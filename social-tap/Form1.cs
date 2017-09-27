@@ -28,8 +28,8 @@ namespace social_tap
             {
                 ImageRecognition imageRecognition = new ImageRecognition(image = new Image<Bgr, byte>(Openfile.FileName));
                 PixelCounter pixelCounter = new PixelCounter(image);
-                pictureBox1.Image = imageRecognition.GetProccessedImg();
-                label6.Text = pixelCounter.getPercentageOfTargetPixels() + "%";
+                pictureBox.Image = imageRecognition.GetProccessedImg();
+                pixelPercentageLabel.Text = pixelCounter.GetPercentageOfTargetPixels() + "%";
 
             }
         }

@@ -41,11 +41,11 @@
             this.commentRichTextBox = new System.Windows.Forms.RichTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.UploadPhotoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.pixelPercentageLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // reviewTitleLabel
@@ -166,30 +166,30 @@
             this.UploadPhotoToolStripMenuItem.Text = "Įkelti nuotrauką";
             this.UploadPhotoToolStripMenuItem.Click += new System.EventHandler(this.UploadPhotoToolStripMenuItem_Click);
             // 
-            // pictureBox1
+            // pictureBox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(489, 146);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(743, 543);
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
+            this.pictureBox.Location = new System.Drawing.Point(489, 146);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(743, 543);
+            this.pictureBox.TabIndex = 12;
+            this.pictureBox.TabStop = false;
             // 
-            // label6
+            // pixelPercentageLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1167, 708);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 20);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Pikseliai";
+            this.pixelPercentageLabel.AutoSize = true;
+            this.pixelPercentageLabel.Location = new System.Drawing.Point(1167, 708);
+            this.pixelPercentageLabel.Name = "pixelPercentageLabel";
+            this.pixelPercentageLabel.Size = new System.Drawing.Size(65, 20);
+            this.pixelPercentageLabel.TabIndex = 13;
+            this.pixelPercentageLabel.Text = "Pikseliai";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1320, 865);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pixelPercentageLabel);
+            this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.commentRichTextBox);
             this.Controls.Add(this.barNameTextBox);
             this.Controls.Add(this.trackBar);
@@ -209,7 +209,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,8 +230,8 @@
         private System.Windows.Forms.RichTextBox commentRichTextBox;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem UploadPhotoToolStripMenuItem;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.Label pixelPercentageLabel;
     }
 }
 
