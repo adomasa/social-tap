@@ -1,8 +1,8 @@
 ﻿using System;
 
-public class pixelCounter
+public class PixelCounter
 {
-	public pixelCounter()
+	public PixelCounter()
 	{
         System.Drawing.Image myImage = image.ToBitmap();
 
