@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Emgu.CV;
+using Emgu.CV.Structure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,9 +19,32 @@ namespace social_tap
             InitializeComponent();
         }
 
-        private void įkeltiNuotraukąToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        Image<Bgr, byte> image;
 
+        private void UploadPhotoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog Openfile = new OpenFileDialog();
+            if (Openfile.ShowDialog() == DialogResult.OK)
+            {
+                ImageRecognition imageRecognition = new ImageRecognition(image = new Image<Bgr, byte>(Openfile.FileName));
+                PixelCounter pixelCounter = new PixelCounter(image);
+                pictureBox.Image = imageRecognition.GetProccessedImg();
+                pixelPercentageLabel.Text = pixelCounter.GetPercentageOfTargetPixels() + "%";
+
+            }
+        }
+
+        private void SubmitClicked(object sender, EventArgs e)
+        {
+            String barName = barNameLabel.Text;
+            int beverageLevel = trackBar.Value;
+            String comment = commentRichTextBox.Text;
+            Boolean recommends = yesRadioButton.Checked;
+
+            Console.WriteLine("Bar name: " + barName);
+            Console.WriteLine("Beverage level: " + beverageLevel/10);
+            Console.WriteLine("Comment: " + comment);
+            Console.WriteLine("User recommends: " + (recommends ? "true" : "false"));
         }
     }
 }
