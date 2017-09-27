@@ -12,10 +12,9 @@ public class PixelCounter
 	{
         myImage = image.ToBitmap();
         myBitmap = new Bitmap(myImage);
-
     }
 
-    public float getPercentageOfTargetPixels()
+    public float GetPercentageOfTargetPixels()
     {
         int i, j;
         bool d = true;
@@ -43,6 +42,6 @@ public class PixelCounter
                 }
             }
         }
-        return count;
+        return count / (height * width) * 100;
     }
 }

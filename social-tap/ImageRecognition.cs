@@ -1,19 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Emgu.CV;
-using Emgu.Util;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using Emgu.CV.CvEnum;
@@ -26,38 +13,38 @@ namespace social_tap
         public ImageRecognition(Image<Bgr, byte> image)
         {
             targetImage = new UMat();
-            CvInvoke.Canny(convertImage(image), targetImage, 50, 150);
+            CvInvoke.Canny(ConvertImage(image), targetImage, 50, 150);
         }
 
-        public ImageRecognition() // :)
+        public ImageRecognition()
         {
         }
 
-        public Image<Gray, byte> convertImage(Image<Bgr, byte> image)
+        public Image<Gray, byte> ConvertImage(Image<Bgr, byte> image)
         {
             var processedImage = image.Convert<Gray, Byte>();
             processedImage = processedImage.SmoothGaussian(5, 5, 0, 0);
             return processedImage;
         }
 
-        public Image getProccessedImg()
+        public Image GetProccessedImg()
         {
             return targetImage.Bitmap;
         }
 
-        public void drawContours()
+        public void DrawContours()
         {
-            CvInvoke.DrawContours(targetImage, findContours(), -1, new MCvScalar(255, 0, 0));
+            CvInvoke.DrawContours(targetImage, FindContours(), -1, new MCvScalar(255, 0, 0));
         }
 
-        public VectorOfVectorOfPoint findContours()
+        private VectorOfVectorOfPoint FindContours()
         {
             var contours = new VectorOfVectorOfPoint();
             CvInvoke.FindContours(targetImage, contours, null, RetrType.Tree, ChainApproxMethod.ChainApproxSimple);
-            return filterContours(contours);
+            return FilterContours(contours);
         }
 
-        public VectorOfVectorOfPoint filterContours(VectorOfVectorOfPoint contours)
+        private VectorOfVectorOfPoint FilterContours(VectorOfVectorOfPoint contours)
         {
             var tempContours = new VectorOfVectorOfPoint();
             for (int i = 0; i < contours.Size; i++)

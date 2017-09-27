@@ -28,172 +28,185 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.reviewTitleLabel = new System.Windows.Forms.Label();
+            this.barNameLabel = new System.Windows.Forms.Label();
+            this.beverageAmountLabel = new System.Windows.Forms.Label();
+            this.doYouRecommendLabel = new System.Windows.Forms.Label();
+            this.commentLabel = new System.Windows.Forms.Label();
+            this.submitButton = new System.Windows.Forms.Button();
+            this.yesRadioButton = new System.Windows.Forms.RadioButton();
+            this.noRadioButton = new System.Windows.Forms.RadioButton();
+            this.trackBar = new System.Windows.Forms.TrackBar();
+            this.barNameTextBox = new System.Windows.Forms.TextBox();
+            this.commentRichTextBox = new System.Windows.Forms.RichTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.įkeltiNuotraukąToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UploadPhotoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.label6 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // reviewTitleLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(493, 64);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Baro reitingavimas";
+            this.reviewTitleLabel.AutoSize = true;
+            this.reviewTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reviewTitleLabel.Location = new System.Drawing.Point(12, 43);
+            this.reviewTitleLabel.Name = "reviewTitleLabel";
+            this.reviewTitleLabel.Size = new System.Drawing.Size(493, 64);
+            this.reviewTitleLabel.TabIndex = 0;
+            this.reviewTitleLabel.Text = "Baro reitingavimas";
             // 
-            // label2
+            // barNameLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 125);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(135, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Baro pavadinimas";
+            this.barNameLabel.AutoSize = true;
+            this.barNameLabel.Location = new System.Drawing.Point(19, 125);
+            this.barNameLabel.Name = "barNameLabel";
+            this.barNameLabel.Size = new System.Drawing.Size(135, 20);
+            this.barNameLabel.TabIndex = 1;
+            this.barNameLabel.Text = "Baro pavadinimas";
             // 
-            // label3
+            // beverageAmountLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 207);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Kiek įpylė?";
+            this.beverageAmountLabel.AutoSize = true;
+            this.beverageAmountLabel.Location = new System.Drawing.Point(28, 207);
+            this.beverageAmountLabel.Name = "beverageAmountLabel";
+            this.beverageAmountLabel.Size = new System.Drawing.Size(83, 20);
+            this.beverageAmountLabel.TabIndex = 2;
+            this.beverageAmountLabel.Text = "Kiek įpylė?";
             // 
-            // label4
+            // doYouRecommendLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 480);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(133, 20);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Ar rekomenduoji?";
+            this.doYouRecommendLabel.AutoSize = true;
+            this.doYouRecommendLabel.Location = new System.Drawing.Point(28, 480);
+            this.doYouRecommendLabel.Name = "doYouRecommendLabel";
+            this.doYouRecommendLabel.Size = new System.Drawing.Size(133, 20);
+            this.doYouRecommendLabel.TabIndex = 3;
+            this.doYouRecommendLabel.Text = "Ar rekomenduoji?";
             // 
-            // label5
+            // commentLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 319);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(95, 20);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Komentaras";
+            this.commentLabel.AutoSize = true;
+            this.commentLabel.Location = new System.Drawing.Point(28, 319);
+            this.commentLabel.Name = "commentLabel";
+            this.commentLabel.Size = new System.Drawing.Size(95, 20);
+            this.commentLabel.TabIndex = 4;
+            this.commentLabel.Text = "Komentaras";
             // 
-            // button1
+            // submitButton
             // 
-            this.button1.Location = new System.Drawing.Point(32, 619);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(247, 70);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Pateikti atsiliepimą";
-            this.button1.UseVisualStyleBackColor = true;
+            this.submitButton.Location = new System.Drawing.Point(32, 619);
+            this.submitButton.Name = "submitButton";
+            this.submitButton.Size = new System.Drawing.Size(247, 70);
+            this.submitButton.TabIndex = 5;
+            this.submitButton.Text = "Pateikti atsiliepimą";
+            this.submitButton.UseVisualStyleBackColor = true;
+            this.submitButton.Click += new System.EventHandler(this.SubmitClicked);
             // 
-            // radioButton1
+            // yesRadioButton
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(32, 522);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(64, 24);
-            this.radioButton1.TabIndex = 6;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Taip";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.yesRadioButton.AutoSize = true;
+            this.yesRadioButton.Location = new System.Drawing.Point(32, 522);
+            this.yesRadioButton.Name = "yesRadioButton";
+            this.yesRadioButton.Size = new System.Drawing.Size(64, 24);
+            this.yesRadioButton.TabIndex = 6;
+            this.yesRadioButton.TabStop = true;
+            this.yesRadioButton.Text = "Taip";
+            this.yesRadioButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // noRadioButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(32, 552);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(54, 24);
-            this.radioButton2.TabIndex = 7;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Ne";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.noRadioButton.AutoSize = true;
+            this.noRadioButton.Location = new System.Drawing.Point(32, 552);
+            this.noRadioButton.Name = "noRadioButton";
+            this.noRadioButton.Size = new System.Drawing.Size(54, 24);
+            this.noRadioButton.TabIndex = 7;
+            this.noRadioButton.TabStop = true;
+            this.noRadioButton.Text = "Ne";
+            this.noRadioButton.UseVisualStyleBackColor = true;
             // 
-            // trackBar1
+            // trackBar
             // 
-            this.trackBar1.Location = new System.Drawing.Point(23, 247);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(191, 69);
-            this.trackBar1.TabIndex = 8;
+            this.trackBar.Location = new System.Drawing.Point(23, 247);
+            this.trackBar.Name = "trackBar";
+            this.trackBar.Size = new System.Drawing.Size(191, 69);
+            this.trackBar.TabIndex = 8;
             // 
-            // textBox1
+            // barNameTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(23, 161);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(191, 26);
-            this.textBox1.TabIndex = 9;
+            this.barNameTextBox.Location = new System.Drawing.Point(23, 161);
+            this.barNameTextBox.Name = "barNameTextBox";
+            this.barNameTextBox.Size = new System.Drawing.Size(191, 26);
+            this.barNameTextBox.TabIndex = 9;
             // 
-            // richTextBox1
+            // commentRichTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(32, 359);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(261, 96);
-            this.richTextBox1.TabIndex = 10;
-            this.richTextBox1.Text = "";
+            this.commentRichTextBox.Location = new System.Drawing.Point(32, 359);
+            this.commentRichTextBox.Name = "commentRichTextBox";
+            this.commentRichTextBox.Size = new System.Drawing.Size(261, 96);
+            this.commentRichTextBox.TabIndex = 10;
+            this.commentRichTextBox.Text = "";
             // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.įkeltiNuotraukąToolStripMenuItem});
+            this.UploadPhotoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1320, 33);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // įkeltiNuotraukąToolStripMenuItem
+            // UploadPhotoToolStripMenuItem
             // 
-            this.įkeltiNuotraukąToolStripMenuItem.Name = "įkeltiNuotraukąToolStripMenuItem";
-            this.įkeltiNuotraukąToolStripMenuItem.Size = new System.Drawing.Size(146, 29);
-            this.įkeltiNuotraukąToolStripMenuItem.Text = "Įkelti nuotrauką";
-            this.įkeltiNuotraukąToolStripMenuItem.Click += new System.EventHandler(this.įkeltiNuotraukąToolStripMenuItem_Click);
+            this.UploadPhotoToolStripMenuItem.Name = "UploadPhotoToolStripMenuItem";
+            this.UploadPhotoToolStripMenuItem.Size = new System.Drawing.Size(146, 29);
+            this.UploadPhotoToolStripMenuItem.Text = "Įkelti nuotrauką";
+            this.UploadPhotoToolStripMenuItem.Click += new System.EventHandler(this.UploadPhotoToolStripMenuItem_Click);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(745, 89);
+            this.pictureBox1.Location = new System.Drawing.Point(489, 146);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(387, 393);
+            this.pictureBox1.Size = new System.Drawing.Size(743, 543);
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1167, 708);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 20);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Pikseliai";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1320, 865);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.trackBar1);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.commentRichTextBox);
+            this.Controls.Add(this.barNameTextBox);
+            this.Controls.Add(this.trackBar);
+            this.Controls.Add(this.noRadioButton);
+            this.Controls.Add(this.yesRadioButton);
+            this.Controls.Add(this.submitButton);
+            this.Controls.Add(this.commentLabel);
+            this.Controls.Add(this.doYouRecommendLabel);
+            this.Controls.Add(this.beverageAmountLabel);
+            this.Controls.Add(this.barNameLabel);
+            this.Controls.Add(this.reviewTitleLabel);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.ShowIcon = false;
+            this.Text = "Social tap";
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -204,20 +217,21 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label reviewTitleLabel;
+        private System.Windows.Forms.Label barNameLabel;
+        private System.Windows.Forms.Label beverageAmountLabel;
+        private System.Windows.Forms.Label doYouRecommendLabel;
+        private System.Windows.Forms.Label commentLabel;
+        private System.Windows.Forms.Button submitButton;
+        private System.Windows.Forms.RadioButton yesRadioButton;
+        private System.Windows.Forms.RadioButton noRadioButton;
+        private System.Windows.Forms.TrackBar trackBar;
+        private System.Windows.Forms.TextBox barNameTextBox;
+        private System.Windows.Forms.RichTextBox commentRichTextBox;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem įkeltiNuotraukąToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem UploadPhotoToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label6;
     }
 }
 
