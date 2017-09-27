@@ -16,5 +16,10 @@ namespace social_tap
         {
             InitializeComponent();
         }
+
+        private void įkeltiNuotraukąToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
