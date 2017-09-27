@@ -29,7 +29,7 @@ namespace social_tap
             CvInvoke.Canny(convertImage(image), targetImage, 50, 150);
         }
 
-        public ImageRecognition()
+        public ImageRecognition() // :)
         {
         }
 
