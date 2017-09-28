@@ -24,7 +24,7 @@
 
 # Idėjos image recognition'ui
 * Identifikuoti bokalą naudojant Haar Cascade (.xml) ir EmguCV
-* Atrasti bokalo kontūrus naudojant EmguCV API
+* Atrasti bokalo kontūrus naudojant EmguCV API *(reikalingas Haar Cascade, kitaip žymi bet ką)* :x:
 * Skaičiuoti alaus spalvos pikselių koncentraciją bounding box'e, kuris eina apie bokalo kontūrą
 _____
 * Keičiant kameros aperture fotografuojant išblurinti foną geresniam kontūrų radimui
