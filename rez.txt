@@ -1,0 +1,15 @@
+AAA 
+5 
+aa 
+True
+
+AAA 
+5 
+aa 
+True
+
+AA 
+5 
+aaa 
+True
+
