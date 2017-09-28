@@ -52,53 +52,59 @@
             // 
             this.reviewTitleLabel.AutoSize = true;
             this.reviewTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reviewTitleLabel.Location = new System.Drawing.Point(12, 43);
+            this.reviewTitleLabel.Location = new System.Drawing.Point(8, 28);
+            this.reviewTitleLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.reviewTitleLabel.Name = "reviewTitleLabel";
-            this.reviewTitleLabel.Size = new System.Drawing.Size(493, 64);
+            this.reviewTitleLabel.Size = new System.Drawing.Size(337, 44);
             this.reviewTitleLabel.TabIndex = 0;
             this.reviewTitleLabel.Text = "Baro reitingavimas";
             // 
             // barNameLabel
             // 
             this.barNameLabel.AutoSize = true;
-            this.barNameLabel.Location = new System.Drawing.Point(19, 125);
+            this.barNameLabel.Location = new System.Drawing.Point(13, 81);
+            this.barNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.barNameLabel.Name = "barNameLabel";
-            this.barNameLabel.Size = new System.Drawing.Size(135, 20);
+            this.barNameLabel.Size = new System.Drawing.Size(91, 13);
             this.barNameLabel.TabIndex = 1;
             this.barNameLabel.Text = "Baro pavadinimas";
             // 
             // beverageAmountLabel
             // 
             this.beverageAmountLabel.AutoSize = true;
-            this.beverageAmountLabel.Location = new System.Drawing.Point(28, 207);
+            this.beverageAmountLabel.Location = new System.Drawing.Point(19, 135);
+            this.beverageAmountLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.beverageAmountLabel.Name = "beverageAmountLabel";
-            this.beverageAmountLabel.Size = new System.Drawing.Size(83, 20);
+            this.beverageAmountLabel.Size = new System.Drawing.Size(58, 13);
             this.beverageAmountLabel.TabIndex = 2;
             this.beverageAmountLabel.Text = "Kiek įpylė?";
             // 
             // doYouRecommendLabel
             // 
             this.doYouRecommendLabel.AutoSize = true;
-            this.doYouRecommendLabel.Location = new System.Drawing.Point(28, 480);
+            this.doYouRecommendLabel.Location = new System.Drawing.Point(19, 312);
+            this.doYouRecommendLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.doYouRecommendLabel.Name = "doYouRecommendLabel";
-            this.doYouRecommendLabel.Size = new System.Drawing.Size(133, 20);
+            this.doYouRecommendLabel.Size = new System.Drawing.Size(89, 13);
             this.doYouRecommendLabel.TabIndex = 3;
             this.doYouRecommendLabel.Text = "Ar rekomenduoji?";
             // 
             // commentLabel
             // 
             this.commentLabel.AutoSize = true;
-            this.commentLabel.Location = new System.Drawing.Point(28, 319);
+            this.commentLabel.Location = new System.Drawing.Point(19, 207);
+            this.commentLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.commentLabel.Name = "commentLabel";
-            this.commentLabel.Size = new System.Drawing.Size(95, 20);
+            this.commentLabel.Size = new System.Drawing.Size(63, 13);
             this.commentLabel.TabIndex = 4;
             this.commentLabel.Text = "Komentaras";
             // 
             // submitButton
             // 
-            this.submitButton.Location = new System.Drawing.Point(32, 619);
+            this.submitButton.Location = new System.Drawing.Point(21, 402);
+            this.submitButton.Margin = new System.Windows.Forms.Padding(2);
             this.submitButton.Name = "submitButton";
-            this.submitButton.Size = new System.Drawing.Size(247, 70);
+            this.submitButton.Size = new System.Drawing.Size(165, 45);
             this.submitButton.TabIndex = 5;
             this.submitButton.Text = "Pateikti atsiliepimą";
             this.submitButton.UseVisualStyleBackColor = true;
@@ -107,9 +113,10 @@
             // yesRadioButton
             // 
             this.yesRadioButton.AutoSize = true;
-            this.yesRadioButton.Location = new System.Drawing.Point(32, 522);
+            this.yesRadioButton.Location = new System.Drawing.Point(21, 339);
+            this.yesRadioButton.Margin = new System.Windows.Forms.Padding(2);
             this.yesRadioButton.Name = "yesRadioButton";
-            this.yesRadioButton.Size = new System.Drawing.Size(64, 24);
+            this.yesRadioButton.Size = new System.Drawing.Size(46, 17);
             this.yesRadioButton.TabIndex = 6;
             this.yesRadioButton.TabStop = true;
             this.yesRadioButton.Text = "Taip";
@@ -118,9 +125,10 @@
             // noRadioButton
             // 
             this.noRadioButton.AutoSize = true;
-            this.noRadioButton.Location = new System.Drawing.Point(32, 552);
+            this.noRadioButton.Location = new System.Drawing.Point(21, 359);
+            this.noRadioButton.Margin = new System.Windows.Forms.Padding(2);
             this.noRadioButton.Name = "noRadioButton";
-            this.noRadioButton.Size = new System.Drawing.Size(54, 24);
+            this.noRadioButton.Size = new System.Drawing.Size(39, 17);
             this.noRadioButton.TabIndex = 7;
             this.noRadioButton.TabStop = true;
             this.noRadioButton.Text = "Ne";
@@ -128,23 +136,28 @@
             // 
             // trackBar
             // 
-            this.trackBar.Location = new System.Drawing.Point(23, 247);
+            this.trackBar.Location = new System.Drawing.Point(15, 161);
+            this.trackBar.Margin = new System.Windows.Forms.Padding(2);
             this.trackBar.Name = "trackBar";
-            this.trackBar.Size = new System.Drawing.Size(191, 69);
+            this.trackBar.Size = new System.Drawing.Size(127, 45);
             this.trackBar.TabIndex = 8;
             // 
             // barNameTextBox
             // 
-            this.barNameTextBox.Location = new System.Drawing.Point(23, 161);
+            this.barNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.barNameTextBox.Location = new System.Drawing.Point(15, 105);
+            this.barNameTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.barNameTextBox.Name = "barNameTextBox";
-            this.barNameTextBox.Size = new System.Drawing.Size(191, 26);
+            this.barNameTextBox.Size = new System.Drawing.Size(129, 20);
             this.barNameTextBox.TabIndex = 9;
+            this.barNameTextBox.TextChanged += new System.EventHandler(this.barNameTextBox_TextChanged);
             // 
             // commentRichTextBox
             // 
-            this.commentRichTextBox.Location = new System.Drawing.Point(32, 359);
+            this.commentRichTextBox.Location = new System.Drawing.Point(21, 233);
+            this.commentRichTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.commentRichTextBox.Name = "commentRichTextBox";
-            this.commentRichTextBox.Size = new System.Drawing.Size(261, 96);
+            this.commentRichTextBox.Size = new System.Drawing.Size(175, 64);
             this.commentRichTextBox.TabIndex = 10;
             this.commentRichTextBox.Text = "";
             // 
@@ -155,39 +168,42 @@
             this.UploadPhotoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1320, 33);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(880, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // UploadPhotoToolStripMenuItem
             // 
             this.UploadPhotoToolStripMenuItem.Name = "UploadPhotoToolStripMenuItem";
-            this.UploadPhotoToolStripMenuItem.Size = new System.Drawing.Size(146, 29);
+            this.UploadPhotoToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.UploadPhotoToolStripMenuItem.Text = "Įkelti nuotrauką";
             this.UploadPhotoToolStripMenuItem.Click += new System.EventHandler(this.UploadPhotoToolStripMenuItem_Click);
             // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(489, 146);
+            this.pictureBox.Location = new System.Drawing.Point(326, 95);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(743, 543);
+            this.pictureBox.Size = new System.Drawing.Size(495, 353);
             this.pictureBox.TabIndex = 12;
             this.pictureBox.TabStop = false;
             // 
             // pixelPercentageLabel
             // 
             this.pixelPercentageLabel.AutoSize = true;
-            this.pixelPercentageLabel.Location = new System.Drawing.Point(1167, 708);
+            this.pixelPercentageLabel.Location = new System.Drawing.Point(778, 460);
+            this.pixelPercentageLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.pixelPercentageLabel.Name = "pixelPercentageLabel";
-            this.pixelPercentageLabel.Size = new System.Drawing.Size(65, 20);
+            this.pixelPercentageLabel.Size = new System.Drawing.Size(45, 13);
             this.pixelPercentageLabel.TabIndex = 13;
             this.pixelPercentageLabel.Text = "Pikseliai";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1320, 865);
+            this.ClientSize = new System.Drawing.Size(880, 562);
             this.Controls.Add(this.pixelPercentageLabel);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.commentRichTextBox);
@@ -203,6 +219,7 @@
             this.Controls.Add(this.reviewTitleLabel);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.ShowIcon = false;
             this.Text = "Social tap";

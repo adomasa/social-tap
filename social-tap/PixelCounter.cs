@@ -24,9 +24,9 @@ public class PixelCounter
         float count = 0;
         Color temporary = Color.FromArgb(0, 0, 0);
 
-        for (i = 0; i < height; i++)
+        for (i = 0; i < height-1; i++)
         {
-            for (j = 0; j < width; j++)
+            for (j = 0; j < width-1; j++)
             {
                 if (myBitmap.GetPixel(i, j) != firstpixelColor && d)
                 {

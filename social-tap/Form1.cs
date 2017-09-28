@@ -36,7 +36,7 @@ namespace social_tap
 
         private void SubmitClicked(object sender, EventArgs e)
         {
-            String barName = barNameLabel.Text;
+            String barName = barNameTextBox.Text;
             int beverageLevel = trackBar.Value;
             String comment = commentRichTextBox.Text;
             Boolean recommends = yesRadioButton.Checked;
@@ -45,6 +45,25 @@ namespace social_tap
             Console.WriteLine("Beverage level: " + beverageLevel/10);
             Console.WriteLine("Comment: " + comment);
             Console.WriteLine("User recommends: " + (recommends ? "true" : "false"));
+
+            Writter(barName, beverageLevel, comment, recommends);
+            
+        }
+
+       private void Writter(String barName, int beverageLevel, String comment, Boolean recommends)
+        {
+            System.IO.StreamWriter file = new System.IO.StreamWriter("C:\\Users\\VALENTINAS\\Source\\Repos\\social-tap\\rez.txt", true);
+            file.Write(barName+ " ");
+            file.Write(beverageLevel+ " ");
+            file.Write(comment+" ");
+            file.WriteLine(recommends);
+
+            file.Close();
+        }
+
+        private void barNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
