@@ -41,10 +41,10 @@ namespace social_tap
             String comment = commentRichTextBox.Text;
             Boolean recommends = yesRadioButton.Checked;
 
-            Console.WriteLine("Bar name: " + barName);
-            Console.WriteLine("Beverage level: " + beverageLevel/10);
-            Console.WriteLine("Comment: " + comment);
-            Console.WriteLine("User recommends: " + (recommends ? "true" : "false"));
+            Console.WriteLine("Bar name: " + barName + "\n");
+            Console.WriteLine("Beverage level: " + beverageLevel/10 + "\n");
+            Console.WriteLine("Comment: " + comment + "\n");
+            Console.WriteLine("User recommends: " + (recommends ? "true" : "false") + "\n");
 
             Writter(barName, beverageLevel, comment, recommends);
             
@@ -53,10 +53,10 @@ namespace social_tap
        private void Writter(String barName, int beverageLevel, String comment, Boolean recommends)
         {
             System.IO.StreamWriter file = new System.IO.StreamWriter("C:\\Users\\VALENTINAS\\Source\\Repos\\social-tap\\rez.txt", true);
-            file.Write(barName+ " ");
-            file.Write(beverageLevel+ " ");
-            file.Write(comment+" ");
-            file.WriteLine(recommends);
+            file.Write(barName + " " + "\n");
+            file.Write(beverageLevel + " " + "\n");
+            file.Write(comment + " " + "\n");
+            file.WriteLine(recommends + "\n");
 
             file.Close();
         }
