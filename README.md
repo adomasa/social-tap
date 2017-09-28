@@ -1,6 +1,6 @@
 # Kitai savaitei
-* Sujungti pikselių skaitymo, analizavimo algoritmus su emgucv karkasu
-* Sukurti WF UI reitingavimo sistemai
+* Sujungti pikselių skaitymo, analizavimo algoritmus su emgucv karkasu :white_check_mark:
+* Sukurti demo WF UI reitingavimo sistemai :white_check_mark:
 
 # Buvusios užduotys
 * Unit testai :white_check_mark:
@@ -9,8 +9,9 @@
 # Tikslai
 
 ## Minimalūs
-* Duomenis apie barą (koks baras, kiek įpilta alaus, komentaras apie barą, ar rekomenduoja barą) gauti per windows form UI
-* Įrašyti duomenis į log'ą
+* Duomenis apie barą (koks baras, kiek įpilta alaus, komentaras apie barą, ar rekomenduoja barą) gauti per windows form UI :white_check_mark:
+* Apdoroti vartotojo pateiktus duomenis iš UI :white_check_mark:
+* Apdoroti įkeltą nuotrauką su EmguCV filtravimo funkcijomis (threshold, canny, etc.) :white_check_mark:
 
 ## Vidutiniai
 * Reitingavimo sistema (komentarai, įvertinimas)
@@ -23,8 +24,8 @@
 * Įvertintos vietos matomos žemėlapyje, paspaudus ant pin'o nukelia į atsiliepimų langą
 
 # Idėjos image recognition'ui
-* Identifikuoti bokalą naudojant Haar Cascade (.xml) ir EmguCV
-* Atrasti bokalo kontūrus naudojant EmguCV API
+* Identifikuoti bokalą naudojant Haar Cascade (.xml) ir EmguCV *(labai daug darbo, nebent projekto tolesnėje dalyje) :x:
+* Atrasti bokalo kontūrus naudojant EmguCV API *(reikalingas Haar Cascade, kitaip žymi bet ką)* :x:
 * Skaičiuoti alaus spalvos pikselių koncentraciją bounding box'e, kuris eina apie bokalo kontūrą
 _____
 * Keičiant kameros aperture fotografuojant išblurinti foną geresniam kontūrų radimui
