@@ -11,6 +11,7 @@
 ## Minimalūs
 * Duomenis apie barą (koks baras, kiek įpilta alaus, komentaras apie barą, ar rekomenduoja barą) gauti per windows form UI :white_check_mark:
 * Apdoroti vartotojo pateiktus duomenis iš UI :white_check_mark:
+* Apdoroti įkeltą nuotrauką su EmguCV filtravimo funkcijomis (threshold, canny, etc.)
 
 ## Vidutiniai
 * Reitingavimo sistema (komentarai, įvertinimas)
