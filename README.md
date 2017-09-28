@@ -10,7 +10,7 @@
 
 ## Minimalūs
 * Duomenis apie barą (koks baras, kiek įpilta alaus, komentaras apie barą, ar rekomenduoja barą) gauti per windows form UI
-* Įrašyti duomenis į log'ą
+* Apdoroti vartotojo pateiktus duomenis iš UI
 
 ## Vidutiniai
 * Reitingavimo sistema (komentarai, įvertinimas)
@@ -23,7 +23,7 @@
 * Įvertintos vietos matomos žemėlapyje, paspaudus ant pin'o nukelia į atsiliepimų langą
 
 # Idėjos image recognition'ui
-* Identifikuoti bokalą naudojant Haar Cascade (.xml) ir EmguCV
+* Identifikuoti bokalą naudojant Haar Cascade (.xml) ir EmguCV *(labai daug darbo, nebent projekto tolesnėje dalyje) :x:
 * Atrasti bokalo kontūrus naudojant EmguCV API *(reikalingas Haar Cascade, kitaip žymi bet ką)* :x:
 * Skaičiuoti alaus spalvos pikselių koncentraciją bounding box'e, kuris eina apie bokalo kontūrą
 _____
