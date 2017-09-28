@@ -9,8 +9,8 @@
 # Tikslai
 
 ## Minimalūs
-* Duomenis apie barą (koks baras, kiek įpilta alaus, komentaras apie barą, ar rekomenduoja barą) gauti per windows form UI
-* Apdoroti vartotojo pateiktus duomenis iš UI
+* Duomenis apie barą (koks baras, kiek įpilta alaus, komentaras apie barą, ar rekomenduoja barą) gauti per windows form UI :white_check_mark:
+* Apdoroti vartotojo pateiktus duomenis iš UI :white_check_mark:
 
 ## Vidutiniai
 * Reitingavimo sistema (komentarai, įvertinimas)
