@@ -36,7 +36,7 @@ public class PixelCounter
                     //Console.WriteLine(temporary);
                     //Console.WriteLine(firstpixelColor);
                 }
-                if (temporary.B <= myBitmap.GetPixel(i, j).B + 200 && myBitmap.GetPixel(i, j).B != firstpixelColor.B)
+                if (temporary.B <= myBitmap.GetPixel(i, j).B + 200 && myBitmap.GetPixel(i, j).B != firstpixelColor.B )
                 {
                     count++;
                 }
