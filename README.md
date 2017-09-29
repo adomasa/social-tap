@@ -1,8 +1,9 @@
 # Kitai savaitei
-* Sujungti pikselių skaitymo, analizavimo algoritmus su emgucv karkasu :white_check_mark:
-* Sukurti demo WF UI reitingavimo sistemai :white_check_mark:
+
 
 # Buvusios užduotys
+* Sujungti pikselių skaitymo, analizavimo algoritmus su emgucv karkasu :white_check_mark:
+* Sukurti demo WF UI reitingavimo sistemai :white_check_mark:
 * Unit testai :white_check_mark:
 * Pull request ir code review :white_check_mark:
 
