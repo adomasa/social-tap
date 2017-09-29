@@ -52,7 +52,7 @@ namespace social_tap
 
        private void Writter(String barName, int beverageLevel, String comment, Boolean recommends)
         {
-            System.IO.StreamWriter file = new System.IO.StreamWriter("C:\\Users\\VALENTINAS\\Source\\Repos\\social-tap\\rez.txt", true);
+            System.IO.StreamWriter file = new System.IO.StreamWriter("rez.txt", true); //true neperrašo failo iš naujo kiekvieną kartą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
             file.Write(barName + " " + "\n");
             file.Write(beverageLevel + " " + "\n");
             file.Write(comment + " " + "\n");
