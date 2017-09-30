@@ -1,6 +1,7 @@
 ﻿using Emgu.CV;
 using Emgu.CV.Structure;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,18 +37,34 @@ namespace social_tap
 
         private void SubmitClicked(object sender, EventArgs e)
         {
+
             String barName = barNameTextBox.Text;
             int beverageLevel = trackBar.Value;
             String comment = commentRichTextBox.Text;
             Boolean recommends = yesRadioButton.Checked;
-
             Console.WriteLine("Bar name: " + barName + "\n");
-            Console.WriteLine("Beverage level: " + beverageLevel/10 + "\n");
+            Console.WriteLine("Beverage level: " + beverageLevel + "\n");
             Console.WriteLine("Comment: " + comment + "\n");
             Console.WriteLine("User recommends: " + (recommends ? "true" : "false") + "\n");
 
             Writter(barName, beverageLevel, comment, recommends);
-            
+
+
+            var evaluations = new List<int>();
+            int result = 0;
+            evaluations.Add(beverageLevel);
+            IComparer myComparer = new ComparingClass();
+            foreach (var evaluation in evaluations)
+            {
+               result= myComparer.Compare(evaluation, 10);
+                if (result == -1)
+                    Console.WriteLine("Įpilta mažai");
+                else if (result == 0)
+                    Console.WriteLine("Įpilta vidutiniškai");
+                else
+                    Console.WriteLine("Įpilta gerai");
+            }
+
         }
 
        private void Writter(String barName, int beverageLevel, String comment, Boolean recommends)
