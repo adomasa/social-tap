@@ -15,9 +15,26 @@ namespace social_tap
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public struct BarInfo
+        {
+            public int amount, sum;
+
+            public BarInfo(int n, int beverageLevel)
+            {
+                amount = n;
+                sum = beverageLevel;
+            }
+            public void count(int n, int beverageLevel)
+            {
+                amount += 1;
+                sum += beverageLevel;
+            }
         }
 
         Image<Bgr, byte> image;
@@ -48,6 +65,8 @@ namespace social_tap
             Console.WriteLine("User recommends: " + (recommends ? "true" : "false") + "\n");
 
             Writter(barName, beverageLevel, comment, recommends);
+            BarInfo stats = new BarInfo(0, 0);
+            Reader(ref stats);
 
 
             var evaluations = new List<int>();
@@ -64,18 +83,43 @@ namespace social_tap
                 else
                     Console.WriteLine("Įpilta gerai");
             }
+            double sum = (double)stats.sum;
+            double amount = (double)stats.amount;
+            if (beverageLevel >= (sum /amount))
+                Console.WriteLine("Įpylė geriau nei vidurkis");
+            else
+                Console.WriteLine("Įpylė blogiau nei vidurkis");
 
+            Console.WriteLine(sum + " " + amount);       
         }
 
        private void Writter(String barName, int beverageLevel, String comment, Boolean recommends)
         {
             System.IO.StreamWriter file = new System.IO.StreamWriter("rez.txt", true); //true neperrašo failo iš naujo kiekvieną kartą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
-            file.Write(barName + " " + "\n");
-            file.Write(beverageLevel + " " + "\n");
-            file.Write(comment + " " + "\n");
+            System.IO.StreamWriter evaluations = new System.IO.StreamWriter("rez1.txt", true); //Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
+            file.WriteLine(barName + " " + "\n");
+            file.WriteLine(beverageLevel + " " + "\n");
+            evaluations.WriteLine(beverageLevel);
+            file.WriteLine(comment + " " + "\n");
             file.WriteLine(recommends + "\n");
 
             file.Close();
+            evaluations.Close();
+        }
+
+        private void Reader(ref BarInfo stats)
+        {
+            System.IO.StreamReader dataStream = new System.IO.StreamReader("rez1.txt"); //Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
+            string datasample;
+            int number = 0; ;
+            while ((datasample = dataStream.ReadLine()) != null)
+            {
+                stats.amount++;
+                int.TryParse(datasample, out number);
+                stats.sum += number;
+            }
+
+            dataStream.Close();
         }
 
         private void barNameTextBox_TextChanged(object sender, EventArgs e)
