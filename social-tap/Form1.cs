@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -90,7 +91,16 @@ namespace social_tap
             else
                 Console.WriteLine("Įpylė blogiau nei vidurkis");
 
-            Console.WriteLine(sum + " " + amount);       
+            Console.WriteLine(sum + " " + amount);
+
+            string value = stats.amount.ToString();
+
+            Match match = Regex.Match(value, @"^[0-9]{2}$");  //regex 
+            if(match.Success)
+            {
+                Console.WriteLine(value+"Programelė pasinaudojo jau dviženklį kartų skaičių");
+            }
+
         }
 
        private void Writter(String barName, int beverageLevel, String comment, Boolean recommends)
