@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace social_tap
 {
-    public class ComparingClass : IComparer
+    public class Comparer : IComparer
     {
         int IComparer.Compare(Object value, Object ten)
         {

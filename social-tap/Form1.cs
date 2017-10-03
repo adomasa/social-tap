@@ -72,7 +72,7 @@ namespace social_tap
             var evaluations = new List<int>();
             int result = 0;
             evaluations.Add(beverageLevel);
-            IComparer myComparer = new ComparingClass();
+            IComparer myComparer = new Comparer();
             foreach (var evaluation in evaluations)
             {
                result= myComparer.Compare(evaluation, 10);
