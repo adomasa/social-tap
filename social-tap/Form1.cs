@@ -68,10 +68,6 @@ namespace social_tap
             {
                 allGood.Visible = true;
                 somethingWrong.Visible = false;
-                Console.WriteLine("Bar name: " + barName + "\n");
-                Console.WriteLine("Beverage level: " + beverageLevel + "\n");
-                Console.WriteLine("Comment: " + comment + "\n");
-                Console.WriteLine("User recommends: " + (recommends ? "true" : "false") + "\n");
 
                 BarInfo stats = new BarInfo(0, 0);
                 Reader(ref stats);
@@ -92,15 +88,8 @@ namespace social_tap
                 }
                 double sum = (double)stats.sum;
                 double amount = (double)stats.amount;
-                if (beverageLevel >= (sum / amount))
-                    Console.WriteLine("Įpylė geriau nei vidurkis");
-                else
-                    Console.WriteLine("Įpylė blogiau nei vidurkis");
-
-                Console.WriteLine(sum + " " + amount);
-
+  
                 string value = stats.amount.ToString();
-
                 Match match = Regex.Match(value, @"^[0-9]{2}$");  //regex 
                 if (match.Success)
                 {
@@ -119,18 +108,14 @@ namespace social_tap
             file.WriteLine("Baro pavadinimas: " + barName + " " + "\n");
             file.WriteLine("Kiek įpylė (0/10)  " + beverageLevel + " " + "\n");
             file.WriteLine("Komentaras: " + comment + " " + "\n");
-            if (recommends)
-            {
-                file.WriteLine("Ar rekomenduoja: Taip! \n");
-            }
-            else file.WriteLine("Ar rekomenduoja: Ne... \n");
+            file.WriteLine("Ar rekomenduoja: " + (recommends ? "Taip!" : "Ne...") + "\n");
 
             evaluations.WriteLine(beverageLevel);
 
             if (beverageLevel >= (sum / amount))
-                info.WriteLine("Įpylė daugiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2));
+                info.WriteLine("Įpylė daugiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2) + " Jau vertino " + amount + " žmonės");
             else
-                info.WriteLine("Įpylė mažiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2));
+                info.WriteLine("Įpylė mažiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2) + " Jau vertino " + amount + " žmonės");
 
             file.Close();
             evaluations.Close();
