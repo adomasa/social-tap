@@ -59,7 +59,7 @@ namespace social_tap
             int beverageLevel = trackBar.Value;
             String comment = commentRichTextBox.Text;
             Boolean recommends = yesRadioButton.Checked;
-            if (barName == "" || (!noRadioButton.Checked && !yesRadioButton.Checked))
+            if (barName == "" || (!noRadioButton.Checked && !yesRadioButton.Checked)) // patikrina, ar įvesta informacija
             {
                 somethingWrong.Visible = true;
                 allGood.Visible = false;
@@ -73,10 +73,8 @@ namespace social_tap
                 Console.WriteLine("Comment: " + comment + "\n");
                 Console.WriteLine("User recommends: " + (recommends ? "true" : "false") + "\n");
 
-                Writter(barName, beverageLevel, comment, recommends);
                 BarInfo stats = new BarInfo(0, 0);
                 Reader(ref stats);
-
 
                 var evaluations = new List<int>();
                 int result = 0;
@@ -108,16 +106,18 @@ namespace social_tap
                 {
                     Console.WriteLine(value + "Programelė pasinaudojo jau dviženklį kartų skaičių");
                 }
+
+                Writter(barName, beverageLevel, comment, recommends, sum, amount); // nusiunčiami duomenys įrašymui į txt fail'us
             }
         }
 
-       private void Writter(String barName, int beverageLevel, String comment, Boolean recommends)
+       private void Writter(String barName, int beverageLevel, String comment, Boolean recommends, double sum, double amount)
         {
             System.IO.StreamWriter file = new System.IO.StreamWriter("rez.txt", true); //true neperrašo failo iš naujo kiekvieną kartą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
             System.IO.StreamWriter evaluations = new System.IO.StreamWriter("rez1.txt", true); //Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
+            System.IO.StreamWriter info = new System.IO.StreamWriter("info.txt", false); //Pateikia paskutinės užklauso rezultatą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
             file.WriteLine("Baro pavadinimas: " + barName + " " + "\n");
             file.WriteLine("Kiek įpylė (0/10)  " + beverageLevel + " " + "\n");
-            evaluations.WriteLine(beverageLevel);
             file.WriteLine("Komentaras: " + comment + " " + "\n");
             if (recommends)
             {
@@ -125,8 +125,16 @@ namespace social_tap
             }
             else file.WriteLine("Ar rekomenduoja: Ne... \n");
 
+            evaluations.WriteLine(beverageLevel);
+
+            if (beverageLevel >= (sum / amount))
+                info.WriteLine("Įpylė daugiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2));
+            else
+                info.WriteLine("Įpylė mažiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2));
+
             file.Close();
             evaluations.Close();
+            info.Close();
         }
 
         private void Reader(ref BarInfo stats)
