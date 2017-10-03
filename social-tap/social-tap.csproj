@@ -56,7 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComparingClass.cs" />
+    <Compile Include="Comparer.cs" />
     <Compile Include="PixelCounter.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
