@@ -43,6 +43,8 @@
             this.UploadPhotoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.pixelPercentageLabel = new System.Windows.Forms.Label();
+            this.somethingWrong = new System.Windows.Forms.Label();
+            this.allGood = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -200,11 +202,45 @@
             this.pixelPercentageLabel.TabIndex = 13;
             this.pixelPercentageLabel.Text = "Pikseliai";
             // 
+            // somethingWrong
+            // 
+            this.somethingWrong.AllowDrop = true;
+            this.somethingWrong.AutoSize = true;
+            this.somethingWrong.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.somethingWrong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.somethingWrong.ForeColor = System.Drawing.Color.Red;
+            this.somethingWrong.Location = new System.Drawing.Point(18, 460);
+            this.somethingWrong.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.somethingWrong.Name = "somethingWrong";
+            this.somethingWrong.Size = new System.Drawing.Size(235, 20);
+            this.somethingWrong.TabIndex = 15;
+            this.somethingWrong.Text = "Neįvesti visi reikalingi duomenys!";
+            this.somethingWrong.UseMnemonic = false;
+            this.somethingWrong.Visible = false;
+            // 
+            // allGood
+            // 
+            this.allGood.AllowDrop = true;
+            this.allGood.AutoSize = true;
+            this.allGood.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.allGood.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.allGood.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.allGood.Location = new System.Drawing.Point(18, 460);
+            this.allGood.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.allGood.Name = "allGood";
+            this.allGood.Size = new System.Drawing.Size(187, 20);
+            this.allGood.TabIndex = 16;
+            this.allGood.Text = "Įvertinimas užfiksuotas! :)";
+            this.allGood.UseMnemonic = false;
+            this.allGood.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(880, 562);
+            this.Controls.Add(this.allGood);
+            this.Controls.Add(this.somethingWrong);
             this.Controls.Add(this.pixelPercentageLabel);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.commentRichTextBox);
@@ -219,6 +255,7 @@
             this.Controls.Add(this.barNameLabel);
             this.Controls.Add(this.reviewTitleLabel);
             this.Controls.Add(this.menuStrip1);
+            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
@@ -250,6 +287,8 @@
         private System.Windows.Forms.ToolStripMenuItem UploadPhotoToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Label pixelPercentageLabel;
+        private System.Windows.Forms.Label somethingWrong;
+        private System.Windows.Forms.Label allGood;
     }
 }
 

@@ -55,66 +55,71 @@ namespace social_tap
 
         private void SubmitClicked(object sender, EventArgs e)
         {
-
             String barName = barNameTextBox.Text;
             int beverageLevel = trackBar.Value;
             String comment = commentRichTextBox.Text;
             Boolean recommends = yesRadioButton.Checked;
-            Console.WriteLine("Bar name: " + barName + "\n");
-            Console.WriteLine("Beverage level: " + beverageLevel + "\n");
-            Console.WriteLine("Comment: " + comment + "\n");
-            Console.WriteLine("User recommends: " + (recommends ? "true" : "false") + "\n");
-
-            Writter(barName, beverageLevel, comment, recommends);
-            BarInfo stats = new BarInfo(0, 0);
-            Reader(ref stats);
-
-
-            var evaluations = new List<int>();
-            int result = 0;
-            evaluations.Add(beverageLevel);
-            IComparer myComparer = new Comparer();
-            foreach (var evaluation in evaluations)
+            if (barName == "" || (!noRadioButton.Checked && !yesRadioButton.Checked)) // patikrina, ar įvesta informacija
             {
-               result= myComparer.Compare(evaluation, 10);
-                if (result == -1)
-                    Console.WriteLine("Įpilta mažai");
-                else if (result == 0)
-                    Console.WriteLine("Įpilta vidutiniškai");
-                else
-                    Console.WriteLine("Įpilta gerai");
+                somethingWrong.Visible = true;
+                allGood.Visible = false;
             }
-            double sum = (double)stats.sum;
-            double amount = (double)stats.amount;
-            if (beverageLevel >= (sum /amount))
-                Console.WriteLine("Įpylė geriau nei vidurkis");
             else
-                Console.WriteLine("Įpylė blogiau nei vidurkis");
-
-            Console.WriteLine(sum + " " + amount);
-
-            string value = stats.amount.ToString();
-
-            Match match = Regex.Match(value, @"^[0-9]{2}$");  //regex 
-            if(match.Success)
             {
-                Console.WriteLine(value+"Programelė pasinaudojo jau dviženklį kartų skaičių");
-            }
+                allGood.Visible = true;
+                somethingWrong.Visible = false;
 
+                BarInfo stats = new BarInfo(0, 0);
+                Reader(ref stats);
+
+                var evaluations = new List<int>();
+                int result = 0;
+                evaluations.Add(beverageLevel);
+                IComparer myComparer = new Comparer();
+                foreach (var evaluation in evaluations)
+                {
+                    result = myComparer.Compare(evaluation, 10);
+                    if (result == -1)
+                        Console.WriteLine("Įpilta mažai");
+                    else if (result == 0)
+                        Console.WriteLine("Įpilta vidutiniškai");
+                    else
+                        Console.WriteLine("Įpilta gerai");
+                }
+                double sum = (double)stats.sum;
+                double amount = (double)stats.amount;
+  
+                string value = stats.amount.ToString();
+                Match match = Regex.Match(value, @"^[0-9]{2}$");  //regex 
+                if (match.Success)
+                {
+                    Console.WriteLine(value + "Programelė pasinaudojo jau dviženklį kartų skaičių");
+                }
+
+                Writter(barName, beverageLevel, comment, recommends, sum, amount); // nusiunčiami duomenys įrašymui į txt fail'us
+            }
         }
 
-       private void Writter(String barName, int beverageLevel, String comment, Boolean recommends)
+       private void Writter(String barName, int beverageLevel, String comment, Boolean recommends, double sum, double amount)
         {
             System.IO.StreamWriter file = new System.IO.StreamWriter("rez.txt", true); //true neperrašo failo iš naujo kiekvieną kartą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
             System.IO.StreamWriter evaluations = new System.IO.StreamWriter("rez1.txt", true); //Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
-            file.WriteLine(barName + " " + "\n");
-            file.WriteLine(beverageLevel + " " + "\n");
+            System.IO.StreamWriter info = new System.IO.StreamWriter("info.txt", false); //Pateikia paskutinės užklauso rezultatą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
+            file.WriteLine("Baro pavadinimas: " + barName + " " + "\n");
+            file.WriteLine("Kiek įpylė (0/10)  " + beverageLevel + " " + "\n");
+            file.WriteLine("Komentaras: " + comment + " " + "\n");
+            file.WriteLine("Ar rekomenduoja: " + (recommends ? "Taip!" : "Ne...") + "\n");
+
             evaluations.WriteLine(beverageLevel);
-            file.WriteLine(comment + " " + "\n");
-            file.WriteLine(recommends + "\n");
+
+            if (beverageLevel >= (sum / amount))
+                info.WriteLine("Įpylė daugiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2) + " Jau vertino " + amount + " žmonės");
+            else
+                info.WriteLine("Įpylė mažiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2) + " Jau vertino " + amount + " žmonės");
 
             file.Close();
             evaluations.Close();
+            info.Close();
         }
 
         private void Reader(ref BarInfo stats)
