@@ -27,17 +27,19 @@ public class PixelCounter
         int r = firstpixelColor.R;
         int g = firstpixelColor.G;
         int b = firstpixelColor.B;
-
+        Console.WriteLine(height +""+width);
         Console.WriteLine(r);
         Console.WriteLine("\n");
         Console.WriteLine(g);
         Console.WriteLine("\n");
         Console.WriteLine(b);
         Console.WriteLine("\n");
-        for (i = 0; i < height-1; i++)
+        for (i = 0; i < width; i++)
             {
-                for (j = 0; j < width-1; j++)
+       //     Console.WriteLine("i " +i);
+            for (j = 0; j < height; j++)
                 {
+      //         Console.WriteLine("j " +j);
                 if (myBitmap.GetPixel(i, j) == firstpixelColor)
                 {
                     count++;
