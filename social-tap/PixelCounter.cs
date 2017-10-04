@@ -17,31 +17,44 @@ public class PixelCounter
     public float GetPercentageOfTargetPixels()
     {
         int i, j;
-        bool d = true;
         int height = myImage.Height;
         int width = myImage.Width;
         Color firstpixelColor = myBitmap.GetPixel(0, 0);
         float count = 0;
-        Color temporary = Color.FromArgb(0, 0, 0);
+        Color temporary = Color.FromArgb(0, 0, 0); // r g b
 
+
+        int r = firstpixelColor.R;
+        int g = firstpixelColor.G;
+        int b = firstpixelColor.B;
+
+        Console.WriteLine(r);
+        Console.WriteLine("\n");
+        Console.WriteLine(g);
+        Console.WriteLine("\n");
+        Console.WriteLine(b);
+        Console.WriteLine("\n");
         for (i = 0; i < height-1; i++)
-        {
-            for (j = 0; j < width-1; j++)
             {
-                if (myBitmap.GetPixel(i, j) != firstpixelColor && d)
+                for (j = 0; j < width-1; j++)
                 {
-                    temporary = myBitmap.GetPixel(i, j);
-                    d = false;
-                    // testai?
-                    //Console.WriteLine(temporary);
-                    //Console.WriteLine(firstpixelColor);
-                }
-                if (temporary.B <= myBitmap.GetPixel(i, j).B + 200 && myBitmap.GetPixel(i, j).B != firstpixelColor.B )
+                if (myBitmap.GetPixel(i, j) == firstpixelColor)
                 {
                     count++;
                 }
+
+                else if ((myBitmap.GetPixel(i, j).R < (r + 100) && myBitmap.GetPixel(i, j).R > (r - 100)) && (myBitmap.GetPixel(i, j).G < (g + 100) && myBitmap.GetPixel(i, j).G > (g - 100)) && (myBitmap.GetPixel(i, j).B < (b + 100) && myBitmap.GetPixel(i, j).B > (b - 100)))
+                {
+                    count++;
+                }
+                else
+                {
+                 //   Console.WriteLine(myBitmap.GetPixel(i, j));
+                }
+                }
             }
-        }
+        Console.WriteLine(count);
+
         return count / (height * width) * 100;
     }
 }
