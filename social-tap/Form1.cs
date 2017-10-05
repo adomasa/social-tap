@@ -84,25 +84,31 @@ namespace social_tap
                     else
                         Console.WriteLine("Įpilta gerai");
                 }
+        
+  
+               
+                
+                Writter(barName, beverageLevel, comment, recommends); // nusiunčiami duomenys įrašymui į txt fail'us
+                Reader(ref stats);
+
                 double sum = (double)stats.sum;
                 double amount = (double)stats.amount;
-  
+                Writter(beverageLevel, sum, amount);
+
                 string value = stats.amount.ToString();
                 Match match = Regex.Match(value, @"^[0-9]{2}$");  //regex 
                 if (match.Success)
                 {
                     Console.WriteLine(value + "Programelė pasinaudojo jau dviženklį kartų skaičių");
                 }
-                Writter(barName, beverageLevel, comment, recommends, sum, amount); // nusiunčiami duomenys įrašymui į txt fail'us
-                Reader(ref stats);
             }
         }
 
-       private void Writter(String barName, int beverageLevel, String comment, Boolean recommends, double sum, double amount)
+       private void Writter(String barName, int beverageLevel, String comment, Boolean recommends)
         {
             System.IO.StreamWriter file = new System.IO.StreamWriter("rez.txt", true); //true neperrašo failo iš naujo kiekvieną kartą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
             System.IO.StreamWriter evaluations = new System.IO.StreamWriter("rez1.txt", true); //Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
-            System.IO.StreamWriter info = new System.IO.StreamWriter("info.txt", false); //Pateikia paskutinės užklauso rezultatą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
+           
             file.WriteLine("Baro pavadinimas: " + barName + " " + "\n");
             file.WriteLine("Kiek įpylė (0/10)  " + beverageLevel + " " + "\n");
             file.WriteLine("Komentaras: " + comment + " " + "\n");
@@ -110,14 +116,21 @@ namespace social_tap
 
             evaluations.WriteLine(beverageLevel);
 
-            if (beverageLevel >= (sum / amount))
+            file.Close();
+            evaluations.Close();
+    
+        }
+
+        private void Writter(int beverageLevel, double sum, double amount)
+        {
+            System.IO.StreamWriter info = new System.IO.StreamWriter("info.txt", false); //Pateikia paskutinės užklauso rezultatą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
+            if(beverageLevel >= (sum / amount))
                 info.WriteLine("Įpylė daugiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2) + " Jau vertino " + amount + " žmonės");
             else
                 info.WriteLine("Įpylė mažiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2) + " Jau vertino " + amount + " žmonės");
 
-            file.Close();
-            evaluations.Close();
             info.Close();
+
         }
 
         private void Reader(ref BarInfo stats)
