@@ -49,7 +49,6 @@ namespace social_tap
                 PixelCounter pixelCounter = new PixelCounter(image);
                 pictureBox.Image = imageRecognition.GetProccessedImg();
                 pixelPercentageLabel.Text = pixelCounter.GetPercentageOfTargetPixels() + "%";
-
             }
         }
 
@@ -70,7 +69,6 @@ namespace social_tap
                 somethingWrong.Visible = false;
 
                 BarInfo stats = new BarInfo(0, 0);
-                Reader(ref stats);
 
                 var evaluations = new List<int>();
                 int result = 0;
@@ -95,8 +93,8 @@ namespace social_tap
                 {
                     Console.WriteLine(value + "Programelė pasinaudojo jau dviženklį kartų skaičių");
                 }
-
                 Writter(barName, beverageLevel, comment, recommends, sum, amount); // nusiunčiami duomenys įrašymui į txt fail'us
+                Reader(ref stats);
             }
         }
 
