@@ -83,7 +83,7 @@ namespace social_tap
                 }
                 double sum = (double)stats.sum;
                 double amount = (double)stats.amount;
-  
+
                 string value = stats.amount.ToString();
                 Match match = Regex.Match(value, @"^[0-9]{2}$");  //regex 
                 if (match.Success)
@@ -95,7 +95,7 @@ namespace social_tap
             }
         }
 
-       private void Writter(String barName, int beverageLevel, String comment, Boolean recommends, double sum, double amount)
+        private void Writter(String barName, int beverageLevel, String comment, Boolean recommends, double sum, double amount)
         {
             StreamWriter file = new StreamWriter("rez.txt", true); //true neperrašo failo iš naujo kiekvieną kartą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
             StreamWriter evaluations = new System.IO.StreamWriter("rez1.txt", true); //Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
