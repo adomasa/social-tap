@@ -12,7 +12,7 @@ namespace social_tap.Tests
     public class ImageRecognitionTests
     {
         [TestMethod()]
-        public void ImageRecognitionTest_NullPointer_default()
+        public void NullPointerPass()
         {
             //Arrange&Act
             ImageRecognition imageRecognition = new ImageRecognition(null);
@@ -22,7 +22,7 @@ namespace social_tap.Tests
         }
 
         [TestMethod()]
-        public void ImageRecognitionTest_NullPointer_DrawContours()
+        public void NullPointerPass_DrawContours()
         {
             //Arrange
             ImageRecognition imageRecognition = new ImageRecognition(null);
