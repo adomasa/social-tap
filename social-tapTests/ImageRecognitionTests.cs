@@ -12,7 +12,17 @@ namespace social_tap.Tests
     public class ImageRecognitionTests
     {
         [TestMethod()]
-        public void ImageRecognitionTest_NullPtr()
+        public void ImageRecognitionTest_NullPointer_default()
+        {
+            //Arrange&Act
+            ImageRecognition imageRecognition = new ImageRecognition(null);
+
+            //Assert
+            Assert.IsNotNull(imageRecognition.GetProccessedImg());
+        }
+
+        [TestMethod()]
+        public void ImageRecognitionTest_NullPointer_DrawContours()
         {
             //Arrange
             ImageRecognition imageRecognition = new ImageRecognition(null);
@@ -23,5 +33,6 @@ namespace social_tap.Tests
             //Assert
             Assert.IsNotNull(imageRecognition.GetProccessedImg());
         }
+
     }
 }
