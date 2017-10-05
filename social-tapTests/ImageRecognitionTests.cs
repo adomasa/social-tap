@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.Collections;
 
 namespace social_tap.Tests
 {
@@ -12,27 +14,48 @@ namespace social_tap.Tests
     public class ImageRecognitionTests
     {
         [TestMethod()]
-        public void NullPointerPass()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor_NullArgument()
         {
-            //Arrange&Act
-            ImageRecognition imageRecognition = new ImageRecognition(null);
+            new ImageRecognition(null);
+        }
+    }
 
-            //Assert
-            Assert.IsNotNull(imageRecognition.GetProccessedImg());
+    [TestClass()]
+    public class ComparerTests
+    {
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Compare_NegativeNumArgument()
+        {
+            //Arrange
+            IComparer myComparer = new Comparer();
+
+            //Act
+            myComparer.Compare(7, 10);
         }
 
         [TestMethod()]
-        public void NullPointerPass_DrawContours()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Compare_NullArgument()
         {
             //Arrange
-            ImageRecognition imageRecognition = new ImageRecognition(null);
+            IComparer myComparer = new Comparer();
 
-            //Act 
-            imageRecognition.DrawContours();
-
-            //Assert
-            Assert.IsNotNull(imageRecognition.GetProccessedImg());
+            //Act
+            myComparer.Compare(null, null);
         }
+    }
 
+
+    [TestClass()]
+    public class PixelCounterTests
+    {
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor_NullArgument()
+        {
+            new PixelCounter(null);
+        }
     }
 }
