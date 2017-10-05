@@ -14,7 +14,7 @@ namespace social_tap.Tests
         [TestMethod()]
         public void ImageRecognitionTest()
         {
-            ImageRecognition imageRecognition = new ImageRecognition();
+            ImageRecognition imageRecognition = new ImageRecognition(null);
             Assert.IsNotNull(imageRecognition.GetProccessedImg());
         }
     }
