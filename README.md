@@ -1,9 +1,3 @@
-# Kitai savaitei
-* Duomenų palyginimas (statistika)
-* Unit testai 
-* Pikselių skaitymas (nusipiešt kvadratą ir skaičiuot jame pikselių koncentraciją)
-* Atnaujint readme su paleidimo intrukcijom
-
 # Buvusios užduotys
 * Sujungti pikselių skaitymo, analizavimo algoritmus su emgucv karkasu :white_check_mark:
 * Sukurti demo WF UI reitingavimo sistemai :white_check_mark:

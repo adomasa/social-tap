@@ -16,11 +16,7 @@ namespace social_tap
             CvInvoke.Canny(ConvertImage(image), targetImage, 50, 150);
         }
 
-        public ImageRecognition()
-        {
-        }
-
-        public Image<Gray, byte> ConvertImage(Image<Bgr, byte> image)
+        private Image<Gray, byte> ConvertImage(Image<Bgr, byte> image)
         {
             var processedImage = image.Convert<Gray, Byte>();
             processedImage = processedImage.SmoothGaussian(5, 5, 0, 0);
