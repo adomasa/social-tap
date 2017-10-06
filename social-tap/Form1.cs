@@ -3,13 +3,8 @@ using Emgu.CV.Structure;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace social_tap
@@ -106,8 +101,8 @@ namespace social_tap
 
        private void Writter(String barName, int beverageLevel, String comment, Boolean recommends)
         {
-            System.IO.StreamWriter file = new System.IO.StreamWriter("rez.txt", true); //true neperrašo failo iš naujo kiekvieną kartą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
-            System.IO.StreamWriter evaluations = new System.IO.StreamWriter("rez1.txt", true); //Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
+            StreamWriter file = new StreamWriter("rez.txt", true); //true neperrašo failo iš naujo kiekvieną kartą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
+            StreamWriter evaluations = new StreamWriter("rez1.txt", true); //Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
            
             file.WriteLine("Baro pavadinimas: " + barName + " " + "\n");
             file.WriteLine("Kiek įpylė (0/10)  " + beverageLevel + " " + "\n");
@@ -123,7 +118,7 @@ namespace social_tap
 
         private void Writter(int beverageLevel, double sum, double amount)
         {
-            System.IO.StreamWriter info = new System.IO.StreamWriter("info.txt", false); //Pateikia paskutinės užklauso rezultatą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
+            StreamWriter info = new StreamWriter("info.txt", false); //Pateikia paskutinės užklauso rezultatą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
             if(beverageLevel >= (sum / amount))
                 info.WriteLine("Įpylė daugiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2) + " Jau vertino " + amount + " žmonės");
             else
@@ -135,16 +130,15 @@ namespace social_tap
 
         private void Reader(ref BarInfo stats)
         {
-            System.IO.StreamReader dataStream = new System.IO.StreamReader("rez1.txt"); //Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
+            StreamReader dataStream = new StreamReader("rez1.txt"); //Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
             string datasample;
-            int number = 0; ;
+            int number = 0;
             while ((datasample = dataStream.ReadLine()) != null)
             {
                 stats.amount++;
                 int.TryParse(datasample, out number);
                 stats.sum += number;
             }
-
             dataStream.Close();
         }
 
