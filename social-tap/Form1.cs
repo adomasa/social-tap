@@ -68,7 +68,7 @@ namespace social_tap
                
                 
                 FileWriter.BarData(barName, beverageLevel, comment, recommends); // nusiunčiami duomenys įrašymui į txt fail'us
-                Reader(ref stats);
+                FileReader.ReadBarInfo(ref stats);
 
                 double sum = (double)stats.sum;
                 double amount = (double)stats.amount;
@@ -81,20 +81,6 @@ namespace social_tap
                     Console.WriteLine(value + "Programelė pasinaudojo jau dviženklį kartų skaičių");
                 }
             }
-        }
-
-        private void Reader(ref BarInfo stats)
-        {
-            StreamReader dataStream = new StreamReader("rez1.txt"); //Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
-            string datasample;
-            int number = 0;
-            while ((datasample = dataStream.ReadLine()) != null)
-            {
-                stats.amount++;
-                int.TryParse(datasample, out number);
-                stats.sum += number;
-            }
-            dataStream.Close();
         }
     }
 }
