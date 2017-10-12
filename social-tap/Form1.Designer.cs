@@ -152,7 +152,6 @@
             this.barNameTextBox.Name = "barNameTextBox";
             this.barNameTextBox.Size = new System.Drawing.Size(129, 20);
             this.barNameTextBox.TabIndex = 9;
-            this.barNameTextBox.TextChanged += new System.EventHandler(this.barNameTextBox_TextChanged);
             // 
             // commentRichTextBox
             // 
