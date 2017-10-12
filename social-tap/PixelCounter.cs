@@ -51,7 +51,7 @@ public class PixelCounter
                 }
                 else if ((myBitmap.GetPixel(i, j).R < (r + 100) && myBitmap.GetPixel(i, j).R > (r - 100)) && (myBitmap.GetPixel(i, j).G < (g + 100) && myBitmap.GetPixel(i, j).G > (g - 100)) && (myBitmap.GetPixel(i, j).B < (b + 100) && myBitmap.GetPixel(i, j).B > (b - 100)))
                 {
-                    //  count++; // NE alaus pixeliai
+                    //  Count++; // NE alaus pixeliai
                     // Console.WriteLine(myBitmap.GetPixel(i, j));
                 }
                 else
@@ -99,8 +99,8 @@ public class PixelCounter
                 }
             }
         }
-        // Console.WriteLine(count);
-        // return count / (height * width) * 100;
+        // Console.WriteLine(Count);
+        // return Count / (height * width) * 100;
         return 100 / (count + count1) * count;
     }
 }

@@ -17,22 +17,6 @@ namespace social_tap
             InitializeComponent();
         }
 
-        public class BarInfo
-        {
-            public int amount, sum;
-
-            public BarInfo(int n, int beverageLevel)
-            {
-                amount = n;
-                sum = beverageLevel;
-            }
-            public void count(int n, int beverageLevel)
-            {
-                amount += 1;
-                sum += beverageLevel;
-            }
-        }
-
         Image<Bgr, byte> image;
 
         private void UploadPhotoToolStripMenuItem_Click(object sender, EventArgs e)
