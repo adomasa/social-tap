@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="BarInfo.cs" />
     <Compile Include="Comparer.cs" />
+    <Compile Include="FileWriter.cs" />
     <Compile Include="PixelCounter.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
