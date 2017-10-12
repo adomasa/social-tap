@@ -64,9 +64,6 @@ namespace social_tap
                         Console.WriteLine("Įpilta gerai");
                 }
         
-  
-               
-                
                 FileWriter.BarData(barName, beverageLevel, comment, recommends); // nusiunčiami duomenys įrašymui į txt fail'us
                 FileReader.ReadBarInfo(ref stats);
 
