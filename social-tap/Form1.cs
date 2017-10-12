@@ -17,7 +17,7 @@ namespace social_tap
             InitializeComponent();
         }
 
-        public struct BarInfo
+        public class BarInfo
         {
             public int amount, sum;
 
