@@ -96,10 +96,5 @@ namespace social_tap
             }
             dataStream.Close();
         }
-
-        private void barNameTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
