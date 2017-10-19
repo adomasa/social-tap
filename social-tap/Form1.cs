@@ -50,12 +50,11 @@ namespace social_tap
                 BarInfo stats = new BarInfo();
 
                 var evaluations = new List<int>();
-                int result = 0;
                 evaluations.Add(beverageLevel);
                 IComparer myComparer = new Comparer();
                 foreach (var evaluation in evaluations)
                 {
-                    result = myComparer.Compare(evaluation, 10);
+                    int result = myComparer.Compare(evaluation, 10);
                     if (result == -1)
                         Console.WriteLine("Įpilta mažai");
                     else if (result == 0)
