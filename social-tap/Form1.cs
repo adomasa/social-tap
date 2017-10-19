@@ -47,7 +47,7 @@ namespace social_tap
                 allGood.Visible = true;
                 somethingWrong.Visible = false;
 
-                BarInfo stats = new BarInfo(0, 0);
+                BarInfo stats = new BarInfo();
 
                 var evaluations = new List<int>();
                 int result = 0;
