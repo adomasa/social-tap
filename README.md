@@ -1,4 +1,5 @@
 # Esamos užduotys
+ * Xamarin
  * Web servisai
  * Reikalavimų įgyvendinimas
  * Tikslesnis recognition'as
