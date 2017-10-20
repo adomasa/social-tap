@@ -10,6 +10,11 @@ namespace social_tap
     {
         public int amount, sum;
 
+        public BarInfo()
+        {
+
+        }
+
         public BarInfo(int n, int beverageLevel)
         {
             amount = n;

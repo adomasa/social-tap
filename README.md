@@ -1,3 +1,8 @@
+# Esamos užduotys
+ * Web servisai
+ * Reikalavimų įgyvendinimas
+ * Tikslesnis recognition'as
+
 # Buvusios užduotys
 * Sujungti pikselių skaitymo, analizavimo algoritmus su emgucv karkasu :white_check_mark:
 * Sukurti demo WF UI reitingavimo sistemai :white_check_mark:

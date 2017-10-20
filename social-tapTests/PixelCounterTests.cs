@@ -1,16 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace social_tap.Tests
+namespace social_tapTests
 {
     [TestClass()]
-    public class ImageRecognitionTests
+    public class PixelCounterTests
     {
         [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullArgument()
         {
-            new ImageRecognition(null);
+            new PixelCounter(null);
         }
     }
 }
