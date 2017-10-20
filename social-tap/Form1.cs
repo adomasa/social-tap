@@ -52,12 +52,13 @@ namespace social_tap
                 var evaluations = new List<int>();
                 evaluations.Add(beverageLevel);
                 IComparer myComparer = new Comparer();
+                
                 foreach (var evaluation in evaluations)
                 {
-                    int result = myComparer.Compare(evaluation, 10);
-                    if (result == -1)
+                    Lazy<int> result = new Lazy<int>(() => myComparer.Compare(evaluation, 10));
+                    if (result.Value == -1)
                         Console.WriteLine("Įpilta mažai");
-                    else if (result == 0)
+                    else if (result.Value == 0)
                         Console.WriteLine("Įpilta vidutiniškai");
                     else
                         Console.WriteLine("Įpilta gerai");

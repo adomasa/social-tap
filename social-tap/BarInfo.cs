@@ -9,7 +9,6 @@ namespace social_tap
     public class BarInfo
     {
         public int amount, sum;
-
         public BarInfo()
         {
 
