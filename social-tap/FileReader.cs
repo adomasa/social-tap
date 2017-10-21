@@ -7,16 +7,24 @@ namespace social_tap
     {
         public static void ReadBarInfo(ref BarInfo stats)
         {
-            StreamReader dataStream = new StreamReader("rez1.txt"); //Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
-            string datasample;
-            int number = 0;
-            while ((datasample = dataStream.ReadLine()) != null)
+            try
             {
-                stats.amount++;
-                int.TryParse(datasample, out number);
-                stats.sum += number;
+                StreamReader dataStream = new StreamReader("rez1.txt"); //Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
+                string datasample;
+                int number = 0;
+                while ((datasample = dataStream.ReadLine()) != null)
+                {
+                    stats.amount++;
+                    int.TryParse(datasample, out number);
+                    stats.sum += number;
+                }
+                dataStream.Close();
             }
-            dataStream.Close();
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine("File does not exist");
+            }
+          
         }
     }
 }
