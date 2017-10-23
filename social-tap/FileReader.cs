@@ -22,7 +22,7 @@ namespace social_tap
             }
             catch (FileNotFoundException e)
             {
-                StreamWriter file = new StreamWriter("rez1.txt");
+                StreamWriter file = new StreamWriter("rez1.txt"); // jei nėra failo tai sukurs jį 
                 file.Close();
                 ReadBarInfo(ref stats);
                 Console.WriteLine("File does not exist");
