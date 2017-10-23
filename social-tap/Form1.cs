@@ -49,6 +49,7 @@ namespace social_tap
 
                 BarInfo stats = new BarInfo();
 
+                
                 var evaluations = new List<int>();
                 evaluations.Add(beverageLevel);
                 IComparer myComparer = new Comparer();
