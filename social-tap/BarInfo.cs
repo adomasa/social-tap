@@ -19,6 +19,8 @@ namespace social_tap
             amount = n;
             sum = beverageLevel;
         }
+
+
         public void Count(int n, int beverageLevel)
         {
             amount += 1;
