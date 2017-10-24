@@ -3,6 +3,7 @@ using System.IO;
 
 namespace social_tap
 {
+    delegate void Printer(string s); //deleagate 
     public static class FileWriter
     {
         public static void BarData(String barName, int beverageLevel, String comment, Boolean recommends)
@@ -26,12 +27,18 @@ namespace social_tap
 
         public static void BeverageData(int beverageLevel, double sum, double amount)
         {
+            StreamWriter info = new StreamWriter("info.txt", false);
+            Printer p = delegate (string text) //sukūriamas delegate tipas naudojant anoniminius metodus 
+              {
+                  info.WriteLine(text);
+              };
+            
             //Pateikia paskutinės užklauso rezultatą. Failo location'as:  ...Source\Repos\social-tap\social-tap\bin\Debug
-            StreamWriter info = new StreamWriter("info.txt", false); 
+           
             if (beverageLevel >= (sum / amount))
-                info.WriteLine("Įpylė daugiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2) + " Jau vertino " + amount + " žmonės");
+                p("Įpylė daugiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2) + " Jau vertino " + amount + " žmonės");
             else
-                info.WriteLine("Įpylė mažiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2) + " Jau vertino " + amount + " žmonės");
+                p("Įpylė mažiau nei vidutiniškai. Vidurkis: " + Math.Round((sum / amount), 2) + " Jau vertino " + amount + " žmonės");
 
             info.Close();
         }
