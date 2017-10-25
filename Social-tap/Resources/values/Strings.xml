@@ -6,4 +6,6 @@
 	<string name="beverage_level_label">Kiek įpylė?</string>
 	<string name="comment_label">Atsiliepimas</string>
 	<string name="is_recommended_label">Ar rekomenduoji?</string>
+    <string name="yes">Taip</string>
+    <string name="no">Ne</string>
 </resources>

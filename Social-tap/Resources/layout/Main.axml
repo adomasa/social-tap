@@ -54,4 +54,25 @@
         android:layout_height="wrap_content"
         android:id="@+id/isRecommendedTextView"
         android:paddingBottom="10dp" />
+    <RadioGroup
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/isRecommendedRadioGroup">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/yes"
+            android:id="@+id/yesRadioButton"
+            android:paddingBottom="10dp" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/no"
+            android:id="@+id/noRadioButton"
+            android:paddingBottom="10dp" />
+    </RadioGroup>
 </LinearLayout>
