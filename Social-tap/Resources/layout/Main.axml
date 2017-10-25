@@ -33,4 +33,11 @@
         android:max="10"
         android:progress="1"
         android:paddingBottom="10dp" />
+    <TextView
+        android:text="@string/comment_label"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/commentTextView"
+        android:paddingBottom="10dp" />
 </LinearLayout>
