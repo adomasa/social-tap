@@ -1,6 +1,9 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using Android.Views;
+using Android.Views.InputMethods;
+using Android.Content;
 
 namespace Socialtap
 {
@@ -26,6 +29,16 @@ namespace Socialtap
                 Toast.MakeText(Application.Context, "Submit", ToastLength.Short).Show();
             };
 
+        }
+
+        //Paslepia klaviatūrą paspaudus kitur nei EditText laukas
+        public override bool OnTouchEvent(MotionEvent e)
+        {
+            InputMethodManager imm =
+                (InputMethodManager)GetSystemService(Context.InputMethodService);
+            // Veikia su abiem EditText laukais
+            imm.HideSoftInputFromWindow(barNameEditText.WindowToken, 0);
+            return base.OnTouchEvent(e);
         }
     }
 }
