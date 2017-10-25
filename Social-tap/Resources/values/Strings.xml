@@ -2,4 +2,5 @@
 <resources>
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">Social-tap</string>
+	<string name="bar_name_label">Baro pavadinimas</string>
 </resources>
