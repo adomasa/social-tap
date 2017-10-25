@@ -11,4 +11,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/barNameTextView"
         android:paddingBottom="10dp" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/barNameEditText"
+        android:paddingBottom="10dp"
+        android:singleLine="true"
+        android:maxLength="32"
+        android:hint="Pavadinimo vieta" />
 </LinearLayout>
