@@ -47,4 +47,11 @@
         android:id="@+id/commentEditText"
         android:paddingBottom="10dp"
         android:hint="Atsiliepimo vieta" />
+    <TextView
+        android:text="@string/is_recommended_label"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/isRecommendedTextView"
+        android:paddingBottom="10dp" />
 </LinearLayout>
