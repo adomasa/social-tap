@@ -19,4 +19,11 @@
         android:singleLine="true"
         android:maxLength="32"
         android:hint="Pavadinimo vieta" />
+    <TextView
+        android:text="@string/beverage_level_label"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/beverageLevelTextView"
+        android:paddingBottom="10dp" />
 </LinearLayout>

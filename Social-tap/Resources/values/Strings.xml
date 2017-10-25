@@ -3,4 +3,5 @@
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">Social-tap</string>
 	<string name="bar_name_label">Baro pavadinimas</string>
+	<string name="beverage_level_label">Kiek įpylė?</string>
 </resources>
