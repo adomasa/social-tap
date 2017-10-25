@@ -15,12 +15,12 @@ namespace Socialtap
         {
             base.OnCreate(savedInstanceState);
 
+            // Set our view from the "main" layout resource
+            SetContentView(Resource.Layout.Main);
+
             barNameEditText = FindViewById<EditText>(Resource.Id.barNameEditText);
             commentEditText = FindViewById<EditText>(Resource.Id.commentEditText);
             submitButton = FindViewById<Button>(Resource.Id.submitButton);
-
-            // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
 
             submitButton.Click += delegate {
                 Toast.MakeText(Application.Context, "Submit", ToastLength.Short).Show();
