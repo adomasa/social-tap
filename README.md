@@ -1,6 +1,6 @@
 # Esamos užduotys
- * Xamarin [Adomas]
- * Web servisai (ASP.NET) [Valentinas]
+ * Xamarin  **[Adomas]**
+ * Web servisai (ASP.NET)  **[Valentinas]**
  * Reikalavimų įgyvendinimas
  * Tikslesnis recognition'as
 
