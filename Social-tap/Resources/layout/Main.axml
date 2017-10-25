@@ -75,4 +75,9 @@
             android:id="@+id/noRadioButton"
             android:paddingBottom="10dp" />
     </RadioGroup>
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/submit_review_label" />
 </LinearLayout>

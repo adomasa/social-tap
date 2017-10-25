@@ -8,4 +8,5 @@
 	<string name="is_recommended_label">Ar rekomenduoji?</string>
     <string name="yes">Taip</string>
     <string name="no">Ne</string>
+	<string name="submit_review_label">Pateikti atsiliepimą</string>
 </resources>
