@@ -38,3 +38,6 @@ Thumbs.db
 
 # dotCover
 *.dotCover
+
+# auto-generated res designer file
+Resource.designer.cs
