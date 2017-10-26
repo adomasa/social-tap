@@ -4,6 +4,8 @@ using Android.OS;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Content;
+using System.Collections.Generic;
+using System;
 
 namespace Socialtap
 {
@@ -13,6 +15,7 @@ namespace Socialtap
         EditText barNameEditText;
         EditText commentEditText;
         Button submitButton;
+        SeekBar beverageVolumeSeekbar;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -24,11 +27,15 @@ namespace Socialtap
             barNameEditText = FindViewById<EditText>(Resource.Id.barNameEditText);
             commentEditText = FindViewById<EditText>(Resource.Id.commentEditText);
             submitButton = FindViewById<Button>(Resource.Id.submitButton);
+            beverageVolumeSeekbar = FindViewById<SeekBar>(Resource.Id.beverageVolumeSeekBar);
 
-            submitButton.Click += delegate {
-                Toast.MakeText(Application.Context, "Submit", ToastLength.Short).Show();
+            submitButton.Click += (sender, e) =>
+            {
+                string dummyBarName = barNameEditText.Text;
+                string dummyBarComment = commentEditText.Text;
+                int dummyBeverageVolume = beverageVolumeSeekbar.Progress;
+
             };
-
         }
 
         //Paslepia klaviatūrą paspaudus kitur nei EditText laukas
