@@ -4,9 +4,13 @@
 	<string name="app_name">Social-tap</string>
 	<string name="bar_name_label">Baro pavadinimas</string>
 	<string name="beverage_level_label">Kiek įpylė?</string>
+	<string name="beverage_volume_low">Mažai</string>
+	<string name="beverage_volume_medium">Vidutiniškai</string>
+	<string name="beverage_volume_high">Daug</string>
 	<string name="comment_label">Atsiliepimas</string>
 	<string name="bar_rating_label">Baro įvertinimas</string>
     <string name="yes">Taip</string>
     <string name="no">Ne</string>
 	<string name="submit_review_label">Pateikti atsiliepimą</string>
+	
 </resources>

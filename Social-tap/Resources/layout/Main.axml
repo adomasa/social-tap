@@ -24,14 +24,21 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/beverageLevelTextView"
+        android:id="@+id/beverageVolumeTextView"
         android:paddingBottom="@dimen/review_bar_components_padding" />
+    <TextView
+        android:text="@string/beverage_volume_low"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/beverageVolumeStatusTextView"
+        android:paddingBottom="@dimen/review_bar_components_small_padding" />
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/beverageVolumeSeekBar"
         android:max="10"
-        android:progress="1"
+        android:progress="0"
         android:paddingBottom="@dimen/review_bar_components_padding" />
     <TextView
         android:text="@string/comment_label"

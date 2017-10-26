@@ -16,6 +16,7 @@ namespace Socialtap
         SeekBar beverageVolumeSeekbar;
         RatingBar ratingBar;
         MainActivityController controller;
+        TextView beverageVolumeLabel;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,15 +38,43 @@ namespace Socialtap
             submitButton = FindViewById<Button>(Resource.Id.submitButton);
             beverageVolumeSeekbar = FindViewById<SeekBar>(Resource.Id.beverageVolumeSeekBar);
             ratingBar = FindViewById<RatingBar>(Resource.Id.ratingBar);
+            beverageVolumeLabel = FindViewById<TextView>(Resource.Id.beverageVolumeStatusTextView);
 
 
             // Click eventas
+            // Todo: iškelti į kontrolerį
             submitButton.Click += (sender, e) =>
             {
                 controller.addBarReview(new BarReview(barNameEditText.Text, 
                                             beverageVolumeSeekbar.Progress, 
                                             commentEditText.Text, 
                                             ratingBar.Progress));
+                Toast.MakeText(Application.Context, 
+                               "Išsaugota", ToastLength.Short).Show();
+            };
+
+            // Todo: iškelti į kontrolerį, pakeisti switch'ą
+            beverageVolumeSeekbar.ProgressChanged += (sender, e) => {
+                switch (beverageVolumeSeekbar.Progress) {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        beverageVolumeLabel.Text =
+                            GetString(Resource.String.beverage_volume_low);
+                        break;
+                    case 5:
+                    case 6:
+                    case 7:
+                        beverageVolumeLabel.Text =
+                           GetString(Resource.String.beverage_volume_medium);
+                        break;
+                    default:
+                        beverageVolumeLabel.Text =
+                            GetString(Resource.String.beverage_volume_high);
+                        break;
+                };
             };
         }
 

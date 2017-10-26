@@ -40,5 +40,10 @@ namespace Socialtap.Model
             totalRating += rating;
             totalBeverageVolume += beverageVolume;
         }
+
+        public override string ToString() => string.Format("[BarData: barName={0}, totalBeverageVolume={1}, " +
+                                 "totalRating={2}, commentList={3}, reviewCount={4}]",
+                                 barName, totalBeverageVolume, totalRating, commentList,
+                                 reviewCount);
     }
 }
