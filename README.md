@@ -1,8 +1,8 @@
 # Esamos užduotys
  * Xamarin  **[Adomas]**
  * Web servisai (ASP.NET)  **[Valentinas]**
- * Reikalavimų įgyvendinimas
- * Tikslesnis recognition'as
+ * Reikalavimų įgyvendinimas **[Visi]**
+ * Tikslesnis recognition'as su unit testais **[Andrius]**
  
 # Xamarin emuliatoriaus konfigūracija
 * Ekranas: Nexus 5X (dirbant su Android design dėl bugų naudoti Nexus 4)
