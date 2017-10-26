@@ -16,6 +16,7 @@ namespace Socialtap
         EditText commentEditText;
         Button submitButton;
         SeekBar beverageVolumeSeekbar;
+        RatingBar ratingBar;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -28,13 +29,14 @@ namespace Socialtap
             commentEditText = FindViewById<EditText>(Resource.Id.commentEditText);
             submitButton = FindViewById<Button>(Resource.Id.submitButton);
             beverageVolumeSeekbar = FindViewById<SeekBar>(Resource.Id.beverageVolumeSeekBar);
+            ratingBar = FindViewById<RatingBar>(Resource.Id.ratingBar);
 
             submitButton.Click += (sender, e) =>
             {
                 string dummyBarName = barNameEditText.Text;
                 string dummyBarComment = commentEditText.Text;
                 int dummyBeverageVolume = beverageVolumeSeekbar.Progress;
-
+                int dummyBarRating = ratingBar.Progress;
             };
         }
 
