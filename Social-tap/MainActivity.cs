@@ -4,8 +4,6 @@ using Android.OS;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Content;
-using System.Collections.Generic;
-using System;
 
 namespace Socialtap
 {
@@ -17,26 +15,37 @@ namespace Socialtap
         Button submitButton;
         SeekBar beverageVolumeSeekbar;
         RatingBar ratingBar;
+        MainActivityController controller;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
+            controller = MainActivityController.Instance;
+
+            if (savedInstanceState != null) {
+                controller.ExtractBarsDataFromMemory(savedInstanceState);
+            }
+
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
+
+            // Prideda funkcionalių UI objektų nuorodas
             barNameEditText = FindViewById<EditText>(Resource.Id.barNameEditText);
             commentEditText = FindViewById<EditText>(Resource.Id.commentEditText);
             submitButton = FindViewById<Button>(Resource.Id.submitButton);
             beverageVolumeSeekbar = FindViewById<SeekBar>(Resource.Id.beverageVolumeSeekBar);
             ratingBar = FindViewById<RatingBar>(Resource.Id.ratingBar);
 
+
+            // Click eventas
             submitButton.Click += (sender, e) =>
             {
-                string dummyBarName = barNameEditText.Text;
-                string dummyBarComment = commentEditText.Text;
-                int dummyBeverageVolume = beverageVolumeSeekbar.Progress;
-                int dummyBarRating = ratingBar.Progress;
+                controller.addBarReview(new BarReview(barNameEditText.Text, 
+                                            beverageVolumeSeekbar.Progress, 
+                                            commentEditText.Text, 
+                                            ratingBar.Progress));
             };
         }
 

@@ -50,6 +50,7 @@
     <Compile Include="Model\IBarData.cs" />
     <Compile Include="Model\BarReview.cs" />
     <Compile Include="Model\BarData.cs" />
+    <Compile Include="MainActivityController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
