@@ -5,7 +5,7 @@
 	<string name="bar_name_label">Baro pavadinimas</string>
 	<string name="beverage_level_label">Kiek įpylė?</string>
 	<string name="comment_label">Atsiliepimas</string>
-	<string name="is_recommended_label">Ar rekomenduoji?</string>
+	<string name="bar_rating_label">Baro įvertinimas</string>
     <string name="yes">Taip</string>
     <string name="no">Ne</string>
 	<string name="submit_review_label">Pateikti atsiliepimą</string>
