@@ -36,13 +36,20 @@ namespace Socialtap
             }
         }
 
-        public void addBarReview(BarReview barReview) 
+        public Boolean addBarReview(BarReview barReview) 
         {
             // pereiti per listą ieškant, ar nėra jau tokio baro
             // yra:
             // ...
             // nėra:
             // ...
-        } 
+            return false;
+        }
+
+        public Boolean saveBarsDataToMemory(Bundle data) 
+        {
+            // ..
+            return false;
+        }
     }
 }
