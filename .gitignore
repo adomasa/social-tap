@@ -39,6 +39,15 @@ Thumbs.db
 # dotCover
 *.dotCover
 
-# auto-generated res designer file
+# Auto-generated res designer file
 Social-tap/Resources/Resource.designer.cs
-/.vs/social-tap/v15/Server/sqlite3
+
+# Visual studio auto-generated files
+.vs/*
+.vs/ProjectSettings.json
+.vs/VSWorkspaceState.json
+.vs/slnx.sqlite
+Social-tap/Social-tap.csproj.bak
+
+# Mac auto-generated files
+.DS_Store
