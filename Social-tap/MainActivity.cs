@@ -39,10 +39,13 @@ namespace Socialtap
             submitButton.Click += (sender, e) =>
             {
                 //async
-                BarReview barReview = new BarReview(barNameField.Text, beverageVolumeBar.Progress, commentField.Text, ratingBar.Progress);
+                BarReview barReview = 
+                    new BarReview(barNameField.Text, beverageVolumeBar.Progress,
+                                  commentField.Text, ratingBar.Progress);
 
                 controller.addBarReview(barReview);
-                Toast.MakeText(Application.Context,"Išsaugota", ToastLength.Short).Show();
+                Toast.MakeText(Application.Context,
+                               "Išsaugota", ToastLength.Short).Show();
             };
 
             // Todo: iškelti į kontrolerį, pakeisti switch'ą
@@ -52,16 +55,19 @@ namespace Socialtap
                     case 1:
                     case 2:
                     case 3:
-                        beverageVolumeLabel.Text = GetString(Resource.String.beverage_volume_low);
+                        beverageVolumeLabel.Text = 
+                            GetString(Resource.String.beverage_volume_low);
                         break;
                     case 4:
                     case 5:
                     case 6:
                     case 7:
-                        beverageVolumeLabel.Text = GetString(Resource.String.beverage_volume_medium);
+                        beverageVolumeLabel.Text = 
+                            GetString(Resource.String.beverage_volume_medium);
                         break;
                     default:
-                        beverageVolumeLabel.Text = GetString(Resource.String.beverage_volume_high);
+                        beverageVolumeLabel.Text = 
+                            GetString(Resource.String.beverage_volume_high);
                         break;
                 };
             };
@@ -70,19 +76,26 @@ namespace Socialtap
         ///Paslepia klaviatūrą paspaudus kitur nei EditText laukas
         public override bool OnTouchEvent(MotionEvent e)
         {
-            InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+            InputMethodManager imm = 
+                (InputMethodManager)GetSystemService(Context.InputMethodService);
             // Veikia su abiem EditText laukais
             imm.HideSoftInputFromWindow(barNameField.WindowToken, 0);
             return base.OnTouchEvent(e);
         }
         /// Prideda funkcionalių UI objektų nuorodas 
         private void GetReferencesFromLayout() {
-            barNameField = FindViewById<EditText>(Resource.Id.barNameEditText);
-            commentField = FindViewById<EditText>(Resource.Id.commentEditText);
-            submitButton = FindViewById<Button>(Resource.Id.submitButton);
-            beverageVolumeBar = FindViewById<SeekBar>(Resource.Id.beverageVolumeSeekBar);
-            ratingBar = FindViewById<RatingBar>(Resource.Id.ratingBar);
-            beverageVolumeLabel = FindViewById<TextView>(Resource.Id.beverageVolumeStatusTextView);
+            barNameField = 
+                FindViewById<EditText>(Resource.Id.barNameEditText);
+            commentField = 
+                FindViewById<EditText>(Resource.Id.commentEditText);
+            submitButton = 
+                FindViewById<Button>(Resource.Id.submitButton);
+            beverageVolumeBar = 
+                FindViewById<SeekBar>(Resource.Id.beverageVolumeSeekBar);
+            ratingBar = 
+                FindViewById<RatingBar>(Resource.Id.ratingBar);
+            beverageVolumeLabel = 
+                FindViewById<TextView>(Resource.Id.beverageVolumeStatusTextView);
         }
     }
 }
