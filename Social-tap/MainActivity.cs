@@ -39,12 +39,10 @@ namespace Socialtap
             submitButton.Click += (sender, e) =>
             {
                 //async
-                controller.addBarReview(new BarReview(barNameField.Text, 
-                                            beverageVolumeBar.Progress, 
-                                            commentField.Text, 
-                                            ratingBar.Progress));
-                Toast.MakeText(Application.Context, 
-                               "Išsaugota", ToastLength.Short).Show();
+                BarReview barReview = new BarReview(barNameField.Text, beverageVolumeBar.Progress, commentField.Text, ratingBar.Progress);
+
+                controller.addBarReview(barReview);
+                Toast.MakeText(Application.Context,"Išsaugota", ToastLength.Short).Show();
             };
 
             // Todo: iškelti į kontrolerį, pakeisti switch'ą
@@ -54,19 +52,16 @@ namespace Socialtap
                     case 1:
                     case 2:
                     case 3:
-                        beverageVolumeLabel.Text =
-                            GetString(Resource.String.beverage_volume_low);
+                        beverageVolumeLabel.Text = GetString(Resource.String.beverage_volume_low);
                         break;
                     case 4:
                     case 5:
                     case 6:
                     case 7:
-                        beverageVolumeLabel.Text =
-                           GetString(Resource.String.beverage_volume_medium);
+                        beverageVolumeLabel.Text = GetString(Resource.String.beverage_volume_medium);
                         break;
                     default:
-                        beverageVolumeLabel.Text =
-                            GetString(Resource.String.beverage_volume_high);
+                        beverageVolumeLabel.Text = GetString(Resource.String.beverage_volume_high);
                         break;
                 };
             };
@@ -75,8 +70,7 @@ namespace Socialtap
         ///Paslepia klaviatūrą paspaudus kitur nei EditText laukas
         public override bool OnTouchEvent(MotionEvent e)
         {
-            InputMethodManager imm =
-                (InputMethodManager)GetSystemService(Context.InputMethodService);
+            InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
             // Veikia su abiem EditText laukais
             imm.HideSoftInputFromWindow(barNameField.WindowToken, 0);
             return base.OnTouchEvent(e);

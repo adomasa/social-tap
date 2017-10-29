@@ -34,6 +34,7 @@ namespace Socialtap
             {
                 barsData = new List<BarData>();
             }
+            
         }
 
         public Boolean addBarReview(BarReview barReview) 
@@ -43,6 +44,7 @@ namespace Socialtap
             // ...
             // nėra:
             // ...
+
             return false;
         }
 
