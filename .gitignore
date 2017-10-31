@@ -51,3 +51,4 @@ Social-tap/Social-tap.csproj.bak
 
 # Mac auto-generated files
 .DS_Store
+Xamarin/Social-tap/Resources/Resource.designer.cs
