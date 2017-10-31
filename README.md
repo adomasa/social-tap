@@ -6,13 +6,13 @@
  * Reikalavimų įgyvendinimas **[Visi]**
     * Lazy
     * Generics (in delegates, events and methods)
-    * Delegates
-    * Events and their usage: standard and custom.
+    * **Delegates**
+    * **Events and their usage: standard and custom.**
     * Exceptions and dealing with them: standard and custom (and meaningfull usage of those).
     * Variation and covariation usage (at least demonstration).
-    * Anonymous methods
-    * Lambda expressions.
-    * concurrent programming (threading or async/await (for your own written classes); common resource usage between threads).
+    * **Anonymous methods**
+    * **Lambda expressions.**
+    * **concurrent programming (threading or async/await (for your own written classes); common resource usage between threads).**
     * Config file usage (both - app and user)
     * Dependency Injection.
  * Tikslesnis recognition'as su unit testais **[Andrius]**
