@@ -40,7 +40,7 @@ Thumbs.db
 *.dotCover
 
 # Auto-generated res designer file
-Social-tap/Resources/Resource.designer.cs
+Xamarin/Social-tap/Resources/Resource.designer.cs
 
 # Visual studio auto-generated files
 .vs/*
@@ -51,4 +51,4 @@ Social-tap/Social-tap.csproj.bak
 
 # Mac auto-generated files
 .DS_Store
-Xamarin/Social-tap/Resources/Resource.designer.cs
+
