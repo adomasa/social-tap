@@ -7,22 +7,12 @@ namespace Socialtap
 {
     public class MainActivityController
     {
-        public List<BarData> barsData;
-        private static MainActivityController instance;
+        public List<BarData> BarsData;
+        private static MainActivityController _instance;
 
         private MainActivityController() { }
 
-        public static MainActivityController Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new MainActivityController();
-                }
-                return instance;
-            }
-        }
+        public static MainActivityController Instance => _instance ?? (_instance = new MainActivityController());
 
         public void ExtractBarsDataFromMemory(Bundle data)
         {
@@ -32,7 +22,7 @@ namespace Socialtap
             }
             else 
             {
-                barsData = new List<BarData>();
+                BarsData = new List<BarData>();
             }
         }
 
