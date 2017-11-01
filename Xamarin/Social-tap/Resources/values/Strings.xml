@@ -12,5 +12,9 @@
     <string name="yes">Taip</string>
     <string name="no">Ne</string>
 	<string name="submit_review_label">Pateikti atsiliepimą</string>
-	
+	<string name="review_fragment_title">Atsiliepimas</string>
+	<string name="map_fragment_title">Žemėlapis</string>
+	<string name="camera_fragment_title">Kamera</string>
+	<string name="bar_list_fragment_title">Barai</string>
+
 </resources>
