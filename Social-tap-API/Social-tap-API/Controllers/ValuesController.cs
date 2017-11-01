@@ -29,7 +29,7 @@ namespace Social_tap_API.Controllers
             }
             else
             {
-                return "Blogiau įyplė";
+                return "Blogiau įpylė";
             }
         }
         [HttpGet("tags/{comment}")]
