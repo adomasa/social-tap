@@ -4,11 +4,13 @@ using Android.OS;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Content;
+using Android.Support.Design.Widget;
+using Android.Support.V7.App;
 
 namespace Socialtap
 {
     [Activity(Label = "Social-tap", MainLauncher = true, Icon = "@mipmap/icon")]
-    public class MainActivity : Activity
+    public class MainActivity : AppCompatActivity
     {
         EditText barNameField;
         EditText commentField;
@@ -34,8 +36,13 @@ namespace Socialtap
 
             GetReferencesFromLayout();
 
+            var bottomBar = FindViewById<BottomNavigationView>(Resource.Id.bottomNavigationView);
+            bottomBar.NavigationItemSelected += (s, a) => {
+            };
+                
             // Click eventas
             // Todo: iškelti į kontrolerį
+
             submitButton.Click += (sender, e) =>
             {
                 //async
