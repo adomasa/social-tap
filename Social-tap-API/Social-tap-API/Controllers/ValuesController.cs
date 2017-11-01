@@ -35,8 +35,8 @@ namespace Social_tap_API.Controllers
         [HttpGet("tags/{comment}")]
         public List<string> HashtagsFinder(string comment) // kad išsikviesti reikia vesti http://localhost:.../api/values/bevlvl/INT
         {
-            var regex = new Regex(@"(?<=_)\w+");          /*Hashtag'ą programoje reikės pakeist kuo nors kitu naudojant kintamasis.Replace("#","_"), ir tada passinti į web API, 
-                                                             kol kas dedu _ nes neturėtų būti naudojamas komentaruose*/
+            var regex = new Regex(@"(?<=Ę)\w+");          /*Hashtag'ą programoje reikės pakeist kuo nors kitu naudojant kintamasis.Replace("#","Ę"), ir tada passinti į web API, 
+                                                             kol kas dedu Ę nes neturėtų būti naudojamas komentaruose kaip pirma raidė sakinio. Bet galima sugalvoti kuo kitu keisti*/
             var matches = regex.Matches(comment);
 
             foreach (Match m in matches)
