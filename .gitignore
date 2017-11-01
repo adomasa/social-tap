@@ -52,4 +52,5 @@ Social-tap/Social-tap.csproj.bak
 # Mac auto-generated files
 .DS_Store
 
-Xamarin/.idea/.idea.Social-tap/.idea/.name
+# Rider IDE auto-generated files
+Xamarin/.idea/.idea.Social-tap/*
