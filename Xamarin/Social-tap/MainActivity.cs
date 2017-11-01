@@ -76,8 +76,8 @@ namespace Socialtap
         ///Paslepia klaviatūrą paspaudus kitur nei EditText laukas
         public override bool OnTouchEvent(MotionEvent e)
         {
-            InputMethodManager imm = 
-                (InputMethodManager)GetSystemService(Context.InputMethodService);
+            var imm = 
+                (InputMethodManager)GetSystemService(InputMethodService);
             // Veikia su abiem EditText laukais
             imm.HideSoftInputFromWindow(barNameField.WindowToken, 0);
             return base.OnTouchEvent(e);
