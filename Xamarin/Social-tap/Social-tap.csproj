@@ -99,15 +99,20 @@
     <Reference Include="Xamarin.GooglePlayServices.Maps">
       <HintPath>..\packages\Xamarin.GooglePlayServices.Maps.42.1021.1\lib\MonoAndroid70\Xamarin.GooglePlayServices.Maps.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\MonoAndroid10\RestSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\IBarData.cs" />
-    <Compile Include="Model\BarReview.cs" />
     <Compile Include="Model\BarData.cs" />
     <Compile Include="MainActivityController.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="ReviewFragment.cs" />
+    <Compile Include="ReviewFragmentController.cs" />
+    <Compile Include="BarListFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -135,6 +140,7 @@
     <AndroidResource Include="Resources\drawable\ic_view_list.xml" />
     <AndroidResource Include="Resources\drawable\ic_rate_review.xml" />
     <AndroidResource Include="Resources\drawable\ic_camera.xml" />
+    <AndroidResource Include="Resources\layout\fragment_review.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
