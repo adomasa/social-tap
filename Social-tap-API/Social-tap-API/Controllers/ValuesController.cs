@@ -11,12 +11,34 @@ namespace Social_tap_API.Controllers
     public class ValuesController : Controller
     {
 
-
         static double sum;
         static int uses;
         public static List<string> HashTags = new List<string>();
         public static List<string> BarsNames = new List<string>();
         public Dictionary<string, List<string>> barInfo = new Dictionary<string, List<string>>();
+
+        public ValuesController ()
+        {
+            
+        }
+        [HttpPost("bevlvl/{beverageLevel}")]    // kad išsikviesti reikia vesti http://localhost:.../api/values/bevlvl/INT
+        public Boolean Average(int beverageLevel)
+        {
+            uses++;
+            sum += beverageLevel;
+            if (sum / uses <= beverageLevel) // sakysime, kad jeigu lygus vidurkiui, tai ipilta geriau 
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        [HttpPost("tags/{comment}")]
+         public List<string> HashtagsFinder(string comment) // kad išsikviesti reikia vesti http://localhost:.../api/values/tags/STRING
+        {
+
         [HttpPut("bevlvl/{beverageLevel}")]    // kad išsikviesti reikia vesti http://localhost:.../api/values/bevlvl/INT
         public string Average(int beverageLevel)
         {
