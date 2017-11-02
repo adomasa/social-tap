@@ -32,6 +32,7 @@ namespace Socialtap.Model
             this.totalRating = rating;
             (commentList = new List<string>()).Add(comment);
             this.totalBeverageVolume += beverageVolume;
+            this.reviewCount = 1;
         }
 
         public void AddReview(String comment, int rating, int beverageVolume)
@@ -39,6 +40,7 @@ namespace Socialtap.Model
             commentList.Add(comment);
             totalRating += rating;
             totalBeverageVolume += beverageVolume;
+            reviewCount++;
         }
 
         public override string ToString() => string.Format("[BarData: barName={0}, totalBeverageVolume={1}, " +
