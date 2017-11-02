@@ -12,97 +12,83 @@ namespace Socialtap
     [Activity(Label = "Social-tap", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : AppCompatActivity
     {
-        EditText barNameField;
-        EditText commentField;
-        Button submitButton;
-        SeekBar beverageVolumeBar;
-        RatingBar ratingBar;
-        TextView beverageVolumeLabel;
-        MainActivityController controller;
+        BottomNavigationView bottomNavigation;
 
         /// Lango inicializacija
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            controller = MainActivityController.Instance;
-
             if (savedInstanceState != null) {
-                controller.ExtractBarsDataFromMemory(savedInstanceState);
+                // Statinė atmintis
             }
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
+            // Atgal mygtukas
+            SupportActionBar.SetDisplayHomeAsUpEnabled(false);
+
+            // UI komponentų referencai
             GetReferencesFromLayout();
 
-            var bottomBar = FindViewById<BottomNavigationView>(Resource.Id.bottomNavigationView);
-            bottomBar.NavigationItemSelected += (s, a) => {
-            };
-                
-            // Click eventas
-            // Todo: iškelti į kontrolerį
+            // Paspaustas navigacijos langelis
+            bottomNavigation.NavigationItemSelected += NavigationItemSelected;
 
-            submitButton.Click += (sender, e) =>
-            {
-                //async
-                BarReview barReview = 
-                    new BarReview(barNameField.Text, beverageVolumeBar.Progress,
-                                  commentField.Text, ratingBar.Progress);
+            // Load the first fragment on creation
+            LoadFragment(Resource.Id.fragment_review);
 
-                controller.addBarReview(barReview);
-                Toast.MakeText(Application.Context,
-                               "Išsaugota", ToastLength.Short).Show();
-            };
-
-            // Todo: iškelti į kontrolerį, pakeisti switch'ą
-            beverageVolumeBar.ProgressChanged += (sender, e) => {
-                switch (beverageVolumeBar.Progress) {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                        beverageVolumeLabel.Text = 
-                            GetString(Resource.String.beverage_volume_low);
-                        break;
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                        beverageVolumeLabel.Text = 
-                            GetString(Resource.String.beverage_volume_medium);
-                        break;
-                    default:
-                        beverageVolumeLabel.Text = 
-                            GetString(Resource.String.beverage_volume_high);
-                        break;
-                };
-            };
         }
 
-        ///Paslepia klaviatūrą paspaudus kitur nei EditText laukas
-        public override bool OnTouchEvent(MotionEvent e)
+        public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            var imm = 
-                (InputMethodManager)GetSystemService(InputMethodService);
-            // Veikia su abiem EditText laukais
-            imm.HideSoftInputFromWindow(barNameField.WindowToken, 0);
-            return base.OnTouchEvent(e);
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    Finish();
+                    return true;
+
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
         }
+
         /// Prideda funkcionalių UI objektų nuorodas 
         private void GetReferencesFromLayout() {
-            barNameField = 
-                FindViewById<EditText>(Resource.Id.barNameEditText);
-            commentField = 
-                FindViewById<EditText>(Resource.Id.commentEditText);
-            submitButton = 
-                FindViewById<Button>(Resource.Id.submitButton);
-            beverageVolumeBar = 
-                FindViewById<SeekBar>(Resource.Id.beverageVolumeSeekBar);
-            ratingBar = 
-                FindViewById<RatingBar>(Resource.Id.ratingBar);
-            beverageVolumeLabel = 
-                FindViewById<TextView>(Resource.Id.beverageVolumeStatusTextView);
+            bottomNavigation = 
+                FindViewById<BottomNavigationView>(Resource.Id.bottom_navigation);
+        }
+
+        protected void LoadFragment(int id)
+        {
+            Fragment fragment = null;
+            switch (id)
+            {
+                case Resource.Id.fragment_review:
+                    fragment = ReviewFragment.NewInstance();
+                    SupportActionBar.SetTitle(Resource.String.review_fragment_title);
+                    break;
+                case Resource.Id.fragment_bar_list:
+                    SupportActionBar.SetTitle(Resource.String.bar_list_fragment_title);
+                    //fragment = Fragment2.NewInstance();
+                    break;
+                case Resource.Id.fragment_map:
+                    SupportActionBar.SetTitle(Resource.String.map_fragment_title);
+                    //fragment = Fragment3.NewInstance();
+                    break;
+            }
+
+            if (fragment == null)
+                return;
+                            
+            FragmentManager.BeginTransaction()
+                .Replace(Resource.Id.content_frame, fragment)
+                .Commit();
+        }
+
+        private void NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
+        {
+            LoadFragment(e.Item.ItemId);
         }
     }
 }
