@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingTop="30dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingBottom="10dp"
+    android:id="@+id/fragment_review_layout">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:text="@string/bar_name_label"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/barNameTextView"
+            android:paddingBottom="@dimen/review_bar_components_padding" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/barNameEditText"
+            android:singleLine="true"
+            android:maxLength="32"
+            android:hint="Pavadinimo vieta"
+            android:paddingBottom="@dimen/review_bar_components_padding" />
+        <TextView
+            android:text="@string/beverage_level_label"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/beverageVolumeTextView"
+            android:paddingBottom="@dimen/review_bar_components_padding" />
+        <TextView
+            android:text="@string/beverage_volume_low"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/beverageVolumeStatusTextView"
+            android:paddingBottom="@dimen/review_bar_components_small_padding" />
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/beverageVolumeSeekBar"
+            android:max="10"
+            android:progress="0"
+            android:paddingBottom="@dimen/review_bar_components_padding" />
+        <TextView
+            android:text="@string/comment_label"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/commentTextView"
+            android:paddingBottom="@dimen/review_bar_components_padding" />
+        <EditText
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/commentEditText"
+            android:paddingBottom="@dimen/review_bar_components_padding"
+            android:hint="Atsiliepimo vieta" />
+        <TextView
+            android:text="@string/bar_rating_label"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/isRecommendedTextView"
+            android:paddingBottom="@dimen/review_bar_components_padding" />
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBar"
+            android:numStars="5"
+            android:stepSize="1" />
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit_review_label" />
+    </LinearLayout>
+</ScrollView>
