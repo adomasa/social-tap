@@ -1,13 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/review_fragment"
+    <item android:id="@+id/fragment_review"
         android:title="@string/review_fragment_title"
 		android:icon="@drawable/ic_rate_review"/>
 
-    <item android:id="@+id/bar_list_fragment"
+    <item android:id="@+id/fragment_bar_list"
         android:title="@string/bar_list_fragment_title"
 		android:icon="@drawable/ic_view_list"/>
 
-    <item android:id="@+id/map_fragment"
+    <item android:id="@+id/fragment_map"
 		android:title="@string/map_fragment_title"
 		android:icon="@drawable/ic_map"/>
        
