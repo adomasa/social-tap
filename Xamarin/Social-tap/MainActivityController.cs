@@ -5,16 +5,11 @@ using Socialtap.Model;
 
 namespace Socialtap
 {
-    public class MainActivityController
+    public static class MainActivityController
     {
-        public List<BarData> BarsData;
-        private static MainActivityController _instance;
+        public static List<BarData> BarsData;
 
-        private MainActivityController() { }
-
-        public static MainActivityController Instance => _instance ?? (_instance = new MainActivityController());
-
-        public void ExtractBarsDataFromMemory(Bundle data)
+        public static void ExtractBarsDataFromMemory(Bundle data)
         {
             if (null != data) 
             {
@@ -26,7 +21,8 @@ namespace Socialtap
             }
         }
 
-        public Boolean addBarReview(BarReview barReview) 
+        public static Boolean AddBarReview(String barName = "Nenurodyta", int beverageLevel = 0,
+                                    String comment = "Nėra", int rating = 0)
         {
             // pereiti per listą ieškant, ar nėra jau tokio baro
             // yra:
@@ -36,7 +32,7 @@ namespace Socialtap
             return false;
         }
 
-        public Boolean saveBarsDataToMemory(Bundle data) 
+        public static Boolean SaveBarsDataToMemory(Bundle data) 
         {
             // ..
             return false;
