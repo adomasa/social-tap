@@ -111,7 +111,6 @@
     <Compile Include="MainActivityController.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="ReviewFragment.cs" />
-    <Compile Include="ReviewFragmentController.cs" />
     <Compile Include="BarListFragment.cs" />
   </ItemGroup>
   <ItemGroup>
