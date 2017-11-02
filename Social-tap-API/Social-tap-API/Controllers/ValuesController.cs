@@ -17,12 +17,12 @@ namespace Social_tap_API.Controllers
         public static List<string> HashTags = new List<string>();
         public static List<string> BarsNames = new List<string>();
         public Dictionary<string, List<string>> barInfo = new Dictionary<string, List<string>>();
-        [HttpGet("bevlvl/{beverageLevel}")]    // kad išsikviesti reikia vesti http://localhost:.../api/values/bevlvl/INT
+        [HttpPut("bevlvl/{beverageLevel}")]    // kad išsikviesti reikia vesti http://localhost:.../api/values/bevlvl/INT
         public string Average(int beverageLevel)
         {
             uses++;
             sum += beverageLevel;
-
+            //return "WTF";
             if (sum / uses <= beverageLevel) // sakysime, kad jeigu lygus vidurkiui, tai ipilta geriau 
             {
                 return "Geriau įpylė";
@@ -32,7 +32,7 @@ namespace Social_tap_API.Controllers
                 return "Blogiau įpylė";
             }
         }
-        [HttpGet("tags/{comment}")]
+        [HttpPost("tags/{comment}")]
         public List<string> HashtagsFinder(string comment) // kad išsikviesti reikia vesti http://localhost:.../api/values/bevlvl/INT
         {
             var regex = new Regex(@"(?<=Ę)\w+");          /*Hashtag'ą programoje reikės pakeist kuo nors kitu naudojant kintamasis.Replace("#","Ę"), ir tada passinti į web API, 
@@ -47,7 +47,7 @@ namespace Social_tap_API.Controllers
             return HashTags;
         }
 
-        [HttpGet("names/{barName}/{comment}")]
+        [HttpPost("names/{barName}/{comment}")]
         public Dictionary<string, List<string>> CountBars(string barName, string comment) // kad išsikviesti reikia vesti 
         {
             // http://localhost:.../api/values/names/STRING_baroPavadinimas/STRING_komentaras
