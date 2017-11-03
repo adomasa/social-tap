@@ -5,12 +5,12 @@ namespace Socialtap.Model
 {
     public interface IBarData
     {
-        String barName { get; }
+        string barName { get; }
         int totalBeverageVolume { get; }
         int totalRating { get; }
         List<string> commentList { get; }
         int reviewCount { get; }
 
-        void AddReview(String comment, int rating, int beverageVolume);
+        void AddReview(string comment, int rating, int beverageVolume);
     }
 }
