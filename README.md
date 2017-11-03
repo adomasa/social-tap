@@ -19,7 +19,7 @@
  
 # Xamarin emuliatoriaus konfigūracija
 * Ekranas: Nexus 5X (dirbant su Android design dėl bugų naudoti Nexus 4)
-* Android API: 24
+* Android API: 25
 
 # Xamarin projekto specifikacijos
 * Tikslinė platforma: **Xamarin Native Android**
