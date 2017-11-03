@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        card_view:cardCornerRadius="4dp"
+        android:elevation="2dp"
+        android:foreground="?android:attr/selectableItemBackground">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp">
+            <TextView
+                android:id="@+id/barTitle"
+                android:text="barTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Material.WindowTitle"
+                android:textSize="24sp"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp" />
+            <TextView
+                android:id="@+id/barRatingLabel"
+                android:text="barRatingLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:layout_marginTop="7dp"
+                android:layout_marginStart="0dp" />
+            <TextView
+                android:id="@+id/barRating"
+                android:text="barRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="0dp" />
+            <TextView
+                android:id="@+id/avgBeverageVolumeLabel"
+                android:text="avgBeverageVolumeLabel"
+                android:layout_width="163dp"
+                android:layout_height="18dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:textAlignment="textEnd"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="7dp" />
+            <TextView
+                android:id="@+id/avgBeverageVolume"
+                android:text="avgBeverageVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:textAppearance="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="16dp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
