@@ -40,7 +40,8 @@ namespace Socialtap.Code.Fragments
             rootView.Touch += HideKeyboard;
 
             // Todo: iškelti į kontrolerį, pakeisti switch'ą
-            beverageVolumeBar.ProgressChanged += (sender, e) => {
+            beverageVolumeBar.ProgressChanged += (sender, e) =>
+            {
                 switch (beverageVolumeBar.Progress)
                 {
                     case 0:
@@ -61,7 +62,8 @@ namespace Socialtap.Code.Fragments
                         beverageVolumeLabel.Text =
                             GetString(Resource.String.beverage_volume_high);
                         break;
-                };
+                }
+                ;
             };
 
             // Click eventas
@@ -95,9 +97,8 @@ namespace Socialtap.Code.Fragments
                 rootView.FindViewById<TextView>(Resource.Id.beverageVolumeStatusTextView);
         }
 
-
         ///Paslepia klaviatūrą paspaudus fone
-        public void HideKeyboard(object sender, View.TouchEventArgs e)
+        private void HideKeyboard(object sender, View.TouchEventArgs e)
         {
             var imm = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
             imm.HideSoftInputFromWindow(rootView.WindowToken, 0);

@@ -57,7 +57,7 @@ namespace Socialtap.Code
                 FindViewById<BottomNavigationView>(Resource.Id.bottom_navigation);
         }
 
-        protected void LoadFragment(int id)
+        private void LoadFragment(int id)
         {
             Fragment fragment = null;
             switch (id)
@@ -73,7 +73,7 @@ namespace Socialtap.Code
                 case Resource.Id.fragment_map:
                     SupportActionBar.SetTitle(Resource.String.map_fragment_title);
                     // ..
-                    break;
+                    break;               
             }
 
             if (fragment == null)

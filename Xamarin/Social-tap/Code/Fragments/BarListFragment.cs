@@ -27,10 +27,10 @@ namespace Socialtap.Code.Fragments
 
             barsData = new List<BarData>
             {
-                new BarData("Bar name", 5, "Comment is here.", 7),
-                new BarData("Bar name", 5, "Comment is here.", 7),
-                new BarData("Bar name", 5, "Comment is here.", 7),
-                new BarData("Bar name", 5, "Comment is here.", 7)
+                new BarData("Bar name1", 5, "Comment is here.", 7),
+                new BarData("Bar name2", 6, "Comment is here.", 7),
+                new BarData("Bar name3", 7, "Comment is here.", 7),
+                new BarData("Bar name4", 8, "Comment is here.", 7)
             };
         }
 
