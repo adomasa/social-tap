@@ -24,14 +24,6 @@ namespace Socialtap.Code.Fragments
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            barsData = new List<BarData>
-            {
-                new BarData("Bar name1", 5, "Comment is here.", 7),
-                new BarData("Bar name2", 6, "Comment is here.", 7),
-                new BarData("Bar name3", 7, "Comment is here.", 7),
-                new BarData("Bar name4", 8, "Comment is here.", 7)
-            };
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -42,7 +34,7 @@ namespace Socialtap.Code.Fragments
             layoutManager = new LinearLayoutManager(Activity);
             recyclerView.SetLayoutManager(layoutManager);
                 
-            adapter = new BarListAdapter(barsData);
+            adapter = new BarListAdapter(MainActivityController.BarsData);
 
             recyclerView.SetAdapter(adapter);
             

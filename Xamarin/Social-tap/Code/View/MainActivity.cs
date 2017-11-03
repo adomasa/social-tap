@@ -1,15 +1,18 @@
-﻿using Android.App;
+﻿using System.Collections.Generic;
+using Android.App;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Socialtap.Code.Fragments;
+using Socialtap.Model;
 
 namespace Socialtap.Code
 {
     [Activity(Label = "Social-tap", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : AppCompatActivity
     {
+        public static string TAG = "MainActivity";
         BottomNavigationView bottomNavigation;
 
         /// Lango inicializacija
@@ -17,6 +20,7 @@ namespace Socialtap.Code
         {
             base.OnCreate(savedInstanceState);
 
+            MainActivityController.BarsData = new List<BarData>();
             if (savedInstanceState != null) {
                 // Statinė atmintis
             }
