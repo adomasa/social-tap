@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
-using Android.InputMethodServices;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
 
-namespace Socialtap
+namespace Socialtap.Code.Fragments
 {
     public class ReviewFragment : Fragment
     {
@@ -36,13 +29,15 @@ namespace Socialtap
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
             rootView = inflater.Inflate(Resource.Layout.fragment_review, container, false);
+
             GetReferencesFromLayout();
 
-                            
-            rootView.Touch += HideKeyboard;
+            // Paslepia klaviatūrą užkrovus fragmentą
             Activity.Window.SetSoftInputMode(SoftInput.StateHidden);
+
+            // Paspaudus fone paslepia klaviatūrą                
+            rootView.Touch += HideKeyboard;
 
             // Todo: iškelti į kontrolerį, pakeisti switch'ą
             beverageVolumeBar.ProgressChanged += (sender, e) => {
@@ -107,8 +102,5 @@ namespace Socialtap
             var imm = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
             imm.HideSoftInputFromWindow(rootView.WindowToken, 0);
         }
-
-
-
     }
 }

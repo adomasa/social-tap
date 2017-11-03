@@ -35,6 +35,10 @@ namespace Socialtap.Model
             this.reviewCount = 1;
         }
 
+        public BarData()
+        {
+        }
+
         public void AddReview(String comment, int rating, int beverageVolume)
         {
             commentList.Add(comment);

@@ -1,13 +1,11 @@
 ﻿using Android.App;
-using Android.Widget;
 using Android.OS;
-using Android.Views;
-using Android.Views.InputMethods;
-using Android.Content;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
+using Android.Views;
+using Socialtap.Code.Fragments;
 
-namespace Socialtap
+namespace Socialtap.Code
 {
     [Activity(Label = "Social-tap", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : AppCompatActivity
@@ -69,17 +67,19 @@ namespace Socialtap
                     SupportActionBar.SetTitle(Resource.String.review_fragment_title);
                     break;
                 case Resource.Id.fragment_bar_list:
+                    fragment = BarListFragment.NewInstance();
                     SupportActionBar.SetTitle(Resource.String.bar_list_fragment_title);
-                    //fragment = Fragment2.NewInstance();
                     break;
                 case Resource.Id.fragment_map:
                     SupportActionBar.SetTitle(Resource.String.map_fragment_title);
-                    //fragment = Fragment3.NewInstance();
+                    // ..
                     break;
             }
 
             if (fragment == null)
+            {
                 return;
+            }
                             
             FragmentManager.BeginTransaction()
                 .Replace(Resource.Id.content_frame, fragment)
