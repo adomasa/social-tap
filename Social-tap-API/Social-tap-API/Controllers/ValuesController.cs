@@ -35,25 +35,7 @@ namespace Social_tap_API.Controllers
                 return false;
             }
         }
-        [HttpPost("tags/{comment}")]
-         public List<string> HashtagsFinder(string comment) // kad išsikviesti reikia vesti http://localhost:.../api/values/tags/STRING
-        {
-
-        [HttpPut("bevlvl/{beverageLevel}")]    // kad išsikviesti reikia vesti http://localhost:.../api/values/bevlvl/INT
-        public string Average(int beverageLevel)
-        {
-            uses++;
-            sum += beverageLevel;
-            //return "WTF";
-            if (sum / uses <= beverageLevel) // sakysime, kad jeigu lygus vidurkiui, tai ipilta geriau 
-            {
-                return "Geriau įpylė";
-            }
-            else
-            {
-                return "Blogiau įpylė";
-            }
-        }
+        
         [HttpPost("tags/{comment}")]
         public List<string> HashtagsFinder(string comment) // kad išsikviesti reikia vesti http://localhost:.../api/values/bevlvl/INT
         {
