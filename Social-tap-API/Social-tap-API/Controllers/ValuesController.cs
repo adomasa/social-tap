@@ -13,12 +13,27 @@ namespace Social_tap_API.Controllers
     {
         static double sum;
         static int uses;
-        public static List<string> HashTags = new List<string>();
-        public static List<string> BarsNames = new List<string>();
-        public Dictionary<string, List<string>> barInfo = new Dictionary<string, List<string>>();
+        public List<string> HashTags = new List<string>();
+        public static List<int> Rates = new List<int>();
+        public static Dictionary<string, List<string>> barInfo = new Dictionary<string, List<string>>();
+        public static Dictionary<string, List<int>> barRates = new Dictionary<string, List<int>>();
         public ValuesController()
         {
 
+        } 
+        [HttpPost("barrate/{barName}/{rate}")] //kad išsikviesti reikia vesti http://localhost:.../api/values/barrate/string_baropavadinimas/string_įvertinimas
+        public double BarRateAverage(string barName, int rate)
+        {
+            barName = barName.ToUpper();  
+            if (barRates.Keys.Contains(barName))
+            {
+                barRates[barName].Add(rate);
+            }
+            else
+            {
+                barRates[barName] = new List<int> { rate }; 
+            }
+            return barRates[barName].Average();
         }
         [HttpPost("bevlvl/{beverageLevel}")]    // kad išsikviesti reikia vesti http://localhost:.../api/values/bevlvl/INT
         public Boolean Average(int beverageLevel)
@@ -54,9 +69,10 @@ namespace Social_tap_API.Controllers
         {
             // http://localhost:.../api/values/names/STRING_baroPavadinimas/STRING_komentaras
             barName = barName.ToUpper();
-            if (!barInfo.Keys.Contains(barName))
+            if (barInfo.Keys.Contains(barName))
             {
-                barInfo.Add(barName, HashtagsFinder(comment));
+                //
+                barInfo[barName].AddRange(HashtagsFinder(comment));
             }
             else
             {
