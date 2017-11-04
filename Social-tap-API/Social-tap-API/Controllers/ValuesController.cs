@@ -73,7 +73,6 @@ namespace Social_tap_API.Controllers
             barName = barName.Replace(" ", String.Empty).Replace("-", String.Empty).Replace(".", String.Empty); // //pasalinam visus tarpus, taškus ir -
             if (barInfo.Keys.Contains(barName))
             {
-                //
                 barInfo[barName].AddRange(HashtagsFinder(comment));
             }
             else
