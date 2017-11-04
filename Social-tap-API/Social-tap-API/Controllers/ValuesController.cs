@@ -14,7 +14,6 @@ namespace Social_tap_API.Controllers
         static double sum;
         static int uses;
         public List<string> HashTags = new List<string>();
-        public static List<int> Rates = new List<int>();
         public static Dictionary<string, List<string>> barInfo = new Dictionary<string, List<string>>();
         public static Dictionary<string, List<int>> barRates = new Dictionary<string, List<int>>();
         public ValuesController()
@@ -24,7 +23,9 @@ namespace Social_tap_API.Controllers
         [HttpPost("barrate/{barName}/{rate}")] //kad išsikviesti reikia vesti http://localhost:.../api/values/barrate/string_baropavadinimas/string_įvertinimas
         public double BarRateAverage(string barName, int rate)
         {
-            barName = barName.ToUpper();  
+            barName = barName.ToUpper();
+            barName = barName.Replace(" ", String.Empty).Replace("-", String.Empty).Replace(".", String.Empty); //pasalinam visus tarpus, taškus ir -
+            
             if (barRates.Keys.Contains(barName))
             {
                 barRates[barName].Add(rate);
@@ -69,6 +70,7 @@ namespace Social_tap_API.Controllers
         {
             // http://localhost:.../api/values/names/STRING_baroPavadinimas/STRING_komentaras
             barName = barName.ToUpper();
+            barName = barName.Replace(" ", String.Empty).Replace("-", String.Empty).Replace(".", String.Empty); // //pasalinam visus tarpus, taškus ir -
             if (barInfo.Keys.Contains(barName))
             {
                 //

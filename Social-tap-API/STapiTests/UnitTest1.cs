@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Social_tap_API.Controllers;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace STapiTests
 {
@@ -11,7 +13,19 @@ namespace STapiTests
         public List<string> Tags = new List<string>();
         public Dictionary<string, List<string>> barInfo = new Dictionary<string, List<string>>();
         public Dictionary<string, List<string>> barInfoTests = new Dictionary<string, List<string>>();
-        
+
+        [TestMethod]
+        public void Average_Test3()
+        {
+            ValuesController valuesController = new ValuesController();
+            bool test;
+            test = valuesController.Average(10);
+            test = valuesController.Average(2);
+            test = valuesController.Average(4);
+            test = valuesController.Average(4);
+            test = valuesController.Average(5);
+            Assert.IsTrue(test);
+        }
         [TestMethod]
         public void Average_Test1()
         {
@@ -19,7 +33,6 @@ namespace STapiTests
             bool test;
             test = valuesController.Average(5);
             test = valuesController.Average(6);
-
             Assert.IsTrue(test);
         }
 
@@ -33,6 +46,7 @@ namespace STapiTests
 
             Assert.IsFalse(test);
         }
+        
         [TestMethod]
         public void HashtagsFinder_Test1()
         {
@@ -136,6 +150,18 @@ namespace STapiTests
             double test2 = valuesController.BarRateAverage("snekutis", 4);
             test = valuesController.BarRateAverage("busi3", 4);
             Assert.AreNotEqual(test, 4);
+        }
+
+        [TestMethod]
+        public void BarRateAverage_Test4()
+        {
+            ValuesController valuesController = new ValuesController();
+            double test = valuesController.BarRateAverage("7.fridays", 5);
+            test = valuesController.BarRateAverage("7-FRIDAYS", 4);
+            double test2 = valuesController.BarRateAverage("snekutis", 4);
+            test = valuesController.BarRateAverage("7fRi DaYs", 4);
+            test = valuesController.BarRateAverage("7 FriDAYS", 3);
+            Assert.AreEqual(test, 4);
         }
 
     }

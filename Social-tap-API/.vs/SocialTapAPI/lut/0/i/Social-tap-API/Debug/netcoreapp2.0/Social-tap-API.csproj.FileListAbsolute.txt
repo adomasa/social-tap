@@ -1,0 +1,10 @@
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\b\Social-tap-API\Debug\netcoreapp2.0\Social-tap-API.deps.json
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\b\Social-tap-API\Debug\netcoreapp2.0\Social-tap-API.runtimeconfig.json
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\b\Social-tap-API\Debug\netcoreapp2.0\Social-tap-API.runtimeconfig.dev.json
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\b\Social-tap-API\Debug\netcoreapp2.0\Social-tap-API.dll
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\b\Social-tap-API\Debug\netcoreapp2.0\Social-tap-API.pdb
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\i\Social-tap-API\Debug\netcoreapp2.0\Social-tap-API.csproj.CoreCompileInputs.cache
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\i\Social-tap-API\Debug\netcoreapp2.0\Social-tap-API.AssemblyInfoInputs.cache
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\i\Social-tap-API\Debug\netcoreapp2.0\Social-tap-API.AssemblyInfo.cs
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\i\Social-tap-API\Debug\netcoreapp2.0\Social-tap-API.dll
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\i\Social-tap-API\Debug\netcoreapp2.0\Social-tap-API.pdb

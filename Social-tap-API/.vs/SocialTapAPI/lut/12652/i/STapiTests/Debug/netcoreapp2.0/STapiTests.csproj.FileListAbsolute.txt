@@ -1,0 +1,14 @@
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\b\STapiTests\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\b\STapiTests\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\b\STapiTests\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\b\STapiTests\Debug\netcoreapp2.0\STapiTests.deps.json
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\b\STapiTests\Debug\netcoreapp2.0\STapiTests.runtimeconfig.json
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\b\STapiTests\Debug\netcoreapp2.0\STapiTests.runtimeconfig.dev.json
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\b\STapiTests\Debug\netcoreapp2.0\STapiTests.dll
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\b\STapiTests\Debug\netcoreapp2.0\STapiTests.pdb
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\i\STapiTests\Debug\netcoreapp2.0\STapiTests.csproj.CoreCompileInputs.cache
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\i\STapiTests\Debug\netcoreapp2.0\STapiTests.AssemblyInfoInputs.cache
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\i\STapiTests\Debug\netcoreapp2.0\STapiTests.AssemblyInfo.cs
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\i\STapiTests\Debug\netcoreapp2.0\STapiTests.dll
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\i\STapiTests\Debug\netcoreapp2.0\STapiTests.pdb
+C:\Users\VALENTINAS\Source\Repos\social-tap\Social-tap-API\.vs\SocialTapAPI\lut\0\i\STapiTests\Debug\netcoreapp2.0\STapiTests.csprojResolveAssemblyReference.cache
