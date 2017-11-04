@@ -11,6 +11,7 @@ namespace STapiTests
         public List<string> Tags = new List<string>();
         public Dictionary<string, List<string>> barInfo = new Dictionary<string, List<string>>();
         public Dictionary<string, List<string>> barInfoTests = new Dictionary<string, List<string>>();
+        
         [TestMethod]
         public void Average_Test1()
         {
@@ -20,8 +21,6 @@ namespace STapiTests
             test = valuesController.Average(6);
 
             Assert.IsTrue(test);
-
-
         }
 
         [TestMethod]
@@ -107,6 +106,36 @@ namespace STapiTests
             barInfo.Add("BUSi3", Tags);
 
             CollectionAssert.AreNotEqual(barInfo.Keys, barInfoTests.Keys);
+        }
+        [TestMethod]
+        public void BarRateAverage_Test1()
+        {
+            ValuesController valuesController = new ValuesController();
+            double test = valuesController.BarRateAverage("busi3", 5);
+            test = valuesController.BarRateAverage("busi3", 4);
+            test = valuesController.BarRateAverage("snekutis", 4);
+            test = valuesController.BarRateAverage("busi3", 3);
+            Assert.AreEqual(test, 4);
+        }
+        [TestMethod]
+        public void BarRateAverage_Test2()
+        {
+            ValuesController valuesController = new ValuesController();
+            double test = valuesController.BarRateAverage("busi3", 5);
+            test = valuesController.BarRateAverage("busi3", 4);
+            double test2 = valuesController.BarRateAverage("snekutis", 4);
+            test = valuesController.BarRateAverage("busi3", 3);
+            Assert.AreEqual(test2, 4);
+        }
+        [TestMethod]
+        public void BarRateAverage_Test3()
+        {
+            ValuesController valuesController = new ValuesController();
+            double test = valuesController.BarRateAverage("busi3", 5);
+            test = valuesController.BarRateAverage("busi3", 4);
+            double test2 = valuesController.BarRateAverage("snekutis", 4);
+            test = valuesController.BarRateAverage("busi3", 4);
+            Assert.AreNotEqual(test, 4);
         }
 
     }
