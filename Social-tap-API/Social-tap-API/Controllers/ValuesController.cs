@@ -34,7 +34,7 @@ namespace Social_tap_API.Controllers
                 return false;
             }
         }
-        [HttpPost("tags/{comment}")]
+      //  [HttpPost("tags/{comment}")]
         public List<string> HashtagsFinder(string comment) // kad išsikviesti reikia vesti http://localhost:.../api/values/tags/STRING
         {
             var regex = new Regex(@"(?<=Ę)\w+");          /*Hashtag'ą programoje reikės pakeist kuo nors kitu naudojant kintamasis.Replace("#","Ę"), ir tada passinti į web API, 
