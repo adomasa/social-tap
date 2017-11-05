@@ -23,9 +23,9 @@ namespace Social_tap_API.Controllers
             _barInfo = new Dictionary<string, List<string>>();
             _barRates = new Dictionary<string, List<int>>();
         }
-        // Į metodą paduodamas baro pavadinimas ir jo įvertinimas
-        // Web service laikome baro pavadinimą ir jo įvertinimų Listą 
-        // Atgal grąžiname tik baro įvertinimų vidurkį
+        /// Į metodą paduodamas baro pavadinimas ir jo įvertinimas
+        /// Web service laikome baro pavadinimą ir jo įvertinimų Listą 
+        /// Atgal grąžiname tik baro įvertinimų vidurkį
         /// http://localhost:.../api/values/barrate/string_baropavadinimas/string_įvertinimas
         [HttpPost("barrate/{barName}/{rate}")] 
         public double BarRateAverage(string barName, int rate)
@@ -45,10 +45,10 @@ namespace Social_tap_API.Controllers
             return _barRates[barName].Average();
         }
         
-        // Į metodą paduodama informacija kiek buvo įpilta 
-        // Web service saugoma informacija apie tai kiek kartų buvo pasinaudota programa 
-        // Grąžiname true jeigu įpilta geriau, false jeigu blogau. 
-        // Lyginimas vyksta ne su vieno baro statistika o su BENDRA 
+        /// Į metodą paduodama informacija kiek buvo įpilta 
+        /// Web service saugoma informacija apie tai kiek kartų buvo pasinaudota programa 
+        /// Grąžiname true jeigu įpilta geriau, false jeigu blogau. 
+        /// Lyginimas vyksta ne su vieno baro statistika o su BENDRA 
         /// http://localhost:.../api/values/bevlvl/INT
         [HttpPost("bevlvl/{beverageLevel}")]    
         public bool Average(int beverageLevel)
@@ -58,9 +58,9 @@ namespace Social_tap_API.Controllers
             // sakysime, kad jeigu lygus vidurkiui, tai ipilta geriau
             return _sum / _uses <= beverageLevel;  
         }
-        // Į metodą paduodamas komentaras 
-        // Iš jo išrenkami žodžiai panaudoti su hashtagu 
-        // Grąžinamas hashtagų listas 
+        /// Į metodą paduodamas komentaras 
+        /// Iš jo išrenkami žodžiai panaudoti su hashtagu 
+        /// Grąžinamas hashtagų listas 
         /// http://localhost:.../api/values/tags/STRING
         //  [HttpPost("tags/{comment}")]
         public List<string> HashtagsFinder(string comment) 
@@ -81,10 +81,10 @@ namespace Social_tap_API.Controllers
             return _hashTags;
         }
 
-        // Į metodą paduodamas baro pavadinimas ir komentaras 
-        // Su baro pavadinimu, kuris yra Dictionary raktas pridedami hashtagai. 
-        // Jie gaunami iškvietus HashtagsFinder metodą
-        // Grąžinamas dictionary tipo kintamasis 
+        /// Į metodą paduodamas baro pavadinimas ir komentaras 
+        /// Su baro pavadinimu, kuris yra Dictionary raktas pridedami hashtagai. 
+        /// Jie gaunami iškvietus HashtagsFinder metodą
+        /// Grąžinamas dictionary tipo kintamasis 
         /// http://localhost:.../api/values/names/STRING_baroPavadinimas/STRING_komentaras
         [HttpPost("names/{barName}/{comment}")]
         public Dictionary<string, List<string>> CountBars(string barName, string comment)
