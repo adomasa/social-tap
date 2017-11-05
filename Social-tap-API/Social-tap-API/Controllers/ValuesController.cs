@@ -11,70 +11,88 @@ namespace Social_tap_API.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller, IValues
     {
-        static double sum;
-        static int uses;
-        public List<string> HashTags = new List<string>();
-        public static Dictionary<string, List<string>> barInfo = new Dictionary<string, List<string>>();
-        public static Dictionary<string, List<int>> barRates = new Dictionary<string, List<int>>();
+        private static double _sum;
+        private static int _uses;
+        private static List<string> _hashTags;
+        private static Dictionary<string, List<string>> _barInfo;
+        private static Dictionary<string, List<int>> _barRates;
+        
         public ValuesController()
         {
-
+            _hashTags = new List<string>();
+            _barInfo = new Dictionary<string, List<string>>();
+            _barRates = new Dictionary<string, List<int>>();
         }
-        [HttpPost("barrate/{barName}/{rate}")] //kad išsikviesti reikia vesti http://localhost:.../api/values/barrate/string_baropavadinimas/string_įvertinimas
+        /// VIETA PAAIŠKINIMUI KĄ DARO
+        /// http://localhost:.../api/values/barrate/string_baropavadinimas/string_įvertinimas
+        [HttpPost("barrate/{barName}/{rate}")] 
         public double BarRateAverage(string barName, int rate)
         {
             barName = barName.ToUpper();
-            barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty); //pasalinam visus tarpus, taškus ir -
+            //pasalinam visus tarpus, taškus ir -
+            barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty); 
 
-            if (barRates.Keys.Contains(barName))
+            if (_barRates.Keys.Contains(barName))
             {
-                barRates[barName].Add(rate);
+                _barRates[barName].Add(rate);
             }
             else
             {
-                barRates[barName] = new List<int> { rate };
+                _barRates[barName] = new List<int> { rate };
             }
-            return barRates[barName].Average();
+            return _barRates[barName].Average();
         }
-        [HttpPost("bevlvl/{beverageLevel}")]    // kad išsikviesti reikia vesti http://localhost:.../api/values/bevlvl/INT
+        
+        /// VIETA PAAIŠKINIMUI KĄ DARO
+        /// http://localhost:.../api/values/bevlvl/INT
+        [HttpPost("bevlvl/{beverageLevel}")]    
         public bool Average(int beverageLevel)
         {
-            uses++;
-            sum += beverageLevel;
+            _uses++;
+            _sum += beverageLevel;
             // sakysime, kad jeigu lygus vidurkiui, tai ipilta geriau
-            return sum / uses <= beverageLevel;  
+            return _sum / _uses <= beverageLevel;  
         }
+        /// VIETA PAAIŠKINIMUI KĄ DARO
+        /// http://localhost:.../api/values/tags/STRING
         //  [HttpPost("tags/{comment}")]
-        public List<string> HashtagsFinder(string comment) // kad išsikviesti reikia vesti http://localhost:.../api/values/tags/STRING
+        public List<string> HashtagsFinder(string comment) 
         {
-            var regex = new Regex(@"(?<=Ę)\w+");          /*Hashtag'ą programoje reikės pakeist kuo nors kitu naudojant kintamasis.Replace("#","Ę"), ir tada passinti į web API, 
-                                                             kol kas dedu Ę nes neturėtų būti naudojamas komentaruose kaip pirma raidė sakinio. Bet galima sugalvoti kuo kitu keisti*/
+            /*
+             * Hashtag'ą programoje reikės pakeist kuo nors kitu naudojant kintamasis.
+             * Replace("#","Ę"), ir tada passinti į web API, kol kas dedu Ę nes neturėtų
+             * būti naudojamas komentaruose kaip pirma raidė sakinio. Bet galima sugalvoti kuo kitu keisti.
+             */
+            var regex = new Regex(@"(?<=Ę)\w+");          
             var matches = regex.Matches(comment);
 
             foreach (Match m in matches)
             {
-                HashTags.Add(m.Value);
+                _hashTags.Add(m.Value);
 
             }
-            return HashTags;
+            return _hashTags;
         }
 
+        /// VIETA PAAIŠKINIMUI KĄ DARO
+        /// http://localhost:.../api/values/names/STRING_baroPavadinimas/STRING_komentaras
         [HttpPost("names/{barName}/{comment}")]
-        public Dictionary<string, List<string>> CountBars(string barName, string comment) //kad išsikviesti reikia vesti 
+        public Dictionary<string, List<string>> CountBars(string barName, string comment)
         {
-            // http://localhost:.../api/values/names/STRING_baroPavadinimas/STRING_komentaras
             barName = barName.ToUpper();
-            barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty); // pasalinam visus tarpus, taškus ir -
-            if (barInfo.Keys.Contains(barName))
+            // pasalinam visus tarpus, taškus ir -
+            barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty); 
+            
+            if (_barInfo.Keys.Contains(barName))
             {
-                barInfo[barName].AddRange(HashtagsFinder(comment));
+                _barInfo[barName].AddRange(HashtagsFinder(comment));
             }
             else
             {
-                barInfo[barName] = HashtagsFinder(comment);
+                _barInfo[barName] = HashtagsFinder(comment);
             }
-
-            return barInfo;
+            
+            return _barInfo;
         }
     }
 }
