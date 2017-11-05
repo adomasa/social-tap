@@ -70,7 +70,7 @@ namespace Social_tap_API.Controllers
         {
             // http://localhost:.../api/values/names/STRING_baroPavadinimas/STRING_komentaras
             barName = barName.ToUpper();
-            barName = barName.Replace(" ", String.Empty).Replace("-", String.Empty).Replace(".", String.Empty); // //pasalinam visus tarpus, taškus ir -
+            barName = barName.Replace(" ", String.Empty).Replace("-", String.Empty).Replace(".", String.Empty); //pasalinam visus tarpus, taškus ir -
             if (barInfo.Keys.Contains(barName))
             {
                 barInfo[barName].AddRange(HashtagsFinder(comment));
