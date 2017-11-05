@@ -14,24 +14,25 @@ namespace Social_tap_API.Controllers
         static double sum;
         static int uses;
         public List<string> HashTags = new List<string>();
-        public static List<int> Rates = new List<int>();
         public static Dictionary<string, List<string>> barInfo = new Dictionary<string, List<string>>();
         public static Dictionary<string, List<int>> barRates = new Dictionary<string, List<int>>();
         public ValuesController()
         {
 
-        } 
+        }
         [HttpPost("barrate/{barName}/{rate}")] //kad išsikviesti reikia vesti http://localhost:.../api/values/barrate/string_baropavadinimas/string_įvertinimas
         public double BarRateAverage(string barName, int rate)
         {
-            barName = barName.ToUpper();  
+            barName = barName.ToUpper();
+            barName = barName.Replace(" ", String.Empty).Replace("-", String.Empty).Replace(".", String.Empty); //pasalinam visus tarpus, taškus ir -
+
             if (barRates.Keys.Contains(barName))
             {
                 barRates[barName].Add(rate);
             }
             else
             {
-                barRates[barName] = new List<int> { rate }; 
+                barRates[barName] = new List<int> { rate };
             }
             return barRates[barName].Average();
         }
@@ -49,7 +50,7 @@ namespace Social_tap_API.Controllers
                 return false;
             }
         }
-      //  [HttpPost("tags/{comment}")]
+        //  [HttpPost("tags/{comment}")]
         public List<string> HashtagsFinder(string comment) // kad išsikviesti reikia vesti http://localhost:.../api/values/tags/STRING
         {
             var regex = new Regex(@"(?<=Ę)\w+");          /*Hashtag'ą programoje reikės pakeist kuo nors kitu naudojant kintamasis.Replace("#","Ę"), ir tada passinti į web API, 
@@ -65,13 +66,13 @@ namespace Social_tap_API.Controllers
         }
 
         [HttpPost("names/{barName}/{comment}")]
-        public Dictionary<string, List<string>> CountBars(string barName, string comment) // kad išsikviesti reikia vesti 
+        public Dictionary<string, List<string>> CountBars(string barName, string comment) //kad išsikviesti reikia vesti 
         {
             // http://localhost:.../api/values/names/STRING_baroPavadinimas/STRING_komentaras
             barName = barName.ToUpper();
+            barName = barName.Replace(" ", String.Empty).Replace("-", String.Empty).Replace(".", String.Empty); // pasalinam visus tarpus, taškus ir -
             if (barInfo.Keys.Contains(barName))
             {
-                //
                 barInfo[barName].AddRange(HashtagsFinder(comment));
             }
             else
