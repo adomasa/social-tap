@@ -24,7 +24,7 @@ namespace Social_tap_API.Controllers
         public double BarRateAverage(string barName, int rate)
         {
             barName = barName.ToUpper();
-            barName = barName.Replace(" ", String.Empty).Replace("-", String.Empty).Replace(".", String.Empty); //pasalinam visus tarpus, taškus ir -
+            barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty); //pasalinam visus tarpus, taškus ir -
 
             if (barRates.Keys.Contains(barName))
             {
@@ -37,18 +37,12 @@ namespace Social_tap_API.Controllers
             return barRates[barName].Average();
         }
         [HttpPost("bevlvl/{beverageLevel}")]    // kad išsikviesti reikia vesti http://localhost:.../api/values/bevlvl/INT
-        public Boolean Average(int beverageLevel)
+        public bool Average(int beverageLevel)
         {
             uses++;
             sum += beverageLevel;
-            if (sum / uses <= beverageLevel) // sakysime, kad jeigu lygus vidurkiui, tai ipilta geriau 
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            // sakysime, kad jeigu lygus vidurkiui, tai ipilta geriau
+            return sum / uses <= beverageLevel;  
         }
         //  [HttpPost("tags/{comment}")]
         public List<string> HashtagsFinder(string comment) // kad išsikviesti reikia vesti http://localhost:.../api/values/tags/STRING
@@ -70,7 +64,7 @@ namespace Social_tap_API.Controllers
         {
             // http://localhost:.../api/values/names/STRING_baroPavadinimas/STRING_komentaras
             barName = barName.ToUpper();
-            barName = barName.Replace(" ", String.Empty).Replace("-", String.Empty).Replace(".", String.Empty); // pasalinam visus tarpus, taškus ir -
+            barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty); // pasalinam visus tarpus, taškus ir -
             if (barInfo.Keys.Contains(barName))
             {
                 barInfo[barName].AddRange(HashtagsFinder(comment));
