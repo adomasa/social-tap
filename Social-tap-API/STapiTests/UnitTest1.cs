@@ -155,7 +155,7 @@ namespace STapiTests
         [TestMethod]
         public void BarRateAverage_Test4() 
         {
-            ValuesController valuesController = new ValuesController(); //patikrinimui ar viskas gerai su skirtingu budu ivestu tuo paciu pavadinimu
+            ValuesController valuesController = new ValuesController(); // patikrinimui ar viskas gerai su skirtingu budu ivestu tuo paciu pavadinimu
             double test = valuesController.BarRateAverage("7.fridays", 5);
             test = valuesController.BarRateAverage("7-FRIDAYS", 4);
             double test2 = valuesController.BarRateAverage("snekutis", 4);
