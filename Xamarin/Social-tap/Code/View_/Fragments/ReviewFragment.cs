@@ -4,18 +4,20 @@ using Android.OS;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
+using Socialtap.Code.Controller;
+using Socialtap.Code.Model;
 
-namespace Socialtap.Code.Fragments
+namespace Socialtap.Code.View_.Fragments
 {
     public class ReviewFragment : Fragment
     {
-        EditText barNameField;
-        EditText commentField;
-        Button submitButton;
-        SeekBar beverageVolumeBar;
-        RatingBar ratingBar;
-        TextView beverageVolumeLabel;
-        View rootView;
+        private EditText _barNameField;
+        private EditText _commentField;
+        private Button _submitButton;
+        private SeekBar _beverageVolumeBar;
+        private RatingBar _ratingBar;
+        private TextView _beverageVolumeLabel;
+        private View _rootView;
 
         public static ReviewFragment NewInstance() {
             return new ReviewFragment();
@@ -29,7 +31,7 @@ namespace Socialtap.Code.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            rootView = inflater.Inflate(Resource.Layout.fragment_review, container, false);
+            _rootView = inflater.Inflate(Resource.Layout.fragment_review, container, false);
 
             GetReferencesFromLayout();
 
@@ -37,29 +39,29 @@ namespace Socialtap.Code.Fragments
             Activity.Window.SetSoftInputMode(SoftInput.StateHidden);
 
             // Paspaudus fone paslepia klaviatūrą                
-            rootView.Touch += HideKeyboard;
+            _rootView.Touch += HideKeyboard;
 
             // Todo: iškelti į kontrolerį, pakeisti switch'ą
-            beverageVolumeBar.ProgressChanged += (sender, e) =>
+            _beverageVolumeBar.ProgressChanged += (sender, e) =>
             {
-                switch (beverageVolumeBar.Progress)
+                switch (_beverageVolumeBar.Progress)
                 {
                     case 0:
                     case 1:
                     case 2:
                     case 3:
-                        beverageVolumeLabel.Text =
+                        _beverageVolumeLabel.Text =
                             GetString(Resource.String.beverage_volume_low);
                         break;
                     case 4:
                     case 5:
                     case 6:
                     case 7:
-                        beverageVolumeLabel.Text =
+                        _beverageVolumeLabel.Text =
                             GetString(Resource.String.beverage_volume_medium);
                         break;
                     default:
-                        beverageVolumeLabel.Text =
+                        _beverageVolumeLabel.Text =
                             GetString(Resource.String.beverage_volume_high);
                         break;
                 }
@@ -69,39 +71,39 @@ namespace Socialtap.Code.Fragments
             // Click eventas
             // Todo: iškelti į kontrolerį, threads
 
-            submitButton.Click += (sender, e) =>
+            _submitButton.Click += (sender, e) =>
             {
-                MainActivityController.AddBarReview(barNameField.Text, beverageVolumeBar.Progress,
-                                   commentField.Text, ratingBar.Progress);
-                Toast.MakeText(Application.Context,
-                               "Išsaugota", ToastLength.Short).Show();
+                MainActivityController.AddBarReview(
+                    new BarReview(_beverageVolumeBar.Progress, 
+                                  _ratingBar.Progress, _barNameField.Text,
+                                  _commentField.Text));
             };
 
-            return rootView;
+            return _rootView;
         }
 
         /// Prideda funkcionalių UI objektų nuorodas 
         private void GetReferencesFromLayout()
         {
-            barNameField =
-                rootView.FindViewById<EditText>(Resource.Id.barNameEditText);
-            commentField =
-                rootView.FindViewById<EditText>(Resource.Id.commentEditText);
-            submitButton =
-                rootView.FindViewById<Button>(Resource.Id.submitButton);
-            beverageVolumeBar =
-                rootView.FindViewById<SeekBar>(Resource.Id.beverageVolumeSeekBar);
-            ratingBar =
-                rootView.FindViewById<RatingBar>(Resource.Id.ratingBar);
-            beverageVolumeLabel =
-                rootView.FindViewById<TextView>(Resource.Id.beverageVolumeStatusTextView);
+            _barNameField =
+                _rootView.FindViewById<EditText>(Resource.Id.barNameEditText);
+            _commentField =
+                _rootView.FindViewById<EditText>(Resource.Id.commentEditText);
+            _submitButton =
+                _rootView.FindViewById<Button>(Resource.Id.submitButton);
+            _beverageVolumeBar =
+                _rootView.FindViewById<SeekBar>(Resource.Id.beverageVolumeSeekBar);
+            _ratingBar =
+                _rootView.FindViewById<RatingBar>(Resource.Id.ratingBar);
+            _beverageVolumeLabel =
+                _rootView.FindViewById<TextView>(Resource.Id.beverageVolumeStatusTextView);
         }
 
         ///Paslepia klaviatūrą paspaudus fone
         private void HideKeyboard(object sender, View.TouchEventArgs e)
         {
             var imm = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
-            imm.HideSoftInputFromWindow(rootView.WindowToken, 0);
+            imm.HideSoftInputFromWindow(_rootView.WindowToken, 0);
         }
     }
 }
