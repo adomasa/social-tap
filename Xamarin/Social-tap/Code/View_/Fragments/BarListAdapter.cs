@@ -2,14 +2,15 @@
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using Socialtap.Model;
+using Socialtap.Code.Controller;
 
-namespace Socialtap.Code.BarListRecyclerView
+namespace Socialtap.Code.View_.Fragments
 {
     public class BarListAdapter : RecyclerView.Adapter
     {
-        private readonly List<BarData> _barsData;
-
+        /// <summary>
+        /// Kiekvieno elemento liste reference'ų gavimas
+        /// </summary>
         private class BarListViewHolder : RecyclerView.ViewHolder
         {
             internal readonly TextView Title;
@@ -23,35 +24,30 @@ namespace Socialtap.Code.BarListRecyclerView
                 AvgBeverageVolume = v.FindViewById<TextView>(Resource.Id.avgBeverageVolume);
             }
         }
-        
-        public BarListAdapter(List<BarData> barsData)
-        {
-            _barsData = barsData;
-        }
 
-        // Create new views (invoked by the layout manager)
+        /// <summary>
+        /// Sukuria naują view'ą BarList fragmentui
+        /// </summary>
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            //Setup and inflate your layout here
-            var id = Resource.Layout.fragment_bar_list_item;
+            // Layouto užkrovimas
+            const int id = Resource.Layout.fragment_bar_list_item;
             var itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
 
             return new BarListViewHolder(itemView);
         }
 
-        // Replace the contents of a view (invoked by the layout manager)
+        /// Pakeičia view'o turinį užkraunant/scrollinant
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            var item = _barsData[position];
-
-            // Replace the contents of the view with that element
+            var item = MainActivityController.BarsData[position];
 
             if (!(holder is BarListViewHolder viewHolder)) return;
-            viewHolder.Title.Text = item.barName;
-            viewHolder.BarRating.Text = item.AvgRating.ToString();
-            viewHolder.AvgBeverageVolume.Text = item.AvgBeverageVolume.ToString();
+            viewHolder.Title.Text = item.BarName;
+            viewHolder.BarRating.Text = item.AverageRating.ToString();
+            viewHolder.AvgBeverageVolume.Text = item.AverageBeverageVolume.ToString();
         }
 
-        public override int ItemCount => _barsData.Count;
+        public override int ItemCount => MainActivityController.BarsData.Count;
     }
 }
