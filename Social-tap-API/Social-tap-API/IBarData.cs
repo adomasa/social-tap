@@ -7,12 +7,10 @@ namespace SocialtapAPI
 {
     public interface IBarData
     {
-        string BarName { get; }
-        List<string> HashTags { get; }
 
         double RateAvg { get; }
 
-        string Comparison { get; }
+        bool Comparison { get; }
 
         double BeverageAvg { get; }
 

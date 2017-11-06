@@ -7,20 +7,19 @@ namespace SocialtapAPI
 {
     public class BarData : IBarData
     {
-        public string BarName { get; }
-        public List<string> HashTags { get; }
+        public List<string> Tags { get; set; }
+        public double RateAvg { get; set; }
 
-        public double RateAvg { get; }
+        public bool Comparison { get; set; }   //ar geriau įpylė visų barų palyginime
 
-        public string Comparison { get; }   //ar geriau įpylė visų barų palyginime
+        public double BeverageAvg { get; set; } //baro vidurkis
 
-        public double BeverageAvg { get; } //baro vidurkis
-
-        public int BarUses { get; }  
+        public  int BarUses { get; set; }
+        public int BeverageSum { get; set; }
 
         public BarData() {
-            HashTags = new List<string>();
-            this.BarName = BarName;
+            Tags = new List<string>();
+            //HashTags = new Dictionary<string, List<string>>();
             BarUses++;
         }
 

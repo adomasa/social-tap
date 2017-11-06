@@ -14,38 +14,38 @@ namespace STapiTests
         public Dictionary<string, List<string>> barInfo = new Dictionary<string, List<string>>();
         public Dictionary<string, List<string>> barInfoTests = new Dictionary<string, List<string>>();
 
-        [TestMethod]
-        public void Average_Test3()
-        {
-            ValuesController valuesController = new ValuesController();
-            bool test;
-            test = valuesController.Average(10);
-            test = valuesController.Average(2);
-            test = valuesController.Average(4);
-            test = valuesController.Average(4);
-            test = valuesController.Average(5);
-            Assert.IsTrue(test);
-        }
-        [TestMethod]
-        public void Average_Test1()
-        {
-            ValuesController valuesController = new ValuesController();
-            bool test;
-            test = valuesController.Average(5);
-            test = valuesController.Average(6);
-            Assert.IsTrue(test);
-        }
+          [TestMethod]
+          public void Average_Test3()
+          {
+              ValuesController valuesController = new ValuesController();
+              bool test;
+              test = valuesController.Average(10);
+              test = valuesController.Average(2);
+              test = valuesController.Average(4);
+              test = valuesController.Average(4);
+              test = valuesController.Average(5);
+              Assert.IsTrue(test);
+          }
+          [TestMethod]
+          public void Average_Test1()
+          {
+              ValuesController valuesController = new ValuesController();
+              bool test;
+              test = valuesController.Average(5);
+              test = valuesController.Average(6);
+              Assert.IsTrue(test);
+          }
 
-        [TestMethod]
-        public void Average_Test2()
-        {
-            ValuesController valuesController = new ValuesController();
-            bool test;
-            test = valuesController.Average(6);
-            test = valuesController.Average(4);
+          [TestMethod]
+          public void Average_Test2()
+          {
+              ValuesController valuesController = new ValuesController();
+              bool test;
+              test = valuesController.Average(6);
+              test = valuesController.Average(4);
 
-            Assert.IsFalse(test);
-        }
+              Assert.IsFalse(test);
+          } 
 
         [TestMethod]
         public void HashtagsFinder_Test1()
