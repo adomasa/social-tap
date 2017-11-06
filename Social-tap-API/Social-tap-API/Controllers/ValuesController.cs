@@ -16,6 +16,7 @@ namespace Social_tap_API.Controllers
         private static List<string> _hashTags;
         private static Dictionary<string, List<string>> _barInfo;
         private static Dictionary<string, List<int>> _barRates;
+        public BarData barData = new BarData();
         
         public ValuesController()
         {
