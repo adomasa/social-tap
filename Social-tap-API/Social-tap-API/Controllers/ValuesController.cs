@@ -16,45 +16,37 @@ namespace Social_tap_API.Controllers
         private List<string> _hashTags= new List<string>();
         private static Dictionary<string, List<string>> _barInfo;
         private static Dictionary<string, List<int>> _barRates= new Dictionary<string, List<int>>();
-        public BarData _barObject; 
+        public static BarData _barObject; 
         public static Dictionary<string, BarData> _barData = new Dictionary<string, BarData>();
         public ValuesController()
         {
             _barObject = new BarData();
             _barInfo = new Dictionary<string, List<string>>();
         }
-        [HttpPost("onclick/{barName}/{comment}/{rate}/{beverage}")]
-        public Dictionary<string, BarData> OnClick (string barName, string comment, int rate, int beverage)
+        [HttpPost("AdBarReview/{barName}/{comment}/{rate}/{beverage}")]
+        public Dictionary<string, BarData> AdBarReview (string barName, string comment, int rate, int beverage)
         {
-
             barName = barName.ToUpper();
             // pasalinam visus tarpus, taškus ir -
             barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty);
-            try
+            if (!_barData.Keys.Contains(barName))
             {
-                _barObject.BeverageSum += beverage;
-                _barObject.Comparison = Average(beverage);
-                _barObject.Tags.AddRange(HashtagsFinder(comment)); //grazins tik šitoj užklausoj panaudotus hashtagus
-                _barObject.RateAvg = BarRateAverage(barName, rate);
-               // _barObject.BeverageAvg = 0;
-                var x = _barData.First((k) => k.Key == barName);
-                x.Value.BarUses++;
-                _barObject.BarUses = x.Value.BarUses;
-
+                _barData.Add(barName, _barObject);
             }
-            catch (InvalidOperationException e)
-            {
-             
-            }
-
-            _barData[barName] = _barObject;
+            
+            _barData[barName].BarUses++;
+            _barData[barName].BeverageSum += beverage;
+            _barData[barName].Comparison = Average(beverage);
+            _barData[barName].Tags.AddRange(HashtagsFinder(comment)); 
+            _barData[barName].RateAvg = BarRateAverage(barName, rate);
+            _barData[barName].BeverageAvg = _barData[barName].BeverageSum/ _barData[barName].BarUses;  
             return _barData;
 
         }
 
         [HttpGet("onclick/{barName}")]
 
-        public Dictionary<string, BarData> GetBarData(string barName)
+        public Dictionary<string, BarData> GetBarData()
         {
             return _barData;
 
