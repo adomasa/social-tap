@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Socialtap.Model
+namespace Socialtap.Code.Model
 {
     public interface IBarData
     {
-        string barName { get; }
-        int totalBeverageVolume { get; }
-        int totalRating { get; }
-        List<string> commentList { get; }
-        int reviewCount { get; }
+        string BarName { get; }
+        int AverageBeverageVolume { get; }
+        int AverageRating { get; }
+        List<string> CommentList { get; }
+        int ReviewCount { get; }
 
-        void AddReview(string comment, int rating, int beverageVolume);
+   
     }
 }
