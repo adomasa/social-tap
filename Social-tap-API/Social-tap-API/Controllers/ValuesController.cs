@@ -23,8 +23,10 @@ namespace Social_tap_API.Controllers
             _barObject = new BarData();
             _barInfo = new Dictionary<string, List<string>>();
         }
-        [HttpPost("AdBarReview/{barName}/{comment}/{rate}/{beverage}")]
-        public Dictionary<string, BarData> AdBarReview (string barName, string comment, int rate, int beverage)
+
+        [HttpPost("AddBarReview/{barName}/{comment}/{rate}/{beverage}")]
+
+        public Dictionary<string, BarData> AdBarReview (string barName, string comment, int rate, int beverage) //rate-žvaigždutės, beverage-įpilto alaus lygis
         {
             barName = barName.ToUpper();
             // pasalinam visus tarpus, taškus ir -
