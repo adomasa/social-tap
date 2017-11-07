@@ -44,13 +44,14 @@ namespace Social_tap_API.Controllers
 
         }
 
-        [HttpGet("GetBarData")]
-
-        public Dictionary<string, BarData> GetBarData()
+        [HttpGet]
+        [Route("GetBarData")]
+        public IDictionary<string, BarData> GetBarData()
         {
             return _barData;
 
         }
+
         // Į metodą paduodamas baro pavadinimas ir jo įvertinimas
         // Web service laikome baro pavadinimą ir jo įvertinimų Listą 
         // Atgal grąžiname tik baro įvertinimų vidurkį
