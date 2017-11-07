@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 using SocialtapAPI;
+using Newtonsoft.Json;
 
 namespace Social_tap_API.Controllers
 {
@@ -51,7 +52,14 @@ namespace Social_tap_API.Controllers
             return _barData;
 
         }
-
+        [HttpGet]
+        [Route("GetBarDataJson")] //grazins Json
+        public string GetBarData_Json()
+        {
+            string barDataJson;
+           return barDataJson = JsonConvert.SerializeObject(_barData);
+            
+        }
         // Į metodą paduodamas baro pavadinimas ir jo įvertinimas
         // Web service laikome baro pavadinimą ir jo įvertinimų Listą 
         // Atgal grąžiname tik baro įvertinimų vidurkį
