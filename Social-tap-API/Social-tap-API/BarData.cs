@@ -8,7 +8,7 @@ namespace SocialtapAPI
     public class BarData : IBarData
     {
         public List<string> Tags { get; set; }
-        public double RateAvg { get; set; }
+        public double RateAvg { get; set; } 
 
         public bool Comparison { get; set; }   //ar geriau įpylė visų barų palyginime
 
