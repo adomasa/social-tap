@@ -16,11 +16,9 @@ namespace Social_tap_API.Controllers
         private List<string> _hashTags= new List<string>();
         private static Dictionary<string, List<string>> _barInfo;
         private static Dictionary<string, List<int>> _barRates= new Dictionary<string, List<int>>();
-        public static BarData _barObject; 
         public static Dictionary<string, BarData> _barData = new Dictionary<string, BarData>();
         public ValuesController()
         {
-            _barObject = new BarData();
             _barInfo = new Dictionary<string, List<string>>();
         }
 
@@ -33,7 +31,7 @@ namespace Social_tap_API.Controllers
             barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty);
             if (!_barData.Keys.Contains(barName))
             {
-                _barData.Add(barName, _barObject);
+                _barData.Add(barName,new BarData());
             }
             
             _barData[barName].BarUses++;
