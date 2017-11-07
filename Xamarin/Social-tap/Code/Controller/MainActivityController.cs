@@ -1,31 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Android.App;
-using Android.OS;
 using Android.Widget;
 using RestSharp;
-using Socialtap.Model;
+using Socialtap.Code.Model;
 
-namespace Socialtap.Code
+namespace Socialtap.Code.Controller
 {
     public static class MainActivityController
     {
+        private const string Url = "http://10.0.2.2:5000";
         public static List<BarData> BarsData;
 
-        public static Boolean AddBarReview(string barName = "Nenurodyta", int beverageVolume = 0,
-                                    string comment = "Nėra", int rating = 0)
+        public static async Task AddBarReview(BarReview barReview)
         {
-            BarsData.Add(new BarData(barName, rating, comment, beverageVolume));
-//            var client = new RestClient("http://localhost:5050");
-//            var request = new RestRequest("resource/{id}", Method.POST);
-//
-//            request.AddJsonBody(new BarData(barName, beverageVolume, comment, rating));
-//
-//            // execute the request
-//            var response = client.Execute(request);
-//            var content = response.Content; // raw content as string
-//            Toast.MakeText(Application.Context,
-//                           content, ToastLength.Short).Show();
+            
+            var client = new RestClient(Url);
+//            var request = new RestRequest($"{barReview.BarName}/{barReview.BeverageVolume}/" +
+//                                          $"{barReview.Comment}/{barReview.Rating}", Method.POST);
+            var request = new RestRequest($"/api/values/names/{barReview.BarName}/{barReview.Comment}",Method.POST);
+            var cancellationTokenSource = new CancellationTokenSource();
+            
+            //Todo: duomenys per JsonBody
+
+            var response = await client.ExecuteTaskAsync(request, cancellationTokenSource.Token);
+            var requestStatus = response.ResponseStatus;
+
+            var content = response.Content;
+
+            if (requestStatus.Equals(ResponseStatus.Completed)) 
+            {
+                Toast.MakeText(Application.Context, "Išsaugota", ToastLength.Short).Show();
+            }
+            else
+            {
+                Toast.MakeText(Application.Context, "Klaida išsaugojant", ToastLength.Short).Show();
+            }
+        }
+
+        public static bool FetchBarsData()
+        {
+            //var client = new RestClient(Url);
+            //var request = new RestRequest("Kelias", Method.GET);    
+            
+            //var response = client.Execute(request);
+            //var content = response.Content; 
+            
+            // Todo: parse JSON, update BarsData
+            BarsData = new List<BarData> {new BarData("a", 10, "b", 4, 5), new BarData("a", 10, "b", 4, 5)};
             var status = true;
             return status;
         }
