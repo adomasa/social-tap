@@ -11,8 +11,8 @@ namespace SocialtapAPI
 
         bool Comparison { get; }
 
-        double BeverageAvg { get; }
-
         int BarUses { get; }
+
+        double BeverageAvg { get; }
     }
 }
