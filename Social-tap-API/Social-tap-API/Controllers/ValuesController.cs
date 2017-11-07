@@ -44,7 +44,7 @@ namespace Social_tap_API.Controllers
 
         }
 
-        [HttpGet("onclick/{barName}")]
+        [HttpGet("GetBarData")]
 
         public Dictionary<string, BarData> GetBarData()
         {
