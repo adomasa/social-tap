@@ -11,8 +11,8 @@ namespace SocialtapAPI
         Boolean Average(int beverageLevel);
         List<string> HashtagsFinder(string comment);
         Dictionary<string, List<string>> CountBars(string barName, string comment);
-        double BarRateAverage(string barName, int rate);
         Dictionary<string, BarData> GetBarData();
+        double BarRateAverage(string barName, int rate);
 
     }
 }

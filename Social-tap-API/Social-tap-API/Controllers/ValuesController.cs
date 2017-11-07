@@ -59,9 +59,6 @@ namespace Social_tap_API.Controllers
 
         public double BarRateAverage(string barName, int rate)
         {
-            barName = barName.ToUpper();
-            //pasalinam visus tarpus, taškus ir -
-            barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty); 
 
             if (_barRates.Keys.Contains(barName))
             {
@@ -119,9 +116,6 @@ namespace Social_tap_API.Controllers
        // [HttpPost("names/{barName}/{comment}")]
         public Dictionary<string, List<string>> CountBars(string barName, string comment)
         {
-            barName = barName.ToUpper();
-            // pasalinam visus tarpus, taškus ir -
-            barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty); 
             
             if (_barInfo.Keys.Contains(barName))
             {
