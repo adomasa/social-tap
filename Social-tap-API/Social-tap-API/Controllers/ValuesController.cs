@@ -24,11 +24,18 @@ namespace Social_tap_API.Controllers
 
         [HttpPost("AddBarReview/{barName}/{comment}/{rate}/{beverage}")]
 
-        public Dictionary<string, BarData> AdBarReview (string barName, string comment, int rate, int beverage) //rate-žvaigždutės, beverage-įpilto alaus lygis
+        public Boolean AddBarReview(string barName, string comment, int rate, int beverage) //rate-žvaigždutės, beverage-įpilto alaus lygis
         {
-            barName = barName.ToUpper();
-            // pasalinam visus tarpus, taškus ir -
+
+            barName = barName.ToLower();
             barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty);
+            barName = char.ToUpper(barName[0]) + barName.Substring(1);
+            // pasalinam visus tarpus, taškus ir -
+
+            if (rate > 5 || beverage>10 || barName.Length==0)
+            {
+                return false;
+            }
             if (!_barData.Keys.Contains(barName))
             {
                 _barData.Add(barName,new BarData());
@@ -39,8 +46,8 @@ namespace Social_tap_API.Controllers
             _barData[barName].Comparison = Average(beverage);
             _barData[barName].Tags.AddRange(HashtagsFinder(comment)); 
             _barData[barName].RateAvg = BarRateAverage(barName, rate);
-            _barData[barName].BeverageAvg = _barData[barName].BeverageSum/ _barData[barName].BarUses;  
-            return _barData;
+            _barData[barName].BeverageAvg = _barData[barName].BeverageSum/ _barData[barName].BarUses;
+            return true;
 
         }
 
@@ -78,7 +85,7 @@ namespace Social_tap_API.Controllers
         // Lyginimas vyksta ne su vieno baro statistika o su BENDRA 
         /// http://localhost:.../api/values/bevlvl/INT
        // [HttpPost("bevlvl/{beverageLevel}")]    
-        public bool Average(int beverageLevel)
+        public Boolean Average(int beverageLevel)
         {
             _uses++;
             _sum += beverageLevel;
