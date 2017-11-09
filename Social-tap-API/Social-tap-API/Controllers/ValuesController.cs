@@ -34,7 +34,7 @@ namespace Social_tap_API.Controllers
         [HttpPost("AddBarReview/{barName}/{comment}/{rate}/{beverage}")]
         public Boolean AddBarReview(string barName, string comment, int rate, int beverage) //rate-žvaigždutės, beverage-įpilto alaus lygis
         {
-
+            Console.WriteLine($"POST: AddBarReview/{barName}/{comment}/{rate}/{beverage}");
             if (rate > MAX_RATE || beverage > MAX_BEVERAGE_LEVEL || barName.Length < MIN_NAME_LENGHT || rate<= MIN_BEVERAGE_RATE_LEVEL || beverage<= MIN_BEVERAGE_RATE_LEVEL)
             {
                 return false;
@@ -62,6 +62,7 @@ namespace Social_tap_API.Controllers
         [Route("GetBarData")]
         public IDictionary<string, BarData> GetBarData()
         {
+            Console.WriteLine($"GET: GetBarData/");
             return _barData;
 
         }
