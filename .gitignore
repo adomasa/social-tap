@@ -56,3 +56,4 @@ Social-tap/Social-tap.csproj.bak
 Xamarin/.idea/*
 Social-tap-API/.idea/*
 Xamarin/Social-tap/Social-tap.csproj.DotSettings
+/Xamarin/.vs/Social-tap/v15/Server/sqlite3/db.lock
