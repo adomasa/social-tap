@@ -6,11 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 using SocialtapAPI;
 
+
 namespace Social_tap_API.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller, IValues
     {
+        public const int MAX_BEVERAGE_LEVEL = 10;
+        public const int MAX_RATE = 5;
+        public const int MIN_NAME_LENGHT = 1;
+        public const int MIN_BEVERAGE_RATE_LEVEL = 0;
         private static double _sum;
         private static int _uses;
         private List<string> _hashTags = new List<string>();
@@ -30,7 +35,7 @@ namespace Social_tap_API.Controllers
         public Boolean AddBarReview(string barName, string comment, int rate, int beverage) //rate-žvaigždutės, beverage-įpilto alaus lygis
         {
 
-            if (rate > 5 || beverage > 10 || barName.Length == 0 || rate<0 || beverage<0)
+            if (rate > MAX_RATE || beverage > MAX_BEVERAGE_LEVEL || barName.Length < MIN_NAME_LENGHT || rate<= MIN_BEVERAGE_RATE_LEVEL || beverage<= MIN_BEVERAGE_RATE_LEVEL)
             {
                 return false;
             }
