@@ -89,10 +89,10 @@ namespace STapiTests
         public void CountBars_Test1()
         {
             ValuesController valuesController = new ValuesController();
-            barInfoTests = valuesController.CountBars("busi3", "Ęgeras Ębaras visai");
+            barInfoTests = valuesController.CountBars("Busi3", "Ęgeras Ębaras visai");
             Tags.Add("geras");
             Tags.Add("baras");
-            barInfo.Add("BUSI3", Tags);
+            barInfo.Add("Busi3", Tags);
 
             CollectionAssert.AreEqual(barInfo.Keys, barInfoTests.Keys);
         }
@@ -155,13 +155,50 @@ namespace STapiTests
         [TestMethod]
         public void BarRateAverage_Test4()
         {
-            ValuesController valuesController = new ValuesController(); //patikrinimui ar viskas gerai su skirtingu budu ivestu tuo paciu pavadinimu
-            double test = valuesController.BarRateAverage("7.fridays", 5);
-            test = valuesController.BarRateAverage("7-FRIDAYS", 4);
-            double test2 = valuesController.BarRateAverage("snekutis", 4);
-            test = valuesController.BarRateAverage("7fRi DaYs", 4);
-            test = valuesController.BarRateAverage("7 FriDAYS", 3);
+            ValuesController valuesController = new ValuesController(); 
+            double test = valuesController.BarRateAverage("7fridays", 5);
+            test = valuesController.BarRateAverage("7fridays", 4);
+            test = valuesController.BarRateAverage("7fridays", 4);
+            test = valuesController.BarRateAverage("7fridays", 3);
             Assert.AreEqual(test, 4);
+        }
+
+        [TestMethod] 
+
+        public void AddBarReview_Test1 ()
+        {
+            ValuesController valuesController = new ValuesController();
+            bool test = valuesController.AddBarReview("", "", 4, 10);
+            Assert.IsFalse(test);
+        }
+        [TestMethod]
+        public void AddBarReview_Test2 ()
+        {
+            ValuesController valuesController = new ValuesController();
+            bool test = valuesController.AddBarReview("busi3", "", 6, 10);
+            Assert.IsFalse(test);
+        }
+        [TestMethod]
+        public void AddBarReview_Test3()
+        {
+            ValuesController valuesController = new ValuesController();
+            bool test = valuesController.AddBarReview("busi3", "", 4, 11);
+            Assert.IsFalse(test);
+        }
+        [TestMethod]
+        public void AddBarReview_Test4()
+        {
+            ValuesController valuesController = new ValuesController();
+            bool test = valuesController.AddBarReview("busi3", "", 4, 10);
+            Assert.IsTrue(test);
+        }
+
+        [TestMethod]
+        public void AddBarReview_Test5()
+        {
+            ValuesController valuesController = new ValuesController();
+            bool test = valuesController.AddBarReview("busi3", "", -1,6);
+            Assert.IsFalse(test);
         }
 
     }
