@@ -12,10 +12,6 @@ namespace Social_tap_API.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller, IValues
     {
-        public const int MAX_BEVERAGE_LEVEL = 10; //kiek daugiausiai gali ipilti
-        public const int MAX_RATE = 5; // kiek daugiausiai gali duoti žvaigždučių 
-        public const int MIN_NAME_LENGHT = 1; //trumpiausias įmanomas baro pavadinimas
-        public const int MIN_BEVERAGE_RATE_LEVEL = 0; //kiek mažiausiai gali įpilti ir duoti žvaigždučių 
         public static Dictionary<string, BarData> _barData = new Dictionary<string, BarData>();
         public ValuesController(){
 
