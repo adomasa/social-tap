@@ -30,6 +30,15 @@
             android:maxLength="32"
             android:hint="Pavadinimo vieta"
             android:paddingBottom="@dimen/review_bar_components_padding" />
+        <Button
+            android:id="@+id/addPhotoButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_photo_button" />
+        <ImageView
+            android:id="@+id/beverageImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <TextView
             android:text="@string/beverage_level_label"
             android:textAppearance="?android:attr/textAppearanceLarge"
