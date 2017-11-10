@@ -7,7 +7,7 @@
         public int Rating { get; }
         public string Comment { get; }
         
-        public BarReview(int beverageVolume, int rating, string barName = "Nenurodyta",
+        public BarReview(int beverageVolume, int rating, string barName,
             string comment = "Komentaro nėra")
         {
             BarName = barName;
