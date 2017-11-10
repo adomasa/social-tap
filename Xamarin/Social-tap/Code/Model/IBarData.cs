@@ -2,14 +2,18 @@
 
 namespace Socialtap.Code.Model
 {
-    public interface IBarData
+    namespace SocialtapAPI
     {
-        string BarName { get; }
-        int AverageBeverageVolume { get; }
-        int AverageRating { get; }
-        List<string> CommentList { get; }
-        int ReviewCount { get; }
+        public interface IBarData
+        {
+            double RateAvg { get; }
 
-   
+            bool Comparison { get; }
+
+            int BarUses { get; }
+
+            double BeverageAvg { get; }
+        }
     }
+
 }
