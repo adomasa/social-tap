@@ -16,15 +16,15 @@ namespace Socialtap.Code.View_.Fragments
 {
     public class ReviewFragment : Fragment
     {
-        View _rootView;
-        EditText _barNameField;
-        Button _addPhotoButton;
-        ImageView _beveragePhoto;
-        TextView _beverageVolumeLabel;
-        SeekBar _beverageVolumeBar;
-        EditText _commentField;
-        RatingBar _ratingBar;
-        Button _submitButton;
+        private View _rootView;
+        private EditText _barNameField;
+        private Button _addPhotoButton;
+        private ImageView _beveragePhoto;
+        private TextView _beverageVolumeLabel;
+        private SeekBar _beverageVolumeBar;
+        private EditText _commentField;
+        private RatingBar _ratingBar;
+        private Button _submitButton;
   
 
         public static ReviewFragment NewInstance() {
@@ -133,12 +133,13 @@ namespace Socialtap.Code.View_.Fragments
             base.OnActivityResult(requestCode, resultCode, data);
             if (resultCode == Result.Ok)
             {
+                PixelCounter pixelCounter = new PixelCounter(MediaStore.Images.Media.GetBitmap(Activity.ContentResolver, data.Data));
                 // img apdorojimas
-                var percentageOfTargetPixels = 
-                    new PixelCounter(MediaStore.Images.Media.GetBitmap(Activity.ContentResolver, data.Data))
+                var percentageOfTargetPixels = pixelCounter
                     .GetPercentageOfTargetPixels();
 
                 _beveragePhoto.SetImageURI (data.Data);
+
                 _beverageVolumeBar.Progress = (int) percentageOfTargetPixels / 10;
                 _beverageVolumeLabel.Typeface = Typeface.DefaultBold;
 
