@@ -2,7 +2,6 @@
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
-using Socialtap.Code.Controller;
 
 namespace Socialtap.Code.View_.Fragments
 {
@@ -20,9 +19,6 @@ namespace Socialtap.Code.View_.Fragments
 
         public override void OnCreate(Bundle savedInstanceState)
         {
-            // Async kontrolerio užklausa listui gauti
-            MainActivityController.FetchBarsData();
-            
             base.OnCreate(savedInstanceState);
         }
 
@@ -30,15 +26,17 @@ namespace Socialtap.Code.View_.Fragments
         {
             _rootView = inflater.Inflate(Resource.Layout.fragment_bar_list, container, false);
             _recyclerView = _rootView.FindViewById<RecyclerView>(Resource.Id.list);
-            
             _layoutManager = new LinearLayoutManager(Activity);
             _recyclerView.SetLayoutManager(_layoutManager);
-                
             _adapter = new BarListAdapter();
-
             _recyclerView.SetAdapter(_adapter);
             
             return _rootView;
         }
+
+        //public void NotifyChangesToAdapter()
+        //{
+        //    _adapter.NotifyDataSetChanged();
+        //}
     }
 }
