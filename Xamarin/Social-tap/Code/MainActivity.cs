@@ -1,21 +1,28 @@
-﻿using System.Collections.Generic;
-using Android.App;
+﻿using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
+using Android.Widget;
 using Socialtap.Code.Controller;
-using Socialtap.Code.Model;
 using Socialtap.Code.View_.Fragments;
+using Fragment = Android.App.Fragment;
 
-namespace Socialtap.Code.View_
+namespace Socialtap.Code
 {
     [Activity(Label = "Social-tap", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : AppCompatActivity
     {
         private const string Tag = "MainActivity";
         private BottomNavigationView _bottomNavigation;
+//        const int RequestStorageAccessId = 0;
+//        readonly string[] PermissionsLocation =
+//        {
+//            Manifest.Permission.AccessCoarseLocation,
+//            Manifest.Permission.AccessFineLocation
+//        };
 
         /// Lango inicializacija
         protected override void OnCreate(Bundle savedInstanceState)
@@ -78,13 +85,9 @@ namespace Socialtap.Code.View_
                     SupportActionBar.SetTitle(Resource.String.review_fragment_title);
                     break;
                 case Resource.Id.fragment_bar_list:
-                    fragment = BarListFragment.NewInstance();
+                    fragment = LoadingFragment.NewInstance();
                     SupportActionBar.SetTitle(Resource.String.bar_list_fragment_title);
                     break;
-                case Resource.Id.fragment_map:
-                    SupportActionBar.SetTitle(Resource.String.map_fragment_title);
-                    // ..
-                    break;  
                 default:
                     Log.Warn(Tag, "LoadFragment(id) unknown ID");
                     break;
@@ -99,13 +102,19 @@ namespace Socialtap.Code.View_
                 .Replace(Resource.Id.content_frame, fragment)
                 .Commit();
         }
-
+                
         /// <summary>
         /// Kviečiamas, kai paspaudžiama ant apatinės navigacijos juostos elemento
         /// </summary>
         private void NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
         {
             LoadFragment(e.Item.ItemId);
+        }
+        
+        public static void ReportAddBarReviewState(bool status)
+        {
+            var reportContent = status ? "Išsaugota." : "Išsaugoti nepavyko.";
+            Toast.MakeText(Application.Context, reportContent , ToastLength.Short).Show();
         }
     }
 }
