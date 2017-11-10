@@ -7,9 +7,9 @@
         android:title="@string/bar_list_fragment_title"
 		android:icon="@drawable/ic_view_list"/>
 
-    <item android:id="@+id/fragment_map"
-		android:title="@string/map_fragment_title"
-		android:icon="@drawable/ic_map"/>
+    <!--<item android:id="@+id/fragment_map"-->
+		<!--android:title="@string/map_fragment_title"-->
+		<!--android:icon="@drawable/ic_map"/>-->
        
 </menu>
 
