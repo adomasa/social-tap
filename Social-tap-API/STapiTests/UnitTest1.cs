@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Social_tap_API.Controllers;
+using SocialtapAPI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,32 +18,32 @@ namespace STapiTests
           [TestMethod]
           public void Average_Test3()
           {
-              ValuesController valuesController = new ValuesController();
+              Calculations calc = new Calculations();
               bool test;
-              test = valuesController.Average(10);
-              test = valuesController.Average(2);
-              test = valuesController.Average(4);
-              test = valuesController.Average(4);
-              test = valuesController.Average(5);
+              test = calc.Average(10);
+              test = calc.Average(2);
+              test = calc.Average(4);
+              test = calc.Average(4);
+              test = calc.Average(5);
               Assert.IsTrue(test);
           }
           [TestMethod]
           public void Average_Test1()
           {
-              ValuesController valuesController = new ValuesController();
+              Calculations calc = new Calculations();
               bool test;
-              test = valuesController.Average(5);
-              test = valuesController.Average(6);
+              test = calc.Average(5);
+              test = calc.Average(6);
               Assert.IsTrue(test);
           }
 
           [TestMethod]
           public void Average_Test2()
           {
-              ValuesController valuesController = new ValuesController();
+              Calculations calc = new Calculations();
               bool test;
-              test = valuesController.Average(6);
-              test = valuesController.Average(4);
+              test = calc.Average(6);
+              test = calc.Average(4);
 
               Assert.IsFalse(test);
           } 
@@ -50,15 +51,15 @@ namespace STapiTests
         [TestMethod]
         public void HashtagsFinder_Test1()
         {
-            ValuesController valuesController = new ValuesController();
-            TagsTest = valuesController.HashtagsFinder("");
+            Calculations calc = new Calculations();
+            TagsTest = calc.HashtagsFinder("");
             CollectionAssert.AreEqual(Tags, TagsTest);
         }
         [TestMethod]
         public void HashtagsFinder_Test2()
         {
-            ValuesController valuesController = new ValuesController();
-            TagsTest = valuesController.HashtagsFinder("Ęgeras Ębaras visai");
+            Calculations calc = new Calculations();
+            TagsTest = calc.HashtagsFinder("Ęgeras Ębaras visai");
             Tags.Add("geras");
             Tags.Add("baras");
             CollectionAssert.AreEqual(Tags, TagsTest);
@@ -67,8 +68,8 @@ namespace STapiTests
         [TestMethod]
         public void HashtagsFinder_Test3()
         {
-            ValuesController valuesController = new ValuesController();
-            TagsTest = valuesController.HashtagsFinder("Ęgeras baras visai");
+            Calculations calc = new Calculations();
+            TagsTest = calc.HashtagsFinder("Ęgeras baras visai");
             Tags.Add("geras");
             Tags.Add("baras");
             CollectionAssert.AreNotEqual(Tags, TagsTest);
@@ -77,89 +78,52 @@ namespace STapiTests
         [TestMethod]
         public void HashtagsFinder_Test4()
         {
-            ValuesController valuesController = new ValuesController();
-            TagsTest = valuesController.HashtagsFinder("");
+            Calculations calc = new Calculations();
+            TagsTest = calc.HashtagsFinder("");
             Tags.Add("geras");
             Tags.Add("baras");
             CollectionAssert.AreNotEqual(Tags, TagsTest);
         }
 
-
-        [TestMethod]
-        public void CountBars_Test1()
-        {
-            ValuesController valuesController = new ValuesController();
-            barInfoTests = valuesController.CountBars("Busi3", "Ęgeras Ębaras visai");
-            Tags.Add("geras");
-            Tags.Add("baras");
-            barInfo.Add("Busi3", Tags);
-
-            CollectionAssert.AreEqual(barInfo.Keys, barInfoTests.Keys);
-        }
-
-        [TestMethod]
-        public void CountBars_Test2()
-        {
-            ValuesController valuesController = new ValuesController();
-            barInfoTests = valuesController.CountBars("busi3", "Ęgeras Ębaras visai");
-            Tags.Add("geras");
-            Tags.Add("baras");
-            barInfo.Add("BUSI3", Tags);
-
-            Assert.AreEqual(barInfo.Values.Count, barInfoTests.Values.Count);
-
-        }
-
-        [TestMethod]
-        public void CountBars_Test3()
-        {
-            ValuesController valuesController = new ValuesController();
-            barInfoTests = valuesController.CountBars("busi3", "Ęgeras Ębaras visai");
-            Tags.Add("geras");
-            Tags.Add("baras");
-            barInfo.Add("BUSi3", Tags);
-
-            CollectionAssert.AreNotEqual(barInfo.Keys, barInfoTests.Keys);
-        }
         [TestMethod]
         public void BarRateAverage_Test1()
         {
-            ValuesController valuesController = new ValuesController();
-            double test = valuesController.BarRateAverage("busi3", 5);
-            test = valuesController.BarRateAverage("busi3", 4);
-            test = valuesController.BarRateAverage("snekutis", 4);
-            test = valuesController.BarRateAverage("busi3", 3);
+            Calculations calc = new Calculations();
+            double test = calc.BarRateAverage("busi3", 5);
+            test = calc.BarRateAverage("busi3", 4);
+            test = calc.BarRateAverage("snekutis", 4);
+            test = calc.BarRateAverage("busi3", 3);
             Assert.AreEqual(test, 4);
         }
         [TestMethod]
         public void BarRateAverage_Test2()
         {
-            ValuesController valuesController = new ValuesController();
-            double test = valuesController.BarRateAverage("busi3", 5);
-            test = valuesController.BarRateAverage("busi3", 4);
-            double test2 = valuesController.BarRateAverage("snekutis", 4);
-            test = valuesController.BarRateAverage("busi3", 3);
+            Calculations calc = new Calculations();
+            double test = calc.BarRateAverage("busi3", 5);
+            test = calc.BarRateAverage("busi3", 4);
+            double test2 = calc.BarRateAverage("snekutis", 4);
+            test = calc.BarRateAverage("busi3", 3);
             Assert.AreEqual(test2, 4);
         }
         [TestMethod]
         public void BarRateAverage_Test3()
         {
-            ValuesController valuesController = new ValuesController();
-            double test = valuesController.BarRateAverage("busi3", 5);
-            test = valuesController.BarRateAverage("busi3", 4);
-            double test2 = valuesController.BarRateAverage("snekutis", 4);
-            test = valuesController.BarRateAverage("busi3", 4);
+            Calculations calc = new Calculations();
+            double test = calc.BarRateAverage("busi3", 5);
+            test = calc.BarRateAverage("busi3", 4);
+            double test2 = calc.BarRateAverage("snekutis", 4);
+            test = calc.BarRateAverage("busi3", 4);
             Assert.AreNotEqual(test, 4);
         }
 
         [TestMethod]
         public void BarRateAverage_Test4()
         {
-            ValuesController valuesController = new ValuesController(); 
-            double test = valuesController.BarRateAverage("7fridays", 5);
-            test = valuesController.BarRateAverage("7fridays", 4);
-            test = valuesController.BarRateAverage("7fridays", 4);
-            test = valuesController.BarRateAverage("7fridays", 3);
+            Calculations calc = new Calculations();
+            double test = calc.BarRateAverage("7fridays", 5);
+            test = calc.BarRateAverage("7fridays", 4);
+            test = calc.BarRateAverage("7fridays", 4);
+            test = calc.BarRateAverage("7fridays", 3);
             Assert.AreEqual(test, 4);
         }
 
@@ -199,6 +163,50 @@ namespace STapiTests
             ValuesController valuesController = new ValuesController();
             bool test = valuesController.AddBarReview("busi3", "", -1,6);
             Assert.IsFalse(test);
+        }
+        [TestMethod] 
+        public void barNameAdaptation_Test1()
+        {
+            Calculations calc = new Calculations();
+            
+            string barName = calc.BarNameAdaptation("Busi 3");
+            Assert.AreEqual("Busi3", barName);
+        }
+
+        [TestMethod]
+        public void barNameAdaptation_Test2()
+        {
+            Calculations calc = new Calculations();
+
+            string barName = calc.BarNameAdaptation("BUSI 3");
+            Assert.AreEqual("Busi3", barName);
+        }
+
+        [TestMethod]
+        public void barNameAdaptation_Test3()
+        {
+            Calculations calc = new Calculations();
+
+            string barName = calc.BarNameAdaptation("BUSI-3");
+            Assert.AreEqual("Busi3", barName);
+        }
+
+        [TestMethod]
+        public void barNameAdaptation_Test4()
+        {
+            Calculations calc = new Calculations();
+
+            string barName = calc.BarNameAdaptation("busi.3");
+            Assert.AreEqual("Busi3", barName);
+        }
+
+        [TestMethod]
+        public void barNameAdaptation_Test5()
+        {
+            Calculations calc = new Calculations();
+
+            string barName = calc.BarNameAdaptation("7Fridays");
+            Assert.AreNotEqual("7Fridays", barName);
         }
 
     }
