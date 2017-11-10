@@ -90,8 +90,8 @@ namespace SocialtapAPI
         /// Ar baro vardas yra bent 1 simblos 
         public Boolean Validation(int rate, int beverage, string barName)
         {
-            return (rate > MAX_RATE || beverage > MAX_BEVERAGE_LEVEL || barName.Length < MIN_NAME_LENGHT
-                    || rate <= MIN_BEVERAGE_RATE_LEVEL || beverage <= MIN_BEVERAGE_RATE_LEVEL);
+            return !(rate > MAX_RATE || beverage > MAX_BEVERAGE_LEVEL || barName.Length < MIN_NAME_LENGHT 
+                  || rate <= MIN_BEVERAGE_RATE_LEVEL || beverage <= MIN_BEVERAGE_RATE_LEVEL);
         }
     }
 }
