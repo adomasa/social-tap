@@ -19,7 +19,6 @@ namespace SocialtapAPI
 
         public BarData() {
             Tags = new List<string>();
-            //HashTags = new Dictionary<string, List<string>>();
         }
 
     }
