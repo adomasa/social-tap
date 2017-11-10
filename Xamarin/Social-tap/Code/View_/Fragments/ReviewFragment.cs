@@ -1,9 +1,14 @@
-﻿using Android.App;
+﻿using System.Threading.Tasks;
+using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
+using Android.Provider;
+using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
+using Java.Lang;
 using Socialtap.Code.Controller;
 using Socialtap.Code.Model;
 
@@ -11,13 +16,16 @@ namespace Socialtap.Code.View_.Fragments
 {
     public class ReviewFragment : Fragment
     {
-        private EditText _barNameField;
-        private EditText _commentField;
-        private Button _submitButton;
-        private SeekBar _beverageVolumeBar;
-        private RatingBar _ratingBar;
-        private TextView _beverageVolumeLabel;
-        private View _rootView;
+        View _rootView;
+        EditText _barNameField;
+        Button _addPhotoButton;
+        ImageView _beveragePhoto;
+        TextView _beverageVolumeLabel;
+        SeekBar _beverageVolumeBar;
+        EditText _commentField;
+        RatingBar _ratingBar;
+        Button _submitButton;
+  
 
         public static ReviewFragment NewInstance() {
             return new ReviewFragment();
@@ -26,7 +34,6 @@ namespace Socialtap.Code.View_.Fragments
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -41,7 +48,7 @@ namespace Socialtap.Code.View_.Fragments
             // Paspaudus fone paslepia klaviatūrą                
             _rootView.Touch += HideKeyboard;
 
-            // Todo: iškelti į kontrolerį, pakeisti switch'ą
+            // Todo: pakeisti switch'ą
             _beverageVolumeBar.ProgressChanged += (sender, e) =>
             {
                 switch (_beverageVolumeBar.Progress)
@@ -68,15 +75,22 @@ namespace Socialtap.Code.View_.Fragments
                 ;
             };
 
-            // Click eventas
-            // Todo: iškelti į kontrolerį, threads
+            // Click eventai
 
             _submitButton.Click += (sender, e) =>
             {
-                MainActivityController.AddBarReview(
+                 MainController.AddBarReview(
                     new BarReview(_beverageVolumeBar.Progress, 
                                   _ratingBar.Progress, _barNameField.Text,
                                   _commentField.Text));
+            };
+
+            _addPhotoButton.Click += (sender, e) =>
+            {
+                var imageIntent = new Intent ();
+                imageIntent.SetAction (Intent.ActionPick);
+                imageIntent.SetData(MediaStore.Images.Media.ExternalContentUri);
+                StartActivityForResult(imageIntent, 0);
             };
 
             return _rootView;
@@ -97,6 +111,10 @@ namespace Socialtap.Code.View_.Fragments
                 _rootView.FindViewById<RatingBar>(Resource.Id.ratingBar);
             _beverageVolumeLabel =
                 _rootView.FindViewById<TextView>(Resource.Id.beverageVolumeStatusTextView);
+            _addPhotoButton = 
+                _rootView.FindViewById<Button>(Resource.Id.addPhotoButton);
+            _beveragePhoto = 
+                _rootView.FindViewById<ImageView>(Resource.Id.beverageImageView);
         }
 
         ///Paslepia klaviatūrą paspaudus fone
@@ -104,6 +122,36 @@ namespace Socialtap.Code.View_.Fragments
         {
             var imm = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
             imm.HideSoftInputFromWindow(_rootView.WindowToken, 0);
+        }
+
+        /// <summary>
+        ///  Iššaukiamas kai gauna CallBack iš aplikacijos, invokinamas 
+        /// _addPhotoButton.Click evento
+        /// </summary>
+        public override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            if (resultCode == Result.Ok)
+            {
+                // img apdorojimas
+                var percentageOfTargetPixels = 
+                    new PixelCounter(MediaStore.Images.Media.GetBitmap(Activity.ContentResolver, data.Data))
+                    .GetPercentageOfTargetPixels();
+
+                _beveragePhoto.SetImageURI (data.Data);
+                _beverageVolumeBar.Progress = (int) percentageOfTargetPixels / 10;
+                _beverageVolumeLabel.Typeface = Typeface.DefaultBold;
+
+                // Būsenos su anuliavimo veiksmu pranešimas lango apačioje 
+                Snackbar
+                    .Make (_rootView, "Atnaujintas įpilto alaus kiekis", Snackbar.LengthShort)
+                    .SetAction ("Anuliuoti", view =>
+                    {
+                        _beverageVolumeBar.Progress = 0;
+                        _beveragePhoto.SetImageURI(null);
+                    }).Show (); 
+            }
+
         }
     }
 }
