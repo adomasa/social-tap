@@ -16,4 +16,8 @@
 	<string name="map_fragment_title">Žemėlapis</string>
 	<string name="camera_fragment_title">Kamera</string>
 	<string name="bar_list_fragment_title">Barai</string>
+	<string name="beverage_photo_label">Bokalo nuotrauka</string>
+	<string name="add_photo_button">Pridėti bokalo nuotrauką</string>
+	
+	
 </resources>

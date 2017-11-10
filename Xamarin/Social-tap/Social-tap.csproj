@@ -38,6 +38,9 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -107,17 +110,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Code\Controller\MainActivityController.cs" />
+    <Compile Include="Code\Controller\MainController.cs" />
     <Compile Include="Code\Model\BarReview.cs" />
     <Compile Include="Code\Model\IBarReview.cs" />
     <Compile Include="Code\View_\Fragments\BarListAdapter.cs" />
     <Compile Include="Code\View_\Fragments\BarListFragment.cs" />
     <Compile Include="Code\View_\Fragments\ReviewFragment.cs" />
-    <Compile Include="Code\View_\MainActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Code\Model\BarData.cs" />
     <Compile Include="Code\Model\IBarData.cs" />
+    <Compile Include="Code\PixelCounter.cs" />
+    <Compile Include="Code\MainActivity.cs" />
+    <Compile Include="Code\View_\Fragments\LoadingFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -148,6 +153,7 @@
     <AndroidResource Include="Resources\layout\fragment_review.axml" />
     <AndroidResource Include="Resources\layout\fragment_bar_list.axml" />
     <AndroidResource Include="Resources\layout\fragment_bar_list_item.axml" />
+    <AndroidResource Include="Resources\layout\fragment_loading.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets')" />
