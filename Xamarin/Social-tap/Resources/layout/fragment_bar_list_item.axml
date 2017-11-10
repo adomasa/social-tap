@@ -29,7 +29,7 @@
                 android:layout_marginTop="8dp" />
             <TextView
                 android:id="@+id/barRatingLabel"
-                android:text="barRatingLabel"
+                android:text="Baro įvertinimo vidurkis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -47,7 +47,7 @@
                 android:layout_marginStart="0dp" />
             <TextView
                 android:id="@+id/avgBeverageVolumeLabel"
-                android:text="avgBeverageVolumeLabel"
+                android:text="Įpilto alaus vidurkis"
                 android:layout_width="163dp"
                 android:layout_height="18dp"
                 android:background="@android:color/transparent"
@@ -59,6 +59,26 @@
             <TextView
                 android:id="@+id/avgBeverageVolume"
                 android:text="avgBeverageVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:textAppearance="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="16dp" />
+            <TextView
+                android:id="@+id/reviewCountLabel"
+                android:text="Įvertininimų skaičius"
+                android:layout_width="163dp"
+                android:layout_height="18dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:textAlignment="textEnd"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="7dp" />
+            <TextView
+                android:id="@+id/reviewCount"
+                android:text="reviewCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
