@@ -41,6 +41,10 @@ namespace Socialtap.Code.Controller
             }
         }
 
+        /// <summary>
+        /// Fetchs the bars data.
+        /// </summary>
+        /// <returns>The bars data.</returns>
         public static async Task<bool> FetchBarsData()
         {
             BarsData = new Dictionary<string, BarData>();
