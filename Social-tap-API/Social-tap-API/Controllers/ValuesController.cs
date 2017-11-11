@@ -31,17 +31,7 @@ namespace Social_tap_API.Controllers
                 return false;
             }
             barName = calc.BarNameAdaptation(barName);
-            if (!_barData.Keys.Contains(barName))
-            {
-                _barData.Add(barName,new BarData());
-            }
-            
-            _barData[barName].BarUses++;
-            _barData[barName].BeverageSum += beverage;
-            _barData[barName].Comparison = calc.Average(beverage);
-            _barData[barName].Tags.AddRange(calc.HashtagsFinder(comment)); 
-            _barData[barName].RateAvg = calc.BarRateAverage(barName, rate);
-            _barData[barName].BeverageAvg = _barData[barName].BeverageSum/ _barData[barName].BarUses;
+            _barData= calc.AddBarInfo(barName, beverage, rate, comment);
             return true;
 
         }
