@@ -94,7 +94,9 @@ namespace SocialtapAPI
             return !(rate > MAX_RATE || beverage > MAX_BEVERAGE_LEVEL || barName.Length < MIN_NAME_LENGHT 
                   || rate < MIN_BEVERAGE_RATE_LEVEL || beverage < MIN_BEVERAGE_RATE_LEVEL);
         }
-
+        /// Baro pavadinimui
+        /// Priskiria reikiamas reiksmes
+        /// Grąžina Dictionary
         public Dictionary<string,BarData> AddBarInfo( string barName, int beverage, int rate, string comment)
         {
               IsBarNew(barName);
@@ -107,7 +109,9 @@ namespace SocialtapAPI
 
             return _barData;
         }
-
+        /// Patikrina ar naujas baras
+        /// Jeigu naujas
+        /// Sukuria naują elementą Dictionary
         public Boolean IsBarNew(string barName)
         {
             if (!_barData.Keys.Contains(barName))
