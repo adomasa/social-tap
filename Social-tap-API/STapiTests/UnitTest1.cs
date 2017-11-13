@@ -209,6 +209,7 @@ namespace STapiTests
             Assert.AreNotEqual("7Fridays", barName);
         }
 
+
         [TestMethod]
         public void Validation_Test1()
         {
