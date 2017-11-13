@@ -16,6 +16,9 @@ namespace SocialtapAPI
         public const int MAX_RATE = 5; // kiek daugiausiai gali duoti žvaigždučių 
         public const int MIN_NAME_LENGHT = 1; //trumpiausias įmanomas baro pavadinimas
         public const int MIN_BEVERAGE_RATE_LEVEL = 0; //kiek mažiausiai gali įpilti ir duoti žvaigždučių 
+
+        public static Dictionary<string, BarData> _barData = new Dictionary<string, BarData>();
+
         public Calculations(){
 
         }
@@ -91,7 +94,34 @@ namespace SocialtapAPI
         public Boolean Validation(int rate, int beverage, string barName)
         {
             return !(rate > MAX_RATE || beverage > MAX_BEVERAGE_LEVEL || barName.Length < MIN_NAME_LENGHT 
-                  || rate <= MIN_BEVERAGE_RATE_LEVEL || beverage <= MIN_BEVERAGE_RATE_LEVEL);
+                  || rate < MIN_BEVERAGE_RATE_LEVEL || beverage < MIN_BEVERAGE_RATE_LEVEL);
+        }
+        /// Baro pavadinimui
+        /// Priskiria reikiamas reiksmes
+        /// Grąžina Dictionary
+        public Dictionary<string,BarData> AddBarInfo( string barName, int beverage, int rate, string comment)
+        {
+              IsBarNew(barName);
+             _barData[barName].BarUses++;
+             _barData[barName].BeverageSum += beverage;
+             _barData[barName].Comparison = Average(beverage);
+             _barData[barName].Tags.AddRange(HashtagsFinder(comment));
+             _barData[barName].RateAvg = BarRateAverage(barName, rate);
+             _barData[barName].BeverageAvg = _barData[barName].BeverageSum / _barData[barName].BarUses;
+
+            return _barData;
+        }
+        /// Patikrina ar naujas baras
+        /// Jeigu naujas
+        /// Sukuria naują elementą Dictionary
+        public Boolean IsBarNew(string barName)
+        {
+            if (!_barData.Keys.Contains(barName))
+            {
+                _barData.Add(barName, new BarData());
+                return false;
+            }
+            return true;
         }
     }
 }

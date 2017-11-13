@@ -209,5 +209,47 @@ namespace STapiTests
             Assert.AreNotEqual("7Fridays", barName);
         }
 
+
+        [TestMethod]
+        public void Validation_Test1()
+        {
+            Calculations calc = new Calculations();
+            bool test = calc.Validation(5, 6, "");
+            Assert.IsFalse(test);
+        }
+
+        [TestMethod]
+        public void Validation_Test2()
+        {
+            Calculations calc = new Calculations();
+            bool test = calc.Validation(-2, 6, "");
+            Assert.IsFalse(test);
+        }
+
+        [TestMethod]
+        public void Validation_Test3()
+        {
+            Calculations calc = new Calculations();
+            bool test = calc.Validation(0, 0, "a");
+            Assert.IsTrue(test);
+        }
+
+        [TestMethod]
+        public void IsBarNew_Test1()
+        {
+            Calculations calc = new Calculations();
+            bool test = calc.IsBarNew("aaa");
+            Assert.IsFalse(test);
+        }
+
+        [TestMethod]
+        public void IsBarNew_Test2()
+        {
+            Calculations calc = new Calculations();
+            bool test = calc.IsBarNew("aaa");
+            test = calc.IsBarNew("aaa");
+            Assert.IsTrue(test);
+        }
+
     }
 }

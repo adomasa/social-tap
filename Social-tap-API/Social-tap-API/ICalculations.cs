@@ -12,6 +12,7 @@ namespace SocialtapAPI
         Boolean Average(int beverageLevel);
         List<string> HashtagsFinder(string comment);
         Boolean Validation(int rate, int beverage, string barName);
-
+        Boolean IsBarNew(string barName);
+        Dictionary<string, BarData> AddBarInfo(string barName, int beverage, int rate, string comment);
     }
 }
