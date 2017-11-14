@@ -37,7 +37,6 @@ public class PixelCounter
 
     public int GetPercentageOfTargetPixels()
     {
-        int i, j; // kintamieji for ciklams
         int height = bitmap.Height; // aukštis
         int width = bitmap.Width; // plotis
         int startY = height / 2; // vieta, nuo kurios pradedam ieškoti box'o
