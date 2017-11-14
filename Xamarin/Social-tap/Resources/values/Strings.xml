@@ -18,6 +18,8 @@
 	<string name="bar_list_fragment_title">Barai</string>
 	<string name="beverage_photo_label">Bokalo nuotrauka</string>
 	<string name="add_photo_button">Pridėti bokalo nuotrauką</string>
-	
-	
+	<string name="error_loading">Klaida užkraunant duomenis.</string>
+	<string name="request_success">Atsiliepimas išsaugotas</string>
+	<string name="request_failed">Įvyko klaida.</string>
+
 </resources>

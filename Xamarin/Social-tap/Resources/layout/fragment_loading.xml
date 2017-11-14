@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <TextView
-        android:text="Klaida užkraunant duomenis."
+        android:text="@string/error_loading"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
