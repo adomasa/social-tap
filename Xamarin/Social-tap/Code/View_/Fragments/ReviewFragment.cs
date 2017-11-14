@@ -138,7 +138,8 @@ namespace Socialtap.Code.View_.Fragments
                 var percentageOfTargetPixels = pixelCounter
                     .GetPercentageOfTargetPixels();
 
-                _beveragePhoto.SetImageURI (data.Data);
+                //_beveragePhoto.SetImageURI (data.Data);
+                _beveragePhoto.SetImageBitmap(pixelCounter.getProcessedImage());
 
                 _beverageVolumeBar.Progress = (int) percentageOfTargetPixels / 10;
                 _beverageVolumeLabel.Typeface = Typeface.DefaultBold;

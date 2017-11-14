@@ -17,7 +17,7 @@ public class PixelCounter
 
     public PixelCounter(Bitmap image)
     {
-        bitmap = image;
+        bitmap = image.Copy(Bitmap.Config.Argb8888, true);
     }
 
     static readonly Color outsideBox = Color.FromArgb(0, 50, 100); // kvadrato išorinio pixelio spalva 0 50 100                                                                
@@ -72,8 +72,6 @@ public class PixelCounter
         DrawLineUp((int)levelofBearUp, xLeft, width); // TAISYTI!!! nubrėžia liniją, iki kur įpilta alaus
 
         DrawLineDown((int)levelofBearDown, xLeft, width); // TAISYTI!!! nubrėžia liniją, nuo kur prasideda alus
-
-        SetImage(); // paduoda nuotrauką su nubrėžtomis linijomis
 
         int bestProcIndex = BestProcIndex(times, proc); // grąžina tiksliausios reikšmės indeksą
 
@@ -234,9 +232,9 @@ public class PixelCounter
 
     }
 
-    public void SetImage()
+    public Bitmap getProcessedImage()
     {
-        // kaip grąžinti tinkamai foto?
+        return bitmap;
     }
 
     public void FindBeerLevel(int height, int width, int xLeft, int yDown, int yUp, ref int? levelofBearDown, ref int? levelofBearUp, ref int[] proc, ref int times)
