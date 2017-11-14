@@ -82,7 +82,7 @@ namespace Socialtap.Code.View_.Fragments
                  MainController.AddBarReview(
                     new BarReview(_beverageVolumeBar.Progress, 
                                   _ratingBar.Progress, _barNameField.Text,
-                                  _commentField.Text));
+                                  _commentField.Text), (MainActivity) this.Activity);
             };
 
             _addPhotoButton.Click += (sender, e) =>
