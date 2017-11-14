@@ -17,17 +17,12 @@ namespace Socialtap.Code
     {
         private const string Tag = "MainActivity";
         private BottomNavigationView _bottomNavigation;
-//        const int RequestStorageAccessId = 0;
-//        readonly string[] PermissionsLocation =
-//        {
-//            Manifest.Permission.AccessCoarseLocation,
-//            Manifest.Permission.AccessFineLocation
-//        };
 
         /// Lango inicializacija
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
 
             if (savedInstanceState != null) {
                 // Statinė atmintis
@@ -89,7 +84,7 @@ namespace Socialtap.Code
                     SupportActionBar.SetTitle(Resource.String.bar_list_fragment_title);
                     break;
                 default:
-                    Log.Warn(Tag, "LoadFragment(id) unknown ID");
+                    Log.Warn(Tag, $"LoadFragment unknown ID: {id}");
                     break;
             }
 
@@ -111,10 +106,16 @@ namespace Socialtap.Code
             LoadFragment(e.Item.ItemId);
         }
         
-        public static void ReportAddBarReviewState(bool status)
+        public void ReportAddBarReviewState(bool status)
         {
-            var reportContent = status ? "Išsaugota." : "Išsaugoti nepavyko.";
-            Toast.MakeText(Application.Context, reportContent , ToastLength.Short).Show();
+            var reportContent = 
+                status ? GetString(Resource.String.request_success) : 
+                         GetString(Resource.String.request_failed);
+                Snackbar
+                .Make (_bottomNavigation, 
+                       reportContent, 
+                       Snackbar.LengthShort).Show(); 
+            //Toast.MakeText(Application.Context, reportContent , ToastLength.Short).Show();
         }
     }
 }
