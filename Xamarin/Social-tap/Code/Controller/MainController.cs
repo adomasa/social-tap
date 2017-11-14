@@ -14,10 +14,8 @@ namespace Socialtap.Code.Controller
 
         private const int PostRequestTimeout = 3000;
         private const int GetRequestTimeout = 5000;
-        
-        
 
-        public static async void AddBarReview(BarReview barReview)
+        public static async void AddBarReview(BarReview barReview, MainActivity mainActivity)
         {
             
             var client = new RestClient(Url);
@@ -30,14 +28,22 @@ namespace Socialtap.Code.Controller
             var cancellationTokenSource = new CancellationTokenSource();
 
             var response = await client.ExecuteTaskAsync(request, cancellationTokenSource.Token);
+
+            if (cancellationTokenSource.IsCancellationRequested)
+            {
+                cancellationTokenSource.Dispose();
+                mainActivity.ReportAddBarReviewState(false);
+                return;
+            }
+            
             var requestStatus = response.ResponseStatus;
             if (requestStatus.Equals(ResponseStatus.None) || requestStatus.Equals(ResponseStatus.TimedOut) 
                 || requestStatus.Equals(ResponseStatus.Error))
-                MainActivity.ReportAddBarReviewState(false);
+                mainActivity.ReportAddBarReviewState(false);
             else
             {
                 var processingStatus = JsonConvert.DeserializeObject<bool>(response.Content);
-                MainActivity.ReportAddBarReviewState(requestStatus.Equals(ResponseStatus.Completed) && processingStatus);
+                mainActivity.ReportAddBarReviewState(requestStatus.Equals(ResponseStatus.Completed) && processingStatus);
             }
         }
 
