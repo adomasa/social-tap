@@ -17,6 +17,7 @@ namespace Socialtap.Code
     {
         private const string Tag = "MainActivity";
         private BottomNavigationView _bottomNavigation;
+        private ScrollView _contentView;
 
         /// Lango inicializacija
         protected override void OnCreate(Bundle savedInstanceState)
@@ -64,6 +65,8 @@ namespace Socialtap.Code
         private void GetReferencesFromLayout() {
             _bottomNavigation = 
                 FindViewById<BottomNavigationView>(Resource.Id.bottom_navigation);
+            _contentView = FindViewById<ScrollView>(Resource.Id.content_frame);
+
         }
 
         /// <summary>
@@ -77,11 +80,13 @@ namespace Socialtap.Code
             {
                 case Resource.Id.fragment_review:
                     fragment = ReviewFragment.NewInstance();
-                    SupportActionBar.SetTitle(Resource.String.review_fragment_title);
+                    SupportActionBar
+                        .SetTitle(Resource.String.review_fragment_title);
                     break;
                 case Resource.Id.fragment_bar_list:
                     fragment = LoadingFragment.NewInstance();
-                    SupportActionBar.SetTitle(Resource.String.bar_list_fragment_title);
+                    SupportActionBar
+                        .SetTitle(Resource.String.bar_list_fragment_title);
                     break;
                 default:
                     Log.Warn(Tag, $"LoadFragment unknown ID: {id}");
@@ -101,7 +106,9 @@ namespace Socialtap.Code
         /// <summary>
         /// Kviečiamas, kai paspaudžiama ant apatinės navigacijos juostos elemento
         /// </summary>
-        private void NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
+        private void NavigationItemSelected(object sender, 
+                                            BottomNavigationView
+                                            .NavigationItemSelectedEventArgs e)
         {
             LoadFragment(e.Item.ItemId);
         }
@@ -109,13 +116,10 @@ namespace Socialtap.Code
         public void ReportAddBarReviewState(bool status)
         {
             var reportContent = 
-                status ? GetString(Resource.String.request_success) : 
-                         GetString(Resource.String.request_failed);
-                Snackbar
-                .Make (_bottomNavigation, 
+                status ? GetString(Resource.String.request_success) : GetString(Resource.String.request_failed);
+            Snackbar.Make (_contentView, 
                        reportContent, 
                        Snackbar.LengthShort).Show(); 
-            //Toast.MakeText(Application.Context, reportContent , ToastLength.Short).Show();
         }
     }
 }
