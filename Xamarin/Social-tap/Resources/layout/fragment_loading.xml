@@ -5,17 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
-    android:gravity="center">
+    android:orientation="vertical"
+    android:layout_gravity="center">
     <ProgressBar
         android:id="@+id/loadingBar"
         style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <TextView
         android:text="Klaida užkraunant duomenis."
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
         android:visibility="gone"
         android:id="@+id/errorLabel" />
 </LinearLayout>
