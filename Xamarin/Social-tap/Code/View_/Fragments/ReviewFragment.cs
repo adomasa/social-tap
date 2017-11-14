@@ -143,6 +143,7 @@ namespace Socialtap.Code.View_.Fragments
 
                 _beverageVolumeBar.Progress = (int) percentageOfTargetPixels / 10;
                 _beverageVolumeLabel.Typeface = Typeface.DefaultBold;
+                _beverageVolumeLabel.Text = $"Debuginimui. {percentageOfTargetPixels.ToString()}%";
 
                 // Būsenos su anuliavimo veiksmu pranešimas lango apačioje 
                 Snackbar
