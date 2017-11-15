@@ -1,15 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/fragment_review"
+    <item android:id="@+id/fragment_home"
+        android:title="@string/home_fragment_title"
+        android:icon="@drawable/ic_home"/>
+	
+	<item android:id="@+id/fragment_review"
         android:title="@string/review_fragment_title"
 		android:icon="@drawable/ic_rate_review"/>
 
     <item android:id="@+id/fragment_bar_list"
         android:title="@string/bar_list_fragment_title"
 		android:icon="@drawable/ic_view_list"/>
-
-    <!--<item android:id="@+id/fragment_map"-->
-		<!--android:title="@string/map_fragment_title"-->
-		<!--android:icon="@drawable/ic_map"/>-->
        
 </menu>
 
