@@ -22,5 +22,13 @@
 	<string name="request_success">Atsiliepimas išsaugotas</string>
 	<string name="request_failed">Įvyko klaida.</string>
 	<string name="home_fragment_title">Pagrindinis</string>
+	<string name="top_bar_name_label">Geriausias baras</string>
+    <string name="top_bar_rate_label">Įvertinimas </string>
+	<string name="top_bar_avg_beverage_volume_label">Įpilto alaus kiekio vidurkis </string>
+	<string name="total_avg_beverage_volume_label">Visų barų įpilto alaus kiekio vidurkis </string>
+	<string name="bar_count_label">Barų kiekis sistemoje</string>
+	<string name="review_count_label">Atsiliepimų kiekis sistemoje</string>
+    
+
 
 </resources>

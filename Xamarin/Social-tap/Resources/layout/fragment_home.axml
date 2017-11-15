@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
-            android:text="topBarNameLabel" />
+            android:text="@string/top_bar_name_label" />
         <TextView
             android:id="@+id/topBarName"
             android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
-            android:text="topBarRateLabel" />
+            android:text="@string/top_bar_rate_label" />
         <TextView
             android:id="@+id/topBarRate"
             android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
-            android:text="topBarAvgBeverageVolumeLabel" />
+            android:text="@string/top_bar_avg_beverage_volume_label" />
         <TextView
             android:id="@+id/topBarAvgBeverageVolume"
             android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
-            android:text="totalAvgBeverageVolumeLabel" />
+            android:text="@string/total_avg_beverage_volume_label" />
         <TextView
             android:id="@+id/totalAvgBeverageVolume"
             android:layout_width="wrap_content"
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
-            android:text="barCountLabel" />
+            android:text="@string/bar_count_label" />
         <TextView
             android:id="@+id/barCount"
             android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
-            android:text="reviewCountLabel" />
+            android:text="@string/review_count_label" />
         <TextView
             android:id="@+id/reviewCount"
             android:layout_width="wrap_content"
