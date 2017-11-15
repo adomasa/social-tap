@@ -1,0 +1,15 @@
+﻿using System;
+using Newtonsoft.Json;
+
+namespace Socialtap.Code.Model
+{
+    public class Statistics : IStatistics
+    {
+        public string TopBarName { get; set; }
+        public double TopBarRate { get; set; }
+        public double TopBarAvgBeverageVolume { get; set; }
+        public double TotalAvgBeverageVolume { get; set; }
+        public int BarCount { get; set; }
+        public int ReviewCount { get; set; }
+    }
+}
