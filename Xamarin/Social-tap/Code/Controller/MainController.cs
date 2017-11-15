@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Content;
@@ -54,8 +55,15 @@ namespace Socialtap.Code.Controller
             else
             {
                 Log.Debug(Tag, "AddBarReview deserialization in progress.");
-                var processingStatus = JsonConvert.DeserializeObject<bool>(response.Content);
-                mainActivity.ReportAddBarReviewState(requestStatus.Equals(ResponseStatus.Completed) && processingStatus);
+                try 
+                {
+                    var processingStatus = JsonConvert.DeserializeObject<bool>(response.Content);
+                    mainActivity.ReportAddBarReviewState(requestStatus.Equals(ResponseStatus.Completed) && processingStatus);
+                }
+                catch (Exception e) {
+                    Log.Error(Tag, $"Exception while handling json response. Message: {e.Message}");
+                    mainActivity.ReportAddBarReviewState(requestStatus.Equals(ResponseStatus.Completed) && status_failed);
+                }
             }
         }
 
@@ -126,7 +134,6 @@ namespace Socialtap.Code.Controller
 
             Log.Debug(Tag, "FetchStatistics deserialization in progress.");
             stats = JsonConvert.DeserializeObject<Statistics>(content);
-
 
             return requestStatus.Equals(ResponseStatus.Completed);
         }
