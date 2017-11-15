@@ -66,7 +66,6 @@ public class PixelCounter
         int[] proc = new int[10]; // išsaugom, kiek proc alaus yra
         int times = 0; // TIKRINTI!!! kiek kartų įvyko. Gal galima pakeisti konstanta
         FindBeerLevel(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc, ref times); // surandam kur prasideda ir kur baigiasi alus
-
         BeerExistsException(levelofBearDown, levelofBearUp); // patikrinam, ar nuotrauko išvis yra alus
 
         DrawLineUp((int)levelofBearUp, xLeft, width); // TAISYTI!!! nubrėžia liniją, iki kur įpilta alaus
