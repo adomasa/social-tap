@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 using SocialtapAPI;
-
+using Newtonsoft.Json.Linq;
 
 namespace Social_tap_API.Controllers
 {
@@ -13,6 +13,10 @@ namespace Social_tap_API.Controllers
     public class ValuesController : Controller, IValues
     {
         public static Dictionary<string, BarData> _barData = new Dictionary<string, BarData>();
+        public static string _bestBar;
+        public static double _all_bars_average;
+        public static int _uses;
+        public static string _stats;
         public ValuesController(){
 
         }
@@ -32,6 +36,7 @@ namespace Social_tap_API.Controllers
             }
             barName = calc.BarNameAdaptation(barName);
             _barData= calc.AddBarInfo(barName, beverage, rate, comment);
+            _stats = calc.Stats();
             return true;
 
         }
@@ -45,6 +50,18 @@ namespace Social_tap_API.Controllers
             return _barData;
 
         }
-        
+        /// Iškvietus šitą metodą 
+        /// Sukuriama informacija 
+        /// Apie geriausią barą 
+        /// Ir bendrus skaičius
+        [HttpGet]
+        [Route("Stats")]
+        public string GetStats()
+        {
+            Console.WriteLine($"GET: Stats/");
+
+            return _stats;
+        }
+
     }
 }
