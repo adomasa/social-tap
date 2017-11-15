@@ -6,7 +6,6 @@ using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Socialtap.Code.Controller;
 using Socialtap.Code.View_.Fragments;
 using Fragment = Android.App.Fragment;
 
@@ -78,13 +77,18 @@ namespace Socialtap.Code
             Fragment fragment = null;
             switch (id)
             {
+                case Resource.Id.fragment_home:
+                    fragment = LoadingFragment.NewInstance(Resource.Id.fragment_home);
+                    SupportActionBar
+                        .SetTitle(Resource.String.home_fragment_title);
+                    break;
                 case Resource.Id.fragment_review:
                     fragment = ReviewFragment.NewInstance();
                     SupportActionBar
                         .SetTitle(Resource.String.review_fragment_title);
                     break;
                 case Resource.Id.fragment_bar_list:
-                    fragment = LoadingFragment.NewInstance();
+                    fragment = LoadingFragment.NewInstance(Resource.Id.fragment_bar_list);
                     SupportActionBar
                         .SetTitle(Resource.String.bar_list_fragment_title);
                     break;
@@ -112,7 +116,11 @@ namespace Socialtap.Code
         {
             LoadFragment(e.Item.ItemId);
         }
-        
+
+        /// <summary>
+        /// Reports the state of the add bar review.
+        /// </summary>
+        /// <param name="status">If set to <c>true</c> status.</param>
         public void ReportAddBarReviewState(bool status)
         {
             var reportContent = 
