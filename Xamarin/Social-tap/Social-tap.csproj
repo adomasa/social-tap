@@ -104,7 +104,6 @@
     <Compile Include="Code\Controller\MainController.cs" />
     <Compile Include="Code\Model\BarReview.cs" />
     <Compile Include="Code\Model\IBarReview.cs" />
-    <Compile Include="Code\PixelCounterNew.cs" />
     <Compile Include="Code\View_\Fragments\BarListAdapter.cs" />
     <Compile Include="Code\View_\Fragments\BarListFragment.cs" />
     <Compile Include="Code\View_\Fragments\ReviewFragment.cs" />

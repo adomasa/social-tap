@@ -19,7 +19,9 @@ namespace SocialtapAPI
         public const int MAX_RATE = 5; // kiek daugiausiai gali duoti žvaigždučių 
         public const int MIN_NAME_LENGHT = 1; //trumpiausias įmanomas baro pavadinimas
         public const int MIN_BEVERAGE_RATE_LEVEL = 0; //kiek mažiausiai gali įpilti ir duoti žvaigždučių 
+
         public static Dictionary<string, BarData> _barData = new Dictionary<string, BarData>();
+
         public Calculations(){
 
         }
