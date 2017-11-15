@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -79,10 +80,22 @@ namespace Socialtap.Code.View_.Fragments
 
             _submitButton.Click += (sender, e) =>
             {
-                 MainController.AddBarReview(
-                    new BarReview(_beverageVolumeBar.Progress, 
-                                  _ratingBar.Progress, _barNameField.Text,
-                                  _commentField.Text), (MainActivity) this.Activity);
+                if (IsInputValid(_beverageVolumeBar.Progress, 
+                                 _ratingBar.Progress, 
+                                 _barNameField.Text)) 
+                {
+                    MainController.AddBarReview(
+                        new BarReview(_beverageVolumeBar.Progress,
+                        _ratingBar.Progress, _barNameField.Text,
+                        _commentField.Text), (MainActivity)this.Activity);
+                }
+                else 
+                {
+                    Snackbar
+                        .Make (_rootView, GetString(Resource.String.invalid_review_format), Snackbar.LengthShort)
+                    .Show (); 
+                }
+
             };
 
             _addPhotoButton.Click += (sender, e) =>
@@ -94,6 +107,11 @@ namespace Socialtap.Code.View_.Fragments
             };
 
             return _rootView;
+        }
+
+        private bool IsInputValid(int progress1, int progress2, string text)
+        {
+            return (progress1 > 0 && progress2 > 0 && text.Length > 0);
         }
 
         /// Prideda funkcionalių UI objektų nuorodas 
@@ -147,8 +165,8 @@ namespace Socialtap.Code.View_.Fragments
 
                 // Būsenos su anuliavimo veiksmu pranešimas lango apačioje 
                 Snackbar
-                    .Make (_rootView, "Atnaujintas įpilto alaus kiekis", Snackbar.LengthShort)
-                    .SetAction ("Anuliuoti", view =>
+                    .Make (_rootView, GetString(Resource.String.beverage_volume_updated), Snackbar.LengthLong)
+                    .SetAction (GetString(Resource.String.undo), view =>
                     {
                         _beverageVolumeBar.Progress = 0;
                         _beveragePhoto.SetImageURI(null);

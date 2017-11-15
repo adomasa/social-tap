@@ -130,6 +130,5 @@ namespace Socialtap.Code.Controller
 
             return requestStatus.Equals(ResponseStatus.Completed);
         }
-
     }
 }

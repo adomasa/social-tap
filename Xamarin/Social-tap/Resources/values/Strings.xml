@@ -28,6 +28,10 @@
 	<string name="total_avg_beverage_volume_label">Visų barų įpilto alaus kiekio vidurkis </string>
 	<string name="bar_count_label">Barų kiekis sistemoje</string>
 	<string name="review_count_label">Atsiliepimų kiekis sistemoje</string>
+	<string name="invalid_review_format">Neteisingas atsiliepimo formatas</string>
+	<string name="beverage_volume_updated">Atnaujintas įpilto alaus kiekis</string>
+	<string name="undo">Anuliuoti</string>
+	<string name="comment_empty">Komentaro nėra</string>
     
 
 
