@@ -248,7 +248,7 @@ namespace STapiTests
         [TestMethod]
         public void BestBarRate_Test1 ()
         {
-            Calculations calc = new Calculations();
+            var calc = new Calculations();
             calc.AddBarInfo("busi3", 5, 4, "");
             calc.AddBarInfo("busi3", 5, 4, "");
             string test = calc.BestBarRate();
@@ -258,7 +258,7 @@ namespace STapiTests
         [TestMethod]
         public void BestBarRate_Test2()
         {
-            Calculations calc = new Calculations();
+            var calc = new Calculations();
             calc.AddBarInfo("busi3", 4, 4, "");
             calc.AddBarInfo("busi3", 4, 4, "");
             calc.AddBarInfo("snekutis", 5, 5, "");
@@ -268,7 +268,7 @@ namespace STapiTests
         [TestMethod]
         public void BestBarRate_Test3()
         {
-            Calculations calc = new Calculations();
+            var calc = new Calculations();
             calc.AddBarInfo("busi3", 5, 4, "");
             calc.AddBarInfo("busi3", 5, 4, "");
             calc.AddBarInfo("snekutis", 5, 5, "");
