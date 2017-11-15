@@ -15,6 +15,8 @@ namespace SocialtapAPI
 
         Boolean IsBarNew(string barName);
         Dictionary<string, BarData> AddBarInfo(string barName, int beverage, int rate, string comment);
+        string BestBarRate();
+        string Stats();
 
     }
 }

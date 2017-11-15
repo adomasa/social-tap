@@ -9,6 +9,6 @@ namespace SocialtapAPI
     {
         Boolean AddBarReview(string barName, string comment, int rate, int beverage);
         IDictionary<string, BarData> GetBarData();
-
+        string GetStats();
     }
 }
