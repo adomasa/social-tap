@@ -153,7 +153,7 @@ namespace SocialtapAPI
             stats.BeverageAvg = _barData[bestBar].BeverageAvg;
             stats.AllBarsAvg = (double)_sum / _uses;
             stats.DifferentBars = _barData.Count;
-            stats.uses = _uses;
+            stats.Uses = _uses;
 
             return stats.ToString();
         }
