@@ -21,5 +21,6 @@
 	<string name="error_loading">Klaida užkraunant duomenis.</string>
 	<string name="request_success">Atsiliepimas išsaugotas</string>
 	<string name="request_failed">Įvyko klaida.</string>
+	<string name="home_fragment_title">Pagrindinis</string>
 
 </resources>
