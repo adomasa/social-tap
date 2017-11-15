@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Social_tap_API;
 
 namespace SocialtapAPI
 {
@@ -15,6 +16,6 @@ namespace SocialtapAPI
         Boolean IsBarNew(string barName);
         Dictionary<string, BarData> AddBarInfo(string barName, int beverage, int rate, string comment);
         string BestBarRate();
-        string Stats();
+        Statistics Stats();
     }
 }

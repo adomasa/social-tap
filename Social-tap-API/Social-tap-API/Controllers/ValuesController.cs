@@ -12,21 +12,20 @@ namespace Social_tap_API.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller, IValues
     {
-        public static Dictionary<string, BarData> _barData = new Dictionary<string, BarData>();
-        public static string _bestBar;
-        public static double _all_bars_average;
-        public static int _uses;
-        public static string _stats;
-        public ValuesController(){
+        public static Dictionary<string, BarData> BarData = new Dictionary<string, BarData>();
+        public static string BestBar;
+        public static double AllBarsAverage;
+        public static int Uses;
+        public static Statistics Stats;
 
-        }
         /// Metodui paduodami 4 parametrai
         /// Patikrinama ar jie atitinka reikalavimus
         /// Suvienodinami pavadinimai
         /// Naudojant kitus metodus 
         /// į _barData Dictionary sudedamos reikšmės
         [HttpPost("AddBarReview/{barName}/{comment}/{rate}/{beverage}")]
-        public Boolean AddBarReview(string barName, string comment, int rate, int beverage) //rate-žvaigždutės, beverage-įpilto alaus lygis
+        //rate-žvaigždutės, beverage-įpilto alaus lygis
+        public Boolean AddBarReview(string barName, string comment, int rate, int beverage) 
         {
             Calculations calc = new Calculations();
             Console.WriteLine($"POST: AddBarReview/{barName}/{comment}/{rate}/{beverage}");
@@ -35,8 +34,8 @@ namespace Social_tap_API.Controllers
                 return false;
             }
             barName = calc.BarNameAdaptation(barName);
-            _barData= calc.AddBarInfo(barName, beverage, rate, comment);
-            _stats = calc.Stats();
+            BarData = calc.AddBarInfo(barName, beverage, rate, comment);
+            Stats = calc.Stats();
             return true;
 
         }
@@ -47,7 +46,7 @@ namespace Social_tap_API.Controllers
         public IDictionary<string, BarData> GetBarData()
         {
             Console.WriteLine($"GET: GetBarData/");
-            return _barData;
+            return BarData;
 
         }
         /// Iškvietus šitą metodą 
@@ -56,11 +55,10 @@ namespace Social_tap_API.Controllers
         /// Ir bendrus skaičius
         [HttpGet]
         [Route("Stats")]
-        public string GetStats()
+        public Statistics GetStats()
         {
             Console.WriteLine($"GET: Stats/");
-
-            return _stats;
+            return Stats;
         }
 
     }
