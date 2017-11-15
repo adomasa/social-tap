@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginStart="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:layout_marginBottom="50dp">
+        <TextView
+            android:id="@+id/topBarNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:text="topBarNameLabel" />
+        <TextView
+            android:id="@+id/topBarName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Material.WindowTitle"
+            android:text="topBarName" />
+        <TextView
+            android:id="@+id/topBarRateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:text="topBarRateLabel" />
+        <TextView
+            android:id="@+id/topBarRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
+            android:text="topBarRate" />
+        <TextView
+            android:id="@+id/topBarAvgBeverageVolumelabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:text="TopBarAvgBeverageVolumeLabel" />
+        <TextView
+            android:id="@+id/topBarAvgBeverageVolume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
+            android:text="TopBarAvgBeverageVolume" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/totalAvgBeverageVolumeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:text="TotalAvgBeverageVolumeLabel" />
+        <TextView
+            android:id="@+id/totalAvgBeverageVolume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
+            android:text="TotalAvgBeverageVolume" />
+        <TextView
+            android:id="@+id/barCountLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:text="BarCountLabel" />
+        <TextView
+            android:id="@+id/barCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
+            android:text="barCount" />
+        <TextView
+            android:id="@+id/ReviewCountLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:text="ReviewCountLabel" />
+        <TextView
+            android:id="@+id/ReviewCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
+            android:text="ReviewCount" />
+    </LinearLayout>
+</LinearLayout>
