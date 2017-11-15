@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -12,6 +13,8 @@ namespace SocialtapAPI
         private List<string> _hashTags = new List<string>();
         static int _uses;
         static int _sum;
+        public double _max;
+        public static string _bestbar;
         public const int MAX_BEVERAGE_LEVEL = 10; //kiek daugiausiai gali ipilti
         public const int MAX_RATE = 5; // kiek daugiausiai gali duoti žvaigždučių 
         public const int MIN_NAME_LENGHT = 1; //trumpiausias įmanomas baro pavadinimas
@@ -108,7 +111,7 @@ namespace SocialtapAPI
              _barData[barName].Tags.AddRange(HashtagsFinder(comment));
              _barData[barName].RateAvg = BarRateAverage(barName, rate);
              _barData[barName].BeverageAvg = _barData[barName].BeverageSum / _barData[barName].BarUses;
-
+             
             return _barData;
         }
         /// Patikrina ar naujas baras
@@ -122,6 +125,37 @@ namespace SocialtapAPI
                 return false;
             }
             return true;
+        }
+
+        public string BestBarRate()
+        {                
+            foreach (string barName in _barData.Keys)
+            {
+                
+                if (_barData[barName].RateAvg > _max)
+                {
+                    _max = _barData[barName].RateAvg;
+                    _bestbar = barName;
+                }
+            }
+            return _bestbar;
+        }
+
+        public string Stats()
+        {
+            string bestBar = BestBarRate();
+           /* string statsInfo = "Baro pavadinimas " + bestBar + " Jo žvaigždučių vidurkis" + _barData[bestBar].RateAvg +
+                "Įpylimo įvertinimo vidurkis " + _barData[bestBar].BeverageAvg + " Visų barų įpylimo vidurkis " + AllBarsAverage()
+                + "Programele pasinaudota " + _barData.Count + " baruose." + "Iš viso panaudojimų: " + _uses; */
+            dynamic stats = new JObject();
+            stats.BarName = bestBar;
+            stats.RateAvg = _barData[bestBar].RateAvg;
+            stats.BeverageAvg = _barData[bestBar].BeverageAvg;
+            stats.AllBarsAvg = _sum / _uses;
+            stats.DifferentBars = _barData.Count;
+            stats.uses = _uses;
+
+            return stats.ToString();
         }
     }
 }
