@@ -41,7 +41,7 @@ namespace Socialtap.Code
             _bottomNavigation.NavigationItemSelected += NavigationItemSelected;
 
             // Užkraunamas defaultinis fragmentas atidarius aplikaciją
-            LoadFragment(Resource.Id.fragment_review);
+            LoadFragment(Resource.Id.fragment_home);
         }
 
         /// <summary>
@@ -65,7 +65,6 @@ namespace Socialtap.Code
             _bottomNavigation = 
                 FindViewById<BottomNavigationView>(Resource.Id.bottom_navigation);
             _contentView = FindViewById<ScrollView>(Resource.Id.content_frame);
-
         }
 
         /// <summary>
