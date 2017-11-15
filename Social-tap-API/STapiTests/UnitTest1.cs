@@ -250,5 +250,37 @@ namespace STapiTests
             Assert.IsTrue(test);
         }
 
+        [TestMethod]
+        public void BestBarRate_Test1 ()
+        {
+            Calculations calc = new Calculations();
+            calc.AddBarInfo("busi3", 5, 4, "");
+            calc.AddBarInfo("busi3", 5, 4, "");
+            string test = calc.BestBarRate();
+            Assert.AreEqual("busi3", test);
+        }
+
+        [TestMethod]
+        public void BestBarRate_Test2()
+        {
+            Calculations calc = new Calculations();
+            calc.AddBarInfo("busi3", 4, 4, "");
+            calc.AddBarInfo("busi3", 4, 4, "");
+            calc.AddBarInfo("snekutis", 5, 5, "");
+            string test = calc.BestBarRate();
+            Assert.AreEqual("snekutis", test);
+        }
+        [TestMethod]
+        public void BestBarRate_Test3()
+        {
+            Calculations calc = new Calculations();
+            calc.AddBarInfo("busi3", 5, 4, "");
+            calc.AddBarInfo("busi3", 5, 4, "");
+            calc.AddBarInfo("snekutis", 5, 5, "");
+            calc.AddBarInfo("snekutis", 5, 0, "");
+            string test = calc.BestBarRate();
+            Assert.AreEqual("busi3", test);
+        }
+
     }
 }
