@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Social_tap_API;
 
 namespace SocialtapAPI
 {
@@ -141,21 +142,24 @@ namespace SocialtapAPI
             return _bestbar;
         }
 
-        public string Stats()
+        public Statistics Stats()
         {
             string bestBar = BestBarRate();
            /* string statsInfo = "Baro pavadinimas " + bestBar + " Jo žvaigždučių vidurkis" + _barData[bestBar].RateAvg +
                 "Įpylimo įvertinimo vidurkis " + _barData[bestBar].BeverageAvg + " Visų barų įpylimo vidurkis " + AllBarsAverage()
                 + "Programele pasinaudota " + _barData.Count + " baruose." + "Iš viso panaudojimų: " + _uses; */
-            dynamic stats = new JObject();
-            stats.BarName = bestBar;
-            stats.RateAvg = _barData[bestBar].RateAvg;
-            stats.BeverageAvg = _barData[bestBar].BeverageAvg;
-            stats.AllBarsAvg = (double)_sum / _uses;
-            stats.DifferentBars = _barData.Count;
-            stats.Uses = _uses;
+          
+            var stats = new Statistics
+            {
+                TopBarName = bestBar,
+                TopBarRate = _barData[bestBar].RateAvg,
+                TopBarAvgBeverageVolume = _barData[bestBar].BeverageAvg,
+                TotalAvgBeverageVolume = (double)_sum / _uses,
+                BarCount = _barData.Count,
+                ReviewCount = _uses
+            };
 
-            return stats.ToString();
+            return stats;
         }
     }
 }

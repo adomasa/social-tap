@@ -20,19 +20,19 @@ namespace STapiTests
           {
               Calculations calc = new Calculations();
               bool test;
-              test = calc.Average(10);
-              test = calc.Average(2);
-              test = calc.Average(4);
-              test = calc.Average(4);
+              calc.Average(10);
+              calc.Average(2);
+              calc.Average(4);
+              calc.Average(4);
               test = calc.Average(5);
               Assert.IsTrue(test);
           }
           [TestMethod]
           public void Average_Test1()
           {
-              Calculations calc = new Calculations();
+              var calc = new Calculations();
               bool test;
-              test = calc.Average(5);
+              calc.Average(5);
               test = calc.Average(6);
               Assert.IsTrue(test);
           }
@@ -40,9 +40,9 @@ namespace STapiTests
           [TestMethod]
           public void Average_Test2()
           {
-              Calculations calc = new Calculations();
+              var calc = new Calculations();
               bool test;
-              test = calc.Average(6);
+              calc.Average(6);
               test = calc.Average(4);
 
               Assert.IsFalse(test);
@@ -51,14 +51,14 @@ namespace STapiTests
         [TestMethod]
         public void HashtagsFinder_Test1()
         {
-            Calculations calc = new Calculations();
+            var calc = new Calculations();
             TagsTest = calc.HashtagsFinder("");
             CollectionAssert.AreEqual(Tags, TagsTest);
         }
         [TestMethod]
         public void HashtagsFinder_Test2()
         {
-            Calculations calc = new Calculations();
+            var calc = new Calculations();
             TagsTest = calc.HashtagsFinder("Ęgeras Ębaras visai");
             Tags.Add("geras");
             Tags.Add("baras");
@@ -68,7 +68,7 @@ namespace STapiTests
         [TestMethod]
         public void HashtagsFinder_Test3()
         {
-            Calculations calc = new Calculations();
+            var calc = new Calculations();
             TagsTest = calc.HashtagsFinder("Ęgeras baras visai");
             Tags.Add("geras");
             Tags.Add("baras");
@@ -78,7 +78,7 @@ namespace STapiTests
         [TestMethod]
         public void HashtagsFinder_Test4()
         {
-            Calculations calc = new Calculations();
+            var calc = new Calculations();
             TagsTest = calc.HashtagsFinder("");
             Tags.Add("geras");
             Tags.Add("baras");
@@ -88,8 +88,8 @@ namespace STapiTests
         [TestMethod]
         public void BarRateAverage_Test1()
         {
-            Calculations calc = new Calculations();
-            double test = calc.BarRateAverage("busi3", 5);
+            var calc = new Calculations();
+            var test = calc.BarRateAverage("busi3", 5);
             test = calc.BarRateAverage("busi3", 4);
             test = calc.BarRateAverage("snekutis", 4);
             test = calc.BarRateAverage("busi3", 3);
@@ -98,20 +98,20 @@ namespace STapiTests
         [TestMethod]
         public void BarRateAverage_Test2()
         {
-            Calculations calc = new Calculations();
-            double test = calc.BarRateAverage("busi3", 5);
-            test = calc.BarRateAverage("busi3", 4);
-            double test2 = calc.BarRateAverage("snekutis", 4);
-            test = calc.BarRateAverage("busi3", 3);
+            var calc = new Calculations();
+            calc.BarRateAverage("busi3", 5);
+            calc.BarRateAverage("busi3", 4);
+            var test2 = calc.BarRateAverage("snekutis", 4);
+            calc.BarRateAverage("busi3", 3);
             Assert.AreEqual(test2, 4);
         }
         [TestMethod]
         public void BarRateAverage_Test3()
         {
-            Calculations calc = new Calculations();
-            double test = calc.BarRateAverage("busi3", 5);
-            test = calc.BarRateAverage("busi3", 4);
-            double test2 = calc.BarRateAverage("snekutis", 4);
+            var calc = new Calculations();
+            var test = calc.BarRateAverage("busi3", 5);
+            calc.BarRateAverage("busi3", 4);
+            calc.BarRateAverage("snekutis", 4);
             test = calc.BarRateAverage("busi3", 4);
             Assert.AreNotEqual(test, 4);
         }
@@ -119,40 +119,39 @@ namespace STapiTests
         [TestMethod]
         public void BarRateAverage_Test4()
         {
-            Calculations calc = new Calculations();
-            double test = calc.BarRateAverage("7fridays", 5);
-            test = calc.BarRateAverage("7fridays", 4);
-            test = calc.BarRateAverage("7fridays", 4);
+            var calc = new Calculations();
+            var test = calc.BarRateAverage("7fridays", 5);
+            calc.BarRateAverage("7fridays", 4);
+            calc.BarRateAverage("7fridays", 4);
             test = calc.BarRateAverage("7fridays", 3);
             Assert.AreEqual(test, 4);
         }
 
         [TestMethod] 
-
         public void AddBarReview_Test1 ()
         {
-            ValuesController valuesController = new ValuesController();
+            var valuesController = new ValuesController();
             bool test = valuesController.AddBarReview("", "", 4, 10);
             Assert.IsFalse(test);
         }
         [TestMethod]
         public void AddBarReview_Test2 ()
         {
-            ValuesController valuesController = new ValuesController();
+            var valuesController = new ValuesController();
             bool test = valuesController.AddBarReview("busi3", "", 6, 10);
             Assert.IsFalse(test);
         }
         [TestMethod]
         public void AddBarReview_Test3()
         {
-            ValuesController valuesController = new ValuesController();
+            var valuesController = new ValuesController();
             bool test = valuesController.AddBarReview("busi3", "", 4, 11);
             Assert.IsFalse(test);
         }
         [TestMethod]
         public void AddBarReview_Test4()
         {
-            ValuesController valuesController = new ValuesController();
+            var valuesController = new ValuesController();
             bool test = valuesController.AddBarReview("busi3", "", 4, 10);
             Assert.IsTrue(test);
         }
@@ -160,15 +159,14 @@ namespace STapiTests
         [TestMethod]
         public void AddBarReview_Test5()
         {
-            ValuesController valuesController = new ValuesController();
+            var valuesController = new ValuesController();
             bool test = valuesController.AddBarReview("busi3", "", -1,6);
             Assert.IsFalse(test);
         }
         [TestMethod] 
         public void barNameAdaptation_Test1()
         {
-            Calculations calc = new Calculations();
-            
+            var calc = new Calculations();
             string barName = calc.BarNameAdaptation("Busi 3");
             Assert.AreEqual("Busi3", barName);
         }
@@ -176,8 +174,7 @@ namespace STapiTests
         [TestMethod]
         public void barNameAdaptation_Test2()
         {
-            Calculations calc = new Calculations();
-
+            var calc = new Calculations();
             string barName = calc.BarNameAdaptation("BUSI 3");
             Assert.AreEqual("Busi3", barName);
         }
@@ -185,8 +182,7 @@ namespace STapiTests
         [TestMethod]
         public void barNameAdaptation_Test3()
         {
-            Calculations calc = new Calculations();
-
+            var calc = new Calculations();
             string barName = calc.BarNameAdaptation("BUSI-3");
             Assert.AreEqual("Busi3", barName);
         }
@@ -194,8 +190,7 @@ namespace STapiTests
         [TestMethod]
         public void barNameAdaptation_Test4()
         {
-            Calculations calc = new Calculations();
-
+            var calc = new Calculations();
             string barName = calc.BarNameAdaptation("busi.3");
             Assert.AreEqual("Busi3", barName);
         }
@@ -203,8 +198,7 @@ namespace STapiTests
         [TestMethod]
         public void barNameAdaptation_Test5()
         {
-            Calculations calc = new Calculations();
-
+            var calc = new Calculations();
             string barName = calc.BarNameAdaptation("7Fridays");
             Assert.AreNotEqual("7Fridays", barName);
         }
@@ -213,7 +207,7 @@ namespace STapiTests
         [TestMethod]
         public void Validation_Test1()
         {
-            Calculations calc = new Calculations();
+            var calc = new Calculations();
             bool test = calc.Validation(5, 6, "");
             Assert.IsFalse(test);
         }
@@ -221,7 +215,7 @@ namespace STapiTests
         [TestMethod]
         public void Validation_Test2()
         {
-            Calculations calc = new Calculations();
+            var calc = new Calculations();
             bool test = calc.Validation(-2, 6, "");
             Assert.IsFalse(test);
         }
@@ -229,7 +223,7 @@ namespace STapiTests
         [TestMethod]
         public void Validation_Test3()
         {
-            Calculations calc = new Calculations();
+            var calc = new Calculations();
             bool test = calc.Validation(0, 0, "a");
             Assert.IsTrue(test);
         }
@@ -237,7 +231,7 @@ namespace STapiTests
         [TestMethod]
         public void IsBarNew_Test1()
         {
-            Calculations calc = new Calculations();
+            var calc = new Calculations();
             bool test = calc.IsBarNew("aaa");
             Assert.IsFalse(test);
         }
@@ -245,7 +239,7 @@ namespace STapiTests
         [TestMethod]
         public void IsBarNew_Test2()
         {
-            Calculations calc = new Calculations();
+            var calc = new Calculations();
             bool test = calc.IsBarNew("aaa");
             test = calc.IsBarNew("aaa");
             Assert.IsTrue(test);
