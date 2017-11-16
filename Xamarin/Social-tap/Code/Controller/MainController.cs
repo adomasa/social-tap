@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Android.Content;
 using Android.Util;
-using Android.Widget;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using RestSharp;
 using Socialtap.Code.Model;
 
@@ -24,6 +21,7 @@ namespace Socialtap.Code.Controller
         private const int GetRequestTimeout = 5000;
         private const bool status_failed = false;
 
+
         /// <summary>
         /// Adds the bar review via http request to web API
         /// </summary>
@@ -40,20 +38,22 @@ namespace Socialtap.Code.Controller
             };
 
             cancellationTokenSource = new CancellationTokenSource();
-
+            // Execution
             var response = await client.ExecuteTaskAsync(request, cancellationTokenSource.Token);
 
             if (cancellationTokenSource != null)
             {
                 cancellationTokenSource.Dispose();
             }
-
+            // Result handling
             var requestStatus = response.ResponseStatus;
+            // Failed request
             if (requestStatus.Equals(ResponseStatus.None) || requestStatus.Equals(ResponseStatus.TimedOut) 
                 || requestStatus.Equals(ResponseStatus.Error))
                 mainActivity.ReportAddBarReviewState(status_failed);
             else
             {
+                // Successful request
                 Log.Debug(Tag, "AddBarReview deserialization in progress.");
                 try 
                 {
@@ -79,22 +79,24 @@ namespace Socialtap.Code.Controller
             var request = new RestRequest("/api/values/GetBarData/", Method.GET) {Timeout = GetRequestTimeout};
 
             cancellationTokenSource = new CancellationTokenSource();
-
+            // Execution
             var response = await client.ExecuteTaskAsync(request, cancellationTokenSource.Token);
 
             if (cancellationTokenSource != null)
             {
                 cancellationTokenSource.Dispose();
             }
-
+            // Result handling
             var requestStatus = response.ResponseStatus;
 
+            // Failed request
             if (requestStatus.Equals(ResponseStatus.None) || requestStatus.Equals(ResponseStatus.TimedOut)
                 || requestStatus.Equals(ResponseStatus.Error))
             {
+                Log.Debug(Tag, "FetchBarsData request failed.");
                 return false;
             }
-
+            // Successful request
             var content = response.Content;
             Log.Debug(Tag, "FetchBarsData deserialization in progress.");
             BarsData = JsonConvert.DeserializeObject<Dictionary<string, BarData>>(content);
@@ -114,24 +116,25 @@ namespace Socialtap.Code.Controller
             var request = new RestRequest("/api/values/Stats/", Method.GET) { Timeout = GetRequestTimeout };
 
             cancellationTokenSource = new CancellationTokenSource();
-
+            // Execution
             var response = await client.ExecuteTaskAsync(request, cancellationTokenSource.Token);
 
             if (cancellationTokenSource != null)
             {
                 cancellationTokenSource.Dispose();
             }
-
+            // Result handling
             var requestStatus = response.ResponseStatus;
 
+            // Failed request
             if (requestStatus.Equals(ResponseStatus.None) || requestStatus.Equals(ResponseStatus.TimedOut)
                 || requestStatus.Equals(ResponseStatus.Error))
             {
                 return status_failed;
             }
 
+            //Succesful request
             var content = response.Content;
-
             Log.Debug(Tag, "FetchStatistics deserialization in progress.");
             stats = JsonConvert.DeserializeObject<Statistics>(content);
 
