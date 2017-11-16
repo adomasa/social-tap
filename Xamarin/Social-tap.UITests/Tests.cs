@@ -1,10 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Xamarin.UITest;
 using Xamarin.UITest.Android;
-using Xamarin.UITest.Queries;
 
 namespace Socialtap.UITests
 {
@@ -20,16 +16,27 @@ namespace Socialtap.UITests
         }
 
         [Test]
-        public void ClickingButtonTwiceShouldChangeItsLabel()
+        public void ClickingNavigationItemShouldChangeViewTitle1()
         {
-            Func<AppQuery, AppQuery> MyButton = c => c.Button("myButton");
+            app.WaitForElement(c => c.Marked("fragment_home"));
+            app.Tap(c => c.Marked("fragment_home"));
+            app.WaitForElement(c => c.Marked("action_bar").Text("Pagrindinis"));
+        }
 
-            app.Tap(MyButton);
-            app.Tap(MyButton);
-            AppResult[] results = app.Query(MyButton);
-            app.Screenshot("Button clicked twice.");
+        [Test]
+        public void ClickingNavigationItemShouldChangeViewTitle2()
+        {
+            app.WaitForElement(c => c.Marked("fragment_review"));
+            app.Tap(c => c.Marked("fragment_home"));
+            app.WaitForElement(c => c.Marked("action_bar").Text("Atsiliepimas"));
+        }
 
-            Assert.AreEqual("2 clicks!", results[0].Text);
+        [Test]
+        public void ClickingNavigationItemShouldChangeViewTitle3()
+        {
+            app.WaitForElement(c => c.Marked("fragment_review"));
+            app.Tap(c => c.Marked("fragment_home"));
+            app.WaitForElement(c => c.Marked("action_bar").Text("Barai"));
         }
     }
 }
