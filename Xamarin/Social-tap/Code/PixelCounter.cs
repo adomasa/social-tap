@@ -13,11 +13,6 @@ public class PixelCounter : IDisposable
     {
     }
 
-    public bool Testukas(int a) // Ištrinsiu
-    {
-        return a == 5;
-    }
-
     public PixelCounter(Bitmap image)
     {
         bitmap = image.Copy(Bitmap.Config.Argb8888, true);
