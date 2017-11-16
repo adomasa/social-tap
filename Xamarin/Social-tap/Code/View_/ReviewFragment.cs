@@ -9,7 +9,6 @@ using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
-using Com.Yalantis.Ucrop;
 using Java.Lang;
 using Socialtap.Code.Controller;
 using Socialtap.Code.Model;
