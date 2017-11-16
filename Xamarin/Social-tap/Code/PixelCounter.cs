@@ -184,7 +184,7 @@ public class PixelCounter : IDisposable
         int finalResult = 0;
         for (int i = 0; i < times; i++)
         {
-            if (i != bestProcIndex && (proc[bestProcIndex] - 5) < proc[i] && (proc[bestProcIndex] + 5) > proc[i])
+            if ((proc[bestProcIndex] - 5) < proc[i] && (proc[bestProcIndex] + 5) > proc[i])
             {
                 finalResult = finalResult + proc[i];
                 best++;
