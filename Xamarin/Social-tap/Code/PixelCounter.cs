@@ -7,8 +7,6 @@ public class PixelCounter : IDisposable
 {
     Bitmap bitmap;
 
-    private IntPtr handle; // Pointer to an external unmanaged resource.
-
     private bool disposed = false; // Track whether Dispose has been called.
 
     public PixelCounter()
@@ -22,7 +20,6 @@ public class PixelCounter : IDisposable
 
     public PixelCounter(Bitmap image, IntPtr handle)
     {
-        this.handle = handle;
         bitmap = image.Copy(Bitmap.Config.Argb8888, true);
     }
 
@@ -305,9 +302,9 @@ public class PixelCounter : IDisposable
 
     public void Dispose()
     {
-        bitmap.Dispose();
-        GC.SuppressFinalize(this);
+        Dispose(true);
     }
+
     protected virtual void Dispose(bool disposing)
     {
         if (!disposed)
@@ -316,18 +313,12 @@ public class PixelCounter : IDisposable
             {
                 bitmap.Dispose();
             }
-            CloseHandle(handle);
-            handle = IntPtr.Zero;
             disposed = true; // Note disposing has been done.
         }
     }
-
-    [System.Runtime.InteropServices.DllImport("Kernel32")]
-    private extern static Boolean CloseHandle(IntPtr handle);
 
     ~PixelCounter()
     {
         Dispose(false);
     }
-
 }
