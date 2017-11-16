@@ -19,6 +19,7 @@ namespace Socialtap.Code.View_.Fragments
 
         public static LoadingFragment NewInstance(int fragment_id)
         {
+            // Saves target fragment for OnCreate() method
             LoadingFragment fragment = new LoadingFragment();
             Bundle args = new Bundle();
             args.PutInt(_targetFragment, fragment_id);
@@ -35,11 +36,17 @@ namespace Socialtap.Code.View_.Fragments
                 case Resource.Id.fragment_home:
                     _fragment = HomeFragment.NewInstance();
                     request_success = await MainController.FetchStatistics();
-
                     break;
                 case Resource.Id.fragment_bar_list:
                     _fragment = BarListFragment.NewInstance();
                     request_success = await MainController.FetchBarsData();
+                    Log.Debug(Tag, $"Count: {MainController.BarsData.Count}");
+                    if (MainController.BarsData.Count == 0) 
+                    {
+                        _errorLabel.Text = GetString(Resource.String.bar_list_empty);
+                        DisplayError();
+                        return;
+                    }
                     break;
                 default:
                     Log.Error(Tag, $"LoadingFragment onCreate(): " +
@@ -69,6 +76,9 @@ namespace Socialtap.Code.View_.Fragments
             return _rootView;
         }
 
+        /// <summary>
+        /// Displays the loading error.
+        /// </summary>
         void DisplayError() {
             _progressBar.Visibility = ViewStates.Gone;
             _errorLabel.Visibility = ViewStates.Visible;
