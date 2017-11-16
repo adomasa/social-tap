@@ -1,10 +1,15 @@
 ﻿using System;
 using Android.Graphics;
 using Color = System.Drawing.Color;
+using System.ComponentModel;
 
 public class PixelCounter : IDisposable
 {
     Bitmap bitmap;
+
+    private IntPtr handle; // Pointer to an external unmanaged resource.
+
+    private bool disposed = false; // Track whether Dispose has been called.
 
     public PixelCounter()
     {
@@ -15,8 +20,9 @@ public class PixelCounter : IDisposable
         return a == 5;
     }
 
-    public PixelCounter(Bitmap image)
+    public PixelCounter(Bitmap image, IntPtr handle)
     {
+        this.handle = handle;
         bitmap = image.Copy(Bitmap.Config.Argb8888, true);
     }
 
@@ -300,5 +306,28 @@ public class PixelCounter : IDisposable
     public void Dispose()
     {
         bitmap.Dispose();
+        GC.SuppressFinalize(this);
     }
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposed)
+        {
+            if (disposing)
+            {
+                bitmap.Dispose();
+            }
+            CloseHandle(handle);
+            handle = IntPtr.Zero;
+            disposed = true; // Note disposing has been done.
+        }
+    }
+
+    [System.Runtime.InteropServices.DllImport("Kernel32")]
+    private extern static Boolean CloseHandle(IntPtr handle);
+
+    ~PixelCounter()
+    {
+        Dispose(false);
+    }
+
 }
