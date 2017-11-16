@@ -1,18 +1,16 @@
 ﻿using System;
 using Android.Graphics;
 using Color = System.Drawing.Color;
+using System.ComponentModel;
 
-public class PixelCounter
+public class PixelCounter : IDisposable
 {
     Bitmap bitmap;
 
+    private bool disposed = false; // Track whether Dispose has been called.
+
     public PixelCounter()
     {
-    }
-
-    public bool Testukas(int a) // Ištrinsiu
-    {
-        return a == 5;
     }
 
     public PixelCounter(Bitmap image)
@@ -77,7 +75,6 @@ public class PixelCounter
         int best = 0;
         int finalResult = FinalResult(times, bestProcIndex, proc, ref best);
         finalResult = finalResult / best;
-
         return finalResult;
     }
 
@@ -182,7 +179,7 @@ public class PixelCounter
         int finalResult = 0;
         for (int i = 0; i < times; i++)
         {
-            if (i != bestProcIndex && (proc[bestProcIndex] - 5) < proc[i] && (proc[bestProcIndex] + 5) > proc[i])
+            if ((proc[bestProcIndex] - 5) < proc[i] && (proc[bestProcIndex] + 5) > proc[i])
             {
                 finalResult = finalResult + proc[i];
                 best++;
@@ -296,5 +293,27 @@ public class PixelCounter
             proc[times] = 100 * ((int)levelofBearDown - (int)levelofBearUp) / ((int)levelofBearDown - yUp);
             times++;
         }
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposed)
+        {
+            if (disposing)
+            {
+                bitmap.Dispose();
+            }
+            disposed = true; // Note disposing has been done.
+        }
+    }
+
+    ~PixelCounter()
+    {
+        Dispose(false);
     }
 }
