@@ -242,7 +242,10 @@ public class PixelCounter : IDisposable
         int distanceY = height / 10;
         int k;
         int j1;
-
+        int up = 0;
+        int down = 0;
+        int counting = 0;
+        levelofBearDown = 0; levelofBearUp = 0; // nebeveiks exception, kad nėra alaus
         for (int i = (xLeft + distanceX); i < (width + xLeft); i = (i + distanceX)) // plotis
         {
             for (int j = yDown; j > yUp; j--) // aukštis
@@ -251,12 +254,12 @@ public class PixelCounter : IDisposable
                 if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax && !startBear)
                 {
                     startBear = true; // reiškias baigėsi dugnas ir prasideda alus
-                    levelofBearDown = j;
-                    levelofBearUp = j;
+                    down = j; //TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
+                    up = j;
                 }
                 if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax)
                 {
-                    levelofBearUp = j;
+                    up = j;
                 }
                 else
                 {
@@ -275,11 +278,11 @@ public class PixelCounter : IDisposable
                     if ((count * 2) >= distanceY)
                     {
                         correctPixel = true;
-                        levelofBearUp = j;
+                        up = j;
                     }
                     else
                     {
-                        correctPixel = false;
+                        correctPixel = false; // tai čia galima ir nutraukti
                     }
                 }
                 /*   if (!correctPixel)
@@ -287,12 +290,23 @@ public class PixelCounter : IDisposable
                        j = yUp; // baisu dėl šito
                    }*/
             }
+            if (times>1 && times<9)
+            {
+                levelofBearUp = levelofBearUp + up;//TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
+                levelofBearDown = levelofBearDown + down; //TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
+                counting++;
+            }
+  
             correctPixel = true;
             startBear = false;
             // Console.WriteLine("beer level: " + (levelofBearUp) + " dugnas " + levelofBearDown);
-            proc[times] = 100 * ((int)levelofBearDown - (int)levelofBearUp) / ((int)levelofBearDown - yUp);
+            //  proc[times] = 100 * ((int)levelofBearDown - (int)levelofBearUp) / ((int)levelofBearDown - yUp); taip buvo
+            proc[times] = 100 * (down - up) / (down - yUp);
             times++;
         }
+        levelofBearUp = levelofBearUp / counting;
+
+        levelofBearDown = levelofBearDown / counting;
     }
 
     public void Dispose()
