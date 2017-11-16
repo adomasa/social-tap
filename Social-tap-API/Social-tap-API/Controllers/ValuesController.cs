@@ -58,7 +58,7 @@ namespace Social_tap_API.Controllers
         public Statistics GetStats()
         {
             Console.WriteLine($"GET: Stats/");
-            return Stats;
+            return Stats ?? new Statistics();
         }
 
     }
