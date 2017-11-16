@@ -1,4 +1,5 @@
-﻿using SocialtapAPI;
+﻿using System.Transactions;
+using SocialtapAPI;
 
 namespace Social_tap_API
 {
@@ -10,5 +11,10 @@ namespace Social_tap_API
         public double TotalAvgBeverageVolume { get; set; }
         public int BarCount { get; set; }
         public int ReviewCount { get; set; }
+
+        public Statistics()
+        {
+            TopBarName = "Nežinomas";
+        }
     }
 }

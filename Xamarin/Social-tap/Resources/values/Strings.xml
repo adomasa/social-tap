@@ -32,7 +32,5 @@
 	<string name="beverage_volume_updated">Atnaujintas įpilto alaus kiekis</string>
 	<string name="undo">Anuliuoti</string>
 	<string name="comment_empty">Komentaro nėra</string>
-    
-
-
+	<string name="bar_list_empty">Barų sąrašas tuščias</string>   
 </resources>
