@@ -2,7 +2,7 @@
 using Android.Graphics;
 using Color = System.Drawing.Color;
 
-public class PixelCounter
+public class PixelCounter : IDisposable
 {
     Bitmap bitmap;
 
@@ -77,7 +77,6 @@ public class PixelCounter
         int best = 0;
         int finalResult = FinalResult(times, bestProcIndex, proc, ref best);
         finalResult = finalResult / best;
-
         return finalResult;
     }
 
@@ -296,5 +295,10 @@ public class PixelCounter
             proc[times] = 100 * ((int)levelofBearDown - (int)levelofBearUp) / ((int)levelofBearDown - yUp);
             times++;
         }
+    }
+
+    public void Dispose()
+    {
+        bitmap.Dispose();
     }
 }
