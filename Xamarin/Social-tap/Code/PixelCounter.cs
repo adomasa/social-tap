@@ -18,7 +18,7 @@ public class PixelCounter : IDisposable
         return a == 5;
     }
 
-    public PixelCounter(Bitmap image, IntPtr handle)
+    public PixelCounter(Bitmap image)
     {
         bitmap = image.Copy(Bitmap.Config.Argb8888, true);
     }
