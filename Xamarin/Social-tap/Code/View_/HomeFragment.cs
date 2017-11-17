@@ -33,18 +33,19 @@ namespace Socialtap.Code.View_.Fragments
             _rootView = inflater.Inflate(Resource.Layout.fragment_home, container, false);
             GetReferencesFromLayout();
 
-            topBarName.Text = MainController.stats.TopBarName;
-            topBarRate.Text = MainController.stats.TopBarRate.ToString("0.00");
-            topBarAvgBeverageVolume.Text = MainController.stats.TopBarAvgBeverageVolume.ToString("0.00");
-            totalAvgBeverageVolume.Text = MainController.stats.TotalAvgBeverageVolume.ToString("0.00");
-            barCount.Text = MainController.stats.BarCount.ToString();
-            reviewCount.Text = MainController.stats.ReviewCount.ToString();
-
-
+            if (MainController.stats != null)
+            {
+                topBarName.Text = MainController.stats.TopBarName;
+                topBarRate.Text = MainController.stats.TopBarRate.ToString("0.00");
+                topBarAvgBeverageVolume.Text = MainController.stats.TopBarAvgBeverageVolume.ToString("0.00");
+                totalAvgBeverageVolume.Text = MainController.stats.TotalAvgBeverageVolume.ToString("0.00");
+                barCount.Text = MainController.stats.BarCount.ToString();
+                reviewCount.Text = MainController.stats.ReviewCount.ToString();   
+            }
             return _rootView;
         }
 
-        /// Prideda funkcionalių UI elementų nuorodas 
+        /// Add references from UI layout
         private void GetReferencesFromLayout()
         {
             topBarName = _rootView.FindViewById<TextView>(Resource.Id.topBarName);

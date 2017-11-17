@@ -11,7 +11,7 @@ namespace Socialtap.Code.View_.Fragments
     public class BarListAdapter : RecyclerView.Adapter
     {
         /// <summary>
-        /// Kiekvieno elemento liste reference'ų gavimas
+        /// Gets the reference of each item from the list
         /// </summary>
         private class BarListViewHolder : RecyclerView.ViewHolder
         {
@@ -29,24 +29,19 @@ namespace Socialtap.Code.View_.Fragments
             }
         }
 
-        /// <summary>
-        /// Sukuria naują view'ą BarList fragmentui
-        /// </summary>
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            // Layouto užkrovimas
+            // Loads layout
             const int id = Resource.Layout.fragment_bar_list_item;
             var itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
 
             return new BarListViewHolder(itemView);
         }
 
-        /// Pakeičia view'o turinį užkraunant/scrollinant
+        /// Updates view content on load/scroll
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-
             var item = MainController.BarsData.ElementAt(position);
-            
 
             if (!(holder is BarListViewHolder viewHolder)) return;
             viewHolder.Title.Text = MainController.BarsData.ElementAt(position).Key;

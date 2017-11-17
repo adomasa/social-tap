@@ -1,10 +1,8 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Util;
-using Android.Views;
 using Android.Widget;
 using Socialtap.Code.View_.Fragments;
 using Fragment = Android.App.Fragment;
@@ -18,49 +16,40 @@ namespace Socialtap.Code
         private BottomNavigationView _bottomNavigation;
         private ScrollView _contentView;
 
-        /// Lango inicializacija
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-
-            if (savedInstanceState != null) {
-                // Statinė atmintis
-            }
-
-            // Pagrindinio view'o inicializacija
             SetContentView(Resource.Layout.Main);
 
-            // Atgal mygtukas
+            // Hide actionbar item
             SupportActionBar.SetDisplayHomeAsUpEnabled(false);
 
-            // UI komponentų referencai
             GetReferencesFromLayout();
 
-            // Paspaustas navigacijos langelis
             _bottomNavigation.NavigationItemSelected += NavigationItemSelected;
 
-            // Užkraunamas defaultinis fragmentas atidarius aplikaciją
+            // Load default fragment
             LoadFragment(Resource.Id.fragment_home);
         }
 
         /// <summary>
-        /// Kviečiamas, kai paspaudžiama ant viršutinės meniu juostos elemento
+        /// Called on top action bar item click
         /// </summary>
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
-            {
-                case Android.Resource.Id.Home:
-                    Finish();
-                    return true;
+        //public override bool OnOptionsItemSelected(IMenuItem item)
+        //{
+        //    switch (item.ItemId)
+        //    {
+        //        case Android.Resource.Id.Home:
+        //            Finish();
+        //            return true;
 
-                default:
-                    return base.OnOptionsItemSelected(item);
-            }
-        }
+        //        default:
+        //            return base.OnOptionsItemSelected(item);
+        //    }
+        //}
 
-        /// Prideda funkcionalių UI elementų nuorodas 
+        /// Add references from UI layout
         private void GetReferencesFromLayout() {
             _bottomNavigation = 
                 FindViewById<BottomNavigationView>(Resource.Id.bottom_navigation);
@@ -68,9 +57,9 @@ namespace Socialtap.Code
         }
 
         /// <summary>
-        /// Užkrauna fragmentą layouto dalyje
+        /// Loads fragment inside activity
         /// </summary>
-        /// <param name="id">Fragmento id</param>
+        /// <param name="id">Fragment id</param>
         private void LoadFragment(int id)
         {
             Fragment fragment = null;
@@ -107,7 +96,7 @@ namespace Socialtap.Code
         }
                 
         /// <summary>
-        /// Kviečiamas, kai paspaudžiama ant apatinės navigacijos juostos elemento
+        /// Called on bottom navigation item tap
         /// </summary>
         private void NavigationItemSelected(object sender, 
                                             BottomNavigationView

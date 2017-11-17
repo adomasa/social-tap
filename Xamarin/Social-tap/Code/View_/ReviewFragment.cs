@@ -26,6 +26,9 @@ namespace Socialtap.Code.View_.Fragments
         private EditText _commentField;
         private RatingBar _ratingBar;
         private Button _submitButton;
+        const int RequestExternalImage = 0;
+        //const int MaxWidth = 1920;
+        //const int MaxHeight = 1080;
   
 
         public static ReviewFragment NewInstance() {
@@ -43,40 +46,19 @@ namespace Socialtap.Code.View_.Fragments
 
             GetReferencesFromLayout();
 
-            // Paslepia klaviatūrą užkrovus fragmentą
+            // Hide keyboard on view created 
             Activity.Window.SetSoftInputMode(SoftInput.StateHidden);
 
-            // Paspaudus fone paslepia klaviatūrą                
+            // Hide keyboard on background tap               
             _rootView.Touch += HideKeyboard;
 
-            // Todo: pakeisti switch'ą
+
             _beverageVolumeBar.ProgressChanged += (sender, e) =>
             {
-                switch (_beverageVolumeBar.Progress)
-                {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                        _beverageVolumeLabel.Text =
-                            GetString(Resource.String.beverage_volume_low);
-                        break;
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                        _beverageVolumeLabel.Text =
-                            GetString(Resource.String.beverage_volume_medium);
-                        break;
-                    default:
-                        _beverageVolumeLabel.Text =
-                            GetString(Resource.String.beverage_volume_high);
-                        break;
-                }
-                ;
+                _beverageVolumeLabel.Text = $"{_beverageVolumeBar.Progress * 10}%";
             };
 
-            // Click eventai
+            // Click events
 
             _submitButton.Click += (sender, e) =>
             {
@@ -87,7 +69,7 @@ namespace Socialtap.Code.View_.Fragments
                     MainController.AddBarReview(
                         new BarReview(_beverageVolumeBar.Progress,
                         _ratingBar.Progress, _barNameField.Text,
-                        _commentField.Text), (MainActivity)this.Activity);
+                        _commentField.Text), (MainActivity)Activity);
                 }
                 else 
                 {
@@ -103,18 +85,24 @@ namespace Socialtap.Code.View_.Fragments
                 var imageIntent = new Intent ();
                 imageIntent.SetAction (Intent.ActionPick);
                 imageIntent.SetData(MediaStore.Images.Media.ExternalContentUri);
-                StartActivityForResult(imageIntent, 0);
+                StartActivityForResult(imageIntent, RequestExternalImage);
             };
 
             return _rootView;
         }
-
+        /// <summary>
+        /// Validates the input
+        /// </summary>
+        /// <returns><c>true</c>, if input valid is valid, <c>false</c> otherwise.</returns>
+        /// <param name="progress1">Beverage level</param>
+        /// <param name="progress2">Bar rating</param>
+        /// <param name="text">Bar title</param>
         private bool IsInputValid(int progress1, int progress2, string text)
         {
             return (progress1 > 0 && progress2 > 0 && text.Length > 0);
         }
 
-        /// Prideda funkcionalių UI objektų nuorodas 
+        /// Add references from UI layout
         private void GetReferencesFromLayout()
         {
             _barNameField =
@@ -135,7 +123,7 @@ namespace Socialtap.Code.View_.Fragments
                 _rootView.FindViewById<ImageView>(Resource.Id.beverageImageView);
         }
 
-        ///Paslepia klaviatūrą paspaudus fone
+        /// Hides the keyboard by default
         private void HideKeyboard(object sender, View.TouchEventArgs e)
         {
             var imm = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
@@ -143,36 +131,42 @@ namespace Socialtap.Code.View_.Fragments
         }
 
         /// <summary>
-        ///  Iššaukiamas kai gauna CallBack iš aplikacijos, invokinamas 
-        /// _addPhotoButton.Click evento
+        /// Invoked by _addPhotoButton.Click event
         /// </summary>
         public override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-            if (resultCode == Result.Ok)
+            if (resultCode == Result.Ok && requestCode == RequestExternalImage)
             {
                 PixelCounter pixelCounter = new PixelCounter(MediaStore.Images.Media.GetBitmap(Activity.ContentResolver, data.Data));
-                // img apdorojimas
+                // img processing
                 var percentageOfTargetPixels = pixelCounter
                     .GetPercentageOfTargetPixels();
 
                 //_beveragePhoto.SetImageURI (data.Data);
                 _beveragePhoto.SetImageBitmap(pixelCounter.getProcessedImage());
 
-                _beverageVolumeBar.Progress = (int) percentageOfTargetPixels / 10;
+                _beverageVolumeBar.Progress = percentageOfTargetPixels / 10;
                 _beverageVolumeLabel.Typeface = Typeface.DefaultBold;
                 _beverageVolumeLabel.Text = $"Debuginimui. {percentageOfTargetPixels.ToString()}%";
 
-                // Būsenos su anuliavimo veiksmu pranešimas lango apačioje 
+                // img processing state window with undo action
                 Snackbar
-                    .Make (_rootView, GetString(Resource.String.beverage_volume_updated), Snackbar.LengthLong)
-                    .SetAction (GetString(Resource.String.undo), view =>
-                    {
-                        _beverageVolumeBar.Progress = 0;
-                        _beveragePhoto.SetImageURI(null);
-                    }).Show (); 
+                    .Make(_rootView, GetString(Resource.String.beverage_volume_updated), Snackbar.LengthLong)
+                    .SetAction(GetString(Resource.String.undo), view =>
+                   {
+                       _beverageVolumeBar.Progress = 0;
+                       _beveragePhoto.SetImageURI(null);
+                   }).Show();
             }
+        }
 
+        public void OpenCropWindow(Android.Net.Uri sourceUri) 
+        {
+            //UCrop.Of(sourceUri, MediaStore.Images.Media.ExternalContentUri)
+            //.WithAspectRatio(16, 9)
+            //.WithMaxResultSize(MaxWidth, MaxHeight)
+            //.Start(Activity);
         }
     }
 }

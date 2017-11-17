@@ -33,10 +33,5 @@ namespace Socialtap.Code.View_.Fragments
             
             return _rootView;
         }
-
-        //public void NotifyChangesToAdapter()
-        //{
-        //    _adapter.NotifyDataSetChanged();
-        //}
     }
 }
