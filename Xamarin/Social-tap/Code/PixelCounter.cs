@@ -24,6 +24,12 @@ public class PixelCounter : IDisposable
     const int lagerBeerGmin = 110;
     const int lagerBeerGmax = 200;
     const int lagerBeerBmax = 90;
+
+    const int darkerBeerRmin = 70;
+    const int darkerBeerRmax = 140;
+    const int darkerBeerGmin = 25;
+    const int darkerBeerGmax = 70;
+    const int darkerBeerBmax = 40;
     Color checkPixel;
 
     /*
@@ -63,7 +69,12 @@ public class PixelCounter : IDisposable
         int? levelofBearDown = null, levelofBearUp = null; // pixelis, kuriame prasideda alus ir kuriame baigiasi
         int[] proc = new int[10]; // išsaugom, kiek proc alaus yra
         int times = 0; // TIKRINTI!!! kiek kartų įvyko. Gal galima pakeisti konstanta
-        FindBeerLevel(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc, ref times); // surandam kur prasideda ir kur baigiasi alus
+        FindBeerLevelLager(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc, ref times); // surandam kur prasideda ir kur baigiasi alus
+        if (!levelofBearDown.HasValue || !levelofBearUp.HasValue)
+        {
+      //      FindBeerLevelDarker(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc, ref times);
+        }
+
         BeerExistsException(levelofBearDown, levelofBearUp); // patikrinam, ar nuotrauko išvis yra alus
 
         DrawLineUp((int)levelofBearUp, xLeft, width); // TAISYTI!!! nubrėžia liniją, iki kur įpilta alaus
@@ -233,7 +244,7 @@ public class PixelCounter : IDisposable
         return bitmap;
     }
 
-    public void FindBeerLevel(int height, int width, int xLeft, int yDown, int yUp, ref int? levelofBearDown, ref int? levelofBearUp, ref int[] proc, ref int times)
+    public void FindBeerLevelLager(int height, int width, int xLeft, int yDown, int yUp, ref int? levelofBearDown, ref int? levelofBearUp, ref int[] proc, ref int times)
     {
         bool startBear = false;
         bool correctPixel = true;
@@ -297,6 +308,81 @@ public class PixelCounter : IDisposable
                 counting++;
             }
   
+            correctPixel = true;
+            startBear = false;
+            // Console.WriteLine("beer level: " + (levelofBearUp) + " dugnas " + levelofBearDown);
+            //  proc[times] = 100 * ((int)levelofBearDown - (int)levelofBearUp) / ((int)levelofBearDown - yUp); taip buvo
+            proc[times] = 100 * (down - up) / (down - yUp);
+            times++;
+        }
+        levelofBearUp = levelofBearUp / counting;
+
+        levelofBearDown = levelofBearDown / counting;
+    }
+
+    public void FindBeerLevelDarker(int height, int width, int xLeft, int yDown, int yUp, ref int? levelofBearDown, ref int? levelofBearUp, ref int[] proc, ref int times)
+    {
+        bool startBear = false;
+        bool correctPixel = true;
+        int count = 0; // !
+        int distanceX = width / 10; // paklaidos dydis
+        int distanceY = height / 10;
+        int k;
+        int j1;
+        int up = 0;
+        int down = 0;
+        int counting = 0;
+        levelofBearDown = 0; levelofBearUp = 0; // nebeveiks exception, kad nėra alaus
+        for (int i = (xLeft + distanceX); i < (width + xLeft); i = (i + distanceX)) // plotis
+        {
+            for (int j = yDown; j > yUp; j--) // aukštis
+            {
+                //  Console.WriteLine("i: " + i + "j:" + j);
+                if (Color.FromArgb(bitmap.GetPixel(i, j)).R > darkerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).R < darkerBeerRmax && Color.FromArgb(bitmap.GetPixel(i, j)).G > darkerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < darkerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < darkerBeerBmax && !startBear)
+                {
+                    startBear = true; // reiškias baigėsi dugnas ir prasideda alus
+                    down = j; //TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
+                    up = j;
+                }
+                if (Color.FromArgb(bitmap.GetPixel(i, j)).R > darkerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).R < darkerBeerRmax && Color.FromArgb(bitmap.GetPixel(i, j)).G > darkerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < darkerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < darkerBeerBmax)
+                {
+                    up = j;
+                }
+                else
+                {
+                    count = 0;
+                    k = 0;
+                    j1 = j;
+                    while (k < distanceY && !(Color.FromArgb(bitmap.GetPixel(i, j)).R == outsideBox.R && Color.FromArgb(bitmap.GetPixel(i, j)).G == outsideBox.G && Color.FromArgb(bitmap.GetPixel(i, j)).B == outsideBox.B)) // ar gerai?
+                    {
+                        if (Color.FromArgb(bitmap.GetPixel(i, j)).R > darkerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).R < darkerBeerRmax && Color.FromArgb(bitmap.GetPixel(i, j)).G > darkerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < darkerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < darkerBeerBmax)
+                        {
+                            count++;
+                        }
+                        j1--;
+                        k++;
+                    }
+                    if ((count * 2) >= distanceY)
+                    {
+                        correctPixel = true;
+                        up = j;
+                    }
+                    else
+                    {
+                        correctPixel = false; // tai čia galima ir nutraukti
+                    }
+                }
+                /*   if (!correctPixel)
+                   {
+                       j = yUp; // baisu dėl šito
+                   }*/
+            }
+            if (times > 1 && times < 9)
+            {
+                levelofBearUp = levelofBearUp + up;//TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
+                levelofBearDown = levelofBearDown + down; //TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
+                counting++;
+            }
             correctPixel = true;
             startBear = false;
             // Console.WriteLine("beer level: " + (levelofBearUp) + " dugnas " + levelofBearDown);
