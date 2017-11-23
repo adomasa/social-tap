@@ -4,11 +4,12 @@ using System.Threading.Tasks;
 using Android.Content;
 using Android.Util;
 using RestSharp;
+using Socialtap.Code.Controller.Interfaces;
 using Socialtap.Code.Model;
 
 namespace Socialtap.Code.Controller
 {
-    public class RequestManager
+    public class RequestManager : IRequestManager
     {
         public static string Tag = "RequestManager";
 
@@ -86,7 +87,7 @@ namespace Socialtap.Code.Controller
                     return requestStatus.Equals(ResponseStatus.Completed) ? response.Content : null;
                 
             }
-            catch (TaskCanceledException e) 
+            catch (TaskCanceledException) 
             {
                 Log.Debug(Tag, "Task cancelled");
                 return null;
