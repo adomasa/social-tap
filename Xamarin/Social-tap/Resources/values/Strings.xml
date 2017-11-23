@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">Social-tap</string>
 	<string name="bar_name_label">Baro pavadinimas</string>
 	<string name="beverage_level_label">Kiek įpylė?</string>
@@ -19,7 +18,7 @@
 	<string name="beverage_photo_label">Bokalo nuotrauka</string>
 	<string name="add_photo_button">Pridėti bokalo nuotrauką</string>
 	<string name="error_loading">Klaida užkraunant duomenis.</string>
-	<string name="request_success">Atsiliepimas išsaugotas</string>
+	<string name="add_review_request_success">Atsiliepimas išsaugotas</string>
 	<string name="request_failed">Įvyko klaida.</string>
 	<string name="home_fragment_title">Pagrindinis</string>
 	<string name="top_bar_name_label">Geriausias baras</string>
@@ -32,5 +31,13 @@
 	<string name="beverage_volume_updated">Atnaujintas įpilto alaus kiekis</string>
 	<string name="undo">Anuliuoti</string>
 	<string name="comment_empty">Komentaro nėra</string>
-	<string name="bar_list_empty">Barų sąrašas tuščias</string>   
+	<string name="bar_list_empty">Barų sąrašas tuščias</string>
+    <string name="post_request_timeout">3000</string>
+    <string name="get_request_timeout">5000</string>
+	<string name="api_url">http://10.0.2.2:5000</string>
+	<string name="post_bar_review_path">/api/values/AddBarReview/{0}/{1}/{2}/{3}</string>  
+	<string name="get_bar_data_path">/api/values/GetBarData/</string>  
+    <string name="get_stats_path">/api/values/Stats/</string>  
+   
+	
 </resources>
