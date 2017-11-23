@@ -6,11 +6,12 @@ using Android.Content;
 using Android.Util;
 using Newtonsoft.Json;
 using RestSharp;
+using Socialtap.Code.Controller.Interfaces;
 using Socialtap.Code.Model;
 
 namespace Socialtap.Code.Controller
 {
-    public class MainController
+    public class MainController : IMainController
     {
         private const string Tag = "MainController";
         private const string Url = "http://10.0.2.2:5000";
@@ -18,7 +19,7 @@ namespace Socialtap.Code.Controller
         public static Dictionary<string, BarData> BarsData;
         public static IStatistics stats;
 
-        private RequestManager requestManager;
+        private IRequestManager requestManager;
         Context context;
         MainActivity activity;
 
