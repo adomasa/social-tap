@@ -3,9 +3,12 @@ using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Util;
+using Socialtap.Code.Model;
 using Android.Widget;
 using Socialtap.Code.View_.Fragments;
 using Fragment = Android.App.Fragment;
+using Socialtap.Code.Controller;
+using Android.Content;
 
 namespace Socialtap.Code
 {
@@ -15,13 +18,14 @@ namespace Socialtap.Code
         private const string Tag = "MainActivity";
         private BottomNavigationView _bottomNavigation;
         private ScrollView _contentView;
+        public MainController controller;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             SetContentView(Resource.Layout.Main);
 
+            controller = MainController.GetInstance(this);
             // Hide actionbar item
             SupportActionBar.SetDisplayHomeAsUpEnabled(false);
 
@@ -32,22 +36,6 @@ namespace Socialtap.Code
             // Load default fragment
             LoadFragment(Resource.Id.fragment_home);
         }
-
-        /// <summary>
-        /// Called on top action bar item click
-        /// </summary>
-        //public override bool OnOptionsItemSelected(IMenuItem item)
-        //{
-        //    switch (item.ItemId)
-        //    {
-        //        case Android.Resource.Id.Home:
-        //            Finish();
-        //            return true;
-
-        //        default:
-        //            return base.OnOptionsItemSelected(item);
-        //    }
-        //}
 
         /// Add references from UI layout
         private void GetReferencesFromLayout() {
@@ -62,6 +50,7 @@ namespace Socialtap.Code
         /// <param name="id">Fragment id</param>
         private void LoadFragment(int id)
         {
+            //controller.AbortRequest();
             Fragment fragment = null;
             switch (id)
             {
@@ -112,7 +101,7 @@ namespace Socialtap.Code
         public void ReportAddBarReviewState(bool status)
         {
             var reportContent = 
-                status ? GetString(Resource.String.request_success) : GetString(Resource.String.request_failed);
+                status ? GetString(Resource.String.add_review_request_success) : GetString(Resource.String.request_failed);
             Snackbar.Make (_contentView, 
                        reportContent, 
                        Snackbar.LengthShort).Show(); 

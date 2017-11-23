@@ -247,6 +247,7 @@ public class PixelCounter : IDisposable
     public void FindBeerLevelLager(int height, int width, int xLeft, int yDown, int yUp, ref int? levelofBearDown, ref int? levelofBearUp, ref int[] proc, ref int times)
     {
         bool startBear = false;
+        // correctPixel niekada nenaudojamas
         bool correctPixel = true;
         int count = 0; // !
         int distanceX = width / 10; // paklaidos dydis
@@ -323,6 +324,7 @@ public class PixelCounter : IDisposable
     public void FindBeerLevelDarker(int height, int width, int xLeft, int yDown, int yUp, ref int? levelofBearDown, ref int? levelofBearUp, ref int[] proc, ref int times)
     {
         bool startBear = false;
+        // correctPixel niekada nenaudojamas
         bool correctPixel = true;
         int count = 0; // !
         int distanceX = width / 10; // paklaidos dydis

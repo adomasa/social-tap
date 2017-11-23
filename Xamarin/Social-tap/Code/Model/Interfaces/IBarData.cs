@@ -4,11 +4,11 @@ namespace Socialtap.Code.Model
 {
     public interface IBarData
     {
-        List<string> Tags { get; }
-        double RateAvg { get; }
-        bool Comparison { get; }
-        int BarUses { get; }
-        double BeverageAvg { get; }
-        int BeverageSum { get; }
+        List<string> Tags { get; set; }
+        double RateAvg { get; set; }
+        bool Comparison { get; set; }
+        int BarUses { get; set; }
+        double BeverageAvg { get; set; }
+        int BeverageSum { get; set; }
     }
 }

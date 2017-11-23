@@ -2,9 +2,9 @@
 {
     public interface IBarReview
     {
-        string BarName { get; }
-        int BeverageVolume { get; }
-        int Rating { get; }
-        string Comment { get; }
+        string BarName { get; set; }
+        int BeverageVolume { get; set; }
+        int Rating { get; set; }
+        string Comment { get; set; }
     }
 }

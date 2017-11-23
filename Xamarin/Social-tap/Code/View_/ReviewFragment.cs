@@ -26,9 +26,8 @@ namespace Socialtap.Code.View_.Fragments
         private EditText _commentField;
         private RatingBar _ratingBar;
         private Button _submitButton;
+
         const int RequestExternalImage = 0;
-        //const int MaxWidth = 1920;
-        //const int MaxHeight = 1080;
   
 
         public static ReviewFragment NewInstance() {
@@ -43,7 +42,7 @@ namespace Socialtap.Code.View_.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             _rootView = inflater.Inflate(Resource.Layout.fragment_review, container, false);
-
+            MainController controller = MainController.GetInstance(Activity);
             GetReferencesFromLayout();
 
             // Hide keyboard on view created 
@@ -66,10 +65,12 @@ namespace Socialtap.Code.View_.Fragments
                                  _ratingBar.Progress, 
                                  _barNameField.Text)) 
                 {
-                    MainController.AddBarReview(
-                        new BarReview(_beverageVolumeBar.Progress,
-                        _ratingBar.Progress, _barNameField.Text,
-                        _commentField.Text), (MainActivity)Activity);
+                    controller.AddBarReview(new BarReview(
+
+                        _beverageVolumeBar.Progress,
+                        _ratingBar.Progress, 
+                        _barNameField.Text,
+                        _commentField.Text));
                 }
                 else 
                 {
@@ -138,26 +139,28 @@ namespace Socialtap.Code.View_.Fragments
             base.OnActivityResult(requestCode, resultCode, data);
             if (resultCode == Result.Ok && requestCode == RequestExternalImage)
             {
-                PixelCounter pixelCounter = new PixelCounter(MediaStore.Images.Media.GetBitmap(Activity.ContentResolver, data.Data));
-                // img processing
-                var percentageOfTargetPixels = pixelCounter
-                    .GetPercentageOfTargetPixels();
+                using (PixelCounter pixelCounter = new PixelCounter(MediaStore.Images.Media.GetBitmap(Activity.ContentResolver, data.Data)))
+                {
+                    // img processing
+                    var percentageOfTargetPixels = pixelCounter
+                        .GetPercentageOfTargetPixels();
 
-                //_beveragePhoto.SetImageURI (data.Data);
-                _beveragePhoto.SetImageBitmap(pixelCounter.getProcessedImage());
+                    //_beveragePhoto.SetImageURI (data.Data);
+                    _beveragePhoto.SetImageBitmap(pixelCounter.getProcessedImage());
 
-                _beverageVolumeBar.Progress = percentageOfTargetPixels / 10;
-                _beverageVolumeLabel.Typeface = Typeface.DefaultBold;
-                _beverageVolumeLabel.Text = $"Debuginimui. {percentageOfTargetPixels.ToString()}%";
+                    _beverageVolumeBar.Progress = percentageOfTargetPixels / 10;
+                    _beverageVolumeLabel.Typeface = Typeface.DefaultBold;
+                    _beverageVolumeLabel.Text = $"{percentageOfTargetPixels.ToString()}%";
 
-                // img processing state window with undo action
-                Snackbar
-                    .Make(_rootView, GetString(Resource.String.beverage_volume_updated), Snackbar.LengthLong)
-                    .SetAction(GetString(Resource.String.undo), view =>
-                   {
-                       _beverageVolumeBar.Progress = 0;
-                       _beveragePhoto.SetImageURI(null);
-                   }).Show();
+                    // img processing state window with undo action
+                    Snackbar
+                        .Make(_rootView, GetString(Resource.String.beverage_volume_updated), Snackbar.LengthLong)
+                        .SetAction(GetString(Resource.String.undo), view =>
+                        {
+                            _beverageVolumeBar.Progress = 0;
+                            _beveragePhoto.SetImageURI(null);
+                        }).Show();
+                }
             }
         }
 

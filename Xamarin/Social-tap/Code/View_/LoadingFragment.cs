@@ -13,7 +13,6 @@ namespace Socialtap.Code.View_.Fragments
         private const string _targetFragment = "TARGET_FRAGMENT";
         private View _rootView;
         private Fragment _fragment;
-        private bool request_success;
         private TextView _errorLabel;
         private ProgressBar _progressBar;
 
@@ -31,16 +30,22 @@ namespace Socialtap.Code.View_.Fragments
         {
             base.OnCreate(savedInstanceState);
             int fragmentId = Arguments.GetInt(_targetFragment);
-               
+            MainController controller = MainController.GetInstance(Activity);
+
+            bool request_success;
             switch (fragmentId) {
                 case Resource.Id.fragment_home:
                     _fragment = HomeFragment.NewInstance();
-                    request_success = await MainController.FetchStatistics();
+                    request_success = await controller.FetchStatistics();
                     break;
                 case Resource.Id.fragment_bar_list:
                     _fragment = BarListFragment.NewInstance();
-                    request_success = await MainController.FetchBarsData();
-                    Log.Debug(Tag, $"Count: {MainController.BarsData.Count}");
+                    request_success = await controller.FetchBarsData();
+                    if (MainController.BarsData == null) {
+                        DisplayError();
+                        return;
+                    }
+                    //Log.Debug(Tag, $"Count: {MainController.BarsData.Count}");
                     if (MainController.BarsData.Count == 0) 
                     {
                         _errorLabel.Text = GetString(Resource.String.bar_list_empty);
