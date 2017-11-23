@@ -5,7 +5,7 @@ namespace Socialtap.Code.Model
     public class BarData : IBarData
     {
         //saugomi hashtagai
-        public List<string> Tags { get; }
+        public List<string> Tags { get; set; }
         //žvaigždučių vidurkis
         public double RateAvg { get; set; }
         //ar geriau įpylė visų barų palyginime
