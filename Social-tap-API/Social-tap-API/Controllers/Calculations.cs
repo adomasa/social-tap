@@ -21,7 +21,7 @@ namespace SocialtapAPI
         public const int MIN_NAME_LENGHT = 1; //trumpiausias įmanomas baro pavadinimas
         public const int MIN_BEVERAGE_RATE_LEVEL = 0; //kiek mažiausiai gali įpilti ir duoti žvaigždučių 
 
-        public static Dictionary<string, BarData> _barData = new Dictionary<string, BarData>();
+        public static Dictionary<string, IBarData> _barData = new Dictionary<string, IBarData>();
 
         public Calculations(){
 
@@ -95,7 +95,7 @@ namespace SocialtapAPI
         /// Ar rate mažiau lygu 5 ir daugiau nei 0
         /// Ar beverage mažiau lygu 10 ir daugiau nei 0 
         /// Ar baro vardas yra bent 1 simblos 
-        public Boolean Validation(int rate, int beverage, string barName)
+        public bool Validation(int rate, int beverage, string barName)
         {
             return !(rate > MAX_RATE || beverage > MAX_BEVERAGE_LEVEL || barName.Length < MIN_NAME_LENGHT 
                   || rate < MIN_BEVERAGE_RATE_LEVEL || beverage < MIN_BEVERAGE_RATE_LEVEL);
@@ -103,7 +103,7 @@ namespace SocialtapAPI
         /// Baro pavadinimui
         /// Priskiria reikiamas reiksmes
         /// Grąžina Dictionary
-        public Dictionary<string,BarData> AddBarInfo( string barName, int beverage, int rate, string comment)
+        public Dictionary<string, IBarData> AddBarInfo( string barName, int beverage, int rate, string comment)
         {
               IsBarNew(barName);
              _barData[barName].BarUses++;
@@ -118,7 +118,7 @@ namespace SocialtapAPI
         /// Patikrina ar naujas baras
         /// Jeigu naujas
         /// Sukuria naują elementą Dictionary
-        public Boolean IsBarNew(string barName)
+        public bool IsBarNew(string barName)
         {
             if (!_barData.Keys.Contains(barName))
             {

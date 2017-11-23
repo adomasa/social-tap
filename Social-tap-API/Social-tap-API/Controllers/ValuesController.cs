@@ -12,7 +12,7 @@ namespace Social_tap_API.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller, IValues
     {
-        public static Dictionary<string, BarData> BarData = new Dictionary<string, BarData>();
+        public static Dictionary<string, IBarData> BarData = new Dictionary<string, IBarData>();
         public static string BestBar;
         public static double AllBarsAverage;
         public static int Uses;
@@ -43,7 +43,7 @@ namespace Social_tap_API.Controllers
         /// Jis grąžina visą Dictionary į programą
         [HttpGet]
         [Route("GetBarData")]
-        public IDictionary<string, BarData> GetBarData()
+        public IDictionary<string, IBarData> GetBarData()
         {
             Console.WriteLine($"GET: GetBarData/");
             return BarData;

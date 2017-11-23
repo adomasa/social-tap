@@ -8,8 +8,8 @@ namespace SocialtapAPI
 {
     interface IValues
     {
-        Boolean AddBarReview(string barName, string comment, int rate, int beverage);
-        IDictionary<string, BarData> GetBarData();
+        bool AddBarReview(string barName, string comment, int rate, int beverage);
+        IDictionary<string, IBarData> GetBarData();
         Statistics GetStats();
     }
 }

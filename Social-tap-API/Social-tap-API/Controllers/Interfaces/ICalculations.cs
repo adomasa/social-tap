@@ -10,11 +10,11 @@ namespace SocialtapAPI
     {
         string BarNameAdaptation(string barName);
         double BarRateAverage(string barName, int rate);
-        Boolean Average(int beverageLevel);
+        bool Average(int beverageLevel);
         List<string> HashtagsFinder(string comment);
-        Boolean Validation(int rate, int beverage, string barName);
-        Boolean IsBarNew(string barName);
-        Dictionary<string, BarData> AddBarInfo(string barName, int beverage, int rate, string comment);
+        bool Validation(int rate, int beverage, string barName);
+        bool IsBarNew(string barName);
+        Dictionary<string, IBarData> AddBarInfo(string barName, int beverage, int rate, string comment);
         string BestBarRate();
         Statistics Stats();
     }
