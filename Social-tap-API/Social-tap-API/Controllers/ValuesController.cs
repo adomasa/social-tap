@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 using SocialtapAPI;
 using Newtonsoft.Json.Linq;
+using System.Data.Entity;
 
 namespace Social_tap_API.Controllers
 {
@@ -36,6 +37,11 @@ namespace Social_tap_API.Controllers
             barName = calc.BarNameAdaptation(barName);
             BarData = calc.AddBarInfo(barName, beverage, rate, comment);
             Stats = calc.Stats();
+            using (var db=new BarDataContext())
+            {
+                db.BardbSet.Add(BarData);
+                db.SaveChanges();
+            }
             return true;
 
         }

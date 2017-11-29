@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.Data.Entity;
 namespace SocialtapAPI
 {
     public class BarData : IBarData
@@ -21,4 +21,12 @@ namespace SocialtapAPI
             Tags = new List<string>();
         }
     }
+
+    public class BarDataContext : DbContext
+    {
+        public DbSet<Dictionary<string, IBarData>> BardbSet { get; set; }
+
+    }
+
+
 }
