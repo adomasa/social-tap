@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Android.Content;
-using RestSharp;
+﻿using System.Threading.Tasks;
 using Socialtap.Code.Model;
 
 namespace Socialtap.Code.Controller.Interfaces
