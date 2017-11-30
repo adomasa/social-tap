@@ -1,7 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
-
-namespace Socialtap.Code.Model
+﻿namespace Socialtap.Code.Model
 {
     public class Statistics : IStatistics
     {
