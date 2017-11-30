@@ -12,40 +12,40 @@ namespace Socialtap.Code.Controller
     public class MainController : IMainController
     {
         private const string Tag = "MainController";
-        private const string Url = "http://10.0.2.2:5000";
 
-        public static Dictionary<string, IBarData> BarsData;
+        public static Dictionary<string, BarData> barsData;
         public static IStatistics stats;
 
         private IRequestManager _requestManager;
+        private IPropertiesHandler _propertiesHandler;
         private Context _context;
         private MainActivity _activity;
 
         private static MainController instance;
 
+
         private MainController(Context context)
         {
             _context = context;
-            _requestManager = RequestManager.GetInstance(context);
             _activity = (MainActivity) context;
+            _propertiesHandler = PropertiesHandler.GetInstance(context);
+            _requestManager = RequestManager.GetInstance(context, _propertiesHandler);
+        }
 
-            //load cfg settings
-            var propertiesHandler = PropertiesHandler.GetInstance(context);
-
-            var url = propertiesHandler.GetConfigValue("api_url");
+        public String GetConfigProperty(string key) 
+        {
+            return _propertiesHandler.GetConfigValue(key);
         }
 
         public static MainController GetInstance(Context context)
         {
-            return instance ?? new MainController(context);
+            return instance = instance ?? new MainController(context);
         }
 
         public void AbortRequest() 
         {
             _requestManager.AbortRequest();
         }
-
-        //Todo: DI, lazy,
 
         /// <summary>
         /// Adds the bar review via http request to web API
@@ -89,7 +89,7 @@ namespace Socialtap.Code.Controller
             if (status)
             {
                 Log.Debug(Tag, "FetchBarsData deserialization in progress.");
-                BarsData = JsonConvert.DeserializeObject<Dictionary<string, IBarData>>(content);
+                barsData = JsonConvert.DeserializeObject<Dictionary<string, BarData>>(content);
             }
             return status;
         }

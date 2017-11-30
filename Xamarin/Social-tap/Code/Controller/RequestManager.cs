@@ -21,17 +21,18 @@ namespace Socialtap.Code.Controller
 
         public static CancellationTokenSource cancellationTokenSource;
 
-        private RequestManager(Context context) 
+        private RequestManager(Context context, IPropertiesHandler propertiesHandler) 
         {
             this.context = context;
-            int.TryParse(context.GetString(Resource.String.get_request_timeout), out getRequestTimeout);
-            int.TryParse(context.GetString(Resource.String.post_request_timeout), out postRequestTimeout);
-            apiUrl = context.GetString(Resource.String.api_url);
+            apiUrl = propertiesHandler.GetConfigValue("api_url");
+            int.TryParse(propertiesHandler.GetConfigValue("post_request_timeout"), out getRequestTimeout);
+            int.TryParse(propertiesHandler.GetConfigValue("get_request_timeout"), out postRequestTimeout);
+
         }
 
-        public static RequestManager GetInstance (Context context)
+        public static RequestManager GetInstance (Context context, IPropertiesHandler propertiesHandler)
         {
-            instance = instance ?? new RequestManager(context);
+            instance = instance ?? new RequestManager(context, propertiesHandler);
             return instance;
         }
 

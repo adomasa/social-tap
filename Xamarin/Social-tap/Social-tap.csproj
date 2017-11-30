@@ -125,6 +125,7 @@
     <Compile Include="Code\Controller\Interfaces\IRequestManager.cs" />
     <Compile Include="Code\Controller\Interfaces\IMainController.cs" />
     <Compile Include="Code\Controller\PropertiesHandler.cs" />
+    <Compile Include="Code\Controller\Interfaces\IPropertiesHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
