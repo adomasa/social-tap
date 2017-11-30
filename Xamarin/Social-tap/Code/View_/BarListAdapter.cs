@@ -41,15 +41,15 @@ namespace Socialtap.Code.View_.Fragments
         /// Updates view content on load/scroll
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            var item = MainController.BarsData.ElementAt(position);
+            var item = MainController.barsData.ElementAt(position);
 
             if (!(holder is BarListViewHolder viewHolder)) return;
-            viewHolder.Title.Text = MainController.BarsData.ElementAt(position).Key;
+            viewHolder.Title.Text = MainController.barsData.ElementAt(position).Key;
             viewHolder.BarRating.Text = item.Value.RateAvg.ToString();
             viewHolder.AvgBeverageVolume.Text = item.Value.BeverageAvg.ToString();
             viewHolder.ReviewCount.Text = item.Value.BarUses.ToString();
         }
 
-        public override int ItemCount => MainController.BarsData.Count;
+        public override int ItemCount => MainController.barsData.Count;
     }
 }

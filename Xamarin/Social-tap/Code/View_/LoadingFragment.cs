@@ -41,12 +41,12 @@ namespace Socialtap.Code.View_.Fragments
                 case Resource.Id.fragment_bar_list:
                     _fragment = BarListFragment.NewInstance();
                     request_success = await controller.FetchBarsData();
-                    if (MainController.BarsData == null) {
+                    if (MainController.barsData == null) {
                         DisplayError();
                         return;
                     }
                     //Log.Debug(Tag, $"Count: {MainController.BarsData.Count}");
-                    if (MainController.BarsData.Count == 0) 
+                    if (MainController.barsData.Count == 0) 
                     {
                         _errorLabel.Text = GetString(Resource.String.bar_list_empty);
                         DisplayError();

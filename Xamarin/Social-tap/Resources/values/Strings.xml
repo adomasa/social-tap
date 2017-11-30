@@ -32,12 +32,8 @@
 	<string name="undo">Anuliuoti</string>
 	<string name="comment_empty">Komentaro nėra</string>
 	<string name="bar_list_empty">Barų sąrašas tuščias</string>
-    <string name="post_request_timeout">3000</string>
-    <string name="get_request_timeout">5000</string>
-	<string name="api_url">http://10.0.2.2:5000</string>
+	
 	<string name="post_bar_review_path">/api/values/AddBarReview/{0}/{1}/{2}/{3}</string>  
 	<string name="get_bar_data_path">/api/values/GetBarData/</string>  
     <string name="get_stats_path">/api/values/Stats/</string>  
-   
-	
 </resources>

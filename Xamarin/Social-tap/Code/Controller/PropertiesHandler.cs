@@ -1,13 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Android.Content;
 using Android.Util;
 using Java.Util;
+using Socialtap.Code.Controller.Interfaces;
 
 namespace Socialtap.Code.Controller
 {
-    public class PropertiesHandler
+    public class PropertiesHandler : IPropertiesHandler
     {
         private static String TAG = "PropertiesHandler";
 
@@ -25,7 +27,6 @@ namespace Socialtap.Code.Controller
             {
                 var streamReader = new StreamReader(assetManager.Open("config.properties"));
                 var rawResource = streamReader.BaseStream;
-                //CleanByteOrderMark(rawResource);
                 _properties = new Properties();
                 _properties.Load(rawResource);
             }
@@ -47,7 +48,7 @@ namespace Socialtap.Code.Controller
         /// </summary>
         /// <returns>The configuration value</returns>
         /// <param name="key">Configuration value key</param>
-        public String GetConfigValue(String key)
+        public string GetConfigValue(String key)
         {
             return _properties.GetProperty(key);
         }
