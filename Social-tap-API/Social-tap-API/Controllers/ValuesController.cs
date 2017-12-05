@@ -6,13 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 using SocialtapAPI;
 using Newtonsoft.Json.Linq;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Social_tap_API.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller, IValues
     {
+        public string barname = "";
+
         public static Dictionary<string, IBarData> BarData = new Dictionary<string, IBarData>();
         public static string BestBar;
         public static double AllBarsAverage;
@@ -37,12 +39,12 @@ namespace Social_tap_API.Controllers
             barName = calc.BarNameAdaptation(barName);
             BarData = calc.AddBarInfo(barName, beverage, rate, comment);
             Stats = calc.Stats();
-            using (var db=new BarDataContext())
+            using (var db = new StatisticsContext())
             {
-                db.BardbSet.Add(BarData);
+                db.StatsSet.Add(Stats);
                 db.SaveChanges();
             }
-            return true;
+                return true;
 
         }
         /// Iškvietus šitą metodą
