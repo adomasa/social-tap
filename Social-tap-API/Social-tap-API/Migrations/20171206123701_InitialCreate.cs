@@ -9,26 +9,24 @@ namespace SocialtapAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "StatsSet",
+                name: "Reviews",
                 columns: table => new
                 {
-                    TopBarName = table.Column<string>(nullable: false),
-                    BarCount = table.Column<int>(nullable: false),
-                    ReviewCount = table.Column<int>(nullable: false),
-                    TopBarAvgBeverageVolume = table.Column<double>(nullable: false),
-                    TopBarRate = table.Column<double>(nullable: false),
-                    TotalAvgBeverageVolume = table.Column<double>(nullable: false)
+                    BarId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Comment = table.Column<string>(type: "TEXT", nullable: true),
+                    Rate = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StatsSet", x => x.TopBarName);
+                    table.PrimaryKey("PK_Reviews", x => x.BarId);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "StatsSet");
+                name: "Reviews");
         }
     }
 }

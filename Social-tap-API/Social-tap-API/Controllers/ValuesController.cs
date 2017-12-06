@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using SocialtapAPI;
 using Newtonsoft.Json.Linq;
 using Microsoft.EntityFrameworkCore;
+using Social_Tap_Api;
 
 namespace Social_tap_API.Controllers
 {
@@ -20,7 +21,7 @@ namespace Social_tap_API.Controllers
         public static double AllBarsAverage;
         public static int Uses;
         public static Statistics Stats;
-
+        public Review Reviews = new Review();
         /// Metodui paduodami 4 parametrai
         /// Patikrinama ar jie atitinka reikalavimus
         /// Suvienodinami pavadinimai
@@ -39,9 +40,11 @@ namespace Social_tap_API.Controllers
             barName = calc.BarNameAdaptation(barName);
             BarData = calc.AddBarInfo(barName, beverage, rate, comment);
             Stats = calc.Stats();
+            Reviews.Comment = comment;
+            Reviews.Rate = rate; 
             using (var db = new DatabaseContext())
             {
-                db.BarDataSet.Add(BarData);
+                db.ReviewSet.Add(Reviews);
                 db.SaveChanges();
             }
                 return true;
