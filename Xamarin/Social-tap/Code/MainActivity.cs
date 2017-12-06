@@ -9,6 +9,7 @@ using Socialtap.Code.View_.Fragments;
 using Fragment = Android.App.Fragment;
 using Socialtap.Code.Controller;
 using Android.Content;
+using Socialtap.Code.Controller.Interfaces;
 
 namespace Socialtap.Code
 {
@@ -18,7 +19,7 @@ namespace Socialtap.Code
         private const string Tag = "MainActivity";
         private BottomNavigationView _bottomNavigation;
         private ScrollView _contentView;
-        public MainController controller;
+        public IMainController controller;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

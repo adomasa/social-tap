@@ -21,7 +21,7 @@ namespace Socialtap.Code.Controller
         private Context _context;
         private MainActivity _activity;
 
-        private static MainController instance;
+        private static IMainController instance;
 
 
         private MainController(Context context)
@@ -37,7 +37,7 @@ namespace Socialtap.Code.Controller
             return _propertiesHandler.GetConfigValue(key);
         }
 
-        public static MainController GetInstance(Context context)
+        public static IMainController GetInstance(Context context)
         {
             return instance = instance ?? new MainController(context);
         }

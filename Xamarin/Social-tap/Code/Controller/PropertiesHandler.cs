@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 using Android.Content;
 using Android.Util;
 using Java.Util;
@@ -13,7 +11,7 @@ namespace Socialtap.Code.Controller
     {
         private static String TAG = "PropertiesHandler";
 
-        private static PropertiesHandler instance;
+        private static IPropertiesHandler instance;
 
         private Context _context;
         private readonly Properties _properties;
@@ -38,7 +36,7 @@ namespace Socialtap.Code.Controller
         }
 
         //Initialised first time 
-        public static PropertiesHandler GetInstance(Context context)
+        public static IPropertiesHandler GetInstance(Context context)
         {
             return instance = instance ?? new PropertiesHandler(context);
         }

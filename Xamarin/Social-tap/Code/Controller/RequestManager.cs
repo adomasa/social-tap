@@ -17,7 +17,7 @@ namespace Socialtap.Code.Controller
         private string apiUrl;
         private int getRequestTimeout;
         private int postRequestTimeout;
-        private static RequestManager instance;
+        private static IRequestManager instance;
 
         public static CancellationTokenSource cancellationTokenSource;
 
@@ -30,7 +30,7 @@ namespace Socialtap.Code.Controller
 
         }
 
-        public static RequestManager GetInstance (Context context, IPropertiesHandler propertiesHandler)
+        public static IRequestManager GetInstance (Context context, IPropertiesHandler propertiesHandler)
         {
             instance = instance ?? new RequestManager(context, propertiesHandler);
             return instance;
