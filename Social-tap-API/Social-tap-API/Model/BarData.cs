@@ -7,7 +7,7 @@ namespace SocialtapAPI
 
     public class BarData : IBarData
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         //saugomi hashtagai
         public List<string> Tags { get; set; }
         //žvaigždučių vidurkis
@@ -26,13 +26,4 @@ namespace SocialtapAPI
             Tags = new List<string>();
         }
     }
-
-    /* public class BarDataContext : DbContext
-     {
-         public DbSet<Dictionary<string, IBarData>> BarDataSet { get; set; }
-         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-         {
-             optionsBuilder.UseSqlite("Data Source=bardata.db");
-         } 
-     } */
 }
