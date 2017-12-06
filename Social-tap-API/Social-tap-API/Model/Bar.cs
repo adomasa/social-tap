@@ -6,12 +6,13 @@ using SocialtapAPI;
 
 namespace Social_Tap_Api
 {
-    public class Review: IReview 
+    public class Bar:IBar 
     {
         public int Id { get; set; }
-        public int Rate { get; set; }
-        public string Comment { get; set; }
-        public Bar Bar { get; set; }
-       
+        public string Name { get; set; }
+        public string Adress { get; set; }
+        public Review Review { get; set; }
+
+        public int BarId { get;set; }
     }
 }

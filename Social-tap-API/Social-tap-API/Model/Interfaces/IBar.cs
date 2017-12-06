@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace SocialtapAPI
 {
-    public interface IReview 
+    public interface IBar
     {
-        int Id { get; }
-        int Rate { get; set; }
-        string Comment { get; set; } 
+        int Id { get; set; }
+        string Name { get; set; }
+
+        string Adress { get; set; }
     }
 }
