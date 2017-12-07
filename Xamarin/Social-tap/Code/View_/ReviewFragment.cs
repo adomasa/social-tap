@@ -144,14 +144,23 @@ namespace Socialtap.Code.View_.Fragments
                     // img processing
                     var percentageOfTargetPixels = pixelCounter
                         .GetPercentageOfTargetPixels();
-
-                    //_beveragePhoto.SetImageURI (data.Data);
-                    _beveragePhoto.SetImageBitmap(pixelCounter.getProcessedImage());
-
-                    _beverageVolumeBar.Progress = percentageOfTargetPixels / 10;
+                    if (percentageOfTargetPixels == null)
+                    {
+                        _beverageVolumeLabel.Typeface = Typeface.DefaultBold;
+                        _beverageVolumeLabel.Text = "Įkelta netinkama nuotrauka!";
+                    }
+                    else if ((int)percentageOfTargetPixels == 0) { 
                     _beverageVolumeLabel.Typeface = Typeface.DefaultBold;
-                    _beverageVolumeLabel.Text = $"{percentageOfTargetPixels.ToString()}%";
-
+                    _beverageVolumeLabel.Text = "Pasirinktoje nuotrauka nerasta alaus!";
+                    }
+                    else
+                    {
+                        //_beveragePhoto.SetImageURI (data.Data);
+                        _beveragePhoto.SetImageBitmap(pixelCounter.getProcessedImage());
+                        _beverageVolumeBar.Progress = (int)percentageOfTargetPixels / 10;
+                        _beverageVolumeLabel.Typeface = Typeface.DefaultBold;
+                        _beverageVolumeLabel.Text = $"{percentageOfTargetPixels.ToString()}%";
+                    }            
                     // img processing state window with undo action
                     Snackbar
                         .Make(_rootView, GetString(Resource.String.beverage_volume_updated), Snackbar.LengthLong)
