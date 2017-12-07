@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
@@ -9,7 +7,6 @@ using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
-using Java.Lang;
 using Socialtap.Code.Controller;
 using Socialtap.Code.Controller.Interfaces;
 using Socialtap.Code.Model;

@@ -13,7 +13,7 @@ using Socialtap.Code.Controller.Interfaces;
 
 namespace Socialtap.Code
 {
-    [Activity(Label = "Social-tap", MainLauncher = true, Icon = "@mipmap/icon")]
+    [Activity(Label = "Social-tap", Icon = "@mipmap/icon")]
     public class MainActivity : AppCompatActivity
     {
         private const string Tag = "MainActivity";

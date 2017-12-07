@@ -16,10 +16,10 @@ namespace Socialtap.Code.Controller
         public static Dictionary<string, BarData> barsData;
         public static IStatistics stats;
 
-        private IRequestManager _requestManager;
-        private IPropertiesHandler _propertiesHandler;
-        private Context _context;
-        private MainActivity _activity;
+        private readonly IRequestManager _requestManager;
+        private readonly IPropertiesHandler _propertiesHandler;
+        private readonly Context _context;
+        private readonly MainActivity _activity;
 
         private static IMainController instance;
 
