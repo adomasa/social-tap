@@ -108,8 +108,10 @@ R    G   B       R-G     R-B     G-B
 
         int? levelofBearDown = null, levelofBearUp = null; // pixelis, kuriame prasideda alus ir kuriame baigiasi
 
-        // int[] proc = new int[10]; // išsaugom, kiek proc alaus yra
-        List<int> proc = new List<int>();
+        List<int> proc = new List<int>(); // išsaugom, kiek proc alaus yra
+
+        List<int> levelUp = new List<int>();
+        List<int> levelDown = new List<int>();
 
         int times = 0; // kiek kartų įvyko
 
@@ -376,8 +378,7 @@ R    G   B       R-G     R-B     G-B
             // Console.WriteLine("beer level: " + (levelofBearUp) + " dugnas " + levelofBearDown);
             //  proc[times] = 100 * ((int)levelofBearDown - (int)levelofBearUp) / ((int)levelofBearDown - yUp); taip buvo
             // proc[times] = 100 * (down - up) / (down - yUp);
-            Console.WriteLine("beer level: " + times);
-            proc.Add((int)levelofBearUp);
+            proc.Add(100 * ((int)levelofBearDown - (int)levelofBearUp) / ((int)levelofBearDown - yUp));
             times++;
         }
     }
