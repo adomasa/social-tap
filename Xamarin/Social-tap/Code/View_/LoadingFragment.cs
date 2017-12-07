@@ -4,6 +4,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Socialtap.Code.Controller;
+using Socialtap.Code.Controller.Interfaces;
 
 namespace Socialtap.Code.View_.Fragments
 {
@@ -30,7 +31,7 @@ namespace Socialtap.Code.View_.Fragments
         {
             base.OnCreate(savedInstanceState);
             int fragmentId = Arguments.GetInt(_targetFragment);
-            MainController controller = MainController.GetInstance(Activity);
+            IMainController controller = MainController.GetInstance(Activity);
 
             bool request_success;
             switch (fragmentId) {

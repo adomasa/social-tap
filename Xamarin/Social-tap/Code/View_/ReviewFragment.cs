@@ -11,6 +11,7 @@ using Android.Views.InputMethods;
 using Android.Widget;
 using Java.Lang;
 using Socialtap.Code.Controller;
+using Socialtap.Code.Controller.Interfaces;
 using Socialtap.Code.Model;
 
 namespace Socialtap.Code.View_.Fragments
@@ -42,7 +43,7 @@ namespace Socialtap.Code.View_.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             _rootView = inflater.Inflate(Resource.Layout.fragment_review, container, false);
-            MainController controller = MainController.GetInstance(Activity);
+            IMainController controller = MainController.GetInstance(Activity);
             GetReferencesFromLayout();
 
             // Hide keyboard on view created 
