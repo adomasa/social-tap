@@ -27,11 +27,11 @@ namespace Social_tap_API
             modelBuilder.Entity<Bar>()
             .HasKey(c => c.Id);
 
-            modelBuilder.Entity<Bar>()
-            .HasOne(p => p.Review)
-            .WithOne(b => b.Bar)
-            .HasForeignKey(p =>p.) // kodel čia nieko nesiūlo?? 
-            .HasConstraintName("ForeignKey_Post_Blog");
+            modelBuilder.Entity<Review>()
+            .HasOne(p => p.Bar)
+            .WithMany(b => b.Reviews)
+            .HasForeignKey(p => p.Id) //  
+            .HasConstraintName("ForeignKey_Review_Bar");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

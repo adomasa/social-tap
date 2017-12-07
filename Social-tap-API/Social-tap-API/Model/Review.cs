@@ -11,7 +11,7 @@ namespace Social_Tap_Api
         public int Id { get; set; }
         public int Rate { get; set; }
         public string Comment { get; set; }
-        public Bar Bar { get; set; }
+        public Bar Bar  { get; set; }
        
     }
 }
