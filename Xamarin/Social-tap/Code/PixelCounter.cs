@@ -203,7 +203,8 @@ public class PixelCounter : IDisposable
     {
         if (!pixelX.HasValue || !pixelY.HasValue)
         {
-            throw new ArgumentException("There is no box in photo", "pixelX and PixelY");
+            throw new ApplicationException("An error has occured");
+        //    throw new ArgumentException("There is no box in photo", "pixelX and PixelY");
         }
     }
 
