@@ -39,7 +39,7 @@ public class PixelCounter : IDisposable
       170-250   130-200   30-90 
    */
 
-    public int GetPercentageOfTargetPixels()
+    public int? GetPercentageOfTargetPixels()
     {
         int height = bitmap.Height; // aukštis
         int width = bitmap.Width; // plotis
@@ -48,7 +48,17 @@ public class PixelCounter : IDisposable
 
         FindBox(startY, height, width, ref pixelX, ref pixelY); // susirandam insideBox pikselio koordinates
 
-        BoxExistsException(pixelX, pixelY); // tikrinam, ar nubrėžtas box'as
+
+        try
+        {
+            BoxExistsException(pixelX, pixelY); // tikrinam, ar nubrėžtas box'as
+        }
+        catch (ArgumentException e)
+        {
+            Console.WriteLine("{0} First exception caught.", e);
+            return null;
+        }
+       
 
         int xLeft = 0, xRight = 0, yUp = 0, yDown = 0; // insideBox kraštinių kordinatės
 
@@ -75,7 +85,15 @@ public class PixelCounter : IDisposable
       //      FindBeerLevelDarker(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc, ref times);
         }
 
-        BeerExistsException(levelofBearDown, levelofBearUp); // patikrinam, ar nuotrauko išvis yra alus
+        try
+        {
+            BeerExistsException(levelofBearDown, levelofBearUp); // patikrinam, ar nuotraukoj išvis yra alus
+        }
+        catch (ArgumentException e)
+        {
+            Console.WriteLine("{0} First exception caught.", e);
+            return 0;
+        }
 
         DrawLineUp((int)levelofBearUp, xLeft, width); // TAISYTI!!! nubrėžia liniją, iki kur įpilta alaus
 
@@ -203,8 +221,8 @@ public class PixelCounter : IDisposable
     {
         if (!pixelX.HasValue || !pixelY.HasValue)
         {
-            throw new ApplicationException("An error has occured");
-        //    throw new ArgumentException("There is no box in photo", "pixelX and PixelY");
+         //  throw new ApplicationException("An error has occured");
+            throw new ArgumentException("There is no box in photo", "pixelX and PixelY");
         }
     }
 
@@ -258,7 +276,7 @@ public class PixelCounter : IDisposable
         int up = 0;
         int down = 0;
         int counting = 0;
-        levelofBearDown = 0; levelofBearUp = 0; // nebeveiks exception, kad nėra alaus
+     //   levelofBearDown = 0; levelofBearUp = 0; // nebeveiks exception, kad nėra alaus
         for (int i = (xLeft + distanceX); i < (width + xLeft); i = (i + distanceX)) // plotis
         {
             for (int j = yDown; j > yUp; j--) // aukštis
