@@ -146,7 +146,6 @@ namespace Socialtap.Code.View_.Fragments
                     var percentageOfTargetPixels = pixelCounter
                         .GetPercentageOfTargetPixels();
 
-                    //_beveragePhoto.SetImageURI (data.Data);
                     _beveragePhoto.SetImageBitmap(pixelCounter.getProcessedImage());
 
                     _beverageVolumeBar.Progress = percentageOfTargetPixels / 10;
@@ -163,14 +162,6 @@ namespace Socialtap.Code.View_.Fragments
                         }).Show();
                 }
             }
-        }
-
-        public void OpenCropWindow(Android.Net.Uri sourceUri) 
-        {
-            //UCrop.Of(sourceUri, MediaStore.Images.Media.ExternalContentUri)
-            //.WithAspectRatio(16, 9)
-            //.WithMaxResultSize(MaxWidth, MaxHeight)
-            //.Start(Activity);
         }
     }
 }

@@ -46,7 +46,6 @@ namespace Socialtap.Code.View_.Fragments
                         DisplayError();
                         return;
                     }
-                    //Log.Debug(Tag, $"Count: {MainController.BarsData.Count}");
                     if (MainController.barsData.Count == 0) 
                     {
                         _errorLabel.Text = GetString(Resource.String.bar_list_empty);

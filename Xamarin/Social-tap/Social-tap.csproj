@@ -111,7 +111,6 @@
     <Compile Include="Code\Model\BarData.cs" />
     <Compile Include="Code\PixelCounter.cs" />
     <Compile Include="Code\MainActivity.cs" />
-    <Compile Include="Code\ImageCropActivity.cs" />
     <Compile Include="Code\Model\Statistics.cs" />
     <Compile Include="Code\Model\Interfaces\IBarData.cs" />
     <Compile Include="Code\Model\Interfaces\IBarReview.cs" />
