@@ -120,6 +120,18 @@ namespace SocialtapAPI
         /// Sukuria naują elementą Dictionary
         public bool IsBarNew(string barName)
         {
+            using (var db = new DatabaseContext())
+            {
+                var count = db.BarSet
+                    .Where(bar => bar.Name.Contains(barName))
+                    .Count();
+                if(count==0)
+                {
+                    db.BarSet.Add(new Social_Tap_Api.Bar(barName));
+                }
+            }
+
+            // old way 
             if (!_barData.Keys.Contains(barName))
             {
                 _barData.Add(barName, new BarData());

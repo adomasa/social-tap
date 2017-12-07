@@ -13,5 +13,15 @@ namespace Social_Tap_Api
         public string Adress { get; set; }
         public List<Review> Reviews { get; set; }
         public int BarId { get;set; }
+
+        public Bar(string barName)
+        {
+            Name = barName;
+        }
+
+        public Bar()
+        {
+
+        }
     }
 }

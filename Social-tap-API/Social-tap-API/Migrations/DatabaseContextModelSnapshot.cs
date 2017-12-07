@@ -18,18 +18,45 @@ namespace SocialtapAPI.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452");
 
+            modelBuilder.Entity("Social_Tap_Api.Bar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Adress");
+
+                    b.Property<int>("BarId");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Bar");
+                });
+
             modelBuilder.Entity("Social_Tap_Api.Review", b =>
                 {
-                    b.Property<int>("BarId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("BarId");
 
                     b.Property<string>("Comment");
 
                     b.Property<int>("Rate");
 
-                    b.HasKey("BarId");
+                    b.HasKey("Id");
 
-                    b.ToTable("Reviews");
+                    b.HasIndex("BarId");
+
+                    b.ToTable("Review");
+                });
+
+            modelBuilder.Entity("Social_Tap_Api.Review", b =>
+                {
+                    b.HasOne("Social_Tap_Api.Bar", "Bar")
+                        .WithMany("Reviews")
+                        .HasForeignKey("BarId");
                 });
 #pragma warning restore 612, 618
         }
