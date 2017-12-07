@@ -34,6 +34,7 @@ public class PixelCounter : IDisposable
 
 
     /*
+R    G   B       R-G     R-B     G-B
 99	52	18		1,904	5,500	2,889
 83	48	16		1,729	5,188	3,000
 113	68	27		1,662	4,185	2,519
@@ -108,7 +109,9 @@ public class PixelCounter : IDisposable
         int? levelofBearDown = null, levelofBearUp = null; // pixelis, kuriame prasideda alus ir kuriame baigiasi
         int[] proc = new int[10]; // išsaugom, kiek proc alaus yra
         int times = 0; // TIKRINTI!!! kiek kartų įvyko. Gal galima pakeisti konstanta
+
         FindBeerLevelLager(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc, ref times); // surandam kur prasideda ir kur baigiasi alus
+        Console.WriteLine("Times" + times + "d" + levelofBearDown + "u" + levelofBearUp);
         if (!levelofBearDown.HasValue || !levelofBearUp.HasValue)
         {
       //      FindBeerLevelDarker(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc, ref times);
@@ -305,7 +308,7 @@ public class PixelCounter : IDisposable
         int up = 0;
         int down = 0;
         int counting = 0;
-     //   levelofBearDown = 0; levelofBearUp = 0; // nebeveiks exception, kad nėra alaus
+    //    levelofBearDown = 0; levelofBearUp = 0; // nebeveiks exception, kad nėra alaus
         for (int i = (xLeft + distanceX); i < (width + xLeft); i = (i + distanceX)) // plotis
         {
             for (int j = yDown; j > yUp; j--) // aukštis
@@ -350,7 +353,13 @@ public class PixelCounter : IDisposable
                        j = yUp; // baisu dėl šito
                    }*/
             }
-            if (times>1 && times<9)
+            if (times ==2)
+            {
+                levelofBearUp = up;//TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
+                levelofBearDown = down; //TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
+                counting++;
+            }
+            if (times>2 && times<9)
             {
                 levelofBearUp = levelofBearUp + up;//TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
                 levelofBearDown = levelofBearDown + down; //TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
