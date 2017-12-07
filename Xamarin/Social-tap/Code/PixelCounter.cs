@@ -30,6 +30,7 @@ public class PixelCounter : IDisposable
     const int darkerBeerGmin = 25;
     const int darkerBeerGmax = 70;
     const int darkerBeerBmax = 40;
+
     Color checkPixel;
 
 
@@ -78,7 +79,6 @@ R    G   B       R-G     R-B     G-B
 
         FindBox(startY, height, width, ref pixelX, ref pixelY); // susirandam insideBox pikselio koordinates
 
-
         try
         {
             BoxExistsException(pixelX, pixelY); // tikrinam, ar nubrėžtas box'as
@@ -89,7 +89,6 @@ R    G   B       R-G     R-B     G-B
             return null;
         }
        
-
         int xLeft = 0, xRight = 0, yUp = 0, yDown = 0; // insideBox kraštinių kordinatės
 
         xLeft = (int)pixelX; // kairė
@@ -108,11 +107,11 @@ R    G   B       R-G     R-B     G-B
 
         int? levelofBearDown = null, levelofBearUp = null; // pixelis, kuriame prasideda alus ir kuriame baigiasi
         int[] proc = new int[10]; // išsaugom, kiek proc alaus yra
-        int times = 0; // TIKRINTI!!! kiek kartų įvyko. Gal galima pakeisti konstanta
+        int times = 0; // kiek kartų įvyko
 
-        FindBeerLevelLager(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc, ref times); // surandam kur prasideda ir kur baigiasi alus
-        Console.WriteLine("Times" + times + "d" + levelofBearDown + "u" + levelofBearUp);
-        if (!levelofBearDown.HasValue || !levelofBearUp.HasValue)
+        FindBeerLevelLager(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc, ref times); // surandam kur prasideda ir kur baigiasi alus, išsaugom procentus
+     //   Console.WriteLine("Times" + times + "d" + levelofBearDown + "u" + levelofBearUp);
+        if (!levelofBearDown.HasValue || !levelofBearUp.HasValue) // Naudosim, jei bus kitokios spalvos alus
         {
       //      FindBeerLevelDarker(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc, ref times);
         }
@@ -127,15 +126,17 @@ R    G   B       R-G     R-B     G-B
             return 0;
         }
 
-        DrawLineUp((int)levelofBearUp, xLeft, width); // TAISYTI!!! nubrėžia liniją, iki kur įpilta alaus
+        //T
+        DrawLineUp((int)levelofBearUp, xLeft, width); // Nubrėžia liniją, iki kur įpilta alaus
 
-        DrawLineDown((int)levelofBearDown, xLeft, width); // TAISYTI!!! nubrėžia liniją, nuo kur prasideda alus
+        //T
+        DrawLineDown((int)levelofBearDown, xLeft, width); // Nubrėžia liniją, nuo kur prasideda alus
 
         int bestProcIndex = BestProcIndex(times, proc); // grąžina tiksliausios reikšmės indeksą
 
-        int best = 0;
-        int finalResult = FinalResult(times, bestProcIndex, proc, ref best);
-        finalResult = finalResult / best;
+        int numberOfBestProc = 0; // išsaugo, kiek buvo tiksliausių reikšmių
+        int finalResult = FinalResult(times, bestProcIndex, proc, ref best); // grąžina tiksliausių reikšmių vidurkį
+        finalResult = finalResult / best; // apskaičiuoja galutinį alaus procentą
         return finalResult;
     }
 
@@ -253,7 +254,6 @@ R    G   B       R-G     R-B     G-B
     {
         if (!pixelX.HasValue || !pixelY.HasValue)
         {
-         //  throw new ApplicationException("An error has occured");
             throw new ArgumentException("There is no box in photo", "pixelX and PixelY");
         }
     }
