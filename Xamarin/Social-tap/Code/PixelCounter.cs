@@ -135,8 +135,8 @@ R    G   B       R-G     R-B     G-B
         int bestProcIndex = BestProcIndex(times, proc); // grąžina tiksliausios reikšmės indeksą
 
         int numberOfBestProc = 0; // išsaugo, kiek buvo tiksliausių reikšmių
-        int finalResult = FinalResult(times, bestProcIndex, proc, ref best); // grąžina tiksliausių reikšmių vidurkį
-        finalResult = finalResult / best; // apskaičiuoja galutinį alaus procentą
+        int finalResult = FinalResult(times, bestProcIndex, proc, ref numberOfBestProc); // grąžina tiksliausių reikšmių vidurkį
+        finalResult = finalResult / numberOfBestProc; // apskaičiuoja galutinį alaus procentą
         return finalResult;
     }
 
@@ -236,7 +236,7 @@ R    G   B       R-G     R-B     G-B
         return bestProcIndex;
     }
 
-    public int FinalResult(int times, int bestProcIndex, int[] proc, ref int best)
+    public int FinalResult(int times, int bestProcIndex, int[] proc, ref int numberOfBestProc)
     {
         int finalResult = 0;
         for (int i = 0; i < times; i++)
@@ -244,7 +244,7 @@ R    G   B       R-G     R-B     G-B
             if ((proc[bestProcIndex] - 5) < proc[i] && (proc[bestProcIndex] + 5) > proc[i])
             {
                 finalResult = finalResult + proc[i];
-                best++;
+                numberOfBestProc++;
             }
         }
         return finalResult;
@@ -275,7 +275,6 @@ R    G   B       R-G     R-B     G-B
                 bitmap.SetPixel(j, i, Android.Graphics.Color.Red);
             }
         }
-
     }
 
     public void DrawLineDown(int? levelofBearDown, int xLeft, int width)
@@ -287,7 +286,6 @@ R    G   B       R-G     R-B     G-B
                 bitmap.SetPixel(j, i, Android.Graphics.Color.Red);
             }
         }
-
     }
 
     public Bitmap getProcessedImage()
@@ -297,32 +295,40 @@ R    G   B       R-G     R-B     G-B
 
     public void FindBeerLevelLager(int height, int width, int xLeft, int yDown, int yUp, ref int? levelofBearDown, ref int? levelofBearUp, ref int[] proc, ref int times)
     {
-        bool startBear = false;
-        // correctPixel niekada nenaudojamas
-        bool correctPixel = true;
-        int count = 0; // !
-        int distanceX = width / 10; // paklaidos dydis
-        int distanceY = height / 10;
-        int k;
+        bool startBear = false; // patikrinam ar prasidėjo alus
+
+
+       bool correctPixel = true; // naudoti jei norėsim nutraukti 
+
+
+        int count = 0; // naudojamas tikrinimui ar nuotraukoje blogas apšvietimas ar jau baigėsi alus
+        int distanceX = width / 20; // kas kokį pločio atstumą tikrinam alaus lygį
+        int distanceY = height / 10; // aukščio paklaidos dydis
+        int distanceYDown = height / 15; // aukščio paklaidos dydis pirmajam pikseliui
+
+        int k = 0; // some variables apibrežti
         int j1;
         int up = 0;
         int down = 0;
         int counting = 0;
-    //    levelofBearDown = 0; levelofBearUp = 0; // nebeveiks exception, kad nėra alaus
-        for (int i = (xLeft + distanceX); i < (width + xLeft); i = (i + distanceX)) // plotis
+
+
+        for (int i = (xLeft + distanceX*4); i < (width + xLeft - distanceX*3); i = (i + distanceX)) // plotis (tikrinam jo 20---80 dalį)
         {
             for (int j = yDown; j > yUp; j--) // aukštis
             {
                 //  Console.WriteLine("i: " + i + "j:" + j);
-                if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax && !startBear)
+                if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax && !startBear) // ieškomas pirmas alaus pikselis nuo dugno
                 {
-                    startBear = true; // reiškias baigėsi dugnas ir prasideda alus
+                    while (k < distanceY && !(Color.FromArgb(bitmap.GetPixel(i, j)).R == outsideBox.R && Color.FromArgb(bitmap.GetPixel(i, j)).G == outsideBox.G && Color.FromArgb(bitmap.GetPixel(i, j)).B == outsideBox.B)) // tikrinam ar ten tikrai prasidėjo alus ar buvo atsitiktinis pikselis
+                        startBear = true; // reiškias baigėsi dugnas ir prasideda alus
                     down = j; //TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
                     up = j;
                 }
                 if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax)
                 {
                     up = j;
+                    bitmap.SetPixel(i, j, Android.Graphics.Color.Red); // for testing
                 }
                 else
                 {
@@ -338,7 +344,7 @@ R    G   B       R-G     R-B     G-B
                         j1--;
                         k++;
                     }
-                    if ((count * 2) >= distanceY)
+                    if ((count * 2) >= distanceY) // jei bent pusė pikselių buvo alaus, tada ok
                     {
                         correctPixel = true;
                         up = j;
