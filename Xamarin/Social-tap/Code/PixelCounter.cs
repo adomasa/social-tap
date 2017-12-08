@@ -35,43 +35,6 @@ public class PixelCounter : IDisposable
 
     Color checkPixel;
 
-
-    /*
-R    G   B       R-G     R-B     G-B
-99	52	18		1,904	5,500	2,889
-83	48	16		1,729	5,188	3,000
-113	68	27		1,662	4,185	2,519
-						
-106	56	19		1,893	5,579	2,947
-114	65	33		1,754	3,455	1,970
-146	83	30		1,759	4,867	2,767
-141	81	27		1,741	5,222	3,000
-97	52	21		1,865	4,619	2,476
-						
-26	21	17		1,238	1,529	1,235
-40	20	13		2,000	3,077	1,538
-27	17	15		1,588	1,800	1,133
-61	23	12		2,652	5,083	1,917
-						
-108	63	22		1,714	4,909	2,864
-172	117	37		1,470	4,649	3,162
-101	61	35		1,656	2,886	1,743
-120	71	31		1,690	3,871	2,290
-123	88	32		1,398	3,844	2,750
-						
-98,647	58,000	23,824		1,748	4,133	2,365
-						
-		B > 120				
-
-        */
-
-    /*
-      220       110-130   12-50
-      180-230   160-200   0-25
-      220-240   140-180   0-70
-      170-250   130-200   30-90 
-   */
-
     public int? GetPercentageOfTargetPixels()
     {
         int height = bitmap.Height; // aukštis
@@ -343,13 +306,12 @@ R    G   B       R-G     R-B     G-B
                 {
                     levelofBearUp.RemoveAt(levelofBearUp.Count - 1);
                     levelofBearUp.Add(j);
-                    bitmap.SetPixel(i, j, Android.Graphics.Color.Red); // for testing
                 }
                 else if (startBear) // jei randa ne alaus pikselį
                 {
                     count = 0;
                     k = 0;
-                    while (k < distanceY && !(Color.FromArgb(bitmap.GetPixel(i, j)).R == outsideBox.R && Color.FromArgb(bitmap.GetPixel(i, j)).G == outsideBox.G && Color.FromArgb(bitmap.GetPixel(i, j)).B == outsideBox.B)) // ar gerai?
+                    while (k < distanceY && !(Color.FromArgb(bitmap.GetPixel(i, j)).R == outsideBox.R && Color.FromArgb(bitmap.GetPixel(i, j)).G == outsideBox.G && Color.FromArgb(bitmap.GetPixel(i, j)).B == outsideBox.B))
                     {
                         if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax)
                         {
@@ -365,7 +327,7 @@ R    G   B       R-G     R-B     G-B
                     }
                     else
                     {
-                        break;// tai čia galima ir nutraukti
+                        break;
                     }
                 }
             }
@@ -380,7 +342,6 @@ R    G   B       R-G     R-B     G-B
 
     public void FindBeerLevelDarker(int height, int width, int xLeft, int yDown, int yUp, ref List<int> levelofBearDown, ref List<int> levelofBearUp, ref List<int> proc)
     { 
-        //    if (Color.FromArgb(bitmap.GetPixel(i, j)).R > darkerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).R<darkerBeerRmax && Color.FromArgb(bitmap.GetPixel(i, j)).G > darkerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G<darkerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B<darkerBeerBmax && !startBear)
         bool startBear = false; // patikrinam ar prasidėjo alus
         int count = 0; // naudojamas tikrinimui ar nuotraukoje blogas apšvietimas ar jau baigėsi alus
         int distanceX = width / 20; // kas kokį pločio atstumą tikrinam alaus lygį
@@ -394,14 +355,14 @@ R    G   B       R-G     R-B     G-B
         {
             for (int j = yDown; j > yUp; j--) // aukštis
             {
-                if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax && !startBear) // ieškomas pirmas alaus pikselis nuo dugno
+                if (Color.FromArgb(bitmap.GetPixel(i, j)).R > darkerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).R < darkerBeerRmax && Color.FromArgb(bitmap.GetPixel(i, j)).G > darkerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < darkerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < darkerBeerBmax && !startBear) // ieškomas pirmas alaus pikselis nuo dugno
                 {
                     tempJ = j; // išsisaugom galimai pirmą alaus pikselį
                     count = 0;
                     k = 0;
                     while (k < distanceYDown) // tikrinam ar ten tikrai prasidėjo alus ar buvo atsitiktinis pikselis
                     {
-                        if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax)
+                        if (Color.FromArgb(bitmap.GetPixel(i, j)).R > darkerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).R < darkerBeerRmax && Color.FromArgb(bitmap.GetPixel(i, j)).G > darkerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < darkerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < darkerBeerBmax)
                         {
                             count++;
                         }
@@ -417,19 +378,18 @@ R    G   B       R-G     R-B     G-B
                     j = tempJ;
                 }
 
-                if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax && startBear) // skaičiuojami kiti alaus pikseliai
+                if (Color.FromArgb(bitmap.GetPixel(i, j)).R > darkerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).R < darkerBeerRmax && Color.FromArgb(bitmap.GetPixel(i, j)).G > darkerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < darkerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < darkerBeerBmax && startBear) // skaičiuojami kiti alaus pikseliai
                 {
                     levelofBearUp.RemoveAt(levelofBearUp.Count - 1);
                     levelofBearUp.Add(j);
-                    bitmap.SetPixel(i, j, Android.Graphics.Color.Red); // for testing
                 }
                 else if (startBear) // jei randa ne alaus pikselį
                 {
                     count = 0;
                     k = 0;
-                    while (k < distanceY && !(Color.FromArgb(bitmap.GetPixel(i, j)).R == outsideBox.R && Color.FromArgb(bitmap.GetPixel(i, j)).G == outsideBox.G && Color.FromArgb(bitmap.GetPixel(i, j)).B == outsideBox.B)) // ar gerai?
+                    while (k < distanceY && !(Color.FromArgb(bitmap.GetPixel(i, j)).R == outsideBox.R && Color.FromArgb(bitmap.GetPixel(i, j)).G == outsideBox.G && Color.FromArgb(bitmap.GetPixel(i, j)).B == outsideBox.B))
                     {
-                        if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax)
+                        if (Color.FromArgb(bitmap.GetPixel(i, j)).R > darkerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).R < darkerBeerRmax && Color.FromArgb(bitmap.GetPixel(i, j)).G > darkerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < darkerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < darkerBeerBmax)
                         {
                             count++;
                         }
@@ -443,7 +403,7 @@ R    G   B       R-G     R-B     G-B
                     }
                     else
                     {
-                        break;// tai čia galima ir nutraukti
+                        break;
                     }
                 }
             }
