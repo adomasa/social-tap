@@ -107,32 +107,22 @@ R    G   B       R-G     R-B     G-B
         height = yDown - yUp; // insideBox aukštis
         width = xRight - xLeft; // insideBox plotis
 
-     //   int? levelofBearDown = null, levelofBearUp = null; // pixelis, kuriame prasideda alus ir kuriame baigiasi
-
         List<int> proc = new List<int>(); // išsaugom, kiek proc alaus yra
 
         List<int> levelofBearUp = new List<int>(); // pixelis, kuriame baigiasi alus
         List<int> levelofBearDown = new List<int>(); // pixelis, kuriame prasideda alus
 
-    //    int times = 0; // kiek kartų įvyko
-
         FindBeerLevelLager(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc); // surandam kur prasideda ir kur baigiasi alus, išsaugom procentus
 
-        int temp = height / 15;
-        foreach (int k in levelofBearDown)
-        {
-            Console.WriteLine(k);
-        }
+       
+       
 
-
-
-        //   Console.WriteLine("Times" + times + "d" + levelofBearDown + "u" + levelofBearUp);
         /*      if (!levelofBearDown.HasValue || !levelofBearUp.HasValue) // Naudosim, jei bus kitokios spalvos alus
               {
             //      FindBeerLevelDarker(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc, ref times);
               }
       */
-        /*  try
+          try
           {
               BeerExistsException(levelofBearUp, levelofBearDown); // patikrinam, ar nuotraukoj išvis yra alus
           }
@@ -140,16 +130,26 @@ R    G   B       R-G     R-B     G-B
           {
               Console.WriteLine("{0} First exception caught.", e);
               return 0;
-          }*/
+          }
 
-        /*      DrawLineUp((int)levelofBearUp, xLeft, width); // Nubrėžia liniją, iki kur įpilta alaus
+        int bestIndex; // tiksliausios reikšmės indeksas
+        int bestResult; // tiksliausiu reiksmiu vidurkis
 
-              DrawLineDown((int)levelofBearDown, xLeft, width); // Nubrėžia liniją, nuo kur prasideda alus
+        bestIndex = BestIndex(levelofBearDown, height / 15);
+        bestResult = BestResultSum(bestIndex, levelofBearDown, height / 15);
+        DrawLine(bestResult, xLeft, width); // Nubrėžia liniją, iki kur įpilta alaus
 
-              int bestProcIndex = BestProcIndex(times, proc); // grąžina tiksliausios reikšmės indeksą
+        bestIndex = BestIndex(levelofBearUp, height / 15);
+        bestResult = BestResultSum(bestIndex, levelofBearUp, height / 15);
+        DrawLine(bestResult, xLeft, width); // Nubrėžia liniją, iki kur įpilta alaus
+
+
+
+
+    /*    int bestIndex = BestProcIndex(times, proc); // grąžina tiksliausios reikšmės indeksą
 
               int numberOfBestProc = 0; // išsaugo, kiek buvo tiksliausių reikšmių
-              int finalResult = FinalResult(times, bestProcIndex, proc, ref numberOfBestProc); // grąžina tiksliausių reikšmių vidurkį
+              int bestResultSum = BestResultSum(times, bestProcIndex, proc, ref numberOfBestProc); // grąžina tiksliausių reikšmių sumą
               finalResult = finalResult / numberOfBestProc; // apskaičiuoja galutinį alaus procentą
               return finalResult; */
         return 10;
@@ -228,41 +228,44 @@ R    G   B       R-G     R-B     G-B
         return yDown;
     }
 
-    public int BestProcIndex(int times, List<int> proc)
+    public int BestIndex(List<int> list, int difference)
     {
-        int bestProcIndex = 0;
+        int bestIndex = 0;
         int best = 0, bestMax = 0;
-        for (int i = 0; i < times; i++)
+        for (int i = 0; i < list.Count; i++)
         {
-            for (int j = 0; j < times; j++)
+            for (int j = 0; j < list.Count; j++)
             {
-                if (i != j && (proc[i] - 5) < proc[j] && (proc[i] + 5) > proc[j])
+                if (i != j && (list[i] - difference) < list[j] && (list[i] + difference) > list[j])
                 {
                     best++;
                 }
             }
             if (best > bestMax)
             {
-                bestProcIndex = i;
+                bestIndex = i;
                 bestMax = best;
             }
             best = 0;
         }
-        return bestProcIndex;
+        return bestIndex;
     }
 
-    public int FinalResult(int times, int bestProcIndex, List<int> proc, ref int numberOfBestProc)
+    public int BestResultSum(int bestIndex, List<int> list, int difference)
     {
-        int finalResult = 0;
-        for (int i = 0; i < times; i++)
+        int bestResultSum = 0;
+        int numberOfBest = 0;
+        int bestResult;
+        for (int i = 0; i < list.Count; i++)
         {
-            if ((proc[bestProcIndex] - 5) < proc[i] && (proc[bestProcIndex] + 5) > proc[i])
+            if ((list[bestIndex] - difference) < list[i] && (list[bestIndex] + difference) > list[i])
             {
-                finalResult = finalResult + proc[i];
-                numberOfBestProc++;
+                bestResultSum = bestResultSum + list[i];
+                numberOfBest++;
             }
         }
-        return finalResult;
+        bestResult = bestResultSum / numberOfBest;
+        return bestResult;
     }
 
     public void BoxExistsException(int? pixelX, int? pixelY)
@@ -281,9 +284,9 @@ R    G   B       R-G     R-B     G-B
         }
     }
 
-    public void DrawLineUp(int? levelofBearUp, int xLeft, int width)
+    public void DrawLine(int levelofBear, int xLeft, int width)
     {
-        for (int i = ((int)levelofBearUp - 1); i < ((int)levelofBearUp + 2); i++)
+        for (int i = (levelofBear - 1); i < (levelofBear + 2); i++)
         {
             for (int j = xLeft; j < (width + xLeft); j++)
             {
