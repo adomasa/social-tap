@@ -146,12 +146,14 @@ namespace Socialtap.Code.View_.Fragments
                         .GetPercentageOfTargetPixels();
                     if (percentageOfTargetPixels == null)
                     {
+                        _beveragePhoto.SetImageBitmap(null);
                         _beverageVolumeLabel.Typeface = Typeface.DefaultBold;
                         _beverageVolumeLabel.Text = "Įkelta netinkama nuotrauka!";
                     }
-                    else if ((int)percentageOfTargetPixels == 0) { 
-                    _beverageVolumeLabel.Typeface = Typeface.DefaultBold;
-                    _beverageVolumeLabel.Text = "Pasirinktoje nuotrauka nerasta alaus!";
+                    else if ((int)percentageOfTargetPixels == 0) {
+                        _beveragePhoto.SetImageBitmap(null);
+                        _beverageVolumeLabel.Typeface = Typeface.DefaultBold;
+                        _beverageVolumeLabel.Text = "Pasirinktoje nuotrauka nerasta alaus!";
                     }
                     else
                     {

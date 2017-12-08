@@ -113,16 +113,12 @@ R    G   B       R-G     R-B     G-B
         List<int> levelofBearDown = new List<int>(); // pixelis, kuriame prasideda alus
 
         FindBeerLevelLager(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc); // surandam kur prasideda ir kur baigiasi alus, išsaugom procentus
+          if (proc.Count == 0)
+        {
+            FindBeerLevelDarker(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc); // surandam kur prasideda ir kur baigiasi alus, išsaugom procentus
+        }
 
-       
-       
-
-        /*      if (!levelofBearDown.HasValue || !levelofBearUp.HasValue) // Naudosim, jei bus kitokios spalvos alus
-              {
-            //      FindBeerLevelDarker(height, width, xLeft, yDown, yUp, ref levelofBearDown, ref levelofBearUp, ref proc, ref times);
-              }
-      */
-          try
+        try
           {
               BeerExistsException(levelofBearUp, levelofBearDown); // patikrinam, ar nuotraukoj išvis yra alus
           }
@@ -136,23 +132,17 @@ R    G   B       R-G     R-B     G-B
         int bestResult; // tiksliausiu reiksmiu vidurkis
 
         bestIndex = BestIndex(levelofBearDown, height / 15);
-        bestResult = BestResultSum(bestIndex, levelofBearDown, height / 15);
+        bestResult = BestResult(bestIndex, levelofBearDown, height / 15);
         DrawLine(bestResult, xLeft, width); // Nubrėžia liniją, iki kur įpilta alaus
 
         bestIndex = BestIndex(levelofBearUp, height / 15);
-        bestResult = BestResultSum(bestIndex, levelofBearUp, height / 15);
+        bestResult = BestResult(bestIndex, levelofBearUp, height / 15);
         DrawLine(bestResult, xLeft, width); // Nubrėžia liniją, iki kur įpilta alaus
 
+        bestIndex = BestIndex(proc, 5);
+        bestResult = BestResult(bestIndex, proc, 5);
 
-
-
-    /*    int bestIndex = BestProcIndex(times, proc); // grąžina tiksliausios reikšmės indeksą
-
-              int numberOfBestProc = 0; // išsaugo, kiek buvo tiksliausių reikšmių
-              int bestResultSum = BestResultSum(times, bestProcIndex, proc, ref numberOfBestProc); // grąžina tiksliausių reikšmių sumą
-              finalResult = finalResult / numberOfBestProc; // apskaičiuoja galutinį alaus procentą
-              return finalResult; */
-        return 10;
+        return bestResult;
     }
 
 
@@ -251,7 +241,7 @@ R    G   B       R-G     R-B     G-B
         return bestIndex;
     }
 
-    public int BestResultSum(int bestIndex, List<int> list, int difference)
+    public int BestResult(int bestIndex, List<int> list, int difference)
     {
         int bestResultSum = 0;
         int numberOfBest = 0;
@@ -322,15 +312,10 @@ R    G   B       R-G     R-B     G-B
         int tempJ;
 
 
-        bool correctPixel = true; // naudoti jei norėsim nutraukti 
-
-
         for (int i = (xLeft + distanceX*4); i < (width + xLeft - distanceX*3); i = (i + distanceX)) // plotis (tikrinam jo 20---80 dalį)
         {
             for (int j = yDown; j > yUp; j--) // aukštis
             {
-                //  Console.WriteLine("i: " + i + "j:" + j);
-     
                 if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax && !startBear) // ieškomas pirmas alaus pikselis nuo dugno
                 {
                     tempJ = j; // išsisaugom galimai pirmą alaus pikselį
@@ -345,21 +330,17 @@ R    G   B       R-G     R-B     G-B
                         k++;
                         j--;
                     }
-                    Console.WriteLine("i: " + count + "j:" + distanceYDown);
                     if ((count * 2) >= distanceYDown) // jei bent pusė pikselių buvo alaus, tuomet ten tikrai prasidėjo alus
                     {
-                        Console.WriteLine("veikiaaaaaa");
                         startBear = true; // reiškias baigėsi dugnas ir prasideda alus
                         levelofBearDown.Add(tempJ); //pažymime, kad čia yra alaus pradžia
                         levelofBearUp.Add(tempJ); //pažymime, kad pokolkas čia yra alaus pabaiga    
-               //         Console.WriteLine("labas" + levelofBearUp.Count());
                     }
                     j = tempJ;
                 }
 
                 if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax && startBear) // skaičiuojami kiti alaus pikseliai
                 {
-          //          Console.WriteLine("labas1"+levelofBearUp.Count());
                     levelofBearUp.RemoveAt(levelofBearUp.Count - 1);
                     levelofBearUp.Add(j);
                     bitmap.SetPixel(i, j, Android.Graphics.Color.Red); // for testing
@@ -379,23 +360,15 @@ R    G   B       R-G     R-B     G-B
                     }
                     if ((count * 2) >= distanceY) // jei bent pusė pikselių buvo alaus, tuomet ten alus
                     {
-                        correctPixel = true;
-               //         Console.WriteLine("??" + startBear);
-             //           Console.WriteLine("labas2" + levelofBearUp.Count());
                         levelofBearUp.RemoveAt(levelofBearUp.Count - 1);
                         levelofBearUp.Add(j);
                     }
                     else
                     {
-                        correctPixel = false; // tai čia galima ir nutraukti
+                        break;// tai čia galima ir nutraukti
                     }
                 }
-                /*   if (!correctPixel)
-                   {
-                       j = yUp; // baisu dėl šito
-                   }*/
             }
-            correctPixel = true;
             startBear = false;
 
             if (levelofBearDown.Count != 0 && levelofBearUp.Count != 0)
@@ -405,80 +378,82 @@ R    G   B       R-G     R-B     G-B
         }
     }
 
-    public void FindBeerLevelDarker(int height, int width, int xLeft, int yDown, int yUp, ref int? levelofBearDown, ref int? levelofBearUp, ref int[] proc, ref int times)
-    {
-        bool startBear = false;
-        // correctPixel niekada nenaudojamas
-        bool correctPixel = true;
-        int count = 0; // !
-        int distanceX = width / 10; // paklaidos dydis
-        int distanceY = height / 10;
-        int k;
-        int j1;
-        int up = 0;
-        int down = 0;
-        int counting = 0;
-        levelofBearDown = 0; levelofBearUp = 0; // nebeveiks exception, kad nėra alaus
-        for (int i = (xLeft + distanceX); i < (width + xLeft); i = (i + distanceX)) // plotis
+    public void FindBeerLevelDarker(int height, int width, int xLeft, int yDown, int yUp, ref List<int> levelofBearDown, ref List<int> levelofBearUp, ref List<int> proc)
+    { 
+        //    if (Color.FromArgb(bitmap.GetPixel(i, j)).R > darkerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).R<darkerBeerRmax && Color.FromArgb(bitmap.GetPixel(i, j)).G > darkerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G<darkerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B<darkerBeerBmax && !startBear)
+        bool startBear = false; // patikrinam ar prasidėjo alus
+        int count = 0; // naudojamas tikrinimui ar nuotraukoje blogas apšvietimas ar jau baigėsi alus
+        int distanceX = width / 20; // kas kokį pločio atstumą tikrinam alaus lygį
+        int distanceY = height / 10; // aukščio paklaidos dydis
+        int distanceYDown = height / 15; // aukščio paklaidos dydis pirmajam pikseliui
+        int k = 0; // naudojamas while cikle
+        int tempJ;
+
+
+        for (int i = (xLeft + distanceX * 4); i < (width + xLeft - distanceX * 3); i = (i + distanceX)) // plotis (tikrinam jo 20---80 dalį)
         {
             for (int j = yDown; j > yUp; j--) // aukštis
             {
-                //  Console.WriteLine("i: " + i + "j:" + j);
-                if (Color.FromArgb(bitmap.GetPixel(i, j)).R > darkerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).R < darkerBeerRmax && Color.FromArgb(bitmap.GetPixel(i, j)).G > darkerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < darkerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < darkerBeerBmax && !startBear)
+                if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax && !startBear) // ieškomas pirmas alaus pikselis nuo dugno
                 {
-                    startBear = true; // reiškias baigėsi dugnas ir prasideda alus
-                    down = j; //TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
-                    up = j;
-                }
-                if (Color.FromArgb(bitmap.GetPixel(i, j)).R > darkerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).R < darkerBeerRmax && Color.FromArgb(bitmap.GetPixel(i, j)).G > darkerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < darkerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < darkerBeerBmax)
-                {
-                    up = j;
-                }
-                else
-                {
+                    tempJ = j; // išsisaugom galimai pirmą alaus pikselį
                     count = 0;
                     k = 0;
-                    j1 = j;
-                    while (k < distanceY && !(Color.FromArgb(bitmap.GetPixel(i, j)).R == outsideBox.R && Color.FromArgb(bitmap.GetPixel(i, j)).G == outsideBox.G && Color.FromArgb(bitmap.GetPixel(i, j)).B == outsideBox.B)) // ar gerai?
+                    while (k < distanceYDown) // tikrinam ar ten tikrai prasidėjo alus ar buvo atsitiktinis pikselis
                     {
-                        if (Color.FromArgb(bitmap.GetPixel(i, j)).R > darkerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).R < darkerBeerRmax && Color.FromArgb(bitmap.GetPixel(i, j)).G > darkerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < darkerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < darkerBeerBmax)
+                        if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax)
                         {
                             count++;
                         }
-                        j1--;
                         k++;
+                        j--;
                     }
-                    if ((count * 2) >= distanceY)
+                    if ((count * 2) >= distanceYDown) // jei bent pusė pikselių buvo alaus, tuomet ten tikrai prasidėjo alus
                     {
-                        correctPixel = true;
-                        up = j;
+                        startBear = true; // reiškias baigėsi dugnas ir prasideda alus
+                        levelofBearDown.Add(tempJ); //pažymime, kad čia yra alaus pradžia
+                        levelofBearUp.Add(tempJ); //pažymime, kad pokolkas čia yra alaus pabaiga    
+                    }
+                    j = tempJ;
+                }
+
+                if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax && startBear) // skaičiuojami kiti alaus pikseliai
+                {
+                    levelofBearUp.RemoveAt(levelofBearUp.Count - 1);
+                    levelofBearUp.Add(j);
+                    bitmap.SetPixel(i, j, Android.Graphics.Color.Red); // for testing
+                }
+                else if (startBear) // jei randa ne alaus pikselį
+                {
+                    count = 0;
+                    k = 0;
+                    while (k < distanceY && !(Color.FromArgb(bitmap.GetPixel(i, j)).R == outsideBox.R && Color.FromArgb(bitmap.GetPixel(i, j)).G == outsideBox.G && Color.FromArgb(bitmap.GetPixel(i, j)).B == outsideBox.B)) // ar gerai?
+                    {
+                        if (Color.FromArgb(bitmap.GetPixel(i, j)).R > lagerBeerRmin && Color.FromArgb(bitmap.GetPixel(i, j)).G > lagerBeerGmin && Color.FromArgb(bitmap.GetPixel(i, j)).G < lagerBeerGmax && Color.FromArgb(bitmap.GetPixel(i, j)).B < lagerBeerBmax)
+                        {
+                            count++;
+                        }
+                        k++;
+                        j--;
+                    }
+                    if ((count * 2) >= distanceY) // jei bent pusė pikselių buvo alaus, tuomet ten alus
+                    {
+                        levelofBearUp.RemoveAt(levelofBearUp.Count - 1);
+                        levelofBearUp.Add(j);
                     }
                     else
                     {
-                        correctPixel = false; // tai čia galima ir nutraukti
+                        break;// tai čia galima ir nutraukti
                     }
                 }
-                /*   if (!correctPixel)
-                   {
-                       j = yUp; // baisu dėl šito
-                   }*/
             }
-            if (times > 1 && times < 9)
-            {
-                levelofBearUp = levelofBearUp + up;//TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
-                levelofBearDown = levelofBearDown + down; //TIKSLINTI TIK SU TINKAMAIS DUOMENIMIS
-                counting++;
-            }
-            correctPixel = true;
             startBear = false;
-            // Console.WriteLine("beer level: " + (levelofBearUp) + " dugnas " + levelofBearDown);
-            //  proc[times] = 100 * ((int)levelofBearDown - (int)levelofBearUp) / ((int)levelofBearDown - yUp); taip buvo
-            proc[times] = 100 * (down - up) / (down - yUp);
-            times++;
-        }
-        levelofBearUp = levelofBearUp / counting;
 
-        levelofBearDown = levelofBearDown / counting;
+            if (levelofBearDown.Count != 0 && levelofBearUp.Count != 0)
+            {
+                proc.Add(100 * (levelofBearDown.Last() - levelofBearUp.Last()) / (levelofBearDown.Last() - yUp));
+            }
+        }
     }
 
     public void Dispose()
