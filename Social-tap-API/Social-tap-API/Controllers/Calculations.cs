@@ -45,6 +45,7 @@ namespace SocialtapAPI
         public double BarRateAverage(string barName, int rate)
         {
 
+           /* old way
             if (_barRates.Keys.Contains(barName))
             {
                 _barRates[barName].Add(rate);
@@ -53,7 +54,25 @@ namespace SocialtapAPI
             {
                 _barRates[barName] = new List<int> { rate };
             }
-            return _barRates[barName].Average();
+            return _barRates[barName].Average(); */ 
+            using(var db=new DatabaseContext())
+            {
+                var x = (from review in db.ReviewSet
+                         where review.Bar.Name == barName
+                         group review by new
+                         {
+                             review.Bar.Name,
+                             review.Beverage
+                         }
+                        into temp
+                         select new
+                         {
+                             Average = temp.Average(avg => avg.Beverage),
+                             temp.Key.Beverage,
+                             temp.Key.Name,
+                         }).Single();
+                return x.Average;
+            }
         }
 
         /// Į metodą paduodama informacija kiek buvo įpilta 
@@ -73,7 +92,7 @@ namespace SocialtapAPI
             using (var db =new DatabaseContext())
             {
                return db.ReviewSet.
-                    Average(avg => avg.Beverage)<= beverageLevel;
+                    Average(avg => avg.Beverage) <= beverageLevel;
             } 
         }
 

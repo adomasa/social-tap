@@ -44,8 +44,9 @@ namespace Social_tap_API.Controllers
             Reviews.Comment = comment;
             Reviews.Rate = rate;
             Reviews.Beverage = beverage;
+            double x = calc.BarRateAverage("aaaa", 2);
             BarData = calc.AddBarInfo(barName, beverage, rate, comment);
-            Stats = calc.Stats();
+           // Stats = calc.Stats();
             
             Bars.Name = barName;
             using (var db = new DatabaseContext())

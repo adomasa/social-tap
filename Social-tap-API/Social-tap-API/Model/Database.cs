@@ -33,11 +33,11 @@ namespace Social_tap_API
             modelBuilder.Entity<Bar>()
             .ToTable("Bar");
 
-           /*  modelBuilder.Entity<Review>()
+             modelBuilder.Entity<Review>()
              .HasOne(p => p.Bar)
              .WithMany(b => b.Reviews)
              .HasForeignKey(p => p.Id) //  
-             .HasConstraintName("ForeignKey_Review_Bar"); */
+             .HasConstraintName("ForeignKey_Review_Bar"); 
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
