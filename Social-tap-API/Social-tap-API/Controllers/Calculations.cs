@@ -150,6 +150,20 @@ namespace SocialtapAPI
              
             return _barData;
         }
+
+        public Boolean AddBar(string barName)
+        {
+            using (var db = new DatabaseContext())
+            {
+                if (IsBarNew(barName))
+                {
+                    db.BarSet.Add(new Bar(barName));
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            return false;   
+        }
         /// Patikrina ar naujas baras
         /// Jeigu naujas
         /// Sukuria naują elementą Dictionary
@@ -184,7 +198,24 @@ namespace SocialtapAPI
                     _bestbar = barName;
                 }
             }
-            return _bestbar;
+            using (var db = new DatabaseContext())
+            {
+                var x = (from review in db.ReviewSet
+                         group review by new
+                         {
+                             review.Bar.Name,
+                             review.Rate
+                         }
+                         into temp
+                         select new
+                         {
+                             Average = temp.Average(avg => avg.Rate),
+                             Max =temp.Max(maximum => maximum.Rate),
+                             temp.Key.Rate,
+                             temp.Key.Name,
+                         }).Single();
+                return x.Name;
+            }
         }
 
         public Statistics Stats()
@@ -205,6 +236,21 @@ namespace SocialtapAPI
             };
 
             return stats;
+        }
+
+        public Boolean AddReview(string barName,int rate, int beverage)
+        {
+            using (var db=new DatabaseContext())
+            {
+                if (Validation(rate, beverage, barName))
+                {
+                    db.ReviewSet.Add(new Review(rate, barName, beverage));
+                    db.SaveChanges();
+                    return true;
+                }
+              
+            }
+            return false;
         }
     }
 }

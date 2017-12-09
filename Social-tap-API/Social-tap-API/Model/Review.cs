@@ -14,9 +14,11 @@ namespace Social_Tap_Api
         public Bar Bar  { get; set; }
         public int Beverage { get; set; }
 
-        public Review(int rate)
+        public Review(int rate, string barname, int bev)
         {
             Rate = rate;
+            Bar.Name = barname;
+            Beverage = bev;
         }
 
         public Review ()

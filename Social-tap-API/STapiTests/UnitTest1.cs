@@ -89,11 +89,16 @@ namespace STapiTests
         public void BarRateAverage_Test1()
         {
             var calc = new Calculations();
+            /*
             var test = calc.BarRateAverage("busi3", 5);
             test = calc.BarRateAverage("busi3", 4);
             test = calc.BarRateAverage("snekutis", 4);
-            test = calc.BarRateAverage("busi3", 3);
-            Assert.AreEqual(test, 4);
+            test = calc.BarRateAverage("busi3", 3);*/
+            calc.AddBarInfo("busi3", 5,6,"");
+            calc.AddBarInfo("busi3", 4,6, "");
+            calc.AddBarInfo("snekutis", 4,4, "");
+            calc.AddBarInfo("busi3", 3, 4, "");
+            Assert.AreEqual(calc.BarRateAverage("busi3",4), 4);
         }
         [TestMethod]
         public void BarRateAverage_Test2()
