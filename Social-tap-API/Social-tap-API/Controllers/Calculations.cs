@@ -64,11 +64,17 @@ namespace SocialtapAPI
        // [HttpPost("bevlvl/{beverageLevel}")]    
         public Boolean Average(int beverageLevel)
         {
-            _uses++;
+            // old way
+           /* _uses++;
             _sum += beverageLevel;
             // sakysime, kad jeigu lygus vidurkiui, 
             // tai ipilta geriau
-            return _sum / _uses <= beverageLevel;
+            return _sum / _uses <= beverageLevel;*/
+            using (var db =new DatabaseContext())
+            {
+               return db.ReviewSet.
+                    Average(avg => avg.Beverage)<= beverageLevel;
+            } 
         }
 
         /// Į metodą paduodamas komentaras 
