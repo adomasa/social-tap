@@ -12,7 +12,8 @@ namespace Social_Tap_Api
         public int Rate { get; set; }
         public string Comment { get; set; }
         public Bar Bar  { get; set; }
-        
+        public int Beverage { get; set; }
+
         public Review(int rate)
         {
             Rate = rate;

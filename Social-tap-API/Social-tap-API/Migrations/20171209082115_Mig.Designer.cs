@@ -10,8 +10,8 @@ using System;
 namespace SocialtapAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20171207093556_Add")]
-    partial class Add
+    [Migration("20171209082115_Mig")]
+    partial class Mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,8 @@ namespace SocialtapAPI.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("BarId");
+
+                    b.Property<int>("Beverage");
 
                     b.Property<string>("Comment");
 

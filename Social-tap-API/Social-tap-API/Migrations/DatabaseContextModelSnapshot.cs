@@ -41,6 +41,8 @@ namespace SocialtapAPI.Migrations
 
                     b.Property<int?>("BarId");
 
+                    b.Property<int>("Beverage");
+
                     b.Property<string>("Comment");
 
                     b.Property<int>("Rate");

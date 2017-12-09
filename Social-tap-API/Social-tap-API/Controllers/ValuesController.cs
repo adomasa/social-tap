@@ -40,8 +40,10 @@ namespace Social_tap_API.Controllers
                 return false;
             }
             barName = calc.BarNameAdaptation(barName);
+
             Reviews.Comment = comment;
             Reviews.Rate = rate;
+            Reviews.Beverage = beverage;
             BarData = calc.AddBarInfo(barName, beverage, rate, comment);
             Stats = calc.Stats();
             

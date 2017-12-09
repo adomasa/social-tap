@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SocialtapAPI.Migrations
 {
-    public partial class Add : Migration
+    public partial class Mig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,7 @@ namespace SocialtapAPI.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     BarId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Beverage = table.Column<int>(type: "INTEGER", nullable: false),
                     Comment = table.Column<string>(type: "TEXT", nullable: true),
                     Rate = table.Column<int>(type: "INTEGER", nullable: false)
                 },
