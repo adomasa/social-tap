@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Social_Tap_Api;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,5 +12,8 @@ namespace SocialtapAPI
         string Name { get; set; }
 
         string Adress { get; set; }
+
+        int BarId { get; set; }
+        List<Review> Reviews { get; set; }
     }
 }

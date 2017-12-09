@@ -32,6 +32,7 @@ namespace Social_tap_API
             .ValueGeneratedOnAdd();
             modelBuilder.Entity<Bar>()
             .ToTable("Bar");
+
              modelBuilder.Entity<Review>()
              .HasOne(p => p.Bar)
              .WithMany(b => b.Reviews)

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Social_tap_API;
+using Social_Tap_Api;
 
 namespace SocialtapAPI
 {
@@ -22,6 +23,8 @@ namespace SocialtapAPI
         public const int MIN_BEVERAGE_RATE_LEVEL = 0; //kiek mažiausiai gali įpilti ir duoti žvaigždučių 
 
         public static Dictionary<string, IBarData> _barData = new Dictionary<string, IBarData>();
+        public IBar Bars = new Bar();
+        public IReview Reviews =new Review(); 
 
         public Calculations(){
 
@@ -103,15 +106,22 @@ namespace SocialtapAPI
         /// Baro pavadinimui
         /// Priskiria reikiamas reiksmes
         /// Grąžina Dictionary
-        public Dictionary<string, IBarData> AddBarInfo( string barName, int beverage, int rate, string comment)
+        public Dictionary<string, IBarData> AddBarInfo(string barName, int beverage, int rate, string comment) 
         {
-              IsBarNew(barName);
-             _barData[barName].BarUses++;
-             _barData[barName].BeverageSum += beverage;
-             _barData[barName].Comparison = Average(beverage);
-             _barData[barName].Tags.AddRange(HashtagsFinder(comment));
-             _barData[barName].RateAvg = BarRateAverage(barName, rate);
-             _barData[barName].BeverageAvg = _barData[barName].BeverageSum / _barData[barName].BarUses;
+            using (var db = new DatabaseContext())
+            {
+                if(IsBarNew(barName))
+                {
+                    db.BarSet.Add(new Bar(barName));                
+                }
+            }
+              
+            // _barData[barName].BarUses++;
+            //_barData[barName].BeverageSum += beverage;
+            //_barData[barName].Comparison = Average(beverage);
+            //_barData[barName].Tags.AddRange(HashtagsFinder(comment));
+            // _barData[barName].RateAvg = BarRateAverage(barName, rate);
+            // _barData[barName].BeverageAvg = _barData[barName].BeverageSum / _barData[barName].BarUses;
              
             return _barData;
         }
@@ -122,22 +132,20 @@ namespace SocialtapAPI
         {
             using (var db = new DatabaseContext())
             {
-                var count = db.BarSet
+                if (db.BarSet
                     .Where(bar => bar.Name.Contains(barName))
-                    .Count();
-                if(count==0)
+                    .Count() == 0)
                 {
-                    db.BarSet.Add(new Social_Tap_Api.Bar(barName));
+                    return true; 
                 }
             }
-
+            return false;
             // old way 
-            if (!_barData.Keys.Contains(barName))
-            {
-                _barData.Add(barName, new BarData());
-                return false;
-            }
-            return true;
+            /*  if (!_barData.Keys.Contains(barName))
+              {
+                  _barData.Add(barName, new BarData());
+                  return false;
+              } */
         }
 
         public string BestBarRate()
