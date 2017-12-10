@@ -46,12 +46,7 @@ namespace Social_tap_API.Controllers
             BarData = calc.AddBarInfo(barName, beverage, rate, comment);
             
            // Stats = calc.Stats();
-            using (var db = new DatabaseContext())
-            {
-                db.ReviewSet.Add(new Review(rate, barName, beverage));
-                db.BarSet.Add(Bars);
-                db.SaveChanges();
-            }
+            
                 return true;
 
         }
