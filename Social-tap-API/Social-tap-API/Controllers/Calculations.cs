@@ -137,7 +137,8 @@ namespace SocialtapAPI
             {
                 if(IsBarNew(barName))
                 {
-                    db.BarSet.Add(new Bar(barName));                
+                    db.BarSet.Add(new Bar(barName));
+                    db.SaveChanges();
                 }
             }
               
@@ -188,8 +189,9 @@ namespace SocialtapAPI
         }
 
         public string BestBarRate()
-        {                
-            foreach (string barName in _barData.Keys)
+        {    
+           //old way
+           /* foreach (string barName in _barData.Keys)
             {
                 
                 if (_barData[barName].RateAvg > _max)
@@ -197,7 +199,7 @@ namespace SocialtapAPI
                     _max = _barData[barName].RateAvg;
                     _bestbar = barName;
                 }
-            }
+            }*/
             using (var db = new DatabaseContext())
             {
                 var x = (from review in db.ReviewSet
@@ -209,10 +211,9 @@ namespace SocialtapAPI
                          into temp
                          select new
                          {
-                             Average = temp.Average(avg => avg.Rate),
-                             Max =temp.Max(maximum => maximum.Rate),
+                             Max =temp.Max(maximum => temp.Average(avg=>avg.Rate)),
                              temp.Key.Rate,
-                             temp.Key.Name,
+                             temp.Key.Name
                          }).Single();
                 return x.Name;
             }
@@ -247,8 +248,7 @@ namespace SocialtapAPI
                     db.ReviewSet.Add(new Review(rate, barName, beverage));
                     db.SaveChanges();
                     return true;
-                }
-              
+                }             
             }
             return false;
         }

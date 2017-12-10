@@ -1,9 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Social_tap_API;
 using Social_tap_API.Controllers;
 using SocialtapAPI;
+using Social_Tap_Api;
 using System;
+
 using System.Collections.Generic;
 using System.Diagnostics;
+using Microsoft.Data.Sqlite;
+using SocialtapAPI.Migrations;
+using Microsoft.EntityFrameworkCore;
 
 namespace STapiTests
 {
@@ -15,85 +21,125 @@ namespace STapiTests
         public Dictionary<string, List<string>> barInfo = new Dictionary<string, List<string>>();
         public Dictionary<string, List<string>> barInfoTests = new Dictionary<string, List<string>>();
 
-          [TestMethod]
-          public void Average_Test3()
-          {
-              Calculations calc = new Calculations();
-              bool test;
-              calc.Average(10);
-              calc.Average(2);
-              calc.Average(4);
-              calc.Average(4);
-              test = calc.Average(5);
-              Assert.IsTrue(test);
-          }
-          [TestMethod]
-          public void Average_Test1()
-          {
-              var calc = new Calculations();
-              bool test;
-              calc.Average(5);
-              test = calc.Average(6);
-              Assert.IsTrue(test);
-          }
-
-          [TestMethod]
-          public void Average_Test2()
-          {
-              var calc = new Calculations();
-              bool test;
-              calc.Average(6);
-              test = calc.Average(4);
-
-              Assert.IsFalse(test);
-          } 
-
         [TestMethod]
-        public void HashtagsFinder_Test1()
+        public void Average_Test3()
         {
-            var calc = new Calculations();
-            TagsTest = calc.HashtagsFinder("");
-            CollectionAssert.AreEqual(Tags, TagsTest);
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.ReviewSet.Add(new Review(5, "aa", 5));
+                    db.ReviewSet.Add(new Review(5, "aa", 5));
+                    db.SaveChanges();
+                    Assert.IsTrue(calc.Average(5));
+                }  
+            }
+            finally
+            {
+                connection.Close();
+            }
+           }
+        [TestMethod]
+        public void Average_Test1()
+        {
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.ReviewSet.Add(new Review(5, "aa", 5));
+                    db.ReviewSet.Add(new Review(5, "aa", 5));
+                    db.SaveChanges();
+                    Assert.IsTrue(calc.Average(10));
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
-        [TestMethod]
-        public void HashtagsFinder_Test2()
-        {
-            var calc = new Calculations();
-            TagsTest = calc.HashtagsFinder("Ęgeras Ębaras visai");
-            Tags.Add("geras");
-            Tags.Add("baras");
-            CollectionAssert.AreEqual(Tags, TagsTest);
-        }
+           [TestMethod]
+           public void Average_Test2()
+           {
+               var calc = new Calculations();
+               bool test;
+               calc.Average(6);
+               test = calc.Average(4);
 
-        [TestMethod]
-        public void HashtagsFinder_Test3()
-        {
-            var calc = new Calculations();
-            TagsTest = calc.HashtagsFinder("Ęgeras baras visai");
-            Tags.Add("geras");
-            Tags.Add("baras");
-            CollectionAssert.AreNotEqual(Tags, TagsTest);
-        }
+               Assert.IsFalse(test);
+           } 
 
-        [TestMethod]
-        public void HashtagsFinder_Test4()
-        {
-            var calc = new Calculations();
-            TagsTest = calc.HashtagsFinder("");
-            Tags.Add("geras");
-            Tags.Add("baras");
-            CollectionAssert.AreNotEqual(Tags, TagsTest);
-        }
+         [TestMethod]
+         public void HashtagsFinder_Test1()
+         {
+             var calc = new Calculations();
+             TagsTest = calc.HashtagsFinder("");
+             CollectionAssert.AreEqual(Tags, TagsTest);
+         }
+         [TestMethod]
+         public void HashtagsFinder_Test2()
+         {
+             var calc = new Calculations();
+             TagsTest = calc.HashtagsFinder("Ęgeras Ębaras visai");
+             Tags.Add("geras");
+             Tags.Add("baras");
+             CollectionAssert.AreEqual(Tags, TagsTest);
+         }
 
-        [TestMethod]
-        public void BarRateAverage_Test1()
-        {
-            var calc = new Calculations();
-            /*
-            var test = calc.BarRateAverage("busi3", 5);
-            test = calc.BarRateAverage("busi3", 4);
-            test = calc.BarRateAverage("snekutis", 4);
-            test = calc.BarRateAverage("busi3", 3);*/
+         [TestMethod]
+         public void HashtagsFinder_Test3()
+         {
+             var calc = new Calculations();
+             TagsTest = calc.HashtagsFinder("Ęgeras baras visai");
+             Tags.Add("geras");
+             Tags.Add("baras");
+             CollectionAssert.AreNotEqual(Tags, TagsTest);
+         }
+
+         [TestMethod]
+         public void HashtagsFinder_Test4()
+         {
+             var calc = new Calculations();
+             TagsTest = calc.HashtagsFinder("");
+             Tags.Add("geras");
+             Tags.Add("baras");
+             CollectionAssert.AreNotEqual(Tags, TagsTest);
+         }
+
+         [TestMethod]
+         public void BarRateAverage_Test1()
+         {
+             var calc = new Calculations();
+             /*
+             var test = calc.BarRateAverage("busi3", 5);
+             test = calc.BarRateAverage("busi3", 4);
+             test = calc.BarRateAverage("snekutis", 4);
+             test = calc.BarRateAverage("busi3", 3);*/
             calc.AddBarInfo("busi3", 5,6,"");
             calc.AddBarInfo("busi3", 4,6, "");
             calc.AddBarInfo("snekutis", 4,4, "");

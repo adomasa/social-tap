@@ -44,10 +44,11 @@ namespace Social_tap_API.Controllers
             calc.AddBar(barName);
            
             BarData = calc.AddBarInfo(barName, beverage, rate, comment);
-            Stats = calc.Stats();
+            
+           // Stats = calc.Stats();
             using (var db = new DatabaseContext())
             {
-                db.ReviewSet.Add(Reviews);
+                db.ReviewSet.Add(new Review(rate, barName, beverage));
                 db.BarSet.Add(Bars);
                 db.SaveChanges();
             }
