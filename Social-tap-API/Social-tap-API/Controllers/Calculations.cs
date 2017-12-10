@@ -46,20 +46,7 @@ namespace SocialtapAPI
         {
             using(var db=new DatabaseContext())
             {
-              /*  var x = (from review in db.ReviewSet
-                         where review.Bar.Name == barName
-                         group review by new
-                         {
-                             review.Bar.Name,
-                             review.Rate
-                         }
-                        into temp
-                         select new
-                         {
-                             Average = temp.Average(avg => avg.Rate),
-                             temp.Key.Rate,
-                             temp.Key.Name,
-                         });*/
+
                 var avg = db.ReviewSet
                     .Where(y => y.Bar.Name == barName)
                     .Select(y => y.Rate)
@@ -76,12 +63,6 @@ namespace SocialtapAPI
        // [HttpPost("bevlvl/{beverageLevel}")]    
         public Boolean Average(int beverageLevel)
         {
-            // old way
-           /* _uses++;
-            _sum += beverageLevel;
-            // sakysime, kad jeigu lygus vidurkiui, 
-            // tai ipilta geriau
-            return _sum / _uses <= beverageLevel;*/
             using (var db =new DatabaseContext())
             {
                return db.ReviewSet.
@@ -134,14 +115,7 @@ namespace SocialtapAPI
                     db.SaveChanges();
                 }
             }
-              
-            // _barData[barName].BarUses++;
-            //_barData[barName].BeverageSum += beverage;
-            //_barData[barName].Comparison = Average(beverage);
-            //_barData[barName].Tags.AddRange(HashtagsFinder(comment));
-            // _barData[barName].RateAvg = BarRateAverage(barName, rate);
-            // _barData[barName].BeverageAvg = _barData[barName].BeverageSum / _barData[barName].BarUses;
-             
+
             return _barData;
         }
 
@@ -173,26 +147,11 @@ namespace SocialtapAPI
                 }
             }
             return false;
-            // old way 
-            /*  if (!_barData.Keys.Contains(barName))
-              {
-                  _barData.Add(barName, new BarData());
-                  return false;
-              } */
         }
 
         public string BestBarRate()
         {    
-           //old way
-           /* foreach (string barName in _barData.Keys)
-            {
-                
-                if (_barData[barName].RateAvg > _max)
-                {
-                    _max = _barData[barName].RateAvg;
-                    _bestbar = barName;
-                }
-            }*/
+
             using (var db = new DatabaseContext())
             {
 
