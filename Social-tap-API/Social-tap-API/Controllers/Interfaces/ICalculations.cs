@@ -9,7 +9,7 @@ namespace SocialtapAPI
     interface ICalculations
     {
         string BarNameAdaptation(string barName);
-        double BarRateAverage(string barName, int rate);
+        double BarRateAverage(string barName);
         bool Average(int beverageLevel);
         List<string> HashtagsFinder(string comment);
         bool Validation(int rate, int beverage, string barName);

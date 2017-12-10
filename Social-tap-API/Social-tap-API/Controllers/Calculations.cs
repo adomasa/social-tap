@@ -42,36 +42,29 @@ namespace SocialtapAPI
         /// Web service laikome baro pavadinimą ir jo įvertinimų Listą 
         /// Atgal grąžiname tik baro įvertinimų vidurkį
         /// http://localhost:.../api/values/barrate/string_baropavadinimas/string_įvertinimas
-        public double BarRateAverage(string barName, int rate)
+        public double BarRateAverage(string barName)
         {
-
-           /* old way
-            if (_barRates.Keys.Contains(barName))
-            {
-                _barRates[barName].Add(rate);
-            }
-            else
-            {
-                _barRates[barName] = new List<int> { rate };
-            }
-            return _barRates[barName].Average(); */ 
             using(var db=new DatabaseContext())
             {
-                var x = (from review in db.ReviewSet
+              /*  var x = (from review in db.ReviewSet
                          where review.Bar.Name == barName
                          group review by new
                          {
                              review.Bar.Name,
-                             review.Beverage
+                             review.Rate
                          }
                         into temp
                          select new
                          {
-                             Average = temp.Average(avg => avg.Beverage),
-                             temp.Key.Beverage,
+                             Average = temp.Average(avg => avg.Rate),
+                             temp.Key.Rate,
                              temp.Key.Name,
-                         }).Single();
-                return x.Average;
+                         });*/
+                var avg = db.ReviewSet
+                    .Where(y => y.Bar.Name == barName)
+                    .Select(y => y.Rate)
+                    .Average();
+                return avg;
             }
         }
 
