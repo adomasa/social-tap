@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Social_tap_API;
 using Social_Tap_Api;
 
@@ -13,22 +10,21 @@ namespace SocialtapAPI
     {
         private static Dictionary<string, List<int>> _barRates = new Dictionary<string, List<int>>();
         private List<string> _hashTags = new List<string>();
-        static int _uses;
-        static int _sum;
+        static int _uses; // niekad nenaudojamas
+        static int _sum; // niekad nenaudojamas
         public double _max;
         public static string _bestbar;
-        public const int MAX_BEVERAGE_LEVEL = 10; //kiek daugiausiai gali ipilti
-        public const int MAX_RATE = 5; // kiek daugiausiai gali duoti žvaigždučių 
-        public const int MIN_NAME_LENGHT = 1; //trumpiausias įmanomas baro pavadinimas
-        public const int MIN_BEVERAGE_RATE_LEVEL = 0; //kiek mažiausiai gali įpilti ir duoti žvaigždučių 
+        public const int MaxBeverageLevel = 10; //kiek daugiausiai gali ipilti
+        public const int MaxRate = 5; // kiek daugiausiai gali duoti žvaigždučių 
+        public const int MinNameLenght = 1; //trumpiausias įmanomas baro pavadinimas
+        public const int MinBeverageRateLevel = 0; //kiek mažiausiai gali įpilti ir duoti žvaigždučių 
 
-        public static Dictionary<string, IBarData> _barData = new Dictionary<string, IBarData>();
+        public static Dictionary<string, IBarData> BarData = new Dictionary<string, IBarData>();
+        
+        // Todo: panaudoti nenaudojamus kintamuosius arba ištrinti
         public IBar Bars = new Bar();
         public IReview Reviews =new Review(); 
-
-        public Calculations(){
-
-        }
+        //---
 
         public string BarNameAdaptation(string barName)
         {
@@ -61,7 +57,7 @@ namespace SocialtapAPI
         /// Lyginimas vyksta ne su vieno baro statistika o su BENDRA 
         /// http://localhost:.../api/values/bevlvl/INT
        // [HttpPost("bevlvl/{beverageLevel}")]    
-        public Boolean Average(int beverageLevel)
+        public bool Average(int beverageLevel)
         {
             using (var db =new DatabaseContext())
             {
@@ -99,8 +95,8 @@ namespace SocialtapAPI
         /// Ar baro vardas yra bent 1 simblos 
         public bool Validation(int rate, int beverage, string barName)
         {
-            return !(rate > MAX_RATE || beverage > MAX_BEVERAGE_LEVEL || barName.Length < MIN_NAME_LENGHT 
-                  || rate < MIN_BEVERAGE_RATE_LEVEL || beverage < MIN_BEVERAGE_RATE_LEVEL);
+            return !(rate > MaxRate || beverage > MaxBeverageLevel || barName.Length < MinNameLenght 
+                  || rate < MinBeverageRateLevel || beverage < MinBeverageRateLevel);
         }
         /// Baro pavadinimui
         /// Priskiria reikiamas reiksmes
@@ -116,21 +112,19 @@ namespace SocialtapAPI
                 }
             }
 
-            return _barData;
+            return BarData;
         }
 
-        public Boolean AddBar(string barName)
+        // Todo: apdoroti AddBar grąžinamą bool reikšmę 
+        public bool AddBar(string barName)
         {
             using (var db = new DatabaseContext())
             {
-                if (IsBarNew(barName))
-                {
-                    db.BarSet.Add(new Bar(barName));
-                    db.SaveChanges();
-                    return true;
-                }
+                if (!IsBarNew(barName)) return false;
+                db.BarSet.Add(new Bar(barName));
+                db.SaveChanges();
+                return true;
             }
-            return false;   
         }
         /// Patikrina ar naujas baras
         /// Jeigu naujas
@@ -139,27 +133,19 @@ namespace SocialtapAPI
         {
             using (var db = new DatabaseContext())
             {
-                if (db.BarSet
-                    .Where(bar => bar.Name.Contains(barName))
-                    .Count() == 0)
-                {
-                    return true; 
-                }
+                return db.BarSet.Count(bar => bar.Name.Contains(barName)) == 0;
             }
-            return false;
         }
 
         public string BestBarRate()
         {    
-
             using (var db = new DatabaseContext())
             {
-
                 var best = (from bars in db.ReviewSet
                             group bars by new
                             {
                                 bars.Rate,
-                                bars.Bar.Name,                               
+                                bars.Bar.Name                             
                            }
                            into barsAvg
                            let average = barsAvg.Average(b => b.Rate)
@@ -176,7 +162,8 @@ namespace SocialtapAPI
 
         public Statistics Stats()
         {
-            string bestBar = BestBarRate();
+            // Todo: bestBar kintamasis nenaudojamas. Ištrinti/panaudoti
+            var bestBar = BestBarRate();
             /* string statsInfo = "Baro pavadinimas " + bestBar + " Jo žvaigždučių vidurkis" + _barData[bestBar].RateAvg +
                  "Įpylimo įvertinimo vidurkis " + _barData[bestBar].BeverageAvg + " Visų barų įpylimo vidurkis " + AllBarsAverage()
                  + "Programele pasinaudota " + _barData.Count + " baruose." + "Iš viso panaudojimų: " + _uses; */
@@ -196,18 +183,15 @@ namespace SocialtapAPI
             }
         }
 
-        public Boolean AddReview(string barName,int rate, int beverage)
+        public bool AddReview(string barName,int rate, int beverage)
         {
-            using (var db=new DatabaseContext())
+            using (var db = new DatabaseContext())
             {
-                if (Validation(rate, beverage, barName))
-                {
-                    db.ReviewSet.Add(new Review(rate, barName, beverage));
-                    db.SaveChanges();
-                    return true;
-                }             
+                if (!Validation(rate, beverage, barName)) return false;
+                db.ReviewSet.Add(new Review(rate, barName, beverage));
+                db.SaveChanges();
+                return true;
             }
-            return false;
         }
     }
 }

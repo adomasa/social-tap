@@ -1,5 +1,4 @@
-﻿using System.Transactions;
-using SocialtapAPI;
+﻿using SocialtapAPI;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 

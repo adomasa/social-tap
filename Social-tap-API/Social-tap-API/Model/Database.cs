@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using SocialtapAPI;
+﻿using Microsoft.EntityFrameworkCore;
 using Social_Tap_Api;
 
 namespace Social_tap_API

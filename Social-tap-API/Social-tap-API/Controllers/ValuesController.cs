@@ -31,9 +31,9 @@ namespace Social_tap_API.Controllers
         /// į _barData Dictionary sudedamos reikšmės
         [HttpPost("AddBarReview/{barName}/{comment}/{rate}/{beverage}")]
         //rate-žvaigždutės, beverage-įpilto alaus lygis
-        public Boolean AddBarReview(string barName, string comment, int rate, int beverage) 
+        public bool AddBarReview(string barName, string comment, int rate, int beverage) 
         {
-            Calculations calc = new Calculations();
+            var calc = new Calculations();
             Console.WriteLine($"POST: AddBarReview/{barName}/{comment}/{rate}/{beverage}");
             if (!calc.Validation(rate, beverage, barName))
             {
