@@ -86,13 +86,34 @@ namespace STapiTests
            [TestMethod]
            public void Average_Test2()
            {
-               var calc = new Calculations();
-               bool test;
-               calc.Average(6);
-               test = calc.Average(4);
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
 
-               Assert.IsFalse(test);
-           } 
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.ReviewSet.Add(new Review(5, "aa", 5));
+                    db.ReviewSet.Add(new Review(5, "aa", 5));
+                    db.SaveChanges();
+                    Assert.IsFalse(calc.Average(4));
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+        } 
 
          [TestMethod]
          public void HashtagsFinder_Test1()
@@ -134,48 +155,135 @@ namespace STapiTests
          [TestMethod]
          public void BarRateAverage_Test1()
          {
-             var calc = new Calculations();
-             /*
-             var test = calc.BarRateAverage("busi3", 5);
-             test = calc.BarRateAverage("busi3", 4);
-             test = calc.BarRateAverage("snekutis", 4);
-             test = calc.BarRateAverage("busi3", 3);*/
-            calc.AddBarInfo("busi3", 5,6,"");
-            calc.AddBarInfo("busi3", 4,6, "");
-            calc.AddBarInfo("snekutis", 4,4, "");
-            calc.AddBarInfo("busi3", 3, 4, "");
-            Assert.AreEqual(calc.BarRateAverage("busi3",4), 4);
+
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.ReviewSet.Add(new Review(5, "aaaaa", 5));
+                    db.ReviewSet.Add(new Review(5, "aaaaa", 5));
+                    db.ReviewSet.Add(new Review(5, "aaaaa", 5));
+                    db.SaveChanges();
+                    Assert.AreEqual(5, calc.BarRateAverage("aaaaa"));
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
         [TestMethod]
         public void BarRateAverage_Test2()
         {
-            var calc = new Calculations();
-            calc.BarRateAverage("busi3", 5);
-            calc.BarRateAverage("busi3", 4);
-            var test2 = calc.BarRateAverage("snekutis", 4);
-            calc.BarRateAverage("busi3", 3);
-            Assert.AreEqual(test2, 4);
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.ReviewSet.Add(new Review(5, "bb", 5));
+                    db.ReviewSet.Add(new Review(5, "bb", 5));
+                    db.ReviewSet.Add(new Review(2, "bb", 5));
+                    db.SaveChanges();
+                    Assert.AreEqual(4, calc.BarRateAverage("bb"));
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
         [TestMethod]
         public void BarRateAverage_Test3()
         {
-            var calc = new Calculations();
-            var test = calc.BarRateAverage("busi3", 5);
-            calc.BarRateAverage("busi3", 4);
-            calc.BarRateAverage("snekutis", 4);
-            test = calc.BarRateAverage("busi3", 4);
-            Assert.AreNotEqual(test, 4);
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.ReviewSet.Add(new Review(5, "ccc", 5));
+                    db.ReviewSet.Add(new Review(5, "ccc", 5));
+                    db.ReviewSet.Add(new Review(0, "ccc", 5));
+                    db.SaveChanges();
+                    Assert.AreNotEqual(0, calc.BarRateAverage("ccc"));
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         [TestMethod]
         public void BarRateAverage_Test4()
         {
-            var calc = new Calculations();
-            var test = calc.BarRateAverage("7fridays", 5);
-            calc.BarRateAverage("7fridays", 4);
-            calc.BarRateAverage("7fridays", 4);
-            test = calc.BarRateAverage("7fridays", 3);
-            Assert.AreEqual(test, 4);
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.ReviewSet.Add(new Review(5, "e", 5));
+                    db.ReviewSet.Add(new Review(5, "e", 5));
+                    db.ReviewSet.Add(new Review(2, "e", 5));
+                    db.ReviewSet.Add(new Review(5, "d", 5));
+                    db.ReviewSet.Add(new Review(5, "d", 5));
+                    db.ReviewSet.Add(new Review(2, "d", 5));
+                    db.SaveChanges();
+                    Assert.AreEqual(calc.BarRateAverage("d"), calc.BarRateAverage("e"));
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         [TestMethod] 
