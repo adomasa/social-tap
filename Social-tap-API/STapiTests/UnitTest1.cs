@@ -10,6 +10,7 @@ using System.Diagnostics;
 using Microsoft.Data.Sqlite;
 using SocialtapAPI.Migrations;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace STapiTests
 {
@@ -41,10 +42,11 @@ namespace STapiTests
                 }
                 using (var db = new DatabaseContext())
                 {
-                    db.ReviewSet.Add(new Review(5, "aa", 5));
-                    db.ReviewSet.Add(new Review(5, "aa", 5));
+                    db.ReviewSet.Add(new Review(5, "abscdefghijk", 5));
+                    db.ReviewSet.Add(new Review(5, "abscdefghijk", 5));
+                    
                     db.SaveChanges();
-                    Assert.IsTrue(calc.Average(5));
+                    Assert.IsTrue(calc.Average(300));
                 }  
             }
             finally
@@ -399,41 +401,113 @@ namespace STapiTests
         public void IsBarNew_Test2()
         {
             var calc = new Calculations();
-            bool test = calc.IsBarNew("aaa");
-            test = calc.IsBarNew("aaa");
+            bool test = calc.IsBarNew("123");
+            test = calc.IsBarNew("123");
             Assert.IsTrue(test);
         }
 
         [TestMethod]
         public void BestBarRate_Test1 ()
         {
-            var calc = new Calculations();
-            calc.AddBarInfo("busi3", 5, 4, "");
-            calc.AddBarInfo("busi3", 5, 4, "");
-            string test = calc.BestBarRate();
-            Assert.AreEqual("busi3", test);
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.ReviewSet.Add(new Review(5, "y", 5));
+                    db.ReviewSet.Add(new Review(5, "y", 5));
+                    db.ReviewSet.Add(new Review(2, "y", 5));
+                    db.ReviewSet.Add(new Review(0, "55", 5));                    
+                    Assert.AreNotEqual("55", calc.BestBarRate());
+                    db.SaveChanges();
+                }
+            }
+            finally
+            {             
+                connection.Close();
+            }
         }
 
         [TestMethod]
         public void BestBarRate_Test2()
         {
-            var calc = new Calculations();
-            calc.AddBarInfo("busi3", 4, 4, "");
-            calc.AddBarInfo("busi3", 4, 4, "");
-            calc.AddBarInfo("snekutis", 5, 5, "");
-            string test = calc.BestBarRate();
-            Assert.AreEqual("snekutis", test);
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.ReviewSet.Add(new Review(7, "xd", 5));
+                    db.ReviewSet.Add(new Review(8, "xdd", 5));
+                    db.ReviewSet.Add(new Review(10, "xd", 5));
+                    db.ReviewSet.Add(new Review(30, "xd", 5));
+                    db.SaveChanges();
+                    string test = calc.BestBarRate();
+                    Assert.AreEqual("xd", test);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+            
         }
         [TestMethod]
         public void BestBarRate_Test3()
         {
-            var calc = new Calculations();
-            calc.AddBarInfo("busi3", 5, 4, "");
-            calc.AddBarInfo("busi3", 5, 4, "");
-            calc.AddBarInfo("snekutis", 5, 5, "");
-            calc.AddBarInfo("snekutis", 5, 0, "");
-            string test = calc.BestBarRate();
-            Assert.AreEqual("busi3", test);
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.ReviewSet.Add(new Review(7, "xd", 5));
+                    db.ReviewSet.Add(new Review(8, "xdd", 5));
+                    db.ReviewSet.Add(new Review(10, "xd", 5));
+                    db.ReviewSet.Add(new Review(10, "xd", 5));
+                    db.SaveChanges();
+                    string test = calc.BestBarRate();
+                    Assert.AreNotEqual("xdd", test);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
     }

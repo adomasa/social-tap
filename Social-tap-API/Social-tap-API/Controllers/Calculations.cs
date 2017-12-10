@@ -195,20 +195,23 @@ namespace SocialtapAPI
             }*/
             using (var db = new DatabaseContext())
             {
-                var x = (from review in db.ReviewSet
-                         group review by new
-                         {
-                             review.Bar.Name,
-                             review.Rate
-                         }
-                         into temp
-                         select new
-                         {
-                             Max =temp.Max(maximum => temp.Average(avg=>avg.Rate)),
-                             temp.Key.Rate,
-                             temp.Key.Name
-                         }).Single();
-                return x.Name;
+
+                var best = (from bars in db.ReviewSet
+                            group bars by new
+                            {
+                                bars.Rate,
+                                bars.Bar.Name,                               
+                           }
+                           into barsAvg
+                           let average = barsAvg.Average(b => b.Rate)
+                           orderby average descending
+                           select new
+                           {
+                               bestname = barsAvg,
+                               barsAvg.Key.Name,
+                               average 
+                           }).First();
+                return best.Name;
             }
         }
 
