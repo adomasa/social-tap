@@ -11,6 +11,7 @@ using Microsoft.Data.Sqlite;
 using SocialtapAPI.Migrations;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Z.EntityFramework.Plus;
 
 namespace STapiTests
 {
@@ -44,9 +45,11 @@ namespace STapiTests
                 {
                     db.ReviewSet.Add(new Review(5, "abscdefghijk", 5));
                     db.ReviewSet.Add(new Review(5, "abscdefghijk", 5));
-                    
-                    db.SaveChanges();
                     Assert.IsTrue(calc.Average(300));
+                    db.ReviewSet.Where(name => name.Bar.Name == "abscdefghijk")
+                        .Delete();
+                    db.SaveChanges();
+                    
                 }  
             }
             finally
@@ -76,8 +79,11 @@ namespace STapiTests
                 {
                     db.ReviewSet.Add(new Review(5, "aa", 5));
                     db.ReviewSet.Add(new Review(5, "aa", 5));
-                    db.SaveChanges();
+                    
                     Assert.IsTrue(calc.Average(10));
+                    db.ReviewSet.Where(name => name.Bar.Name == "aa")
+                        .Delete();
+                    db.SaveChanges();
                 }
             }
             finally
@@ -107,8 +113,11 @@ namespace STapiTests
                 {
                     db.ReviewSet.Add(new Review(5, "aa", 5));
                     db.ReviewSet.Add(new Review(5, "aa", 5));
-                    db.SaveChanges();
+                    
                     Assert.IsFalse(calc.Average(4));
+                    db.ReviewSet.Where(name => name.Bar.Name == "aa")
+                        .Delete();
+                    db.SaveChanges();
                 }
             }
             finally
@@ -210,8 +219,11 @@ namespace STapiTests
                     db.ReviewSet.Add(new Review(5, "bb", 5));
                     db.ReviewSet.Add(new Review(5, "bb", 5));
                     db.ReviewSet.Add(new Review(2, "bb", 5));
-                    db.SaveChanges();
+                    
                     Assert.AreEqual(4, calc.BarRateAverage("bb"));
+                    db.ReviewSet.Where(name => name.Bar.Name == "bb")
+                        .Delete();
+                    db.SaveChanges();
                 }
             }
             finally
@@ -242,8 +254,11 @@ namespace STapiTests
                     db.ReviewSet.Add(new Review(5, "ccc", 5));
                     db.ReviewSet.Add(new Review(5, "ccc", 5));
                     db.ReviewSet.Add(new Review(0, "ccc", 5));
-                    db.SaveChanges();
+                    
                     Assert.AreNotEqual(0, calc.BarRateAverage("ccc"));
+                    db.ReviewSet.Where(name => name.Bar.Name == "ccc")
+                        .Delete();
+                    db.SaveChanges();
                 }
             }
             finally
@@ -278,8 +293,11 @@ namespace STapiTests
                     db.ReviewSet.Add(new Review(5, "d", 5));
                     db.ReviewSet.Add(new Review(5, "d", 5));
                     db.ReviewSet.Add(new Review(2, "d", 5));
-                    db.SaveChanges();
+                    
                     Assert.AreEqual(calc.BarRateAverage("d"), calc.BarRateAverage("e"));
+                    db.ReviewSet.Where(name => name.Bar.Name == "d" || name.Bar.Name=="e")
+                        .Delete();
+                    db.SaveChanges();
                 }
             }
             finally
@@ -429,8 +447,10 @@ namespace STapiTests
                     db.ReviewSet.Add(new Review(5, "y", 5));
                     db.ReviewSet.Add(new Review(5, "y", 5));
                     db.ReviewSet.Add(new Review(2, "y", 5));
-                    db.ReviewSet.Add(new Review(0, "55", 5));                    
+                    db.ReviewSet.Add(new Review(5, "55", 5));                    
                     Assert.AreNotEqual("55", calc.BestBarRate());
+                    db.ReviewSet.Where(name => name.Bar.Name == "55" || name.Bar.Name == "y")
+                        .Delete();
                     db.SaveChanges();
                 }
             }
@@ -464,9 +484,12 @@ namespace STapiTests
                     db.ReviewSet.Add(new Review(8, "xdd", 5));
                     db.ReviewSet.Add(new Review(10, "xd", 5));
                     db.ReviewSet.Add(new Review(30, "xd", 5));
-                    db.SaveChanges();
+                    
                     string test = calc.BestBarRate();
                     Assert.AreEqual("xd", test);
+                    db.ReviewSet.Where(name => name.Bar.Name == "xd" || name.Bar.Name == "xdd")
+                        .Delete();
+                    db.SaveChanges();
                 }
             }
             finally
@@ -499,9 +522,12 @@ namespace STapiTests
                     db.ReviewSet.Add(new Review(8, "xdd", 5));
                     db.ReviewSet.Add(new Review(10, "xd", 5));
                     db.ReviewSet.Add(new Review(10, "xd", 5));
-                    db.SaveChanges();
+                    
                     string test = calc.BestBarRate();
                     Assert.AreNotEqual("xdd", test);
+                    db.ReviewSet.Where(name => name.Bar.Name == "xd" || name.Bar.Name == "xdd")
+                        .Delete();
+                    db.SaveChanges();
                 }
             }
             finally
