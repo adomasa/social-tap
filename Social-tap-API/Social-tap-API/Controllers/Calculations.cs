@@ -177,21 +177,23 @@ namespace SocialtapAPI
         public Statistics Stats()
         {
             string bestBar = BestBarRate();
-           /* string statsInfo = "Baro pavadinimas " + bestBar + " Jo žvaigždučių vidurkis" + _barData[bestBar].RateAvg +
-                "Įpylimo įvertinimo vidurkis " + _barData[bestBar].BeverageAvg + " Visų barų įpylimo vidurkis " + AllBarsAverage()
-                + "Programele pasinaudota " + _barData.Count + " baruose." + "Iš viso panaudojimų: " + _uses; */
-          
-            var stats = new Statistics
+            /* string statsInfo = "Baro pavadinimas " + bestBar + " Jo žvaigždučių vidurkis" + _barData[bestBar].RateAvg +
+                 "Įpylimo įvertinimo vidurkis " + _barData[bestBar].BeverageAvg + " Visų barų įpylimo vidurkis " + AllBarsAverage()
+                 + "Programele pasinaudota " + _barData.Count + " baruose." + "Iš viso panaudojimų: " + _uses; */
+            using (var db = new DatabaseContext())
             {
-                TopBarName = bestBar,
-                TopBarRate = _barData[bestBar].RateAvg,
-                TopBarAvgBeverageVolume = _barData[bestBar].BeverageAvg,
-                TotalAvgBeverageVolume = (double)_sum / _uses,
-                BarCount = _barData.Count,
-                ReviewCount = _uses
-            };
+                var stats = new Statistics
+                {
+                    TopBarName = BestBarRate(),
+                    TopBarRate = db.ReviewSet.Where(name => name.Bar.Name == BestBarRate()).Average(avg => avg.Rate),
+                    TopBarAvgBeverageVolume = db.ReviewSet.Where(name => name.Bar.Name == BestBarRate()).Average(avg => avg.Beverage),
+                    TotalAvgBeverageVolume = db.ReviewSet.Average(avg => avg.Beverage),
+                    BarCount = db.BarSet.Count(),
+                    ReviewCount = db.ReviewSet.Count()
+                };
 
-            return stats;
+                return stats;
+            }
         }
 
         public Boolean AddReview(string barName,int rate, int beverage)
