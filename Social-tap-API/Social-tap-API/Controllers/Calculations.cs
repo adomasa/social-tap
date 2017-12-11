@@ -8,11 +8,7 @@ namespace SocialtapAPI
 {
     public class Calculations:ICalculations
     {
-        private static Dictionary<string, List<int>> _barRates = new Dictionary<string, List<int>>();
         private List<string> _hashTags = new List<string>();
-        static int _uses; // niekad nenaudojamas
-        static int _sum; // niekad nenaudojamas
-        public double _max;
         public static string _bestbar;
         public const int MaxBeverageLevel = 10; //kiek daugiausiai gali ipilti
         public const int MaxRate = 5; // kiek daugiausiai gali duoti žvaigždučių 
@@ -20,11 +16,7 @@ namespace SocialtapAPI
         public const int MinBeverageRateLevel = 0; //kiek mažiausiai gali įpilti ir duoti žvaigždučių 
 
         public static Dictionary<string, IBarData> BarData = new Dictionary<string, IBarData>();
-        
-        // Todo: panaudoti nenaudojamus kintamuosius arba ištrinti
-        public IBar Bars = new Bar();
-        public IReview Reviews =new Review(); 
-        //---
+       
 
         public string BarNameAdaptation(string barName)
         {
@@ -133,7 +125,8 @@ namespace SocialtapAPI
         {
             using (var db = new DatabaseContext())
             {
-                return db.BarSet.Count(bar => bar.Name.Contains(barName)) == 0;
+                return db.BarSet.
+                    Count(bar => bar.Name.Contains(barName)) == 0;
             }
         }
 
@@ -187,7 +180,6 @@ namespace SocialtapAPI
         {
             using (var db = new DatabaseContext())
             {
-                if (!Validation(rate, beverage, barName)) return false;
                 db.ReviewSet.Add(new Review(rate, barName, beverage));
                 db.SaveChanges();
                 return true;

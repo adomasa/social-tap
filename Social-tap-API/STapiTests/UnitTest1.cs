@@ -29,7 +29,6 @@ namespace STapiTests
             var connection = new SqliteConnection("DataSource=:memory:");
             connection.Open();
             Calculations calc = new Calculations();
-
             try
             {
                 var options = new DbContextOptionsBuilder<DatabaseContext>()
