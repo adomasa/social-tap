@@ -155,7 +155,6 @@ namespace SocialtapAPI
 
         public Statistics Stats()
         {
-            // Todo: bestBar kintamasis nenaudojamas. Ištrinti/panaudoti
             var bestBar = BestBarRate();
             /* string statsInfo = "Baro pavadinimas " + bestBar + " Jo žvaigždučių vidurkis" + _barData[bestBar].RateAvg +
                  "Įpylimo įvertinimo vidurkis " + _barData[bestBar].BeverageAvg + " Visų barų įpylimo vidurkis " + AllBarsAverage()
@@ -164,9 +163,9 @@ namespace SocialtapAPI
             {
                 var stats = new Statistics
                 {
-                    TopBarName = BestBarRate(),
-                    TopBarRate = db.ReviewSet.Where(name => name.Bar.Name == BestBarRate()).Average(avg => avg.Rate),
-                    TopBarAvgBeverageVolume = db.ReviewSet.Where(name => name.Bar.Name == BestBarRate()).Average(avg => avg.Beverage),
+                    TopBarName = bestBar,
+                    TopBarRate = db.ReviewSet.Where(name => name.Bar.Name == bestBar).Average(avg => avg.Rate),
+                    TopBarAvgBeverageVolume = db.ReviewSet.Where(name => name.Bar.Name == bestBar).Average(avg => avg.Beverage),
                     TotalAvgBeverageVolume = db.ReviewSet.Average(avg => avg.Beverage),
                     BarCount = db.BarSet.Count(),
                     ReviewCount = db.ReviewSet.Count()

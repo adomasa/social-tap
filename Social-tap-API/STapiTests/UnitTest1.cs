@@ -409,18 +409,68 @@ namespace STapiTests
         [TestMethod]
         public void IsBarNew_Test1()
         {
-            var calc = new Calculations();
-            bool test = calc.IsBarNew("aaa");
-            Assert.IsFalse(test);
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.BarSet.Add(new Bar("55"));
+                    db.BarSet.Add(new Bar("y"));
+                    Assert.IsFalse(calc.IsBarNew("y"));
+                    db.ReviewSet.Where(name => name.Bar.Name == "55" || name.Bar.Name == "y")
+                        .Delete();
+                    db.SaveChanges();
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         [TestMethod]
         public void IsBarNew_Test2()
         {
-            var calc = new Calculations();
-            bool test = calc.IsBarNew("123");
-            test = calc.IsBarNew("123");
-            Assert.IsTrue(test);
+
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.BarSet.Add(new Bar("55"));
+                    db.BarSet.Add(new Bar("y"));
+                    Assert.IsTrue(calc.IsBarNew("yy"));
+                    db.ReviewSet.Where(name => name.Bar.Name == "55" || name.Bar.Name == "y")
+                        .Delete();
+                    db.SaveChanges();
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         [TestMethod]
