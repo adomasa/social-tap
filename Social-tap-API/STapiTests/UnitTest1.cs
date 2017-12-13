@@ -695,6 +695,83 @@ namespace STapiTests
                 connection.Close();
             }
         }
+        [TestMethod]
+        public void BarAverage_Test4()
+        {
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.ReviewSet.Add(new Review(7, "xd", 5));
+                    db.ReviewSet.Add(new Review(8, "xdd", 5));
+                    db.ReviewSet.Add(new Review(10, "xd", 5));
+                    db.ReviewSet.Add(new Review(10, "xd", 5));
+
+                    double test = calc.BarAverage("xd", 2);
+                    Assert.AreNotEqual(test, 9.5);
+                    db.ReviewSet.Where(name => name.Bar.Name == "xd" || name.Bar.Name == "xdd")
+                        .Delete();
+                    db.SaveChanges();
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        [TestMethod]
+        public void BarAverage_Test5()
+        {
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.ReviewSet.Add(new Review(7, "xd", 5));
+                    db.ReviewSet.Add(new Review(8, "xdd", 5));
+                    db.ReviewSet.Add(new Review(10, "xd", 5));
+                    db.ReviewSet.Add(new Review(10, "xd", 5));
+
+                    
+                    Assert.AreNotEqual(calc.BarAverage("xd",1), calc.BarAverage("xdd",2));
+                    db.ReviewSet.Where(name => name.Bar.Name == "xd" || name.Bar.Name == "xdd")
+                        .Delete();
+                    db.SaveChanges();
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
 
     }
+
+
 }
