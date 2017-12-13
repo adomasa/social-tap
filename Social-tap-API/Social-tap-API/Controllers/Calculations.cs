@@ -16,7 +16,7 @@ namespace SocialtapAPI
         public const int MinBeverageRateLevel = 0; //kiek mažiausiai gali įpilti ir duoti žvaigždučių 
         public const int ForAverage = 1; // jei skaičiuoti baro įpilto alaus vidurkį
         public const int ForRate = 2; // jei skaičiuoti baro žvaigždučių vidurkį
-
+        public const int error = -1; // jei kažkas negerai
         public static Dictionary<string, IBarData> BarData = new Dictionary<string, IBarData>();
        
 
@@ -194,8 +194,9 @@ namespace SocialtapAPI
                 if(index==1)
                    return db.ReviewSet.Where(name => name.Bar.Name == barName).Average(avg => avg.Beverage);
                 
-                else 
-                    return db.ReviewSet.Where(name => name.Bar.Name == barName).Average(avg => avg.Rate); 
+                else if(index ==2)
+                    return db.ReviewSet.Where(name => name.Bar.Name == barName).Average(avg => avg.Rate);
+                return error;
             }
         }
     }
