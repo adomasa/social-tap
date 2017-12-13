@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Social_tap_API;
+using Social_Tap_Api;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Social_tap_API;
-using Social_Tap_Api;
 
 namespace SocialtapAPI
 {
@@ -14,6 +14,8 @@ namespace SocialtapAPI
         public const int MaxRate = 5; // kiek daugiausiai gali duoti žvaigždučių 
         public const int MinNameLenght = 1; //trumpiausias įmanomas baro pavadinimas
         public const int MinBeverageRateLevel = 0; //kiek mažiausiai gali įpilti ir duoti žvaigždučių 
+        public const int ForAverage = 1; // jei skaičiuoti baro įpilto alaus vidurkį
+        public const int ForRate = 2; // jei skaičiuoti baro žvaigždučių vidurkį
 
         public static Dictionary<string, IBarData> BarData = new Dictionary<string, IBarData>();
        
@@ -164,8 +166,8 @@ namespace SocialtapAPI
                 var stats = new Statistics
                 {
                     TopBarName = bestBar,
-                    TopBarRate = db.ReviewSet.Where(name => name.Bar.Name == bestBar).Average(avg => avg.Rate),
-                    TopBarAvgBeverageVolume = db.ReviewSet.Where(name => name.Bar.Name == bestBar).Average(avg => avg.Beverage),
+                    TopBarRate = BarAverage(bestBar, 1),
+                    TopBarAvgBeverageVolume = BarAverage(bestBar, 2),
                     TotalAvgBeverageVolume = db.ReviewSet.Average(avg => avg.Beverage),
                     BarCount = db.BarSet.Count(),
                     ReviewCount = db.ReviewSet.Count()
@@ -182,6 +184,18 @@ namespace SocialtapAPI
                 db.ReviewSet.Add(new Review(rate, barName, beverage));
                 db.SaveChanges();
                 return true;
+            }
+        }
+
+        public double BarAverage (string barName, int index)
+        {
+            using (var db = new DatabaseContext ())
+            {
+                if(index==1)
+                   return db.ReviewSet.Where(name => name.Bar.Name == barName).Average(avg => avg.Beverage);
+                
+                else 
+                    return db.ReviewSet.Where(name => name.Bar.Name == barName).Average(avg => avg.Rate); 
             }
         }
     }
