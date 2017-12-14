@@ -111,7 +111,6 @@
     <Compile Include="Code\Model\BarData.cs" />
     <Compile Include="Code\PixelCounter.cs" />
     <Compile Include="Code\MainActivity.cs" />
-    <Compile Include="Code\ImageCropActivity.cs" />
     <Compile Include="Code\Model\Statistics.cs" />
     <Compile Include="Code\Model\Interfaces\IBarData.cs" />
     <Compile Include="Code\Model\Interfaces\IBarReview.cs" />
@@ -126,6 +125,7 @@
     <Compile Include="Code\Controller\Interfaces\IMainController.cs" />
     <Compile Include="Code\Controller\PropertiesHandler.cs" />
     <Compile Include="Code\Controller\Interfaces\IPropertiesHandler.cs" />
+    <Compile Include="Code\SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -159,8 +159,8 @@
     <AndroidResource Include="Resources\layout\fragment_loading.xml" />
     <AndroidResource Include="Resources\drawable\ic_home.xml" />
     <AndroidResource Include="Resources\layout\fragment_home.axml" />
-    <AndroidResource Include="Resources\drawable\circle.xml" />
-    <AndroidResource Include="Resources\drawable\bg.xml" />
+    <AndroidResource Include="Resources\drawable\ic_logo.xml" />
+    <AndroidResource Include="Resources\drawable\splash_screen.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Code\Model\Interfaces\" />

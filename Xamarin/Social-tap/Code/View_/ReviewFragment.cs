@@ -1,5 +1,3 @@
-﻿using System;
-using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -9,14 +7,16 @@ using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
-using Java.Lang;
 using Socialtap.Code.Controller;
+using Socialtap.Code.Controller.Interfaces;
 using Socialtap.Code.Model;
 
 namespace Socialtap.Code.View_.Fragments
 {
     public class ReviewFragment : Fragment
     {
+        static readonly new string Tag = typeof(ReviewFragment).Name;
+
         private View _rootView;
         private EditText _barNameField;
         private Button _addPhotoButton;
@@ -28,6 +28,7 @@ namespace Socialtap.Code.View_.Fragments
         private Button _submitButton;
 
         const int RequestExternalImage = 0;
+        private IMainController _controller;
   
 
         public static ReviewFragment NewInstance() {
@@ -37,12 +38,13 @@ namespace Socialtap.Code.View_.Fragments
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            _controller = MainController.GetInstance(Context);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             _rootView = inflater.Inflate(Resource.Layout.fragment_review, container, false);
-            MainController controller = MainController.GetInstance(Activity);
+
             GetReferencesFromLayout();
 
             // Hide keyboard on view created 
@@ -51,43 +53,13 @@ namespace Socialtap.Code.View_.Fragments
             // Hide keyboard on background tap               
             _rootView.Touch += HideKeyboard;
 
-
             _beverageVolumeBar.ProgressChanged += (sender, e) =>
             {
                 _beverageVolumeLabel.Text = $"{_beverageVolumeBar.Progress * 10}%";
             };
 
-            // Click events
-
-            _submitButton.Click += (sender, e) =>
-            {
-                if (IsInputValid(_beverageVolumeBar.Progress, 
-                                 _ratingBar.Progress, 
-                                 _barNameField.Text)) 
-                {
-                    controller.AddBarReview(new BarReview(
-
-                        _beverageVolumeBar.Progress,
-                        _ratingBar.Progress, 
-                        _barNameField.Text,
-                        _commentField.Text));
-                }
-                else 
-                {
-                    Snackbar
-                        .Make (_rootView, GetString(Resource.String.invalid_review_format), Snackbar.LengthShort)
-                    .Show (); 
-                }
-
-            };
-
-            _addPhotoButton.Click += (sender, e) =>
-            {
-                var imageIntent = new Intent ();
-                imageIntent.SetAction (Intent.ActionPick);
-                imageIntent.SetData(MediaStore.Images.Media.ExternalContentUri);
-                StartActivityForResult(imageIntent, RequestExternalImage);
-            };
+            _submitButton.Click += SaveReview;
+            _addPhotoButton.Click += StartImageSelection;
 
             return _rootView;
         }
@@ -103,6 +75,38 @@ namespace Socialtap.Code.View_.Fragments
             return (progress1 > 0 && progress2 > 0 && text.Length > 0);
         }
 
+        private void SaveReview(object sender, System.EventArgs e)
+        {
+            if (IsInputValid(_beverageVolumeBar.Progress,
+                 _ratingBar.Progress,
+                 _barNameField.Text))
+            {
+                _controller.AddBarReview(new BarReview(
+
+                    _beverageVolumeBar.Progress,
+                    _ratingBar.Progress,
+                    _barNameField.Text,
+                    _commentField.Text));
+            }
+            else
+            {
+                Snackbar
+                    .Make(_rootView,
+                           GetString(Resource.String.invalid_review_format),
+                           Snackbar.LengthShort)
+                .Show();
+            }
+        }
+
+        private void StartImageSelection(object sender, System.EventArgs e)
+        {
+            {
+                var imageIntent = new Intent();
+                imageIntent.SetAction(Intent.ActionPick);
+                imageIntent.SetData(MediaStore.Images.Media.ExternalContentUri);
+                StartActivityForResult(imageIntent, RequestExternalImage);
+            };
+        }
         /// Add references from UI layout
         private void GetReferencesFromLayout()
         {
@@ -139,11 +143,12 @@ namespace Socialtap.Code.View_.Fragments
             base.OnActivityResult(requestCode, resultCode, data);
             if (resultCode == Result.Ok && requestCode == RequestExternalImage)
             {
-                using (PixelCounter pixelCounter = new PixelCounter(MediaStore.Images.Media.GetBitmap(Activity.ContentResolver, data.Data)))
+                using (var pixelCounter = new PixelCounter(MediaStore.Images.Media.GetBitmap(Activity.ContentResolver, data.Data)))
                 {
                     // img processing
                     var percentageOfTargetPixels = pixelCounter
                         .GetPercentageOfTargetPixels();
+
                     if (percentageOfTargetPixels == null)
                     {
                         _beveragePhoto.SetImageBitmap(null);
@@ -173,14 +178,6 @@ namespace Socialtap.Code.View_.Fragments
                         }).Show();
                 }
             }
-        }
-
-        public void OpenCropWindow(Android.Net.Uri sourceUri) 
-        {
-            //UCrop.Of(sourceUri, MediaStore.Images.Media.ExternalContentUri)
-            //.WithAspectRatio(16, 9)
-            //.WithMaxResultSize(MaxWidth, MaxHeight)
-            //.Start(Activity);
         }
     }
 }

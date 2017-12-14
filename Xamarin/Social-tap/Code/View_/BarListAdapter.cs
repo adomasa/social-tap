@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Linq;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
@@ -10,6 +8,7 @@ namespace Socialtap.Code.View_.Fragments
 {
     public class BarListAdapter : RecyclerView.Adapter
     {
+        static readonly string Tag = typeof(BarListAdapter).Name;
         /// <summary>
         /// Gets the reference of each item from the list
         /// </summary>

@@ -9,6 +9,8 @@ namespace Socialtap.Code.View_.Fragments
 {
     public class HomeFragment : Fragment
     {
+        static readonly new string Tag = typeof(HomeFragment).Name;
+
         private View _rootView;
         private TextView topBarName;
         private TextView topBarRate;

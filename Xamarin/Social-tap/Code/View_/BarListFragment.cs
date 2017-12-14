@@ -7,6 +7,7 @@ namespace Socialtap.Code.View_.Fragments
 {
     public class BarListFragment : Fragment
     {
+        static readonly new string Tag = typeof(BarListFragment).Name;
         private RecyclerView _recyclerView;
         private RecyclerView.LayoutManager _layoutManager;
         private BarListAdapter _adapter;

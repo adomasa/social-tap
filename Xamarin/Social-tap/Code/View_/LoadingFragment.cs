@@ -4,12 +4,13 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Socialtap.Code.Controller;
+using Socialtap.Code.Controller.Interfaces;
 
 namespace Socialtap.Code.View_.Fragments
 {
     public class LoadingFragment : Fragment
     {
-
+        static readonly new string Tag = typeof(LoadingFragment).Name;
         private const string _targetFragment = "TARGET_FRAGMENT";
         private View _rootView;
         private Fragment _fragment;
@@ -30,7 +31,7 @@ namespace Socialtap.Code.View_.Fragments
         {
             base.OnCreate(savedInstanceState);
             int fragmentId = Arguments.GetInt(_targetFragment);
-            MainController controller = MainController.GetInstance(Activity);
+            IMainController controller = MainController.GetInstance(Activity);
 
             bool request_success;
             switch (fragmentId) {
@@ -45,7 +46,6 @@ namespace Socialtap.Code.View_.Fragments
                         DisplayError();
                         return;
                     }
-                    //Log.Debug(Tag, $"Count: {MainController.BarsData.Count}");
                     if (MainController.barsData.Count == 0) 
                     {
                         _errorLabel.Text = GetString(Resource.String.bar_list_empty);

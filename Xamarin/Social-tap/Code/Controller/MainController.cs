@@ -11,17 +11,17 @@ namespace Socialtap.Code.Controller
 {
     public class MainController : IMainController
     {
-        private const string Tag = "MainController";
+        static readonly string Tag = typeof(MainController).Name;
 
         public static Dictionary<string, BarData> barsData;
         public static IStatistics stats;
 
-        private IRequestManager _requestManager;
-        private IPropertiesHandler _propertiesHandler;
-        private Context _context;
-        private MainActivity _activity;
+        private readonly IRequestManager _requestManager;
+        private readonly IPropertiesHandler _propertiesHandler;
+        private readonly Context _context;
+        private readonly MainActivity _activity;
 
-        private static MainController instance;
+        private static IMainController instance;
 
 
         private MainController(Context context)
@@ -37,7 +37,7 @@ namespace Socialtap.Code.Controller
             return _propertiesHandler.GetConfigValue(key);
         }
 
-        public static MainController GetInstance(Context context)
+        public static IMainController GetInstance(Context context)
         {
             return instance = instance ?? new MainController(context);
         }

@@ -36,4 +36,10 @@
 	<string name="post_bar_review_path">/api/values/AddBarReview/{0}/{1}/{2}/{3}</string>  
 	<string name="get_bar_data_path">/api/values/GetBarData/</string>  
     <string name="get_stats_path">/api/values/Stats/</string>  
+
+    <string name="config_file_key">config.properties</string>
+    <string name="saved_api_url">api_url</string>
+    <string name="saved_post_request_timeout">post_request_timeout</string>
+    <string name="saved_get_request_timeout">get_request_timeout</string>
+    
 </resources>

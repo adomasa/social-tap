@@ -3,22 +3,22 @@ using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Util;
-using Socialtap.Code.Model;
 using Android.Widget;
 using Socialtap.Code.View_.Fragments;
 using Fragment = Android.App.Fragment;
 using Socialtap.Code.Controller;
-using Android.Content;
+using Socialtap.Code.Controller.Interfaces;
 
 namespace Socialtap.Code
 {
-    [Activity(Label = "Social-tap", MainLauncher = true, Icon = "@mipmap/icon")]
+    [Activity(Label = "Social-tap", Icon = "@mipmap/icon")]
     public class MainActivity : AppCompatActivity
     {
-        private const string Tag = "MainActivity";
+        static readonly new string Tag = typeof(MainActivity).Name;
         private BottomNavigationView _bottomNavigation;
         private ScrollView _contentView;
-        public MainController controller;
+
+        private IMainController controller;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

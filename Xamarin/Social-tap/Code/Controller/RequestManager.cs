@@ -11,34 +11,40 @@ namespace Socialtap.Code.Controller
 {
     public class RequestManager : IRequestManager
     {
-        public static string Tag = "RequestManager";
+        static readonly string Tag = typeof(RequestManager).Name;
 
-        private Context context;
-        private string apiUrl;
-        private int getRequestTimeout;
-        private int postRequestTimeout;
-        private static RequestManager instance;
+        private static IRequestManager _instance;
+        private Context _context;
+
+        private readonly string ApiUrl;
+        private readonly int GetRequestTimeout;
+        private readonly int PostRequestTimeout;
+
 
         public static CancellationTokenSource cancellationTokenSource;
 
         private RequestManager(Context context, IPropertiesHandler propertiesHandler) 
         {
-            this.context = context;
-            apiUrl = propertiesHandler.GetConfigValue("api_url");
-            int.TryParse(propertiesHandler.GetConfigValue("post_request_timeout"), out getRequestTimeout);
-            int.TryParse(propertiesHandler.GetConfigValue("get_request_timeout"), out postRequestTimeout);
+            this._context = context;
+            string savedApiUrlKey = context.GetString(Resource.String.saved_api_url);
+            ApiUrl = propertiesHandler.GetConfigValue(savedApiUrlKey);
 
+            string savedPostRequestTimeoutKey = context.GetString(Resource.String.saved_post_request_timeout);
+            GetRequestTimeout = int.Parse(propertiesHandler.GetConfigValue(savedPostRequestTimeoutKey));
+
+            string savedGetRequestTimeoutKey = context.GetString(Resource.String.saved_get_request_timeout);
+            PostRequestTimeout = int.Parse(propertiesHandler.GetConfigValue(savedGetRequestTimeoutKey));
         }
 
-        public static RequestManager GetInstance (Context context, IPropertiesHandler propertiesHandler)
+        public static IRequestManager GetInstance (Context context, IPropertiesHandler propertiesHandler)
         {
-            instance = instance ?? new RequestManager(context, propertiesHandler);
-            return instance;
+            _instance = _instance ?? new RequestManager(context, propertiesHandler);
+            return _instance;
         }
 
         public async Task<string> PostBarReview(IBarReview review) 
         {
-            var requestPathFormat = context.GetString(Resource.String.post_bar_review_path);
+            var requestPathFormat = _context.GetString(Resource.String.post_bar_review_path);
             var requestPath = String.Format(requestPathFormat, review.BarName, review.Comment, review.Rating, review.BeverageVolume);
             // returns request result raw content
             var sth = await BaseRequest(requestPath, Method.POST);
@@ -47,7 +53,7 @@ namespace Socialtap.Code.Controller
 
         public async Task<string> GetBarsData()
         {
-            var requestPath = context.GetString(Resource.String.get_bar_data_path);
+            var requestPath = _context.GetString(Resource.String.get_bar_data_path);
 
             // returns request result raw content
             return await BaseRequest(requestPath, Method.GET);
@@ -55,7 +61,7 @@ namespace Socialtap.Code.Controller
 
         public async Task<string> GetStatData()
         {
-            var requestPath = context.GetString(Resource.String.get_stats_path);
+            var requestPath = _context.GetString(Resource.String.get_stats_path);
 
             // returns request result raw content
             return await BaseRequest(requestPath, Method.GET);
@@ -63,10 +69,10 @@ namespace Socialtap.Code.Controller
 
         private async Task<string> BaseRequest(string requestPath, Method method) 
         {
-            var client = new RestClient(apiUrl);
+            var client = new RestClient(ApiUrl);
             var request = new RestRequest(requestPath, method)
             {
-                Timeout = postRequestTimeout
+                Timeout = PostRequestTimeout
             };
 
             IRestResponse response;
