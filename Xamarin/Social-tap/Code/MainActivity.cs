@@ -3,12 +3,10 @@ using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Util;
-using Socialtap.Code.Model;
 using Android.Widget;
 using Socialtap.Code.View_.Fragments;
 using Fragment = Android.App.Fragment;
 using Socialtap.Code.Controller;
-using Android.Content;
 using Socialtap.Code.Controller.Interfaces;
 
 namespace Socialtap.Code

@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Support.V7.App;
+using Socialtap.Code.Controller;
 
 namespace Socialtap.Code
 {
@@ -17,16 +18,14 @@ namespace Socialtap.Code
         protected override void OnResume()
         {
             base.OnResume();
-            Task startupWork = new Task(LoadResources);
-            startupWork.Start();
+            new Task(LoadResources).Start();
         }
 
         /// Background work behind the splash screen
         async void LoadResources()
         {
-            // Todo: initialise resources here
-
-            await Task.Delay(500);// simulate loading
+            // Load controller
+            MainController.GetInstance(this);
 
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }

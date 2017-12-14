@@ -13,21 +13,27 @@ namespace Socialtap.Code.Controller
     {
         public static string Tag = "RequestManager";
 
-        private Context context;
-        private string apiUrl;
-        private int getRequestTimeout;
-        private int postRequestTimeout;
         private static IRequestManager instance;
+
+        private Context context;
+        private readonly string ApiUrl;
+        private readonly int GetRequestTimeout;
+        private readonly int PostRequestTimeout;
+
 
         public static CancellationTokenSource cancellationTokenSource;
 
         private RequestManager(Context context, IPropertiesHandler propertiesHandler) 
         {
             this.context = context;
-            apiUrl = propertiesHandler.GetConfigValue("api_url");
-            int.TryParse(propertiesHandler.GetConfigValue("post_request_timeout"), out getRequestTimeout);
-            int.TryParse(propertiesHandler.GetConfigValue("get_request_timeout"), out postRequestTimeout);
+            string savedApiUrlKey = context.GetString(Resource.String.saved_api_url);
+            ApiUrl = propertiesHandler.GetConfigValue(savedApiUrlKey);
 
+            string savedPostRequestTimeoutKey = context.GetString(Resource.String.saved_post_request_timeout);
+            GetRequestTimeout = int.Parse(propertiesHandler.GetConfigValue(savedPostRequestTimeoutKey));
+
+            string savedGetRequestTimeoutKey = context.GetString(Resource.String.saved_get_request_timeout);
+            PostRequestTimeout = int.Parse(propertiesHandler.GetConfigValue(savedGetRequestTimeoutKey));
         }
 
         public static IRequestManager GetInstance (Context context, IPropertiesHandler propertiesHandler)
@@ -63,10 +69,10 @@ namespace Socialtap.Code.Controller
 
         private async Task<string> BaseRequest(string requestPath, Method method) 
         {
-            var client = new RestClient(apiUrl);
+            var client = new RestClient(ApiUrl);
             var request = new RestRequest(requestPath, method)
             {
-                Timeout = postRequestTimeout
+                Timeout = PostRequestTimeout
             };
 
             IRestResponse response;

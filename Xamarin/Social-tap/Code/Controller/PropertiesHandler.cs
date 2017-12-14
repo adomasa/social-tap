@@ -11,6 +11,8 @@ namespace Socialtap.Code.Controller
     {
         private static String TAG = "PropertiesHandler";
 
+        private readonly string ConfigFileName;
+
         private static IPropertiesHandler instance;
 
         private Context _context;
@@ -23,7 +25,7 @@ namespace Socialtap.Code.Controller
 
             try
             {
-                var streamReader = new StreamReader(assetManager.Open("config.properties"));
+                var streamReader = new StreamReader(assetManager.Open(ConfigFileName));
                 var rawResource = streamReader.BaseStream;
                 _properties = new Properties();
                 _properties.Load(rawResource);
