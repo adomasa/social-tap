@@ -13,16 +13,8 @@ namespace Social_Tap_Api
         public Review(int rate, string barname, int bev)
         {
             Rate = rate;
-            Bar = new Bar
-            {
-                Name = barname
-            };
+            Bar = new Bar(barname);
             Beverage = bev;
-        }
-
-        public Review ()
-        {
-
         }
     }
 }
