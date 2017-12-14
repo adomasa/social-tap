@@ -4,9 +4,10 @@ namespace SocialtapAPI
 {
     public interface IReview 
     {
-        int Id { get; }
+        int Id { get; set; }
         int Rate { get; set; }
         string Comment { get; set; }
-        Bar Bar { get; set; }
+        Bar Bar  { get; set; }
+        int Beverage { get; set; }
     }
 }
