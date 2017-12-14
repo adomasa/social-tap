@@ -13,14 +13,9 @@ namespace Social_Tap_Api
         public List<Review> Reviews { get; set; }
         public int BarId { get;set; }
 
-        public Bar(string barName)
+        public Bar(string barName = "")
         {
             Name = barName;
-        }
-
-        public Bar()
-        {
-
         }
     }
 }
