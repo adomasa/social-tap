@@ -3,30 +3,32 @@ using Social_Tap_Api;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Z.EntityFramework.Plus;
-using System;
 
 namespace SocialtapAPI
 {
     public class Calculations:ICalculations
     {
-        private List<string> _hashTags = new List<string>();
-        public static string _bestbar;
-        public const int MaxBeverageLevel = 10; //kiek daugiausiai gali ipilti
-        public const int MaxRate = 5; // kiek daugiausiai gali duoti žvaigždučių 
-        public const int MinNameLenght = 1; //trumpiausias įmanomas baro pavadinimas
-        public const int MinBeverageRateLevel = 0; //kiek mažiausiai gali įpilti ir duoti žvaigždučių 
-        public const int ForAverage = 1; // jei skaičiuoti baro įpilto alaus vidurkį
-        public const int ForRate = 2; // jei skaičiuoti baro žvaigždučių vidurkį
-        public const int error = -1; // jei kažkas negerai
-        public static Dictionary<string, IBarData> BarData = new Dictionary<string, IBarData>();
+        private readonly List<string> _hashTags = new List<string>();
+        private const int MaxBeverageLevel = 10; //kiek daugiausiai gali ipilti
+        private const int MaxRate = 5; // kiek daugiausiai gali duoti žvaigždučių 
+        private const int MinNameLenght = 1; //trumpiausias įmanomas baro pavadinimas
+        private const int MinBeverageRateLevel = 0; //kiek mažiausiai gali įpilti ir duoti žvaigždučių 
+        private const int Error = -1; // jei kažkas negerai
+        private static Dictionary<string, IBarData> BarData = new Dictionary<string, IBarData>();
        
+        // Nenaudojami kintamieji
+        // private const int ForAverage = 1; // jei skaičiuoti baro įpilto alaus vidurkį
+        // private const int ForRate = 2; // jei skaičiuoti baro žvaigždučių vidurkį
+        // public static string Bestbar;
 
         public string BarNameAdaptation(string barName)
         {
+            string[] forbiddenSymbols = {" ", ".", "-"};
 
             barName = barName.ToLower();
-            barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty);  // pasalinam visus tarpus, taškus ir -
+            // pasalinam visus tarpus, taškus ir -
+            forbiddenSymbols.ToList().ForEach(i => barName = barName.Replace(i, string.Empty));
+            // barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty);  
             barName = char.ToUpper(barName[0]) + barName.Substring(1);
 
             return barName;
@@ -102,11 +104,9 @@ namespace SocialtapAPI
         {
             using (var db = new DatabaseContext())
             {
-                if(IsBarNew(barName))
-                {
-                    db.BarSet.Add(new Bar(barName));
-                    db.SaveChanges();
-                }
+                if (!IsBarNew(barName)) return BarData;
+                db.BarSet.Add(new Bar(barName));
+                db.SaveChanges();
             }
 
             return BarData;
@@ -159,7 +159,7 @@ namespace SocialtapAPI
             }
         }
 
-        public Statistics Stats()
+        public IStatistics Stats()
         {
             var bestBar = BestBarRate();
             /* string statsInfo = "Baro pavadinimas " + bestBar + " Jo žvaigždučių vidurkis" + _barData[bestBar].RateAvg +
@@ -200,15 +200,15 @@ namespace SocialtapAPI
                 {
                     case 1:
                         values = db.ReviewSet.Where(name => name.Bar.Name == barName);
-                        if (values.Count() == 0) return 0;
+                        if (!values.Any()) return 0;
                         return values.Average(avg => avg.Beverage);
                     case 2:
                         values = db.ReviewSet.Where(name => name.Bar.Name == barName);
-                        if (values.Count() == 0) return 0;
+                        if (!values.Any()) return 0;
                         return values.Average(avg => avg.Rate);
                 }
 
-                return error;
+                return Error;
             }
         }
 
