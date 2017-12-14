@@ -12,7 +12,7 @@ namespace Socialtap.Code
               ScreenOrientation = ScreenOrientation.Portrait)]
     public class SplashActivity : AppCompatActivity
     {
-        static readonly string TAG = typeof(SplashActivity).Name;
+        static readonly new string Tag = typeof(SplashActivity).Name;
 
         /// Launches the startup task
         protected override void OnResume()
@@ -24,8 +24,8 @@ namespace Socialtap.Code
         /// Background work behind the splash screen
         async void LoadResources()
         {
-            // Load controller
-            MainController.GetInstance(this);
+            // Load resources here
+            await Task.Delay(500);
 
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }
