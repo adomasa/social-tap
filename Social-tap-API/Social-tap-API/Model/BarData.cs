@@ -5,7 +5,6 @@ namespace SocialtapAPI
 
     public class BarData : IBarData
     {
-        public int Id { get; set; }
         //saugomi hashtagai
         public List<string> Tags { get; set; }
         //žvaigždučių vidurkis
