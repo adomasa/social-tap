@@ -15,6 +15,8 @@ namespace Socialtap.Code.View_.Fragments
 {
     public class ReviewFragment : Fragment
     {
+        static readonly new string Tag = typeof(ReviewFragment).Name;
+
         private View _rootView;
         private EditText _barNameField;
         private Button _addPhotoButton;

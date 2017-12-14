@@ -9,9 +9,9 @@ namespace Socialtap.Code.Controller
 {
     public class PropertiesHandler : IPropertiesHandler
     {
-        private static String TAG = "PropertiesHandler";
+        static readonly string Tag = typeof(PropertiesHandler).Name;
 
-        private readonly string ConfigFileName;
+        private readonly string ConfigFileKey;
 
         private static IPropertiesHandler instance;
 
@@ -22,19 +22,11 @@ namespace Socialtap.Code.Controller
         {
             _context = context;
             var assetManager = context.Assets;
-
-            try
-            {
-                var streamReader = new StreamReader(assetManager.Open(ConfigFileName));
-                var rawResource = streamReader.BaseStream;
-                _properties = new Properties();
-                _properties.Load(rawResource);
-            }
-            //Todo: handle exception separately
-            catch (Exception e)
-            {
-                Log.Error(TAG, $"Failed to read .properties: {e.Message}");
-            }
+            ConfigFileKey = context.GetString(Resource.String.config_file_key);
+            var streamReader = new StreamReader(assetManager.Open(ConfigFileKey));
+            var rawResource = streamReader.BaseStream;
+            _properties = new Properties();
+            _properties.Load(rawResource);
         }
 
         //Initialised first time 
@@ -50,6 +42,7 @@ namespace Socialtap.Code.Controller
         /// <param name="key">Configuration value key</param>
         public string GetConfigValue(String key)
         {
+            Log.Debug(Tag, $"Fetching {key}");
             return _properties.GetProperty(key);
         }
     }

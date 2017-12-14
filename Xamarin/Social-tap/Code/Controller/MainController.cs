@@ -11,7 +11,7 @@ namespace Socialtap.Code.Controller
 {
     public class MainController : IMainController
     {
-        private const string Tag = "MainController";
+        static readonly string Tag = typeof(MainController).Name;
 
         public static Dictionary<string, BarData> barsData;
         public static IStatistics stats;

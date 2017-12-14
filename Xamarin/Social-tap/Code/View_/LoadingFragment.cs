@@ -10,7 +10,7 @@ namespace Socialtap.Code.View_.Fragments
 {
     public class LoadingFragment : Fragment
     {
-
+        static readonly new string Tag = typeof(LoadingFragment).Name;
         private const string _targetFragment = "TARGET_FRAGMENT";
         private View _rootView;
         private Fragment _fragment;

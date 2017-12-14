@@ -11,11 +11,11 @@ namespace Socialtap.Code.Controller
 {
     public class RequestManager : IRequestManager
     {
-        public static string Tag = "RequestManager";
+        static readonly string Tag = typeof(RequestManager).Name;
 
-        private static IRequestManager instance;
+        private static IRequestManager _instance;
+        private Context _context;
 
-        private Context context;
         private readonly string ApiUrl;
         private readonly int GetRequestTimeout;
         private readonly int PostRequestTimeout;
@@ -25,7 +25,7 @@ namespace Socialtap.Code.Controller
 
         private RequestManager(Context context, IPropertiesHandler propertiesHandler) 
         {
-            this.context = context;
+            this._context = context;
             string savedApiUrlKey = context.GetString(Resource.String.saved_api_url);
             ApiUrl = propertiesHandler.GetConfigValue(savedApiUrlKey);
 
@@ -38,13 +38,13 @@ namespace Socialtap.Code.Controller
 
         public static IRequestManager GetInstance (Context context, IPropertiesHandler propertiesHandler)
         {
-            instance = instance ?? new RequestManager(context, propertiesHandler);
-            return instance;
+            _instance = _instance ?? new RequestManager(context, propertiesHandler);
+            return _instance;
         }
 
         public async Task<string> PostBarReview(IBarReview review) 
         {
-            var requestPathFormat = context.GetString(Resource.String.post_bar_review_path);
+            var requestPathFormat = _context.GetString(Resource.String.post_bar_review_path);
             var requestPath = String.Format(requestPathFormat, review.BarName, review.Comment, review.Rating, review.BeverageVolume);
             // returns request result raw content
             var sth = await BaseRequest(requestPath, Method.POST);
@@ -53,7 +53,7 @@ namespace Socialtap.Code.Controller
 
         public async Task<string> GetBarsData()
         {
-            var requestPath = context.GetString(Resource.String.get_bar_data_path);
+            var requestPath = _context.GetString(Resource.String.get_bar_data_path);
 
             // returns request result raw content
             return await BaseRequest(requestPath, Method.GET);
@@ -61,7 +61,7 @@ namespace Socialtap.Code.Controller
 
         public async Task<string> GetStatData()
         {
-            var requestPath = context.GetString(Resource.String.get_stats_path);
+            var requestPath = _context.GetString(Resource.String.get_stats_path);
 
             // returns request result raw content
             return await BaseRequest(requestPath, Method.GET);

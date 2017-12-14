@@ -14,10 +14,11 @@ namespace Socialtap.Code
     [Activity(Label = "Social-tap", Icon = "@mipmap/icon")]
     public class MainActivity : AppCompatActivity
     {
-        private const string Tag = "MainActivity";
+        static readonly new string Tag = typeof(MainActivity).Name;
         private BottomNavigationView _bottomNavigation;
         private ScrollView _contentView;
-        public IMainController controller;
+
+        private IMainController controller;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
