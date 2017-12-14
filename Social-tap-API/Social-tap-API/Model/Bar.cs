@@ -17,5 +17,7 @@ namespace Social_Tap_Api
         {
             Name = barName;
         }
+        
+        public Bar() {}
     }
 }

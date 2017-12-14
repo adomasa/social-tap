@@ -16,5 +16,7 @@ namespace Social_Tap_Api
             Bar = new Bar(barname);
             Beverage = bev;
         }
+
+        public Review() {}
     }
 }
