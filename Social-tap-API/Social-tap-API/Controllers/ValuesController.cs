@@ -1,40 +1,42 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.RegularExpressions;
 using SocialtapAPI;
-using Newtonsoft.Json.Linq;
-using Microsoft.EntityFrameworkCore;
-using Social_Tap_Api;
-using System.Data.SqlClient;
 
 namespace Social_tap_API.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller, IValues
+    public class ValuesController : Controller, IValuesController
     {
-        public string barName = "";
-
-        public Dictionary<string, IBarData> BarData = new Dictionary<string, IBarData>();
-        public static string BestBar;
-        public static double AllBarsAverage;
-        public static int Uses;
-        public Statistics Stats;
-        public Review Reviews = new Review();
-        public Bar Bars = new Bar();
+        public IStatistics Stats;  
+        
+        // Nenaudojami kintamamieji
+        // public Bar Bars = new Bar();
+        // public Review Reviews = new Review();
+        // public string barName = "";
+        // public Dictionary<string, IBarData> BarData = new Dictionary<string, IBarData>();
+        // public static string BestBar;
+        // public static double AllBarsAverage;
+        // public static int Uses;
+        
+        
+        /// <summary>
         /// Metodui paduodami 4 parametrai
         /// Patikrinama ar jie atitinka reikalavimus
         /// Suvienodinami pavadinimai
         /// Naudojant kitus metodus 
         /// į _barData Dictionary sudedamos reikšmės
+        /// </summary>
+        /// <param name="barName">baro pavadinimas</param>
+        /// <param name="comment">komentaras</param>
+        /// <param name="rate">žvaigždutės</param>
+        /// <param name="beverage">įpilto alaus lygis</param>
+        /// <returns>pridėjimo statusas</returns>
         [HttpPost("AddBarReview/{barName}/{comment}/{rate}/{beverage}")]
-        //rate-žvaigždutės, beverage-įpilto alaus lygis
         public bool AddBarReview(string barName, string comment, int rate, int beverage) 
         {
             
-            var calc = new Calculations();
+            ICalculations calc = new Calculations();
             Console.WriteLine($"POST: AddBarReview/{barName}/{comment}/{rate}/{beverage}");
             if (!calc.Validation(rate, beverage, barName)) return false;
             barName = calc.BarNameAdaptation(barName);
@@ -46,8 +48,7 @@ namespace Social_tap_API.Controllers
         }
         /// Iškvietus šitą metodą
         /// Jis grąžina visą Dictionary į programą
-        [HttpGet]
-        [Route("GetBarData")]
+        [HttpGet, Route("GetBarData")]
         public IDictionary<string, IBarData> GetBarData()
         {
             Console.WriteLine("GET: GetBarData/");
@@ -59,13 +60,11 @@ namespace Social_tap_API.Controllers
         /// Sukuriama informacija 
         /// Apie geriausią barą 
         /// Ir bendrus skaičius
-        [HttpGet]
-        [Route("Stats")]
-        public Statistics GetStats()
+        [HttpGet, Route("Stats")]
+        public IStatistics GetStats()
         {
             Console.WriteLine("GET: Stats/");
-            var calc = new Calculations();
-            Stats = calc.Stats();
+            Stats = new Calculations().Stats();
             return Stats ?? new Statistics();
         }
 
