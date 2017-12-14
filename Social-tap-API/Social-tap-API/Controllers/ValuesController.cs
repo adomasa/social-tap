@@ -21,7 +21,7 @@ namespace Social_tap_API.Controllers
         public static string BestBar;
         public static double AllBarsAverage;
         public static int Uses;
-        public static Statistics Stats;
+        public Statistics Stats;
         public Review Reviews = new Review();
         public Bar Bars = new Bar();
         /// Metodui paduodami 4 parametrai
@@ -43,8 +43,7 @@ namespace Social_tap_API.Controllers
             barName = calc.BarNameAdaptation(barName);
             calc.AddReview(barName, rate, beverage);
             calc.AddBar(barName);
-            //BarData = calc.AddBarInfo(barName, beverage, rate, comment);
-            Stats = calc.Stats();
+            
             
                 return true;
 
@@ -69,6 +68,8 @@ namespace Social_tap_API.Controllers
         public Statistics GetStats()
         {
             Console.WriteLine($"GET: Stats/");
+            var calc = new Calculations();
+            Stats = calc.Stats();
             return Stats ?? new Statistics();
         }
 
