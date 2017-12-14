@@ -14,9 +14,9 @@ namespace Social_tap_API
         public int BarCount { get; set; }
         public int ReviewCount { get; set; }
 
-        public Statistics()
+        public Statistics(string topbarName = "Nežinomas")
         {
-            TopBarName = "Nežinomas";
+            TopBarName = topbarName;
         }
     }
 
