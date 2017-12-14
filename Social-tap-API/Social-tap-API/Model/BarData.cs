@@ -28,5 +28,12 @@ namespace SocialtapAPI
         {
             Tags = new List<string>();
         }
+
+        public BarData(double ratingaverage, double beverageaverage, int uses)
+        {
+            RateAvg = ratingaverage;
+            BeverageAvg = beverageaverage;
+            BarUses = uses;
+        }
     }
 }

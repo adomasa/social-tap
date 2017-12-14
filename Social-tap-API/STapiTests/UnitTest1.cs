@@ -474,6 +474,39 @@ namespace STapiTests
         }
 
         [TestMethod]
+        public void IsBarNew_Test3()
+        {
+
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            Calculations calc = new Calculations();
+            try
+            {
+                var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+                using (var db = new DatabaseContext())
+                {
+                    db.BarSet.Add(new Bar("55"));
+                    Assert.IsFalse(calc.IsBarNew("55"));
+                    db.ReviewSet.Where(name => name.Bar.Name == "55")
+                        .Delete();
+                    db.SaveChanges();
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        [TestMethod]
         public void BestBarRate_Test1 ()
         {
             var connection = new SqliteConnection("DataSource=:memory:");

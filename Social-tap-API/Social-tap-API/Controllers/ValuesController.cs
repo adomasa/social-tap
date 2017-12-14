@@ -17,7 +17,7 @@ namespace Social_tap_API.Controllers
     {
         public string barname = "";
 
-        public static Dictionary<string, IBarData> BarData = new Dictionary<string, IBarData>();
+        public Dictionary<string, IBarData> BarData = new Dictionary<string, IBarData>();
         public static string BestBar;
         public static double AllBarsAverage;
         public static int Uses;
@@ -33,6 +33,7 @@ namespace Social_tap_API.Controllers
         //rate-žvaigždutės, beverage-įpilto alaus lygis
         public bool AddBarReview(string barName, string comment, int rate, int beverage) 
         {
+            
             var calc = new Calculations();
             Console.WriteLine($"POST: AddBarReview/{barName}/{comment}/{rate}/{beverage}");
             if (!calc.Validation(rate, beverage, barName))
@@ -55,7 +56,8 @@ namespace Social_tap_API.Controllers
         public IDictionary<string, IBarData> GetBarData()
         {
             Console.WriteLine($"GET: GetBarData/");
-            return BarData;
+            Calculations calc = new Calculations();
+            return calc.GetBarData();
 
         }
         /// Iškvietus šitą metodą 

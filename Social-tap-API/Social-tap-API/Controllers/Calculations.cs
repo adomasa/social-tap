@@ -3,6 +3,7 @@ using Social_Tap_Api;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Z.EntityFramework.Plus;
 
 namespace SocialtapAPI
 {
@@ -22,6 +23,7 @@ namespace SocialtapAPI
 
         public string BarNameAdaptation(string barName)
         {
+
             barName = barName.ToLower();
             barName = barName.Replace(" ", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty);  // pasalinam visus tarpus, taškus ir -
             barName = char.ToUpper(barName[0]) + barName.Substring(1);
@@ -109,6 +111,8 @@ namespace SocialtapAPI
             return BarData;
         }
 
+        
+
         // Todo: apdoroti AddBar grąžinamą bool reikšmę 
         public bool AddBar(string barName)
         {
@@ -127,8 +131,8 @@ namespace SocialtapAPI
         {
             using (var db = new DatabaseContext())
             {
-                return db.BarSet.
-                    Count(bar => bar.Name.Contains(barName)) == 0;
+                return db.BarSet.Where(bar => bar.Name == barName)
+                   .Count() == 0;
             }
         }
 
@@ -177,7 +181,7 @@ namespace SocialtapAPI
             }
         }
 
-        public bool AddReview(string barName,int rate, int beverage)
+        public bool AddReview(string barName, int rate, int beverage)
         {
             using (var db = new DatabaseContext())
             {
@@ -197,6 +201,34 @@ namespace SocialtapAPI
                 else if(index ==2)
                     return db.ReviewSet.Where(name => name.Bar.Name == barName).Average(avg => avg.Rate);
                 return error;
+            }
+        }
+
+        public Dictionary<string, IBarData> GetBarData()
+        {
+            using (var db = new DatabaseContext())
+            {
+                var data = new Dictionary<string, IBarData>();
+                foreach(Bar bar in db.BarSet)
+                {
+                    if(!data.Keys.Contains(bar.Name))
+                    data.Add(bar.Name,
+                        new BarData(BarAverage(bar.Name, 2),
+                        BarAverage(bar.Name, 1),
+                        db.ReviewSet
+                        .Where(review => review.Bar.Name == bar.Name)
+                        .Count()));
+                    else
+                    {
+                        data[bar.Name].BeverageAvg = BarAverage(bar.Name, 1);
+                        data[bar.Name].RateAvg = BarAverage(bar.Name, 1);
+                        data[bar.Name].BarUses= db.ReviewSet
+                        .Where(review => review.Bar.Name == bar.Name)
+                        .Count();
+                    }
+                }
+
+                return data;
             }
         }
     }
