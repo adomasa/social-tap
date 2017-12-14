@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Social_tap_API;
+﻿using System.Collections.Generic;
 
 namespace SocialtapAPI
 {
     interface ICalculations
     {
         string BarNameAdaptation(string barName);
-        double BarRateAverage(string barName, int rate);
+        double BarRateAverage(string barName);
         bool Average(int beverageLevel);
-        List<string> HashtagsFinder(string comment);
-        bool Validation(int rate, int beverage, string barName);
-        bool IsBarNew(string barName);
         Dictionary<string, IBarData> AddBarInfo(string barName, int beverage, int rate, string comment);
+        Dictionary<string, IBarData> GetBarData();
+        double BarAverage(string barName, int index);
+        bool AddReview(string barName, int rate, int beverage);
+        IStatistics Stats();
         string BestBarRate();
-        Statistics Stats();
+        bool IsBarNew(string barName);
+        bool AddBar(string barName);
+        bool Validation(int rate, int beverage, string barName);
     }
 }
