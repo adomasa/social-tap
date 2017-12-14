@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Z.EntityFramework.Plus;
+using System;
 
 namespace SocialtapAPI
 {
@@ -131,8 +132,7 @@ namespace SocialtapAPI
         {
             using (var db = new DatabaseContext())
             {
-                return db.BarSet.Where(bar => bar.Name == barName)
-                   .Count() == 0;
+                return !db.BarSet.Any(bar => bar.Name == barName);
             }
         }
 
@@ -195,11 +195,19 @@ namespace SocialtapAPI
         {
             using (var db = new DatabaseContext ())
             {
-                if(index==1)
-                   return db.ReviewSet.Where(name => name.Bar.Name == barName).Average(avg => avg.Beverage);
-                
-                else if(index ==2)
-                    return db.ReviewSet.Where(name => name.Bar.Name == barName).Average(avg => avg.Rate);
+                IQueryable<Review> values;
+                switch (index)
+                {
+                    case 1:
+                        values = db.ReviewSet.Where(name => name.Bar.Name == barName);
+                        if (values.Count() == 0) return 0;
+                        return values.Average(avg => avg.Beverage);
+                    case 2:
+                        values = db.ReviewSet.Where(name => name.Bar.Name == barName);
+                        if (values.Count() == 0) return 0;
+                        return values.Average(avg => avg.Rate);
+                }
+
                 return error;
             }
         }
@@ -209,25 +217,26 @@ namespace SocialtapAPI
             using (var db = new DatabaseContext())
             {
                 var data = new Dictionary<string, IBarData>();
-                foreach(Bar bar in db.BarSet)
+                foreach(var bar in db.BarSet)
                 {
-                    if(!data.Keys.Contains(bar.Name))
-                    data.Add(bar.Name,
+                    if (data.Keys.Count(x => x == bar.Name) == 0 || !data.Keys.Contains(bar.Name))
+                    {
+                        // to prevent null values in db again
+                        if (bar.Name == null) continue;
+
+                        data.Add(bar.Name,
                         new BarData(BarAverage(bar.Name, 2),
                         BarAverage(bar.Name, 1),
                         db.ReviewSet
-                        .Where(review => review.Bar.Name == bar.Name)
-                        .Count()));
+                        .Count(review => review.Bar.Name == bar.Name)));
+                    }
                     else
                     {
                         data[bar.Name].BeverageAvg = BarAverage(bar.Name, 1);
                         data[bar.Name].RateAvg = BarAverage(bar.Name, 1);
-                        data[bar.Name].BarUses= db.ReviewSet
-                        .Where(review => review.Bar.Name == bar.Name)
-                        .Count();
+                        data[bar.Name].BarUses= db.ReviewSet.Count(review => review.Bar.Name == bar.Name);
                     }
                 }
-
                 return data;
             }
         }

@@ -15,7 +15,7 @@ namespace Social_tap_API.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller, IValues
     {
-        public string barname = "";
+        public string barName = "";
 
         public Dictionary<string, IBarData> BarData = new Dictionary<string, IBarData>();
         public static string BestBar;
@@ -36,16 +36,12 @@ namespace Social_tap_API.Controllers
             
             var calc = new Calculations();
             Console.WriteLine($"POST: AddBarReview/{barName}/{comment}/{rate}/{beverage}");
-            if (!calc.Validation(rate, beverage, barName))
-            {
-                return false;
-            }
+            if (!calc.Validation(rate, beverage, barName)) return false;
             barName = calc.BarNameAdaptation(barName);
             calc.AddReview(barName, rate, beverage);
             calc.AddBar(barName);
             
-            
-                return true;
+            return true;
 
         }
         /// Iškvietus šitą metodą
@@ -54,8 +50,8 @@ namespace Social_tap_API.Controllers
         [Route("GetBarData")]
         public IDictionary<string, IBarData> GetBarData()
         {
-            Console.WriteLine($"GET: GetBarData/");
-            Calculations calc = new Calculations();
+            Console.WriteLine("GET: GetBarData/");
+            var calc = new Calculations();
             return calc.GetBarData();
 
         }
@@ -67,7 +63,7 @@ namespace Social_tap_API.Controllers
         [Route("Stats")]
         public Statistics GetStats()
         {
-            Console.WriteLine($"GET: Stats/");
+            Console.WriteLine("GET: Stats/");
             var calc = new Calculations();
             Stats = calc.Stats();
             return Stats ?? new Statistics();
