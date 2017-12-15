@@ -1,5 +1,6 @@
- # :warning: Project is not maintained anymore
-
+# :warning: Project is not maintained anymore
+# Summary
+The project was developed for **"Applied object-oriented programming(C#)"** programme and was a part of final evaluation. 
 ## Project specifications
 * Platform: **Xamarin Native Android**
 * Java SDK: **jdk1.8.0_152**. :warning: *(JDK 1.9 causes Android.Designer errors)*
