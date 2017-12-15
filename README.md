@@ -1,14 +1,10 @@
-# Xamarin main branchas
- 
-# Xamarin emuliatoriaus konfigūracija
-* Ekranas: Nexus 5X (dirbant su Android design dėl bugų naudoti Nexus 4)
-* Android API: 25
+ # :warning: Project is not maintained anymore
 
-# Xamarin projekto specifikacijos
-* Tikslinė platforma: **Xamarin Native Android**
-* Java SDK: **jdk1.8.0_152**. :warning: (su Java SDK 9+ gerai neveikia Android Designer)
+## Project specifications
+* Platform: **Xamarin Native Android**
+* Java SDK: **jdk1.8.0_152**. :warning: *(JDK 1.9 causes Android.Designer errors)*
 * .NET Runtime: **Mono 5.4.0.201**
-* Android SDK Platform Tools versija: **26.0.2**
-* Android Emulator versija: **(26.1.4)**
-* CMake versija: **3.6.4111459**
-* Nuget šaltinis: **https://api.nuget.org/v3/index.json**
+* Minimum Android SDK: **API 23**
+* Target Android SDK: **API 25**
+* Target phone screen size: **Nexus 5X**
+* CMake: **3.6.4111459**
